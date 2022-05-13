@@ -54,7 +54,7 @@ public class LogDataNephrectomy : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Assets\\Logs\\Nephrectomy\\NephrectomyPost.m",
+        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Assets\\Logs\\Nephrectomy\\NephrectomyPostOriginal.m",
             folderpath+"\\NephrectomyPost.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
