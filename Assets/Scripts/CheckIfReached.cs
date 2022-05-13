@@ -30,7 +30,7 @@ public class CheckIfReached : MonoBehaviour
     void Start()
     {
         targetreached = Resources.Load<Material>("Materials/TargetReached");   
-        targetnotreached = Resources.Load<Material>("Materials/TargetNotReached");   
+        targetnotreached = Resources.Load<Material>("Materials/TargetNotReached");  
     }
 
 
@@ -38,11 +38,9 @@ public class CheckIfReached : MonoBehaviour
     {
         Vector3 subjectp = subject.TransformPoint(subject.position);
         target = subject.TransformPoint(gameObject.transform.position);
-        if (Mathf.Abs(subjectp.x-target.x) < 0.1f && REACHED==false) {
-            if (Vector3.Distance(subjectp,target)<targetRadius) {
-                REACHED = true;
-                gameObject.GetComponent<Renderer>().material = targetreached;
-            }
+        if (Vector3.Distance(subjectp, target) < targetRadius) {
+            REACHED = true;
+            gameObject.GetComponent<Renderer>().material = targetreached;
         }
         if (REACHED==false) {
             gameObject.GetComponent<Renderer>().material = targetnotreached;

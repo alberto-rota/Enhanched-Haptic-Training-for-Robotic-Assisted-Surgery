@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AWSDController : MonoBehaviour
 {
+    [Range(0,0.5f)]
+    public float scale = 0.001f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,16 +17,16 @@ public class AWSDController : MonoBehaviour
     {
          Rigidbody rb = GetComponent<Rigidbody>();
          if (Input.GetKey(KeyCode.W))
-             rb.AddForce(Vector3.left);
+             rb.AddForce(scale*Vector3.left);
          if (Input.GetKey(KeyCode.S))
-             rb.AddForce(Vector3.right);
+             rb.AddForce(scale*Vector3.right);
          if (Input.GetKey(KeyCode.A))
-             rb.AddForce(Vector3.back);
+             rb.AddForce(scale*Vector3.back);
          if (Input.GetKey(KeyCode.D))
-             rb.AddForce(Vector3.forward);
+             rb.AddForce(scale*Vector3.forward);
          if (Input.GetKey(KeyCode.P))
-             rb.AddForce(Vector3.up);
+             rb.AddForce(scale*Vector3.up);
          if (Input.GetKey(KeyCode.L))
-             rb.AddForce(Vector3.down);
+             rb.AddForce(scale*Vector3.down);
     }
 }

@@ -35,8 +35,8 @@ public class SurfaceAvoidanceVF : MonoBehaviour
     public float maxForce=100;
     public Vector3 force;
     public bool graphics = true;
-    [Range(0,1  )]
-    public float normalVectorsLength = 0;
+    // [Range(0,1  )]
+    // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
     Transform EndEffector;
@@ -101,10 +101,12 @@ public class SurfaceAvoidanceVF : MonoBehaviour
             Debug.DrawLine(EndEffector.position, closestP, Color.red);
             Debug.DrawLine(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
         }
-        if (normalVectorsLength > 0 && graphics) {
-            for (int i = 0; i<surfaceNormals.Count; i++) {
-                Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
-            }
-        }
+
+        // DRAWING MESH NORMALS [DEPRECATED]
+        // if (normalVectorsLength > 0 && graphics) {
+        //     for (int i = 0; i<surfaceNormals.Count; i++) {
+        //         Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
+        //     }
+        // }
     }
 }

@@ -32,14 +32,13 @@ public class SurfaceGuidanceVF : MonoBehaviour
     public float width = 1;
     [Range(0,2)]
     public float slope = 1;
-    public float distance10Perc;
     [Range(0,100)]
     public float forceAtInfinity = 1;
     public float maxForce=100;
     public Vector3 force;
     public bool graphics = true;
-    [Range(0,1  )]
-    public float normalVectorsLength = 0;
+    // [Range(0,1  )]
+    // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
     Transform EndEffector;
@@ -51,8 +50,8 @@ public class SurfaceGuidanceVF : MonoBehaviour
         EndEffector = gameObject.transform;
         surfacePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
-        colorok = Resources.Load<Material>("Materials/Organ");
-        colorred = Resources.Load<Material>("Materials/OrganRed");
+        colorok = Resources.Load<Material>("Materials/SurfaceGreen");
+        colorred = Resources.Load<Material>("Materials/SurfaceRed");
 
         Mesh surgicalMesh;
         surgicalMesh = surface.GetComponent<MeshFilter>().sharedMesh;
@@ -90,26 +89,28 @@ public class SurfaceGuidanceVF : MonoBehaviour
         }
         float f_mag = forceAtInfinity*(1-Mathf.Exp(-Mathf.Pow((Mathf.Pow(mindist,2)/Mathf.Pow(width,2)), 1/slope)));
 
-        Vector3 f_dir = surfaceNormals[idx_closest]*-1;
+        Vector3 f_dir = surfaceNormals[idx_closest];
         force = f_mag*f_dir.normalized;
         if (f_mag > maxForce) {
             f_mag = maxForce;
         }
 
-        // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-EndEffector.position,surfaceNormals[idx_closest])>=0) {
-            surface.GetComponent<MeshRenderer>().material = colorred;
-        } else {
+        // CHECHING IF EE IS CLOSE ENOUGH TO SURFACER
+        if (force.magnitude <= 0.5*forceAtInfinity) {
             surface.GetComponent<MeshRenderer>().material = colorok;
+        } else {
+            surface.GetComponent<MeshRenderer>().material = colorred;
         }
         if (graphics) {
             Debug.DrawLine(EndEffector.position, closestP, Color.red);
             Debug.DrawLine(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
         }
-        if (normalVectorsLength > 0 && graphics) {
-            for (int i = 0; i<surfaceNormals.Count; i++) {
-                Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
-            }
-        }
+
+        // DRAWING MESH NORMALS [DEPRECATED]
+        // if (normalVectorsLength > 0 && graphics) {
+        //     for (int i = 0; i<surfaceNormals.Count; i++) {
+        //         Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
+        //     }
+        // }
     }
 }

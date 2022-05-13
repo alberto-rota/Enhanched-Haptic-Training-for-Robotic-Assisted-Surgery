@@ -23,6 +23,9 @@ public class SumForces : MonoBehaviour
     public List<MonoBehaviour> activeConstraints;
     public Vector3 totalForce = Vector3.zero;
     public bool graphics = true;
+    
+    [Range(0,5f)]
+    public float forceThreshold = 0.1f;
     [Range(0,5)]
     public float graphicVectorGain = 1;
 
@@ -30,7 +33,12 @@ public class SumForces : MonoBehaviour
     {
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {
-            if (s.GetType().Name != "LogData" && s.enabled == true) {
+            if ((s.GetType().Name == "TrajectoryGuidanceVF" ||
+                s.GetType().Name == "ObstacleAvoidanceForceFieldVF" ||
+                s.GetType().Name == "SurfaceAvoidanceVF" ||
+                s.GetType().Name == "SurfaceGuidanceVF" ||
+                s.GetType().Name == "ConeApproachGuidanceVF" )
+                && s.enabled == true) {
                 activeConstraints.Add(s);
             }
         }   
@@ -59,7 +67,7 @@ public class SumForces : MonoBehaviour
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+totalForce*graphicVectorGain, Color.white);
         }
         //force applied only if big enough
-        if (totalForce.magnitude > 0.1f) {
+        if (totalForce.magnitude > forceThreshold) {
             gameObject.GetComponent<Rigidbody>().AddForce(totalForce);
         }
     }

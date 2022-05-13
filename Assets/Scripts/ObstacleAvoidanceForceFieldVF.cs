@@ -37,8 +37,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public float maxForce=100;
     public Vector3 force;
     public bool graphics = true;
-    [Range(0,1  )]  
-    public float normalVectorsLength = 0;
+    // [Range(0,1  )]  
+    // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
     Transform EndEffector;
@@ -113,11 +113,12 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             obstacle.GetComponent<MeshRenderer>().material = colorok;
         }
 
-        if (normalVectorsLength > 0 && graphics) {
-            for (int i = 0; i<surfaceNormals.Count; i++) {
-                Debug.DrawLine(obstaclePoints[i], obstaclePoints[i]+surfaceNormals[i]*normalVectorsLength);
-            }
-        }
+        // DRAWING MESH NORMALS [DEPRECATED]
+        // if (normalVectorsLength > 0 && graphics) {
+        //     for (int i = 0; i<surfaceNormals.Count; i++) {
+        //         Debug.DrawLine(obstaclePoints[i], obstaclePoints[i]+surfaceNormals[i]*normalVectorsLength);
+        //     }
+        // }
 
     }
 }
