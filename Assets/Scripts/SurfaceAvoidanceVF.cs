@@ -98,8 +98,8 @@ public class SurfaceAvoidanceVF : MonoBehaviour
         }
 
         if (graphics) {
-            Debug.DrawLine(EndEffector.position, closestP, Color.red);
-            Debug.DrawLine(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Arrow(EndEffector.position, closestP, Color.red);
+            Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
         }
 
         // DRAWING MESH NORMALS [DEPRECATED]
@@ -108,5 +108,31 @@ public class SurfaceAvoidanceVF : MonoBehaviour
         //         Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
         //     }
         // }
+    }
+    void Arrow(Vector3 from, Vector3 to, Color color) {
+        int coneResolution=30;
+        float deltaTheta = 360f/coneResolution;
+
+        Vector3 stem = (to-from)*0.9f;
+        Vector3 tip = to-(from+stem)*0.1f;
+        float tipradius = 0.1f*(to-from).magnitude;
+        List<Vector3> tipBasePoints = new List<Vector3>();
+        Vector3 b = Vector3.Cross(tip, Vector3.up)*tipradius;
+        tipBasePoints.Add(b);
+
+        for (int i=0; i<coneResolution-1; i++) {
+            float theta = deltaTheta*i; 
+            b = Quaternion.AngleAxis(deltaTheta,tip.normalized)*b;
+            tipBasePoints.Add(b);
+        }
+        Vector3 tipcenter = from+stem;
+        //SRAWING THE STEM
+        Debug.DrawLine(from,tipcenter, color);
+        // DRAWING THE TIP
+        for (int i=0; i<coneResolution; i++) {
+            Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
+            if (i==coneResolution-1) Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[0],color);
+            else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
+        }
     }
 }

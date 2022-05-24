@@ -167,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407310036899648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5efb8a236fc56594d94f54c1b7afc6c6, type: 3}
   m_Name: 
@@ -26853,7 +26853,7 @@ MonoBehaviour:
   slope: 0.82
   forceAtInfinity: 0.05
   maxForce: 100
-  force: {x: -0.0040174755, y: 0.0005625456, z: 0.0002107448}
+  force: {x: -0.0033132103, y: -0.012369036, z: -0.04833249}
   graphics: 1
   graphicVectorGain: 1
 --- !u!114 &1888331470
@@ -26869,8 +26869,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeConstraints:
-  - {fileID: 1888331469}
-  totalForce: {x: -0.0040174755, y: 0.0005625456, z: 0.0002107448}
+  - {fileID: 1407310036899650}
+  totalForce: {x: 0, y: 0, z: 0}
   graphics: 0
   forceThreshold: 0
   graphicVectorGain: 1
@@ -27137,6 +27137,7 @@ GameObject:
   - component: {fileID: 1888331470}
   - component: {fileID: 1888331471}
   - component: {fileID: 1407310036899649}
+  - component: {fileID: 1407310036899650}
   m_Layer: 0
   m_Name: PSM
   m_TagString: Untagged
@@ -27158,6 +27159,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeConstraints: []
   saveTo: C:\Users\alber\Desktop\Active_Constraints\Assets\Logs\LiverResection
+--- !u!114 &1407310036899650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407310036899648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a49938f2e7cf714a90bc25ba5a2fabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configuring: 1
+  target: {fileID: 2062951033643828794}
+  coneApertureDegrees: 2.3
+  gainInsideOfCone: 0
+  gainOutsideOfCone: 0.05
+  force: {x: 0, y: 0, z: 0}
+  graphics: 1
+  graphicVectorGain: 1
+  coneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coneResolution: 10
 --- !u!1 &1438180036083628
 GameObject:
   m_ObjectHideFlags: 0
@@ -27670,7 +27693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407310036899648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0062, y: 0.0673, z: 0.0069}
+  m_LocalPosition: {x: 0.04719, y: 0.173, z: 0.0482}
   m_LocalScale: {x: 0.6991748, y: 0.6991748, z: 0.6991748}
   m_Children:
   - {fileID: 4253303545803492}
@@ -29196,7 +29219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8254898118768870492}
   m_LocalRotation: {x: -0.7158083, y: 0.068197556, z: -0.03622552, w: 0.69401395}
-  m_LocalPosition: {x: 0.0103, y: 0.0948, z: -0.0153}
+  m_LocalPosition: {x: 0.0092, y: 0.0948, z: -0.0117}
   m_LocalScale: {x: 0.004308528, y: 0.004308528, z: 0.0043085287}
   m_Children: []
   m_Father: {fileID: 1536045695}
@@ -29962,7 +29985,6 @@ GameObject:
   - component: {fileID: 2658562906005985934}
   - component: {fileID: 4716464629009540662}
   - component: {fileID: 1203455193270286508}
-  - component: {fileID: 3492339758058692150}
   - component: {fileID: 3492339758058692149}
   - component: {fileID: 3492339758058692148}
   m_Layer: 0
@@ -29998,18 +30020,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: -0.00000032782555, y: -0.00000032782563, z: 3.3355263e-14}
---- !u!122 &3492339758058692150
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3492339758058692147}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!23 &3512536842963117309
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30721,7 +30731,6 @@ GameObject:
   - component: {fileID: 3589570614766298610}
   - component: {fileID: 3924682561918691400}
   - component: {fileID: 474452713119474902}
-  - component: {fileID: 5354468930123153059}
   - component: {fileID: 5354468930123153058}
   - component: {fileID: 5354468930123153057}
   m_Layer: 0
@@ -30757,18 +30766,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: -0.00000032782555, y: -0.00000032782563, z: 3.3355263e-14}
---- !u!122 &5354468930123153059
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5354468930123153056}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!33 &5361362841640286121
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -30903,7 +30900,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 657990b9ebe9f334382c3127abd59478, type: 2}
+  - {fileID: 2100000, guid: 28bc872b2c3d7a34fa27cff6fa37d081, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30966,7 +30963,6 @@ GameObject:
   - component: {fileID: 1181525868231416785}
   - component: {fileID: 8435525013220324867}
   - component: {fileID: 6469869814200049649}
-  - component: {fileID: 5758349685070766477}
   - component: {fileID: 5758349685070766476}
   - component: {fileID: 5758349685070766475}
   m_Layer: 0
@@ -31002,18 +30998,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: 0.00000014901161, y: -0.00000032782563, z: 3.3355263e-14}
---- !u!122 &5758349685070766477
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5758349685070766474}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!1 &5811374827592673207
 GameObject:
   m_ObjectHideFlags: 0
@@ -31214,7 +31198,6 @@ GameObject:
   - component: {fileID: 10703616502237308}
   - component: {fileID: 5140364492445404730}
   - component: {fileID: 4597451113604466115}
-  - component: {fileID: 6177728811346739411}
   - component: {fileID: 6177728811346739410}
   - component: {fileID: 6177728811346739409}
   m_Layer: 0
@@ -31250,18 +31233,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: -0.00000032782555, y: 0.00000062584866, z: 3.3355263e-14}
---- !u!122 &6177728811346739411
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6177728811346739408}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!4 &6218094618082474303
 Transform:
   m_ObjectHideFlags: 0
@@ -32589,7 +32560,6 @@ GameObject:
   - component: {fileID: 7189791556234156784}
   - component: {fileID: 8775697245204405378}
   - component: {fileID: 6777416107335316746}
-  - component: {fileID: 8076436930014842550}
   - component: {fileID: 8076436930014842549}
   - component: {fileID: 8076436930014842548}
   m_Layer: 0
@@ -32625,18 +32595,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: -0.00000032782555, y: 0.00000014901153, z: 3.3355263e-14}
---- !u!122 &8076436930014842550
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8076436930014842547}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!1 &8175902727330698179
 GameObject:
   m_ObjectHideFlags: 0
@@ -32746,7 +32704,6 @@ GameObject:
   - component: {fileID: 2062951033643828794}
   - component: {fileID: 6403007010350857847}
   - component: {fileID: 7113093134107312605}
-  - component: {fileID: 8254898118768870495}
   - component: {fileID: 8254898118768870494}
   - component: {fileID: 8254898118768870493}
   m_Layer: 0
@@ -32782,18 +32739,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: -0.0000008046627, y: -0.00000032782563, z: 3.3355263e-14}
---- !u!122 &8254898118768870495
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8254898118768870492}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012
 --- !u!1 &8322728509589965993
 GameObject:
   m_ObjectHideFlags: 0
@@ -33308,7 +33253,6 @@ GameObject:
   - component: {fileID: 8184860173651227243}
   - component: {fileID: 9164692970883225600}
   - component: {fileID: 6664714501639473530}
-  - component: {fileID: 9172523402851403648}
   - component: {fileID: 9172523402851403647}
   - component: {fileID: 9172523402851403646}
   m_Layer: 0
@@ -33344,15 +33288,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000002
   m_Center: {x: 0.00000014901161, y: -0.00000032782563, z: -0.00000095367426}
---- !u!122 &9172523402851403648
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9172523402851403645}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278255615
-  m_Size: 0.012

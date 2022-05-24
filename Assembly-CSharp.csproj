@@ -45,6 +45,7 @@
      <Compile Include="Assets\RosSharp\Scripts\Extensions\HeaderExtensions.cs" />
      <Compile Include="Assets\Scripts\GenerateHermiteTrajectory.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\Timing\Timer.cs" />
+     <Compile Include="Assets\Scripts\IsTarget.cs" />
      <Compile Include="Assets\RosSharp\Scripts\Urdf\UrdfComponents\UrdfOrigin.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\MessageHandling\JointStateReader.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\MessageHandling\JoyAxisInputPasser.cs" />
@@ -115,7 +116,6 @@
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\UnityFibonacciActionClient.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\GetParamServiceProvider.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\MessageHandling\LaserScanReader.cs" />
-     <Compile Include="Assets\Scripts\IsTarget.cs" />
      <None Include="Assets\RosSharp\Plugins\Microsoft\System.Threading.Tasks.Extensions.xml" />
      <None Include="Assets\RosSharp\Plugins\External\websocket-sharp.xml" />
      <None Include="Assets\RosSharp\Plugins\External\Newtonsoft.Json.Bson.xml" />

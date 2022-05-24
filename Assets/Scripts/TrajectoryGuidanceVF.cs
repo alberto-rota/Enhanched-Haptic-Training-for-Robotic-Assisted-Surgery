@@ -34,7 +34,6 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     int maxForce = 100;
 
     Vector3 closest;
-    Vector3 prevPosition = Vector3.zero;
     public Vector3 velocity;
     public Vector3 displacement;
     public   Vector3 force;
@@ -48,7 +47,6 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     void Start()
     {
         EndEffector = gameObject.transform;
-        prevPosition = EndEffector.position;
     }
 
     void Update()
@@ -71,8 +69,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         displacement = closest - EndEffector.position;
 
         // VELOCITY
-        velocity = (EndEffector.position-prevPosition)/Time.deltaTime;
-        prevPosition = EndEffector.position;
+        velocity = gameObject.GetComponent<Rigidbody>().velocity;
 
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,displacement.normalized))/2);
@@ -92,9 +89,35 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         force = f_mag*f_dir;
 
         if (graphics) {
-            Debug.DrawLine(EndEffector.position, EndEffector.position+velocity*graphicVectorGain, Color.green);
-            Debug.DrawLine(EndEffector.position, closest, Color.red);
-            Debug.DrawLine(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Arrow(EndEffector.position, EndEffector.position+velocity*graphicVectorGain, Color.green);
+            Arrow(EndEffector.position, closest, Color.red);
+            Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+        }
+    }
+    void Arrow(Vector3 from, Vector3 to, Color color) {
+        int coneResolution=30;
+        float deltaTheta = 360f/coneResolution;
+
+        Vector3 stem = (to-from)*0.9f;
+        Vector3 tip = to-(from+stem)*0.1f;
+        float tipradius = 0.1f*(to-from).magnitude;
+        List<Vector3> tipBasePoints = new List<Vector3>();
+        Vector3 b = Vector3.Cross(tip, Vector3.up)*tipradius;
+        tipBasePoints.Add(b);
+
+        for (int i=0; i<coneResolution-1; i++) {
+            float theta = deltaTheta*i; 
+            b = Quaternion.AngleAxis(deltaTheta,tip.normalized)*b;
+            tipBasePoints.Add(b);
+        }
+        Vector3 tipcenter = from+stem;
+        //SRAWING THE STEM
+        Debug.DrawLine(from,tipcenter, color);
+        // DRAWING THE TIP
+        for (int i=0; i<coneResolution; i++) {
+            Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
+            if (i==coneResolution-1) Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[0],color);
+            else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
         }
     }
 }
