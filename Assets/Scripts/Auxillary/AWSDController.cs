@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class AWSDController : MonoBehaviour
 {
     [Range(0,0.5f)]

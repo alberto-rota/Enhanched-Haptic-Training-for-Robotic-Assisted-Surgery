@@ -27,12 +27,12 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public Transform obstacle;
     public List<Vector3> obstaclePoints;
     public List<Vector3> surfaceNormals;
-    [Range(0,0.1f)]
-    public float forceFieldGain = 0.05f;
+    [Range(0,0.01f)]
+    public float forceFieldGain = 0.001f;
     [Range(0,4)]
     public int forceFieldDegree = 2;
-    [Range(0,10f)]
-    public float thresholdDistance = 0.001f;
+    [Range(0,0.006f)]
+    public float thresholdDistance = 0.0005f;
     [Range(0,100)]
     public float maxForce=100;
     public Vector3 force;
@@ -88,11 +88,11 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             if (d < thresholdDistance) {
                 force += forceFieldGain/Mathf.Pow(d,forceFieldDegree)*(gameObject.transform.position-p);
 
-                if (graphics) {
-                    Arrow(gameObject.transform.position, p, Color.red);
-                    Arrow(gameObject.transform.position, gameObject.transform.position+
-                    forceFieldGain/Mathf.Pow(d,forceFieldDegree)*(gameObject.transform.position-p)*graphicVectorGain, Color.cyan);
-                }
+                // if (graphics) {
+                //     Arrow(gameObject.transform.position, p, Color.red);
+                //     Arrow(gameObject.transform.position, gameObject.transform.position+
+                //     forceFieldGain/Mathf.Pow(d,forceFieldDegree)*(gameObject.transform.position-p)*graphicVectorGain, Color.cyan);
+                // }
 
             }
             j++;

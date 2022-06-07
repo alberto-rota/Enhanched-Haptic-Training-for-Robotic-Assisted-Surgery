@@ -90,12 +90,12 @@
      <Compile Include="Assets\RosSharp\Scripts\Urdf\Math\Matrix3x3.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\JoyPublisher.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\LaserScanSubscriber.cs" />
-     <Compile Include="Assets\Scripts\Auxillary\TubeRenderer.cs" />
      <Compile Include="Assets\RosSharp\Scripts\Urdf\UrdfComponents\UrdfPlugin.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\MessageHandling\LaserScanWriter.cs" />
      <Compile Include="Assets\Scripts\LogDataNephrectomy.cs" />
      <Compile Include="Assets\RosSharp\Scripts\Urdf\UrdfComponents\UrdfCollisions.cs" />
      <Compile Include="Assets\RosSharp\Scripts\Urdf\UrdfComponents\UrdfJoints\UrdfJoint.cs" />
+     <Compile Include="Assets\Scripts\LogDataThymectomy.cs" />
      <Compile Include="Assets\3d_models\dvrk\Scripts\URDFJoint.cs" />
      <Compile Include="Assets\RosSharp\Scripts\Urdf\JointLimitsManagers\HingeJointLimitsManager.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\UnityFibonacciActionSever.cs" />
@@ -116,6 +116,7 @@
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\UnityFibonacciActionClient.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\RosCommuncation\GetParamServiceProvider.cs" />
      <Compile Include="Assets\RosSharp\Scripts\RosBridgeClient\MessageHandling\LaserScanReader.cs" />
+     <Compile Include="Assets\Scripts\CheckTaskCompletion.cs" />
      <None Include="Assets\RosSharp\Plugins\Microsoft\System.Threading.Tasks.Extensions.xml" />
      <None Include="Assets\RosSharp\Plugins\External\websocket-sharp.xml" />
      <None Include="Assets\RosSharp\Plugins\External\Newtonsoft.Json.Bson.xml" />
@@ -344,24 +345,6 @@
     <Reference Include="System.Buffers">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="MessageGeneration">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\MessageGeneration.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
     <Reference Include="websocket-sharp">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\External\websocket-sharp.dll</HintPath>
     </Reference>
@@ -371,8 +354,14 @@
     <Reference Include="System.Memory">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="MessageGeneration">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\MessageGeneration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Urdf">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Urdf.dll</HintPath>
@@ -380,8 +369,20 @@
     <Reference Include="System.Threading.Channels">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Threading.Channels.dll</HintPath>
     </Reference>
+    <Reference Include="System.Text.Json">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Text.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json.Bson">
         <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\External\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+        <HintPath>C:\Users\alber\Desktop\Active_Constraints\Assets\RosSharp\Plugins\Microsoft\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.21f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

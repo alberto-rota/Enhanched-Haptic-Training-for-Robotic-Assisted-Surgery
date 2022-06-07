@@ -88,7 +88,7 @@ public class SumForces : MonoBehaviour
             tipBasePoints.Add(b);
         }
         Vector3 tipcenter = from+stem;
-        //SRAWING THE STEM
+        //DRAWING THE STEM
         Debug.DrawLine(from,tipcenter, color);
         // DRAWING THE TIP
         for (int i=0; i<coneResolution; i++) {

@@ -54,7 +54,7 @@ public class LogDataLiverResection : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Assets\\Logs\\LiverResection\\LiverResectionPostOriginal.m",
+        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\LiverResection\\LiverResectionPostOriginal.m",
             folderpath+"\\LiverResectionPost.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
