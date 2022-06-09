@@ -17,37 +17,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckTaskCompletion : MonoBehaviour
+public class Manager : MonoBehaviour
 {
-    public GameObject canvas;
-    public List<Transform> targets;
-    public int targetReached = 0;
-
     void Start()
     {
-        targets = new List<Transform>();
-        foreach (Transform child in gameObject.transform)
-        {
-            targets.Add(child);
-        }
+        
     }
+
+
 
     void Update()
     {
-        targetReached = 0;
-        foreach (Transform child in gameObject.transform)
-        {
-            if (child.GetComponent<IsTarget>().reached)
-            {
-                targetReached++;
-            }
-        }
-        if (targetReached == targets.Count)
-        {
-            canvas.SetActive(true);
-        } else {
-            canvas.SetActive(false);    
+        // QUITS THE GAME WHEN ESC IS PRESSED
+        if(Input.GetKey(KeyCode.Escape)){
+            Application.Quit();
         }
     }
 }
-//////

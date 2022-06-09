@@ -17,6 +17,8 @@ public class IsTarget : MonoBehaviour
     {
         colorreached = Resources.Load<Material>("Materials/TargetReached");
         colornotreached = Resources.Load<Material>("Materials/Target");
+        //Disable the collider
+        gameObject.GetComponent<SphereCollider>().enabled = false;
     }
 
     void Update()

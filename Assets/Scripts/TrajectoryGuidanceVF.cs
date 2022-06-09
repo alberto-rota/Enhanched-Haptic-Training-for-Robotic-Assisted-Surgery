@@ -33,20 +33,27 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     [SerializeField]
     int maxForce = 100;
 
+    // If the VF accounts for the position of an object different from the PSM, specify it here
+    public Transform taskSubject;
+
     Vector3 closest;
     public Vector3 velocity;
-    public Vector3 displacement;
+    public Vector3 deviation;
     public   Vector3 force;
     [SerializeField]
     bool graphics = true;
     [Range(0,5)]
     public float graphicVectorGain = 1;
 
-    Transform EndEffector;
+    Transform effector;
 
     void Start()
     {
-        EndEffector = gameObject.transform;
+        if (taskSubject == null) {
+            effector = gameObject.transform;
+        }else{
+            effector = taskSubject;
+        }
     }
 
     void Update()
@@ -60,49 +67,49 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         // Vector3[] extractPositions = new Vector3[GetComponent<LineRenderer>().positionCount];
         for (int i=0; i<Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
             Vector3 point = Trajectory.GetComponent<LineRenderer>().GetPosition(i);
-            float d = Vector3.Distance(point, EndEffector.position);
+            float d = Vector3.Distance(point, effector.position);
             if (d < mindist) {
                 mindist = d;
                 closest = point;
             }
         }
-        displacement = closest - EndEffector.position;
+        deviation = closest - effector.position;
 
         // VELOCITY
         velocity = gameObject.GetComponent<Rigidbody>().velocity;
 
         // FORCE
-        float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,displacement.normalized))/2);
+        float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
         float f_mag = b*velocity.magnitude;
         if (f_mag > maxForce) {
             f_mag = maxForce;
         }
         Vector3 f_dir;
-        if (Vector3.Dot(velocity.normalized, displacement.normalized)<0) { // When moving away
-            f_dir = displacement.normalized;
+        if (Vector3.Dot(velocity.normalized, deviation.normalized)<0) { // When moving away
+            f_dir = deviation.normalized;
         } else {  // When approaching
             f_dir = Quaternion.AngleAxis(
-                (1+Vector3.Dot(velocity.normalized,displacement.normalized))*Mathf.PI/2*180f/Mathf.PI, // Rotation Angle (in degrees)
-                Vector3.Cross(velocity.normalized,displacement.normalized)
+                (1+Vector3.Dot(velocity.normalized,deviation.normalized))*Mathf.PI/2*180f/Mathf.PI, // Rotation Angle (in degrees)
+                Vector3.Cross(velocity.normalized,deviation.normalized)
                 )*velocity.normalized;  //Rotation Axis
         }
         force = f_mag*f_dir;
 
         if (graphics) {
-            Arrow(EndEffector.position, EndEffector.position+velocity*graphicVectorGain, Color.green);
-            Arrow(EndEffector.position, closest, Color.red);
-            Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Arrow(effector.position, effector.position+velocity*graphicVectorGain, Color.green);
+            Arrow(effector.position, closest, Color.red);
+            Arrow(effector.position, effector.position+force*graphicVectorGain, Color.blue);
         }
     }
     void Arrow(Vector3 from, Vector3 to, Color color) {
-        int coneResolution=30;
+        int coneResolution=20;
         float deltaTheta = 360f/coneResolution;
 
         Vector3 stem = (to-from)*0.9f;
-        Vector3 tip = to-(from+stem)*0.1f;
-        float tipradius = 0.1f*(to-from).magnitude;
+        Vector3 tip = (to-from)-stem;
+        float tipradius = 0.05f*(to-from).magnitude;
         List<Vector3> tipBasePoints = new List<Vector3>();
-        Vector3 b = Vector3.Cross(tip, Vector3.up)*tipradius;
+        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
         tipBasePoints.Add(b);
 
         for (int i=0; i<coneResolution-1; i++) {
@@ -112,7 +119,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         }
         Vector3 tipcenter = from+stem;
         //SRAWING THE STEM
-        Debug.DrawLine(from,tipcenter, color);
+        Debug.DrawLine(from, tipcenter, color);
         // DRAWING THE TIP
         for (int i=0; i<coneResolution; i++) {
             Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
