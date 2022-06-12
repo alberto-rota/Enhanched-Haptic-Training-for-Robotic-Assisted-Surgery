@@ -24,14 +24,15 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 {
+    public Transform subject;
     public Transform obstacle;
     public List<Vector3> obstaclePoints;
     public List<Vector3> surfaceNormals;
-    [Range(0,0.01f)]
+    [Range(0,5f)]
     public float forceFieldGain = 0.001f;
     [Range(0,4)]
     public int forceFieldDegree = 2;
-    [Range(0,0.006f)]
+    [Range(0,1)]
     public float thresholdDistance = 0.0005f;
     [Range(0,100)]
     public float maxForce=100;
@@ -42,16 +43,19 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     [Range(0,5)]
     public float graphicVectorGain = 1;
     Transform EndEffector;
-    Material colorok;
-    Material colorred;
+    Material materialown;
+    Material materialhit;
 
     void Start()
     {
+        if (subject == null) {
+            subject = GameObject.Find("PSM").transform;
+        }
         EndEffector = gameObject.transform;
         obstaclePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
-        colorok = Resources.Load<Material>("Materials/Organ");
-        colorred = Resources.Load<Material>("Materials/OrganRed");
+        materialown = obstacle.GetComponent<MeshRenderer>().sharedMaterial;
+        materialhit = Resources.Load<Material>("Materials/ObstacleHit");
 
         Mesh surgicalMesh;
         surgicalMesh = obstacle.GetComponent<MeshFilter>().sharedMesh;
@@ -72,56 +76,50 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE' in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
         }
         
-        force = Vector3.zero;
-        float mindist = 100000;
+
+        int n_close=0;
+        Vector3 com = Vector3.zero;
         Vector3 closestP = Vector3.zero;
-        int idx_closest=0;
+        float min_dist = 10000;
+        int idx_closest = 0;
         int j=0;
+        force = Vector3.zero;
         foreach (Vector3 p in obstaclePoints) {
-            float d = Vector3.Distance(p, gameObject.transform.position);
-            if (d < mindist) {
-                mindist = d;
+            float d = Vector3.Distance(p, subject.position);
+            if (d < min_dist) {
+                min_dist = d;
                 closestP = p;
-                idx_closest=j;
+                idx_closest = j;
             }
-
             if (d < thresholdDistance) {
-                force += forceFieldGain/Mathf.Pow(d,forceFieldDegree)*(gameObject.transform.position-p);
-
-                // if (graphics) {
-                //     Arrow(gameObject.transform.position, p, Color.red);
-                //     Arrow(gameObject.transform.position, gameObject.transform.position+
-                //     forceFieldGain/Mathf.Pow(d,forceFieldDegree)*(gameObject.transform.position-p)*graphicVectorGain, Color.cyan);
-                // }
-
+                com=com+p;
+                n_close++;
             }
             j++;
         }   
+        com = com/n_close;
+
+        // ADD DAMP
+        force = (subject.position-com).normalized*forceFieldGain/Mathf.Pow(Vector3.Distance(subject.position,com),forceFieldDegree);
 
         // Rescaling the force the max magnitude if exceeded
         if (force.magnitude > maxForce) {
             force = force.normalized * maxForce;
         }
         if (graphics) {
-            Arrow(gameObject.transform.position, gameObject.transform.position+force*graphicVectorGain, Color.blue);
+            Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
 
         // CHECHING IF EE IS INSIDE OF ORGAN
         if (Vector3.Dot(closestP-EndEffector.position,surfaceNormals[idx_closest])>=0) {
-            obstacle.GetComponent<MeshRenderer>().material = colorred;
+            obstacle.GetComponent<MeshRenderer>().material = materialhit;
+            force = Vector3.zero;
         } else {
-            obstacle.GetComponent<MeshRenderer>().material = colorok;
+            obstacle.GetComponent<MeshRenderer>().material = materialown;
         }
 
-        // DRAWING MESH NORMALS [DEPRECATED]
-        // if (normalVectorsLength > 0 && graphics) {
-        //     for (int i = 0; i<surfaceNormals.Count; i++) {
-        //         Arrow(obstaclePoints[i], obstaclePoints[i]+surfaceNormals[i]*normalVectorsLength);
-        //     }
-        // }
-
     }
-     void Arrow(Vector3 from, Vector3 to, Color color) {
+    void Arrow(Vector3 from, Vector3 to, Color color) {
         int coneResolution=20;
         float deltaTheta = 360f/coneResolution;
 

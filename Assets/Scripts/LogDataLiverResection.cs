@@ -24,7 +24,7 @@ public class LogDataLiverResection : MonoBehaviour
 {
 
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Assets\Logs";
+    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\LiverResection";
     string foldername;
     string folderpath;
     string path;
@@ -127,6 +127,23 @@ public class LogDataLiverResection : MonoBehaviour
             }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<ConeApproachGuidanceVF>())) {
+            for (int j=0; j<gameObject.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
+                path = folderpath+"\\"+foldername+"_coneapproach"+j+".csv";
+                FileStream streamtraj = new FileStream(path, FileMode.Append);  
+                using (StreamWriter writer = new StreamWriter(streamtraj))  
+                {  
+                        Vector3 start = gameObject.GetComponents<ConeApproachGuidanceVF>()[j].target.position-gameObject.GetComponents<ConeApproachGuidanceVF>()[j].delta;
+                        Vector3 end = gameObject.GetComponents<ConeApproachGuidanceVF>()[j].target.position;
+                        writer.Write("X,Y,Z,\n");
+                        writer.Write(start.x.ToString()+",");
+                        writer.Write(start.y.ToString()+",");
+                        writer.Write(start.z.ToString()+",\n");
+                        writer.Write(end.x.ToString()+",");
+                        writer.Write(end.y.ToString()+",");
+                        writer.Write(end.z.ToString()+",\n");
+                    
+                }
+            }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<SumForces>())) {
         }

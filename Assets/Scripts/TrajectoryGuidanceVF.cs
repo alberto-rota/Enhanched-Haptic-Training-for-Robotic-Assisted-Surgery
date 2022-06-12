@@ -24,7 +24,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TrajectoryGuidanceVF : MonoBehaviour
 {
-
+    public Transform subject;
     public Transform Trajectory;
 
     [Range(0,100)]
@@ -33,8 +33,6 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     [SerializeField]
     int maxForce = 100;
 
-    // If the VF accounts for the position of an object different from the PSM, specify it here
-    public Transform taskSubject;
 
     Vector3 closest;
     public Vector3 velocity;
@@ -45,14 +43,10 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     [Range(0,5)]
     public float graphicVectorGain = 1;
 
-    Transform effector;
-
     void Start()
     {
-        if (taskSubject == null) {
-            effector = gameObject.transform;
-        }else{
-            effector = taskSubject;
+        if (subject == null) {
+            subject = GameObject.Find("PSM").transform;
         }
     }
 
@@ -67,16 +61,16 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         // Vector3[] extractPositions = new Vector3[GetComponent<LineRenderer>().positionCount];
         for (int i=0; i<Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
             Vector3 point = Trajectory.GetComponent<LineRenderer>().GetPosition(i);
-            float d = Vector3.Distance(point, effector.position);
+            float d = Vector3.Distance(point, subject.position);
             if (d < mindist) {
                 mindist = d;
                 closest = point;
             }
         }
-        deviation = closest - effector.position;
+        deviation = closest - subject.position;
 
         // VELOCITY
-        velocity = gameObject.GetComponent<Rigidbody>().velocity;
+        velocity = subject.GetComponent<Rigidbody>().velocity;
 
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
@@ -96,9 +90,9 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         force = f_mag*f_dir;
 
         if (graphics) {
-            Arrow(effector.position, effector.position+velocity*graphicVectorGain, Color.green);
-            Arrow(effector.position, closest, Color.red);
-            Arrow(effector.position, effector.position+force*graphicVectorGain, Color.blue);
+            Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
+            Arrow(subject.position, closest, Color.red);
+            Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
     }
     void Arrow(Vector3 from, Vector3 to, Color color) {

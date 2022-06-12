@@ -5,10 +5,13 @@ UserSettings
 ProjectSettings
 Unity-Robotics-Hub-main
 Temp
+Task_Data/*/*/
+# !Task_Data/*/*.stl
+# !Task_Data/*/*.m
+Build
 Assets/3d_models
-Assets/Tasks/Blend_Files/*.blend
-Assets/Tasks/Blend_Files/*.blend1
+Assets/Tasks/Setup_files/*.blend
+Assets/Tasks/Setup_files/*.blend1
 *.meta
-*.stl
 *.csproj
 *.sln

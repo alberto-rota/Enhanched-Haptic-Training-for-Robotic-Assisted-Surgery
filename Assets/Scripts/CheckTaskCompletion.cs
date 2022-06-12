@@ -19,9 +19,9 @@ using UnityEngine;
 
 public class CheckTaskCompletion : MonoBehaviour
 {
-    public GameObject canvas;
     public List<Transform> targets;
     public int targetReached = 0;
+    GameObject canvas;
 
     void Start()
     {
@@ -30,6 +30,7 @@ public class CheckTaskCompletion : MonoBehaviour
         {
             targets.Add(child);
         }
+        canvas = GameObject.Find("Text/Canvas");
     }
 
     void Update()

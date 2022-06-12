@@ -27,16 +27,16 @@ public class ConeApproachGuidanceVF : MonoBehaviour
 {
     // Draw draw = new Draw();
 
-    public bool configuring = true;
+    public bool configuring = false;
     public Transform target;
     Vector3 coneCenter;
     [Range(1,30)]
     public float coneApertureDegrees = 10;
-    [Range(0,0.1f)]
-    public float gainInsideOfCone = 0.02f; 
-    [Range(0,0.1f)]
+    [Range(0,10f)]
+    public float dampInsideOfCone = 0.02f; 
+    [Range(0,10f)]
     public float gainOutsideOfCone = 0.02f; 
-    Vector3 delta;
+    public Vector3 delta;
     List<Vector3> coneBasePoints;
     public Vector3 force;
     Color savedColor;
@@ -57,6 +57,20 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         preva = Vector3.zero;
         savedColor = coneColor;
         force = Vector3.zero;
+
+        coneColor = Color.yellow;
+        float deltaTheta = 360f/coneResolution;
+        delta = target.position-gameObject.transform.position;  
+        coneBasePoints = new List<Vector3>();
+        Vector3 b = Vector3.Cross(delta.normalized, Vector3.up)*delta.magnitude*Mathf.Tan(coneApertureDegrees*Mathf.PI/180f);
+        coneBasePoints.Add(b);
+        for (int i=0; i<coneResolution-1; i++) {
+            float theta = deltaTheta*i; 
+            b = Quaternion.AngleAxis(deltaTheta,delta.normalized)*b;
+            coneBasePoints.Add(b);
+        }
+        coneCenter = gameObject.transform.position;
+        tp = target.position;
     }
 
     void Update()
@@ -69,7 +83,6 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             return;
         } 
         
-        tp = target.position;
         if (configuring) { // THE CONE MOVES WITH THE EE, NO VF APPLIED
             coneColor = Color.yellow;
             float deltaTheta = 360f/coneResolution;
@@ -91,7 +104,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
 
             float aperture = Mathf.Tan(coneApertureDegrees*Mathf.PI/180f);
 
-            // CHECKING IF INSIDE OF CONE
+            // Changing color the cone if outside of the border
             if (a.magnitude >= aperture*l.magnitude) {
                 coneColor = Color.red;
             } else {
@@ -101,20 +114,25 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             float f_mag;
             float eps = 0.05f*a.magnitude; // Switching region is 5% of the radial coordinate 
 
-            if (a.magnitude < aperture*l.magnitude - eps) { // INSIDE OF THE CONE, NOT IN THE SWITCHING REGION
-                f_mag = gainInsideOfCone;
-
-            } else if (a.magnitude < aperture*l.magnitude) { // INSIDE OF THE CONE, IN THE SWITCHING REGION
-                f_mag = gainInsideOfCone + (gainOutsideOfCone-gainInsideOfCone)/eps*(a.magnitude-(aperture*l.magnitude-eps));
-
-            } else {
+            if (a.magnitude < aperture*l.magnitude) { // INSIDE OF THE CONE,
+                f_mag = dampInsideOfCone;
+                force = (f_mag*-1*va);
+            } else if (a.magnitude < aperture*l.magnitude+eps) { // OUTSIDE OF THE CONE, IN THE SWITCHING REGION
+                f_mag = gainOutsideOfCone/eps*(a.magnitude-(aperture*l.magnitude-eps));
+                force = (f_mag*-1*a.normalized);
+            } else { // Outside of cone
                 f_mag = gainOutsideOfCone;  
+                force = (f_mag*-1*a.normalized);
+            }
+
+            // When close enough to the target, force is reduced (the cone is too narrow)
+            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.05) {
+                force = force*0.25f;
             }
 
             // Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+vl*graphicVectorGain, Color.magenta);
             // Debug.DrawLine(gameObject.transform.position+vl*graphicVectorGain, gameObject.transform.position+(vl+va)*graphicVectorGain, Color.magenta);
             // Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+(vl+va)*graphicVectorGain, Color.magenta);
-            force = (f_mag*-1*va.normalized);
             if (graphics) {
                 Debug.DrawLine(tp,tp+l,Color.white);
                 Debug.DrawLine(tp+l,tp+l+a,Color.white);
@@ -136,14 +154,14 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         }
     }
     void Arrow(Vector3 from, Vector3 to, Color color) {
-        int coneResolution=30;
+        int coneResolution=20;
         float deltaTheta = 360f/coneResolution;
 
         Vector3 stem = (to-from)*0.9f;
-        Vector3 tip = to-(from+stem)*0.1f;
-        float tipradius = 0.1f*(to-from).magnitude;
+        Vector3 tip = (to-from)-stem;
+        float tipradius = 0.05f*(to-from).magnitude;
         List<Vector3> tipBasePoints = new List<Vector3>();
-        Vector3 b = Vector3.Cross(tip, Vector3.up)*tipradius;
+        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
         tipBasePoints.Add(b);
 
         for (int i=0; i<coneResolution-1; i++) {
@@ -153,7 +171,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         }
         Vector3 tipcenter = from+stem;
         //SRAWING THE STEM
-        Debug.DrawLine(from,tipcenter, color);
+        Debug.DrawLine(from, tipcenter, color);
         // DRAWING THE TIP
         for (int i=0; i<coneResolution; i++) {
             Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);

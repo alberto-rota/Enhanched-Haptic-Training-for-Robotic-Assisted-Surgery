@@ -16,21 +16,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    void Start()
+   void Update()
     {
-        
-    }
-
-
-
-    void Update()
-    {
-        // QUITS THE GAME WHEN ESC IS PRESSED
+        // Quits when the ESC key is pressed
         if(Input.GetKey(KeyCode.Escape)){
             Application.Quit();
+        }
+
+        // Toggles the VFs when the V key is pressed
+        if(Input.GetKeyDown(KeyCode.V)){
+            GameObject.Find("PSM").GetComponent<SumForces>().enabled = !GameObject.Find("PSM").GetComponent<SumForces>().enabled;
+                if (GameObject.Find("PSM").GetComponent<SumForces>().enabled) {
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                } else {
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                }
+        }
+
+        // Loads a scene of choice when the user presses the corresponding key
+        if(Input.GetKey(KeyCode.Alpha1)){
+            SceneManager.LoadScene("Assets/Tasks/Training1.unity");
+        }else if(Input.GetKey(KeyCode.Alpha2)){
+            SceneManager.LoadScene("Assets/Tasks/Training2.unity");
+        }else if(Input.GetKey(KeyCode.Alpha3)){
+            SceneManager.LoadScene("Assets/Tasks/Training3.unity");
+        }else if(Input.GetKey(KeyCode.Alpha4)){
+            SceneManager.LoadScene("Assets/Tasks/Thymectomy.unity");
+        }else if(Input.GetKey(KeyCode.Alpha5)){
+            SceneManager.LoadScene("Assets/Tasks/Nephrectomy.unity");
+        }else if(Input.GetKey(KeyCode.Alpha6)){
+            SceneManager.LoadScene("Assets/Tasks/LiverResection.unity");
         }
     }
 }

@@ -25,7 +25,7 @@ public class SumForces : MonoBehaviour
     public bool graphics = true;
     
     [Range(0,5f)]
-    public float forceThreshold = 0.1f;
+    public float forceThreshold = 0f;
     [Range(0,5)]
     public float graphicVectorGain = 1;
 
@@ -49,20 +49,31 @@ public class SumForces : MonoBehaviour
     {
         totalForce = Vector3.zero;
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
-            totalForce = totalForce + gameObject.GetComponent<TrajectoryGuidanceVF>().force;   
+            foreach (TrajectoryGuidanceVF vf in gameObject.GetComponents<TrajectoryGuidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
-            totalForce = totalForce + gameObject.GetComponent<ObstacleAvoidanceForceFieldVF>().force;   
+            foreach (ObstacleAvoidanceForceFieldVF vf in gameObject.GetComponents<ObstacleAvoidanceForceFieldVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<SurfaceAvoidanceVF>())) {
-            totalForce = totalForce + gameObject.GetComponent<SurfaceAvoidanceVF>().force;   
+            foreach (SurfaceAvoidanceVF vf in gameObject.GetComponents<SurfaceAvoidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<SurfaceGuidanceVF>())) {
-            totalForce = totalForce + gameObject.GetComponent<SurfaceGuidanceVF>().force;   
+            foreach (SurfaceGuidanceVF vf in gameObject.GetComponents<SurfaceGuidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<ConeApproachGuidanceVF>())) {
-            totalForce = totalForce + gameObject.GetComponent<ConeApproachGuidanceVF>().force;   
+            foreach (ConeApproachGuidanceVF vf in gameObject.GetComponents<ConeApproachGuidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
         }
+
         if (graphics) {
             Arrow(gameObject.transform.position, gameObject.transform.position+totalForce*graphicVectorGain, Color.white);
         }
@@ -72,14 +83,14 @@ public class SumForces : MonoBehaviour
         }
     }
     void Arrow(Vector3 from, Vector3 to, Color color) {
-        int coneResolution=30;
+        int coneResolution=20;
         float deltaTheta = 360f/coneResolution;
 
         Vector3 stem = (to-from)*0.9f;
-        Vector3 tip = to-(from+stem)*0.1f;
-        float tipradius = 0.1f*(to-from).magnitude;
+        Vector3 tip = (to-from)-stem;
+        float tipradius = 0.05f*(to-from).magnitude;
         List<Vector3> tipBasePoints = new List<Vector3>();
-        Vector3 b = Vector3.Cross(tip, Vector3.up)*tipradius;
+        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
         tipBasePoints.Add(b);
 
         for (int i=0; i<coneResolution-1; i++) {
@@ -88,8 +99,8 @@ public class SumForces : MonoBehaviour
             tipBasePoints.Add(b);
         }
         Vector3 tipcenter = from+stem;
-        //DRAWING THE STEM
-        Debug.DrawLine(from,tipcenter, color);
+        //SRAWING THE STEM
+        Debug.DrawLine(from, tipcenter, color);
         // DRAWING THE TIP
         for (int i=0; i<coneResolution; i++) {
             Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);

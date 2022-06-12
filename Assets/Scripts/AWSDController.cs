@@ -7,6 +7,9 @@ public class AWSDController : MonoBehaviour
 {
     [Range(0,0.5f)]
     public float scale = 0.001f;
+    public Vector3 W;
+    public Vector3 A;
+    public Vector3 P;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,16 +21,16 @@ public class AWSDController : MonoBehaviour
     {
          Rigidbody rb = GetComponent<Rigidbody>();
          if (Input.GetKey(KeyCode.W))
-             rb.AddForce(scale*Vector3.left);
+             rb.AddForce(scale*W);
          if (Input.GetKey(KeyCode.S))
-             rb.AddForce(scale*Vector3.right);
+             rb.AddForce(scale*W*-1);
          if (Input.GetKey(KeyCode.A))
-             rb.AddForce(scale*Vector3.back);
+             rb.AddForce(scale*A);
          if (Input.GetKey(KeyCode.D))
-             rb.AddForce(scale*Vector3.forward);
+             rb.AddForce(scale*A*-1);
          if (Input.GetKey(KeyCode.P))
-             rb.AddForce(scale*Vector3.up);
+             rb.AddForce(scale*P);
          if (Input.GetKey(KeyCode.L))
-             rb.AddForce(scale*Vector3.down);
+             rb.AddForce(scale*P*-1);
     }
 }
