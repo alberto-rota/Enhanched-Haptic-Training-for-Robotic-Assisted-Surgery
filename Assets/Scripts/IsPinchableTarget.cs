@@ -17,17 +17,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode, RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(Rigidbody))]
-public class IsTarget : MonoBehaviour
+[ExecuteInEditMode, RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(Rigidbody)),]
+public class IsPinchableTarget : MonoBehaviour
 {
     Material materialtarget;
     Material materialtargethit;
+    Material materialtargetpinchable;
+
     Vector3 psm;
     Vector3 p;
     public Transform subject;
     public float d;
     float targetRadius; 
     public bool reached = false;
+    bool pinchable = false;
 
     void Start()
     {
@@ -36,6 +39,7 @@ public class IsTarget : MonoBehaviour
         }
         materialtarget = Resources.Load<Material>("Materials/Target");
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");
+        materialtargetpinchable = Resources.Load<Material>("Materials/TargetPinchable");
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
@@ -48,13 +52,18 @@ public class IsTarget : MonoBehaviour
         p = subject.position;
         d = Vector3.Distance(p,gameObject.transform.position);
         if (d < targetRadius) {
-            reached = true;
-
-        } else reached = false;
+            pinchable = true;
+            if (Input.GetKey(KeyCode.Space)) {
+                reached = true;
+            }
+        } else pinchable = false;
 
         if (reached) {
             gameObject.GetComponent<Renderer>().material = materialtargethit;
-        } else {
+        } else if (pinchable) {
+            gameObject.GetComponent<Renderer>().material = materialtargetpinchable;
+        }
+        if (!reached && !pinchable) {
             gameObject.GetComponent<Renderer>().material = materialtarget;
         }
     }

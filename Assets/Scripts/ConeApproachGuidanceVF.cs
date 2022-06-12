@@ -27,7 +27,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
 {
     // Draw draw = new Draw();
 
-    public bool configuring = false;
+    public bool configuring;
     public Transform target;
     Vector3 coneCenter;
     [Range(1,30)]
@@ -39,7 +39,6 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     public Vector3 delta;
     List<Vector3> coneBasePoints;
     public Vector3 force;
-    Color savedColor;
     Vector3 tp;
     Vector3 ee;
     Vector3 prevl;
@@ -48,17 +47,18 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     public bool graphics = true;
     [Range(0,5)]
     public float graphicVectorGain = 1;
-    public Color coneColor = Color.yellow;
+    Color coneColor;
+    public Color color;
     public int coneResolution = 10;
 
 
     void Start(){
+        configuring = false;
         prevl = Vector3.zero;
         preva = Vector3.zero;
-        savedColor = coneColor;
         force = Vector3.zero;
+        coneColor = color;
 
-        coneColor = Color.yellow;
         float deltaTheta = 360f/coneResolution;
         delta = target.position-gameObject.transform.position;  
         coneBasePoints = new List<Vector3>();
@@ -84,7 +84,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         } 
         
         if (configuring) { // THE CONE MOVES WITH THE EE, NO VF APPLIED
-            coneColor = Color.yellow;
+            coneColor = color;
             float deltaTheta = 360f/coneResolution;
             delta = target.position-gameObject.transform.position;  
             coneBasePoints = new List<Vector3>();
@@ -103,12 +103,11 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             Vector3 a = ee-tp-l;
 
             float aperture = Mathf.Tan(coneApertureDegrees*Mathf.PI/180f);
-
             // Changing color the cone if outside of the border
             if (a.magnitude >= aperture*l.magnitude) {
                 coneColor = Color.red;
             } else {
-                coneColor = Color.yellow; 
+                coneColor = color; 
             }
             Vector3 eta = Vector3.Cross(delta,Vector3.Cross(delta,a));
             float f_mag;
@@ -126,8 +125,9 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             }
 
             // When close enough to the target, force is reduced (the cone is too narrow)
-            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.05) {
-                force = force*0.25f;
+            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.1f) {
+                force = force*0.2f;
+                coneColor = Color.green;
             }
 
             // Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+vl*graphicVectorGain, Color.magenta);

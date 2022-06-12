@@ -36,19 +36,22 @@ public class CheckTaskCompletion : MonoBehaviour
     void Update()
     {
         targetReached = 0;
-        foreach (Transform child in gameObject.transform)
-        {
-            if (child.GetComponent<IsTarget>().reached)
-            {
-                targetReached++;
+        foreach (Transform child in gameObject.transform) {
+            if (child.GetComponent<IsTarget>() != null) {
+                if (child.GetComponent<IsTarget>().reached) {
+                    targetReached++;
+                }
+            }
+            if (child.GetComponent<IsPinchableTarget>() != null) {
+                if (child.GetComponent<IsPinchableTarget>().reached) {
+                    targetReached++;
+                }
             }
         }
-        if (targetReached == targets.Count)
-        {
+        if (targetReached == targets.Count) {
             canvas.SetActive(true);
         } else {
             canvas.SetActive(false);    
         }
     }
 }
-//////
