@@ -39,7 +39,7 @@ public class LogDataNephrectomy : MonoBehaviour
         return validatedName;
     }
 
-    void Start() {
+    public void Start() {
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {

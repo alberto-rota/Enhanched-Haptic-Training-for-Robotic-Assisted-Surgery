@@ -20,11 +20,11 @@ using System.IO;
 using UnityEngine.SceneManagement;
 
 
-public class LogDataLiverResection : MonoBehaviour
+public class LogDataTraining3 : MonoBehaviour
 {
 
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\LiverResection";
+    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training3";
     string foldername;
     string folderpath;
     string path;
@@ -54,8 +54,8 @@ public class LogDataLiverResection : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\LiverResection\\LiverResectionPostOriginal.m",
-            folderpath+"\\LiverResectionPost.m");
+        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\Training3PostOriginal.m",
+            folderpath+"\\Training3Post.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {

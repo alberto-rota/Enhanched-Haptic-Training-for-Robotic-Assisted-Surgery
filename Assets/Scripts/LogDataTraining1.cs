@@ -39,7 +39,7 @@ public class LogDataTraining1 : MonoBehaviour
         return validatedName;
     }
 
-    void Start() {
+    public void Start() {
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {
@@ -51,6 +51,8 @@ public class LogDataTraining1 : MonoBehaviour
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo);
         folderpath = saveTo+"\\"+foldername;
+
+        // Creates the folder
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
