@@ -43,6 +43,7 @@ public class IsPinchable : MonoBehaviour
 
     void Update()
     {
+        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
         bool pinchingAction = Input.GetKey(KeyCode.Space);
         string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
         "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
@@ -77,14 +78,18 @@ public class IsPinchable : MonoBehaviour
         if (!pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialown;
         }
-        if (Input.GetKey(KeyCode.Space)) {
-            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-        }else{
-            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-            GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
-            GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
+        if (pinchingAction) {      
+            GameObject.Find(pinch1).transform.Rotate(0,+90*Mathf.PI/180,0);
+            GameObject.Find(pinch2).transform.Rotate(0,-90*Mathf.PI/180,0);
+            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+        }if (releasingAction) {
+            GameObject.Find(pinch1).transform.Rotate(0,-90*Mathf.PI/180,0);
+            GameObject.Find(pinch2).transform.Rotate(0,+90*Mathf.PI/180,0);
+            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
+            // GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
         }
     }
 }
