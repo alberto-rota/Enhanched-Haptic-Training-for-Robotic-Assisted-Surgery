@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode, RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
+[RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
 public class IsPinchable : MonoBehaviour
 {
     Material materialpinched;
@@ -43,15 +43,26 @@ public class IsPinchable : MonoBehaviour
 
     void Update()
     {
+        bool pinchingAction = Input.GetKey(KeyCode.Space);
+        string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+        string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
         psm = GameObject.Find("PSM").transform.position;
         p = gameObject.transform.localPosition;
         d = Vector3.Distance(p,psm);
         if (d < targetRadius) {
             pinchable = true;
-            if (Input.GetKey(KeyCode.Space)) {
+            if (pinchingAction) {
                 pinched = true;
-            } else pinched = false;
+            } else {
+                pinched = false;
+            }
         } else pinchable = false;
 
         if (pinched) {
@@ -65,6 +76,15 @@ public class IsPinchable : MonoBehaviour
         }
         if (!pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialown;
+        }
+        if (Input.GetKey(KeyCode.Space)) {
+            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
+            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
+        }else{
+            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
+            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
+            GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
+            GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
         }
     }
 }

@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 208453150}
   - component: {fileID: 208453149}
   - component: {fileID: 208453148}
+  - component: {fileID: 208453152}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -169,8 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc36e9e5b6224344ca5026aaa93064bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reached: 0
   subject: {fileID: 244489878}
+  d: 3.984133
+  reached: 0
 --- !u!135 &208453149
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -233,6 +235,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208453146}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &208453152
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208453146}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &244489875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1407309689265650, guid: c00810e8a198d9f469c7d6ad89ca570c, type: 3}
@@ -293,7 +311,7 @@ MonoBehaviour:
   - {fileID: 244489884}
   - {fileID: 244489885}
   - {fileID: 244489886}
-  totalForce: {x: NaN, y: NaN, z: NaN}
+  totalForce: {x: 0, y: 0, z: 0}
   graphics: 1
   forceThreshold: 0
   graphicVectorGain: 1
@@ -26865,8 +26883,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 100
+  m_Intensity: 1.2
+  m_Range: 200
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -27002,7 +27020,7 @@ Transform:
   m_Children:
   - {fileID: 208453147}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1012193012
 PrefabInstance:
@@ -27260,7 +27278,7 @@ Transform:
   m_LocalScale: {x: 0.33200526, y: 0.33200526, z: 0.33200526}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2008889975
 MonoBehaviour:
@@ -27683,7 +27701,7 @@ Transform:
   - {fileID: 277166491}
   - {fileID: 597954508}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6716013819627199712
 MeshFilter:

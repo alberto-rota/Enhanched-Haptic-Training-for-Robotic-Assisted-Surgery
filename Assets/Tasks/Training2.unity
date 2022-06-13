@@ -281,7 +281,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1.2
-  m_Range: 100
+  m_Range: 200
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -731,13 +731,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897612879}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b147c10b862fec84cba96b70a43f1bdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeConstraints:
-  - {fileID: 1897612886}
+  activeConstraints: []
   totalForce: {x: 0, y: 0, z: 0}
   graphics: 1
   forceThreshold: 0.1
@@ -795,7 +794,7 @@ MonoBehaviour:
   force: {x: -0, y: -0, z: -0}
   graphics: 0
   graphicVectorGain: 1
-  coneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  color: {r: 0, g: 0.78901577, b: 1, a: 1}
   coneResolution: 10
 --- !u!1001 &1998552958
 PrefabInstance:
@@ -20021,7 +20020,7 @@ Transform:
   m_LocalScale: {x: 0.25015998, y: 0.25015977, z: 0.25015977}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6963812838076454997
 MeshRenderer:

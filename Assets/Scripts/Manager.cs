@@ -20,7 +20,20 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-   void Update()
+    void Start() {
+        string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+        string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
+        GameObject.Find(pinch1).transform.Rotate(0,-450*Mathf.PI/180,0);
+        GameObject.Find(pinch2).transform.Rotate(0,450*Mathf.PI/180,0);
+    }
+
+    void Update()
     {
         GameObject psm = GameObject.Find("PSM");
         // Quits when the ESC key is pressed
