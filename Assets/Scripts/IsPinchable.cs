@@ -17,7 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode, RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
+[ExecuteInEditMode, RequireComponent(typeof(SphereCollider))]
+// ,RequireComponent(typeof(FixedJoint))]
 public class IsPinchable : MonoBehaviour
 {
     Material materialpinched;
@@ -38,7 +39,7 @@ public class IsPinchable : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        // gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 
     void Update()
@@ -68,9 +69,15 @@ public class IsPinchable : MonoBehaviour
 
         if (pinched) {
             gameObject.GetComponent<Renderer>().material = materialpinched;
-            gameObject.GetComponent<FixedJoint>().connectedBody = GameObject.Find("PSM").GetComponent<Rigidbody>();
+            if (gameObject.GetComponent<FixedJoint>() == null) {
+                gameObject.AddComponent<FixedJoint>();
+                gameObject.GetComponent<FixedJoint>().connectedBody = GameObject.Find("PSM").GetComponent<Rigidbody>();
+            }
         } else {
-            gameObject.GetComponent<FixedJoint>().connectedBody = null;
+            if (gameObject.GetComponent<FixedJoint>() != null) {
+                Destroy(gameObject.GetComponent<FixedJoint>());
+            }
+            // gameObject.GetComponent<FixedJoint>().connectedBody = null;
         }
         if (pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialpinchable;
