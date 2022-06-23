@@ -49,7 +49,7 @@ public class CheckTaskCompletion : MonoBehaviour
             }
         }
         if (targetReached == targets.Count) {
-            canvas.SetActive(true);
+            canvas.SetActive(true); 
         } else {
             canvas.SetActive(false);    
         }

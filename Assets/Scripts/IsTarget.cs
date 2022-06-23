@@ -44,6 +44,16 @@ public class IsTarget : MonoBehaviour
 
     void Update()
     {
+        bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
+        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
+        string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+        string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
         p = subject.position;
         d = Vector3.Distance(p,gameObject.transform.position);
@@ -56,6 +66,19 @@ public class IsTarget : MonoBehaviour
             gameObject.GetComponent<Renderer>().material = materialtargethit;
         } else {
             gameObject.GetComponent<Renderer>().material = materialtarget;
+        }
+        if (pinchingAction) {      
+            GameObject.Find(pinch1).transform.Rotate(0,+90*Mathf.PI/180,0);
+            GameObject.Find(pinch2).transform.Rotate(0,-90*Mathf.PI/180,0);
+            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+        }if (releasingAction) {
+            GameObject.Find(pinch1).transform.Rotate(0,-90*Mathf.PI/180,0);
+            GameObject.Find(pinch2).transform.Rotate(0,+90*Mathf.PI/180,0);
+            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
+            // GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
+            // GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
         }
     }
 }

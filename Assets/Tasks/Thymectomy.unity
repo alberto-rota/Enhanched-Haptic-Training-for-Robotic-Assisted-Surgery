@@ -13701,13 +13701,13 @@ MonoBehaviour:
   - {x: -0.06589496, y: 0.71231335, z: -0.6987614}
   - {x: -0.06589496, y: 0.71231335, z: -0.6987614}
   - {x: -0.06589496, y: 0.71231335, z: -0.6987614}
-  forceFieldGain: 0.000002
+  forceFieldGain: 0.000005
   forceFieldDegree: 1
-  thresholdDistance: 0.00319
+  thresholdDistance: 0.005
   maxForce: 100
   force: {x: NaN, y: NaN, z: NaN}
   graphics: 1
-  graphicVectorGain: 0.89
+  graphicVectorGain: 5
 --- !u!114 &333671833367510568
 MonoBehaviour:
   m_ObjectHideFlags: 0

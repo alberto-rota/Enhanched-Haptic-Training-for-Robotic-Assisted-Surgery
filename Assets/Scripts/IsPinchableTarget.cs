@@ -63,7 +63,7 @@ public class IsPinchableTarget : MonoBehaviour
         d = Vector3.Distance(p,gameObject.transform.position);
         if (d < targetRadius) {
             pinchable = true;
-            if (pinchingAction) {
+            if (Input.GetKey(KeyCode.Space)) {
                 reached = true;
             }
         } else pinchable = false;

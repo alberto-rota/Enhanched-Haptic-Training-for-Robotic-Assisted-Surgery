@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
+[ExecuteInEditMode, RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
 public class IsPinchable : MonoBehaviour
 {
     Material materialpinched;
@@ -43,7 +43,8 @@ public class IsPinchable : MonoBehaviour
 
     void Update()
     {
-        bool pinchingAction = Input.GetKey(KeyCode.Space);
+        bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
+        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
         string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
         "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
         "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
@@ -58,7 +59,7 @@ public class IsPinchable : MonoBehaviour
         d = Vector3.Distance(p,psm);
         if (d < targetRadius) {
             pinchable = true;
-            if (pinchingAction) {
+            if (Input.GetKey(KeyCode.Space)) {
                 pinched = true;
             } else {
                 pinched = false;
