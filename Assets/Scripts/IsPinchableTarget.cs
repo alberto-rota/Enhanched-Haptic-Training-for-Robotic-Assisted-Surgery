@@ -76,18 +76,12 @@ public class IsPinchableTarget : MonoBehaviour
         if (!reached && !pinchable) {
             gameObject.GetComponent<Renderer>().material = materialtarget;
         }
-        if (pinchingAction) {      
-            GameObject.Find(pinch1).transform.Rotate(0,+90*Mathf.PI/180,0);
-            GameObject.Find(pinch2).transform.Rotate(0,-90*Mathf.PI/180,0);
-            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
-            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
-        }if (releasingAction) {
-            GameObject.Find(pinch1).transform.Rotate(0,-90*Mathf.PI/180,0);
-            GameObject.Find(pinch2).transform.Rotate(0,+90*Mathf.PI/180,0);
-            // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
-            // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + new Vector3(0,0,0);
-            // GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
-            // GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GameObject.Find(pinch2).transform.Rotate(Vector3.up,-10*Mathf.PI/180);            
+            GameObject.Find(pinch1).transform.Rotate(Vector3.up,+10*Mathf.PI/180);
+        }else if (Input.GetKeyUp(KeyCode.Space)) {
+            GameObject.Find(pinch2).transform.Rotate(Vector3.up,10*Mathf.PI/180);            
+            GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10*Mathf.PI/180);
         }
     }
 }

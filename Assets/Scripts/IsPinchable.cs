@@ -77,12 +77,10 @@ public class IsPinchable : MonoBehaviour
         if (!pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialown;
         }
-        if (Input.GetKey(KeyCode.Space)) {
-            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-        }else{
-            GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
-            GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find("PSM").transform.eulerAngles + 90*Vector3.forward;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            GameObject.Find(pinch2).transform.Rotate(Vector3.up,-10);            
+            GameObject.Find(pinch1).transform.Rotate(Vector3.up,+10);
+        }else if (Input.GetKeyUp(KeyCode.Space)) {
             GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
             GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
         }
