@@ -17,7 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider)), RequireComponent(typeof(FixedJoint))]
+[ExecuteInEditMode, RequireComponent(typeof(SphereCollider))]
+// ,RequireComponent(typeof(FixedJoint))]
 public class IsPinchable : MonoBehaviour
 {
     Material materialpinched;
@@ -38,12 +39,13 @@ public class IsPinchable : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        // gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 
     void Update()
     {
-        bool pinchingAction = Input.GetKey(KeyCode.Space);
+        bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
+        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
         string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
         "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
         "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
@@ -58,7 +60,7 @@ public class IsPinchable : MonoBehaviour
         d = Vector3.Distance(p,psm);
         if (d < targetRadius) {
             pinchable = true;
-            if (pinchingAction) {
+            if (Input.GetKey(KeyCode.Space)) {
                 pinched = true;
             } else {
                 pinched = false;
@@ -67,9 +69,15 @@ public class IsPinchable : MonoBehaviour
 
         if (pinched) {
             gameObject.GetComponent<Renderer>().material = materialpinched;
-            gameObject.GetComponent<FixedJoint>().connectedBody = GameObject.Find("PSM").GetComponent<Rigidbody>();
+            if (gameObject.GetComponent<FixedJoint>() == null) {
+                gameObject.AddComponent<FixedJoint>();
+                gameObject.GetComponent<FixedJoint>().connectedBody = GameObject.Find("PSM").GetComponent<Rigidbody>();
+            }
         } else {
-            gameObject.GetComponent<FixedJoint>().connectedBody = null;
+            if (gameObject.GetComponent<FixedJoint>() != null) {
+                Destroy(gameObject.GetComponent<FixedJoint>());
+            }
+            // gameObject.GetComponent<FixedJoint>().connectedBody = null;
         }
         if (pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialpinchable;

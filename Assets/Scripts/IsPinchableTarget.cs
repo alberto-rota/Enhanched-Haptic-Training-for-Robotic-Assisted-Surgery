@@ -43,7 +43,7 @@ public class IsPinchableTarget : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        // gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class IsPinchableTarget : MonoBehaviour
         d = Vector3.Distance(p,gameObject.transform.position);
         if (d < targetRadius) {
             pinchable = true;
-            if (pinchingAction) {
+            if (Input.GetKey(KeyCode.Space)) {
                 reached = true;
             }
         } else pinchable = false;
