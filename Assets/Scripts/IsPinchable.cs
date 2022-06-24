@@ -56,7 +56,7 @@ public class IsPinchable : MonoBehaviour
         "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
         psm = GameObject.Find("PSM").transform.position;
-        p = gameObject.transform.localPosition;
+        p = gameObject.transform.position;
         d = Vector3.Distance(p,psm);
         if (d < targetRadius) {
             pinchable = true;
