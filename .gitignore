@@ -6,6 +6,7 @@ ProjectSettings
 Unity-Robotics-Hub-main
 Temp
 Task_Data/*/*/
+Assets/Tasks/OBJ_scenes
 # !Task_Data/*/*.stl
 # !Task_Data/*/*.m
 Build
