@@ -24,7 +24,8 @@ public class LogDataThymectomy : MonoBehaviour
 {
 
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Thymectomy";
+    // public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Thymectomy";
+    public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\Thymectomy";
     string foldername;
     string folderpath;
     string path;
@@ -51,11 +52,12 @@ public class LogDataThymectomy : MonoBehaviour
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo);
         folderpath = saveTo+"\\"+foldername;
+
+        // Creates the folder
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Thymectomy\\ThymectomyPostOriginal.m",
-            folderpath+"\\ThymectomyPost.m");
+        File.Copy(saveTo+"\\ThymectomyPostOriginal.m", folderpath+"\\ThymectomyPost.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
@@ -149,6 +151,7 @@ public class LogDataThymectomy : MonoBehaviour
         }
 
         path = folderpath+"\\"+foldername+"_VFs.csv";
+        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
         {  
@@ -202,11 +205,11 @@ public class LogDataThymectomy : MonoBehaviour
             writer.Write("\n");
         }  
 
-        // ADD GENERATION OF SCRIPT FOR GRAPHICS [MATLAB/PYTHON]
     }
 
     void Update()
     {
+        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
         {  

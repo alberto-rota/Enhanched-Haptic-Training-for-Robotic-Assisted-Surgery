@@ -2,7 +2,7 @@ using UnityEditor;
  
 public static class CopyPathMenuItem
 {
-    [MenuItem("Path/Copy Path")]
+    [MenuItem("GameObject/2D Object/Copy Path")]
     private static void CopyPath()
     {
         var go = Selection.activeGameObject;

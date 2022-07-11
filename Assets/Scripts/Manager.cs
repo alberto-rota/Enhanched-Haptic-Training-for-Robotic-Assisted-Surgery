@@ -20,22 +20,12 @@ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
-    void Start() {
-        string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
-        string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
-        GameObject.Find(pinch1).transform.Rotate(0,-450*Mathf.PI/180,0);
-        GameObject.Find(pinch2).transform.Rotate(0,450*Mathf.PI/180,0);
-    }
+    void Start() {}
 
     void Update()
     {
-        GameObject psm = GameObject.Find("PSM");
+        GameObject psm = GameObject.Find("/PSM/world/psm_base_link/psm_yaw_link/psm_pitch_back_link/psm_pitch_bottom_link/"+
+        "psm_pitch_end_link/psm_main_insertion_link/psm_tool_roll_link/psm_tool_pitch_link/psm_tool_yaw_link");
         // Quits when the ESC key is pressed
         if(Input.GetKey(KeyCode.Escape)){
             Application.Quit();

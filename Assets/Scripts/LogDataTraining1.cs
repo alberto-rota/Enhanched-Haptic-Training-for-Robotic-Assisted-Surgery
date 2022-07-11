@@ -24,7 +24,8 @@ public class LogDataTraining1 : MonoBehaviour
 {
 
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training1";
+    // public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training1";
+    public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\Training1";
     string foldername;
     string folderpath;
     string path;
@@ -56,8 +57,7 @@ public class LogDataTraining1 : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training1\\Training1PostOriginal.m",
-            folderpath+"\\Training1Post.m");
+        File.Copy(saveTo+"\\Training1PostOriginal.m", folderpath+"\\Training1Post.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
@@ -151,6 +151,7 @@ public class LogDataTraining1 : MonoBehaviour
         }
 
         path = folderpath+"\\"+foldername+"_VFs.csv";
+        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
         {  
@@ -204,11 +205,11 @@ public class LogDataTraining1 : MonoBehaviour
             writer.Write("\n");
         }  
 
-        // ADD GENERATION OF SCRIPT FOR GRAPHICS [MATLAB/PYTHON]
     }
 
     void Update()
     {
+        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
         {  

@@ -32,6 +32,15 @@ public class IsPinchableTarget : MonoBehaviour
     public bool reached = false;
     bool pinchable = false;
 
+    string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+    string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
+   
     void Start()
     {
         if (subject == null){
@@ -48,22 +57,21 @@ public class IsPinchableTarget : MonoBehaviour
 
     void Update()
     {
-        bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
-        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
-        string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
-        string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-        "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-        "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-        "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
+        // DEPRECATED: USE ONLY IF CONTROLLING THE ROBOT WITH THE KEYBOARD
+        // bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
+        // bool releasingAction = Input.GetKeyUp(KeyCode.Space);
+
+        bool pinchingAction  = false;
+        if (GameObject.Find("Stage/Manager").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+            pinchingAction = true;
+        }
+
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
         p = subject.position;
         d = Vector3.Distance(p,gameObject.transform.position);
         if (d < targetRadius) {
             pinchable = true;
-            if (Input.GetKey(KeyCode.Space)) {
+            if (pinchingAction) {
                 reached = true;
             }
         } else pinchable = false;
