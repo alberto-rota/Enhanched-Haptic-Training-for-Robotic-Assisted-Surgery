@@ -27,17 +27,19 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     public Transform subject;
     public Transform Trajectory;
 
-    [Range(0,100)]
+    [Range(0,100000)]
     public float viscousCoefficient = 1;
 
     [SerializeField]
-    int maxForce = 100;
+    float maxForce = 100;
 
 
     Vector3 closest;
     public Vector3 velocity;
     public Vector3 deviation;
-    public   Vector3 force;
+    public  Vector3 force;
+    public float f_mag;
+    public Vector3 f_dir; 
     [SerializeField]
     bool graphics = true;
     [Range(0,5)]
@@ -48,6 +50,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         if (subject == null) {
             subject = GameObject.Find("PSM").transform;
         }
+        subject.GetComponent<Rigidbody>().solverVelocityIterations = 50;
     }
 
     void Update()
@@ -74,11 +77,11 @@ public class TrajectoryGuidanceVF : MonoBehaviour
 
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
-        float f_mag = b*velocity.magnitude;
+        f_mag = b*velocity.magnitude;
         if (f_mag > maxForce) {
             f_mag = maxForce;
         }
-        Vector3 f_dir;
+        // f_dir;
         if (Vector3.Dot(velocity.normalized, deviation.normalized)<0) { // When moving away
             f_dir = deviation.normalized;
         } else {  // When approaching

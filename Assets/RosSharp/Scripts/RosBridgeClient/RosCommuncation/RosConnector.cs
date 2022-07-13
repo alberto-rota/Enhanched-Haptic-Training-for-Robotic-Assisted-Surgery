@@ -22,7 +22,6 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    [ExecuteInEditMode]
     public class RosConnector : MonoBehaviour
     {
         public int SecondsTimeout = 10;

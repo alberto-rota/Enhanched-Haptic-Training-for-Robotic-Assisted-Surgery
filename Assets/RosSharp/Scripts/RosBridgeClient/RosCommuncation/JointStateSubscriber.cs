@@ -12,8 +12,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+// using System.Collections.Generic;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -23,14 +25,15 @@ namespace RosSharp.RosBridgeClient
         public List<JointStateWriter> JointStateWriters;
 
         protected override void ReceiveMessage(MessageTypes.Sensor.JointState message)
-        {
+        {  
             int index;
             for (int i = 0; i < message.name.Length; i++)
             {
                 index = JointNames.IndexOf(message.name[i]);
                 if (index != -1)
                     JointStateWriters[index].Write((float) message.position[i]);
-            }
+            
+           }
         }
     }
 }
