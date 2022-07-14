@@ -28,7 +28,7 @@ public class IsPinchableTarget : MonoBehaviour
     Vector3 p;
     public Transform subject;
     public float d;
-    float targetRadius; 
+    public float targetRadius; 
     public bool reached = false;
     bool pinchable = false;
 
@@ -50,31 +50,46 @@ public class IsPinchableTarget : MonoBehaviour
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");
         materialtargetpinchable = Resources.Load<Material>("Materials/TargetPinchable");
         //Disable the collider
-        gameObject.GetComponent<SphereCollider>().enabled = false;
+        gameObject.GetComponent<SphereCollider>().enabled = true;
         gameObject.GetComponent<Rigidbody>().mass = 0;
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
         // gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
+
+    // void OnCollisionEnter(Collision collision) {
+    //     Debug.Log(collision.gameObject);
+    //     if (collision.gameObject == subject.gameObject) {
+    //         pinchable = true;
+    //     } else pinchable = false;
+    // }
+    // void OnCollisionStay(Collision collision) { 
+    //     Debug.Log(collision.gameObject);
+    //     if (collision.gameObject == subject.gameObject) {
+    //         pinchable = true;
+    //     } else pinchable = false;
+    // }
 
     void Update()
     {
         // DEPRECATED: USE ONLY IF CONTROLLING THE ROBOT WITH THE KEYBOARD
         // bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
         // bool releasingAction = Input.GetKeyUp(KeyCode.Space);
+        // Debug.Log(pinchable);
 
         bool pinchingAction  = false;
-        if (GameObject.Find("Stage/Manager").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+        if (GameObject.Find(Global.tooltip_path).GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
             pinchingAction = true;
         }
-
-        targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
+        // targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
+        targetRadius  = gameObject.transform.localScale.x;
         p = subject.position;
         d = Vector3.Distance(p,gameObject.transform.position);
         if (d < targetRadius) {
             pinchable = true;
-            if (pinchingAction) {
-                reached = true;
-            }
         } else pinchable = false;
+        if (pinchable && pinchingAction) {
+            reached = true;
+        } 
 
         if (reached) {
             gameObject.GetComponent<Renderer>().material = materialtargethit;

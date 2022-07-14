@@ -22,7 +22,6 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    [ExecuteInEditMode]
     public class RosConnector : MonoBehaviour
     {
         public int SecondsTimeout = 10;
@@ -30,7 +29,8 @@ namespace RosSharp.RosBridgeClient
         public RosSocket RosSocket { get; private set; }
         public RosSocket.SerializerEnum Serializer;
         public Protocol protocol;
-        public string RosBridgeServerUrl = "ws://192.168.0.1:9090";
+        public string RosBridgeServerUrl = "ws://192.168.1.1:9090";
+        string whoisconnecting;
 
         public ManualResetEvent IsConnected { get; private set; }
 
@@ -38,6 +38,7 @@ namespace RosSharp.RosBridgeClient
         {
             IsConnected = new ManualResetEvent(false);
             new Thread(ConnectAndWait).Start();
+            whoisconnecting=gameObject.name;
         }
 
         protected void ConnectAndWait()
@@ -45,7 +46,7 @@ namespace RosSharp.RosBridgeClient
             RosSocket = ConnectToRos(protocol, RosBridgeServerUrl, OnConnected, OnClosed, Serializer);
 
             if (!IsConnected.WaitOne(SecondsTimeout * 1000))
-                Debug.LogWarning("Failed to connect to RosBridge at: " + RosBridgeServerUrl);
+                Debug.LogWarning(whoisconnecting+": FAILED to connect to RosBridge at @ " + RosBridgeServerUrl);
         }
 
         public static RosSocket ConnectToRos(Protocol protocolType, string serverUrl, EventHandler onConnected = null, EventHandler onClosed = null, RosSocket.SerializerEnum serializer = RosSocket.SerializerEnum.Microsoft)
@@ -65,13 +66,13 @@ namespace RosSharp.RosBridgeClient
         private void OnConnected(object sender, EventArgs e)
         {
             IsConnected.Set();
-            Debug.Log("Connected to RosBridge: " + RosBridgeServerUrl);
+            Debug.Log(whoisconnecting+": CONNECTED to RosBridge @ " + RosBridgeServerUrl);
         }
 
         private void OnClosed(object sender, EventArgs e)
         {
             IsConnected.Reset();
-            Debug.Log("Disconnected from RosBridge: " + RosBridgeServerUrl);
+            Debug.Log(whoisconnecting+": Disconnected from RosBridge @ " + RosBridgeServerUrl);
         }
     }
 }

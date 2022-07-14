@@ -22,6 +22,7 @@ public class SumForces : MonoBehaviour
 {
     public List<MonoBehaviour> activeConstraints;
     public Vector3 totalForce = Vector3.zero;
+    public float totalForceMagnitude;
     public bool graphics = true;
     
     [Range(0,5f)]
@@ -73,7 +74,7 @@ public class SumForces : MonoBehaviour
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
             }
         }
-
+        totalForceMagnitude  = totalForce.magnitude;
         if (graphics) {
             Arrow(gameObject.transform.position, gameObject.transform.position+totalForce*graphicVectorGain, Color.white);
         }

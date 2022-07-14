@@ -30,7 +30,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     public bool configuring;
     public Transform target;
     Vector3 coneCenter;
-    [Range(1,30)]
+    [Range(0,30)]
     public float coneApertureDegrees = 10;
     [Range(0,10f)]
     public float dampInsideOfCone = 0.02f; 
@@ -38,6 +38,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     public float gainOutsideOfCone = 0.02f; 
     public Vector3 delta;
     List<Vector3> coneBasePoints;
+    public float maxForce = 3;
     public Vector3 force;
     Vector3 tp;
     Vector3 ee;
@@ -124,8 +125,12 @@ public class ConeApproachGuidanceVF : MonoBehaviour
                 force = (f_mag*-1*a.normalized);
             }
 
+            // Rescaling the force the max magnitude if exceeded
+            if (force.magnitude > maxForce) {
+                force = force.normalized * maxForce;
+            }
             // When close enough to the target, force is reduced (the cone is too narrow)
-            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.1f) {
+            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.2f) {
                 force = force*0.2f;
                 coneColor = Color.green;
             }

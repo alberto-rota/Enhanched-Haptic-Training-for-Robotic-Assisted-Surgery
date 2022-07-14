@@ -12,12 +12,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+using System.Threading;
 
 using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    [RequireComponent(typeof(RosConnector))]
+    // [RequireComponent(typeof(RosConnector))]
     public abstract class UnityPublisher<T> : MonoBehaviour where T : Message
     {
         public string Topic;

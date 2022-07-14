@@ -18,7 +18,7 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    [ExecuteInEditMode, RequireComponent(typeof(RosConnector))]
+    [ExecuteInEditMode]
     public abstract class UnitySubscriber<T> : MonoBehaviour where T: Message
     {
         public string Topic;

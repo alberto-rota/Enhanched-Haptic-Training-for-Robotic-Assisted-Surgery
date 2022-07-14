@@ -29,18 +29,19 @@ public class IsPinchable : MonoBehaviour
     public float d;
     public float targetRadius; 
     public Transform pincherObject;
+    public bool addGravity = false;
 
     public bool pinched = false;
     bool pinchable = false;
 
-    string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
-    string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
-    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
-    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
-    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
+    // string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    // "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    // "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    // "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+    // string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    // "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    // "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    // "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
     // string tooltip_path  = "/PSM/world/psm_base_link/psm_yaw_link/psm_pitch_back_link/psm_pitch_bottom_link/"+
     // "psm_pitch_end_link/psm_main_insertion_link/psm_tool_roll_link/psm_tool_pitch_link/psm_tool_yaw_link";
 
@@ -52,7 +53,7 @@ public class IsPinchable : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        // gameObject.GetComponent<Rigidbody>().useGravity = false;
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
 
         pincherObject = GameObject.Find("/PSM/world/psm_base_link/psm_yaw_link/psm_pitch_back_link/psm_pitch_bottom_link/"+
         "psm_pitch_end_link/psm_main_insertion_link/psm_tool_roll_link/psm_tool_pitch_link/psm_tool_yaw_link").transform;
@@ -65,14 +66,14 @@ public class IsPinchable : MonoBehaviour
         // bool releasingAction = Input.GetKeyUp(KeyCode.Space);
 
         bool pinchingAction  = false;
-        if (GameObject.Find("PSM").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+        if (pincherObject.GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
             pinchingAction = true;
         }
 
 
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.localScale.x;
         psm = pincherObject.position;
-        p = gameObject.transform.localPosition;
+        p = gameObject.transform.position;
         d = Vector3.Distance(p,psm);
         if (d < targetRadius) {
             pinchable = true;
@@ -84,7 +85,9 @@ public class IsPinchable : MonoBehaviour
         } else pinchable = false;
 
         if (pinched) {
-            gameObject.GetComponent<Renderer>().material = materialpinched;
+            if (gameObject.GetComponent<Renderer>().material != materialpinched) {
+                gameObject.GetComponent<Renderer>().material = materialpinched;
+            }
             if (gameObject.GetComponent<FixedJoint>() == null) {
                 gameObject.AddComponent<FixedJoint>();
                 gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject.gameObject.GetComponent<Rigidbody>();
@@ -94,19 +97,30 @@ public class IsPinchable : MonoBehaviour
                 Destroy(gameObject.GetComponent<FixedJoint>());
             }
             // gameObject.GetComponent<FixedJoint>().connectedBody = null;
+            if (addGravity) {
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+            }else{
+                gameObject.GetComponent<Rigidbody>().useGravity = false;
+            }
+
         }
         if (pinchable && !pinched) {
             gameObject.GetComponent<Renderer>().material = materialpinchable;
         }
         if (!pinchable && !pinched) {
-            gameObject.GetComponent<Renderer>().material = materialown;
+            
+            if (gameObject.GetComponent<Renderer>().material != materialown) {
+                gameObject.GetComponent<Renderer>().material = materialown;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            GameObject.Find(pinch2).transform.Rotate(Vector3.up,-10);            
-            GameObject.Find(pinch1).transform.Rotate(Vector3.up,+10);
-        }else if (Input.GetKeyUp(KeyCode.Space)) {
-            GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
-            GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
-        }
+
+        // DEPRECATED: USE ONLY IF CONTROLLING THE ROBOT WITH THE KEYBOARD
+        // if (Input.GetKeyDown(KeyCode.Space)) {
+        //     GameObject.Find(pinch2).transform.Rotate(Vector3.up,-10);            
+        //     GameObject.Find(pinch1).transform.Rotate(Vector3.up,+10);
+        // }else if (Input.GetKeyUp(KeyCode.Space)) {
+        //     GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
+        //     GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
+        // }
     }
 }
