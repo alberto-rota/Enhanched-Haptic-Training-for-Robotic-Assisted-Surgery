@@ -44,7 +44,7 @@ public class IsPinchableTarget : MonoBehaviour
     void Start()
     {
         if (subject == null){
-            subject = GameObject.Find("PSM").transform;
+            subject = GameObject.Find(Global.tooltip_path).transform;
         }
         materialtarget = Resources.Load<Material>("Materials/Target");
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");

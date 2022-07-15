@@ -24,7 +24,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 {
-    public float min_dist;
+    float min_dist;
     public Transform subject;
     public Transform obstacle;
     public List<Vector3> obstaclePoints;
@@ -43,16 +43,16 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
-    Transform EndEffector;
     Material materialown;
     Material materialhit;
+    public Vector3 p;
+    public Vector3 t;
 
     void Start()
     {
         if (subject == null) {
-            subject = GameObject.Find("PSM").transform;
+            subject = GameObject.Find(Global.tooltip_path).transform;
         }
-        EndEffector = gameObject.transform;
         obstaclePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
         materialown = obstacle.GetComponent<MeshRenderer>().sharedMaterial;
@@ -111,43 +111,19 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             force = force.normalized * maxForce;
         }
         if (graphics) {
-            Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
+            Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
+            Global.Arrow(subject.position, com, Color.yellow);
         }
-        // Debug.DrawLine(EndEffector.position,closestP);
         // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-EndEffector.position,surfaceNormals[idx_closest])>=0) {
+        if (Vector3.Dot(closestP-subject.position,surfaceNormals[idx_closest])>=0) {
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
             force = Vector3.zero;
             Debug.Log("INSIDE");
         } else {
             obstacle.GetComponent<MeshRenderer>().material = materialown;
         }
-
+        p = subject.position;
+        t = com;
     }
-    void Arrow(Vector3 from, Vector3 to, Color color) {
-        int coneResolution=20;
-        float deltaTheta = 360f/coneResolution;
-
-        Vector3 stem = (to-from)*0.9f;
-        Vector3 tip = (to-from)-stem;
-        float tipradius = 0.05f*(to-from).magnitude;
-        List<Vector3> tipBasePoints = new List<Vector3>();
-        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
-        tipBasePoints.Add(b);
-
-        for (int i=0; i<coneResolution-1; i++) {
-            float theta = deltaTheta*i; 
-            b = Quaternion.AngleAxis(deltaTheta,tip.normalized)*b;
-            tipBasePoints.Add(b);
-        }
-        Vector3 tipcenter = from+stem;
-        //SRAWING THE STEM
-        Debug.DrawLine(from, tipcenter, color);
-        // DRAWING THE TIP
-        for (int i=0; i<coneResolution; i++) {
-            Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
-            if (i==coneResolution-1) Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[0],color);
-            else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
-        }
-    }
+    
 }

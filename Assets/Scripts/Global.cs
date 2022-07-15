@@ -1,4 +1,62 @@
+// Copyright (c) 2022 Alberto Rota
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public static class Global
 {
-    public const string tooltip_path = "/ROBOT/world/base_link/suj_psm1_L0/suj_psm1_L1/suj_psm1_L2/suj_psm1_L3/suj_psm1_L4/psm1/psm1_base_link/psm1_yaw_link/psm1_pitch_back_link/Collisions/psm1_pitch_end_link/psm1_main_insertion_link/psm1_tool_roll_link/psm1_tool_pitch_link/psm1_tool_yaw_link/PSM_TIP";
+    public const string tooltip_path = @"/ROBOT/world/base_link/suj_psm1_L0/suj_psm1_L1/suj_psm1_L2/suj_psm1_L3/"+
+    "suj_psm1_L4/psm1/psm1_base_link/psm1_yaw_link/psm1_pitch_back_link/Collisions/psm1_pitch_end_link/"+
+    "psm1_main_insertion_link/psm1_tool_roll_link/psm1_tool_pitch_link/psm1_tool_yaw_link/PSM_TIP";
+    
+    public const string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_2_joint";
+
+    public const string pinch1 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
+    "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
+    "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
+    "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
+
+    public static void Arrow(Vector3 from, Vector3 to, Color color) {
+        int coneResolution=20;
+        float deltaTheta = 360f/coneResolution;
+
+        Vector3 stem = (to-from)*0.9f;
+        Vector3 tip = (to-from)-stem;
+        float tipradius = 0.05f*(to-from).magnitude;
+        List<Vector3> tipBasePoints = new List<Vector3>();
+        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
+        tipBasePoints.Add(b);
+
+        for (int i=0; i<coneResolution-1; i++) {
+            float theta = deltaTheta*i; 
+            b = Quaternion.AngleAxis(deltaTheta,tip.normalized)*b;
+            tipBasePoints.Add(b);
+        }
+        Vector3 tipcenter = from+stem;
+        //SRAWING THE STEM
+        Debug.DrawLine(from, tipcenter, color);
+        // DRAWING THE TIP
+        for (int i=0; i<coneResolution; i++) {
+            Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
+            if (i==coneResolution-1) Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[0],color);
+            else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
+        }
+    }
 }
