@@ -24,16 +24,16 @@ public class IsPinchable : MonoBehaviour
     Material materialpinched;
     Material materialown;
     Material materialpinchable;
-    Vector3 psm;
-    Vector3 p;
-    public float d;
-    public float targetRadius; 
+    Vector3 tool;
+    Vector3 target;
+    float d;
+    float targetRadius; 
+    public bool graphics = false;
     public Transform pincherObject;
-    public bool addGravity = false;
+    public bool restoreGravity = false;
 
     public bool pinched = false;
     bool pinchable = false;
-    public bool graphics = false;
 
     void Start()
     {
@@ -50,20 +50,15 @@ public class IsPinchable : MonoBehaviour
 
     void Update()
     {
-        // DEPRECATED: USE ONLY IF CONTROLLING THE ROBOT WITH THE KEYBOARD
-        // bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
-        // bool releasingAction = Input.GetKeyUp(KeyCode.Space);
-
         bool pinchingAction  = false;
         if (GameObject.Find("ROBOT").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
             pinchingAction = true;
         }
 
-
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.lossyScale.x;
-        psm = pincherObject.position;
-        p = gameObject.transform.position;
-        d = Vector3.Distance(p,psm);
+        tool = pincherObject.position;
+        target = gameObject.transform.position;
+        d = Vector3.Distance(target,tool);
         if (d < targetRadius) {
             pinchable = true;
             if (pinchingAction) {
@@ -74,7 +69,7 @@ public class IsPinchable : MonoBehaviour
         } else pinchable = false;
        
         if (graphics) {
-            Global.Arrow(psm,p,Color.yellow);
+            Global.Arrow(tool,target,Color.yellow);
         }
 
         if (pinched) {
@@ -90,7 +85,7 @@ public class IsPinchable : MonoBehaviour
                 Destroy(gameObject.GetComponent<FixedJoint>());
             }
             // gameObject.GetComponent<FixedJoint>().connectedBody = null;
-            if (addGravity) {
+            if (restoreGravity) {
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
             }else{
                 gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -106,14 +101,5 @@ public class IsPinchable : MonoBehaviour
                 gameObject.GetComponent<Renderer>().material = materialown;
             }
         }
-
-        // DEPRECATED: USE ONLY IF CONTROLLING THE ROBOT WITH THE KEYBOARD
-        // if (Input.GetKeyDown(KeyCode.Space)) {
-        //     GameObject.Find(pinch2).transform.Rotate(Vector3.up,-10);            
-        //     GameObject.Find(pinch1).transform.Rotate(Vector3.up,+10);
-        // }else if (Input.GetKeyUp(KeyCode.Space)) {
-        //     GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
-        //     GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
-        // }
     }
 }

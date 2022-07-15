@@ -129,7 +129,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             if (force.magnitude > maxForce) {
                 force = force.normalized * maxForce;
             }
-            // When close enough to the target, force is reduced (the cone is too narrow)
+            // When close enough to the target, force is reduced (the cone is too nGlobal.Arrow)
             if (Vector3.Distance(ee,tp)/delta.magnitude < 0.2f) {
                 force = force*0.2f;
                 coneColor = Color.green;
@@ -154,34 +154,9 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         if (graphics) {
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+vl*graphicVectorGain, Color.green);
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+va*graphicVectorGain, Color.green);
-            Arrow(gameObject.transform.position, gameObject.transform.position+v*graphicVectorGain, Color.green);
+            Global.Arrow(gameObject.transform.position, gameObject.transform.position+v*graphicVectorGain, Color.green);
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+force*graphicVectorGain, Color.blue);
         }
     }
-    void Arrow(Vector3 from, Vector3 to, Color color) {
-        int coneResolution=20;
-        float deltaTheta = 360f/coneResolution;
-
-        Vector3 stem = (to-from)*0.9f;
-        Vector3 tip = (to-from)-stem;
-        float tipradius = 0.05f*(to-from).magnitude;
-        List<Vector3> tipBasePoints = new List<Vector3>();
-        Vector3 b = Vector3.Cross(tip.normalized, Vector3.up)*tipradius;
-        tipBasePoints.Add(b);
-
-        for (int i=0; i<coneResolution-1; i++) {
-            float theta = deltaTheta*i; 
-            b = Quaternion.AngleAxis(deltaTheta,tip.normalized)*b;
-            tipBasePoints.Add(b);
-        }
-        Vector3 tipcenter = from+stem;
-        //SRAWING THE STEM
-        Debug.DrawLine(from, tipcenter, color);
-        // DRAWING THE TIP
-        for (int i=0; i<coneResolution; i++) {
-            Debug.DrawLine(tipcenter+tipBasePoints[i],to, color);
-            if (i==coneResolution-1) Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[0],color);
-            else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
-        }
-    }
+    
 }

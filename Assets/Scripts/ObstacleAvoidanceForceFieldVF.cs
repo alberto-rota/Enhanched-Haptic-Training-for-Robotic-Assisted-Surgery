@@ -45,8 +45,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public float graphicVectorGain = 1;
     Material materialown;
     Material materialhit;
-    public Vector3 p;
-    public Vector3 t;
+    Vector3 p;
+    Vector3 t;
 
     void Start()
     {
@@ -118,7 +118,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         if (Vector3.Dot(closestP-subject.position,surfaceNormals[idx_closest])>=0) {
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
             force = Vector3.zero;
-            Debug.Log("INSIDE");
+            // Debug.Log("INSIDE");
         } else {
             obstacle.GetComponent<MeshRenderer>().material = materialown;
         }

@@ -22,7 +22,7 @@ namespace RosSharp.RosBridgeClient
 {
     public class WrenchPublisher : UnityPublisher<MessageTypes.Geometry.Wrench>
     {
-        public GameObject Tool;
+        public GameObject Tool = GameObject.Find(Global.tooltip_path);
         private MessageTypes.Geometry.Wrench message;
         private MessageTypes.Geometry.Vector3 geometryPoint;
 
@@ -30,6 +30,7 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
+            Tool = GameObject.Find(Global.tooltip_path);
         }
 
         private void FixedUpdate()

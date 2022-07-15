@@ -24,8 +24,7 @@ public class Manager : MonoBehaviour
 
     void Update()
     {
-        GameObject psm = GameObject.Find("/PSM/world/psm_base_link/psm_yaw_link/psm_pitch_back_link/psm_pitch_bottom_link/"+
-        "psm_pitch_end_link/psm_main_insertion_link/psm_tool_roll_link/psm_tool_pitch_link/psm_tool_yaw_link");
+        GameObject psm = GameObject.Find("ROBOT");
         // Quits when the ESC key is pressed
         if(Input.GetKey(KeyCode.Escape)){
             Application.Quit();
@@ -76,17 +75,17 @@ public class Manager : MonoBehaviour
 
         // Loads a scene of choice when the user presses the corresponding key
         if(Input.GetKey(KeyCode.Alpha1)){
-            SceneManager.LoadScene("Assets/Tasks/Training1.unity");
+            SceneManager.LoadScene("Assets/Training1.unity");
         }else if(Input.GetKey(KeyCode.Alpha2)){
-            SceneManager.LoadScene("Assets/Tasks/Training2.unity"); 
+            SceneManager.LoadScene("Assets/Training2.unity"); 
         }else if(Input.GetKey(KeyCode.Alpha3)){
-            SceneManager.LoadScene("Assets/Tasks/Training3.unity");
+            SceneManager.LoadScene("Assets/Training3.unity");
         }else if(Input.GetKey(KeyCode.Alpha4)){
-            SceneManager.LoadScene("Assets/Tasks/Thymectomy.unity");
+            SceneManager.LoadScene("Assets/Thymectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha5)){
-            SceneManager.LoadScene("Assets/Tasks/Nephrectomy.unity");
+            SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
-            SceneManager.LoadScene("Assets/Tasks/LiverResection.unity");
+            SceneManager.LoadScene("Assets/LiverResection.unity");
         }
     }
 }
