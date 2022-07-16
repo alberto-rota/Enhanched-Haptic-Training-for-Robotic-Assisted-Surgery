@@ -129,7 +129,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             if (force.magnitude > maxForce) {
                 force = force.normalized * maxForce;
             }
-            // When close enough to the target, force is reduced (the cone is too nGlobal.Arrow)
+            // When close enough to the target, force is reduced (the cone is too narrow)
             if (Vector3.Distance(ee,tp)/delta.magnitude < 0.2f) {
                 force = force*0.2f;
                 coneColor = Color.green;
@@ -154,7 +154,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         if (graphics) {
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+vl*graphicVectorGain, Color.green);
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+va*graphicVectorGain, Color.green);
-            Global.Arrow(gameObject.transform.position, gameObject.transform.position+v*graphicVectorGain, Color.green);
+            Arrow(gameObject.transform.position, gameObject.transform.position+v*graphicVectorGain, Color.green);
             Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+force*graphicVectorGain, Color.blue);
         }
     }

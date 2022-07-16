@@ -103,8 +103,8 @@ public class SurfaceGuidanceVF : MonoBehaviour
             surface.GetComponent<MeshRenderer>().material = colorred;
         }
         if (graphics) {
-            Global.Arrow(EndEffector.position, closestP, Color.red);
-            Global.Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Arrow(EndEffector.position, closestP, Color.red);
+            Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
         }
 
         // DRAWING MESH NORMALS [DEPRECATED]

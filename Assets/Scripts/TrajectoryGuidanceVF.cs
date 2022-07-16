@@ -93,9 +93,9 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         force = f_mag*f_dir;
 
         if (graphics) {
-            Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
-            Global.Arrow(subject.position, closest, Color.red);
-            Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
+            Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
+            Arrow(subject.position, closest, Color.red);
+            Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
     }
     
