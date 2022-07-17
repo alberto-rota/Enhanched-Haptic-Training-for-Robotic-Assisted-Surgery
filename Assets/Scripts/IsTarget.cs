@@ -23,11 +23,11 @@ public class IsTarget : MonoBehaviour
     Material materialtarget;
     Material materialtargethit;
     Vector3 psm;
-    public Vector3 p;
-    public Vector3 t;
+    Vector3 tool;
+    Vector3 target;
     public Transform subject;
-    public float d;
-    public float targetRadius; 
+    float d;
+    float targetRadius; 
     public bool reached = false;
 
     void Start()
@@ -41,43 +41,26 @@ public class IsTarget : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().enabled = true;
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-    }
+        // gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject == subject.gameObject) {
-            reached = true;
-        } else reached = false;
     }
 
     void Update()
     {
-        bool pinchingAction = Input.GetKeyDown(KeyCode.Space);
-        bool releasingAction = Input.GetKeyUp(KeyCode.Space);
-        // p = subject.position;
-        // t =  gameObject.transform.position;
-        // d = Vector3.Distance(p,gameObject.transform.position);
-        // if (d < targetRadius) {
-        //     reached = true;
 
-        // } else reached = false;
+        targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.lossyScale.x;
+        tool = subject.position;
+        target = gameObject.transform.position;
+        d = Vector3.Distance(target,tool);
+        if (d < targetRadius) {
+            reached = true;
+        } 
 
         if (reached) {
             gameObject.GetComponent<Renderer>().material = materialtargethit;
         } else {
             gameObject.GetComponent<Renderer>().material = materialtarget;
         }
-        // if (pinchingAction) {      
-        //     GameObject.Find(pinch1).transform.Rotate(0,+90*Mathf.PI/180,0);
-        //     GameObject.Find(pinch2).transform.Rotate(0,-90*Mathf.PI/180,0);
-        //     // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find(Global.tooltip_path).transform.eulerAngles + new Vector3(0,0,0);
-        //     // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find(Global.tooltip_path).transform.eulerAngles + new Vector3(0,0,0);
-        // }if (releasingAction) {
-        //     GameObject.Find(pinch1).transform.Rotate(0,-90*Mathf.PI/180,0);
-        //     GameObject.Find(pinch2).transform.Rotate(0,+90*Mathf.PI/180,0);
-        //     // GameObject.Find(pinch1).transform.eulerAngles = GameObject.Find(Global.tooltip_path).transform.eulerAngles + new Vector3(0,0,0);
-        //     // GameObject.Find(pinch2).transform.eulerAngles = GameObject.Find(Global.tooltip_path).transform.eulerAngles + new Vector3(0,0,0);
-        //     // GameObject.Find(pinch2).transform.Rotate(Vector3.up,10);            
-        //     // GameObject.Find(pinch1).transform.Rotate(Vector3.up,-10);
-        // }
+
     }
 }

@@ -42,7 +42,8 @@ public class IsPinchableTarget : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = true;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        gameObject.GetComponent<Rigidbody>().useGravity = false;
         // gameObject.GetComponent<Rigidbody>().useGravity = false;
     }
 

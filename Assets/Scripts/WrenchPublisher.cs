@@ -22,7 +22,6 @@ namespace RosSharp.RosBridgeClient
 {
     public class WrenchPublisher : UnityPublisher<MessageTypes.Geometry.Wrench>
     {
-        public GameObject Tool = GameObject.Find(Global.tooltip_path);
         private MessageTypes.Geometry.Wrench message;
         private MessageTypes.Geometry.Vector3 geometryPoint;
 
@@ -30,7 +29,6 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
-            Tool = GameObject.Find(Global.tooltip_path);
         }
 
         private void FixedUpdate()
@@ -76,8 +74,8 @@ namespace RosSharp.RosBridgeClient
             // }
         ///////////////////////////////////////////////////////
         Vector3 unityforce;
-            if (Tool.GetComponent<SumForces>() != null) {
-                unityforce = Tool.GetComponent<SumForces>().totalForce;
+            if (GameObject.Find("ROBOT").GetComponent<SumForces>() != null) {
+                unityforce = GameObject.Find("ROBOT").GetComponent<SumForces>().totalForce;
             }else {
                 unityforce = Vector3.zero;
             }
@@ -88,7 +86,7 @@ namespace RosSharp.RosBridgeClient
             // rosforce = rosforce*-1;
             if(rosforce.x !=0.0 || rosforce.y !=0.0 || rosforce.z !=0.0 || float.IsNaN(rosforce.x))
             {  
-            GetGeometryPoint(unityforce*-1, message.force);
+                GetGeometryPoint(unityforce*-1, message.force);
                Publish(message);
                 // Debug.Log("PUBLISHING OK");
             } else {

@@ -36,6 +36,7 @@ namespace RosSharp.RosBridgeClient
 
         public virtual void Awake()
         {
+            RosBridgeServerUrl = GameObject.Find("ROBOT").GetComponent<ROSBRIDGE_SERVER_URI>().getIP();
             IsConnected = new ManualResetEvent(false);
             new Thread(ConnectAndWait).Start();
             whoisconnecting=gameObject.name;
