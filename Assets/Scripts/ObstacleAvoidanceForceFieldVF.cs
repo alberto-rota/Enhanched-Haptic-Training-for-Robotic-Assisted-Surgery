@@ -29,12 +29,12 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public Transform obstacle;
     public List<Vector3> obstaclePoints;
     public List<Vector3> surfaceNormals;
-    [Range(0,1000f)]
+    [Range(0,100000f)]
     public float forceFieldGain = 0.001f;
     [Range(0,4)]
     public float forceFieldDegree = 2;
     [Range(0,1)]
-    public float thresholdDistance = 0.0005f;
+    public float thresholdDistance = 0.002f;
     [Range(0,100)]
     public float maxForce=100;
     public Vector3 force;

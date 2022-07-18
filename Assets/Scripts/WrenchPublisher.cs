@@ -29,6 +29,7 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
+            Publish(message);
         }
 
         private void FixedUpdate()
@@ -45,6 +46,8 @@ namespace RosSharp.RosBridgeClient
         }
         private void UpdateMessage()
         {
+            Vector3 unityforce;
+            Vector3 rosforce = Vector3.zero;
             // TROUBLESHOOTING
             // message.force.x=0;
             // message.force.y=0;
@@ -58,9 +61,9 @@ namespace RosSharp.RosBridgeClient
         // THIS WORKS LOL
             // Vector3 unityforce = Tool.GetComponent<SumForces>().totalForce;
             // Vector3 rosforce = Vector3.zero;
-            // rosforce.x = unityforce.x*-1;
-            // rosforce.y = unityforce.z*-1*0;
-            // rosforce.z = unityforce.y*+1*0;
+            // rosforce.x = 0;
+            // rosforce.y = 1;
+            // rosforce.z = 0;
             // // rosforce = rosforce*-1;
             // if(rosforce.x !=0.0 || rosforce.y !=0.0 || rosforce.z !=0.0 || float.IsNaN(rosforce.x))
             // {  
@@ -73,27 +76,43 @@ namespace RosSharp.RosBridgeClient
             //     // Debug.Log("PUBLISHING ZERO");
             // }
         ///////////////////////////////////////////////////////
-        Vector3 unityforce;
             if (GameObject.Find("ROBOT").GetComponent<SumForces>() != null) {
                 unityforce = GameObject.Find("ROBOT").GetComponent<SumForces>().totalForce;
             }else {
                 unityforce = Vector3.zero;
             }
-            Vector3 rosforce = Vector3.zero;
-            rosforce.x = 0;
-            rosforce.y = 15;
-            rosforce.z = 0;
+            // rosforce.x = unityforce.y;
+            // rosforce.y = unityforce.x;
+            // rosforce.z = unityforce.z;
+            Vector3 tip = GameObject.Find(Global.tooltip_path).transform.position;
+            Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
+
+            // rosforce = GameObject.Find(Global.tooltip_path).transform.TransformDirection(unityforce);
+            // Global.Arrow(tip, tip+rosforce*0.3f, Color.green);
+
+            // rosforce = GameObject.Find(Global.tooltip_fix_path).transform.TransformDirection(rosforce);
+            // Global.Arrow(tip, tip+rosforce*0.3f, Color.white);
+
+            // rosforce = GameObject.Find(Global.ecm_path).transform.TransformDirection(unityforce);
+            // Global.Arrow(tip, tip+rosforce*0.3f, Color.red);
+
+            // rosforce = GameObject.Find(Global.tooltip_path).transform.TransformDirection(unityforce);
+            // Global.Arrow(tip, tip+rosforce*0.3f, Color.cyan);
+
             // rosforce = rosforce*-1;
-            if(rosforce.x !=0.0 || rosforce.y !=0.0 || rosforce.z !=0.0 || float.IsNaN(rosforce.x))
+            if(unityforce.x !=0.0 || unityforce.y !=0.0 || unityforce.z !=0.0 || float.IsNaN(unityforce.x))
             {  
-                GetGeometryPoint(unityforce*-1, message.force);
-               Publish(message);
+                // GetGeometryPoint(rosforce, message.force);
+                GetGeometryPoint(unityforce.Unity2Ros(), message.force);
+                Publish(message);
                 // Debug.Log("PUBLISHING OK");
             } else {
-                GetGeometryPoint(Vector3.zero.Unity2Ros(), message.force);
+                GetGeometryPoint(Vector3.zero, message.force);
                 Publish(message);
                 // Debug.Log("PUBLISHING ZERO");
             }
+            rosforce = GameObject.Find(Global.rcm_path).transform.TransformDirection(rosforce);
+            Global.Arrow(tip, tip+rosforce.Unity2Ros()*0.3f, Color.yellow);
 
         }
 

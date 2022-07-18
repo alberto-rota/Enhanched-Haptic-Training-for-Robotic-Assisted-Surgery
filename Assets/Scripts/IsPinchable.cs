@@ -17,7 +17,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[ExecuteInEditMode,RequireComponent(typeof(SphereCollider)),RequireComponent(typeof(Rigidbody))]
 // ,RequireComponent(typeof(FixedJoint))]
 public class IsPinchable : MonoBehaviour
 {
@@ -73,8 +73,8 @@ public class IsPinchable : MonoBehaviour
         }
 
         if (pinched) {
-            if (gameObject.GetComponent<Renderer>().material != materialpinched) {
-                gameObject.GetComponent<Renderer>().material = materialpinched;
+            if (gameObject.GetComponent<Renderer>().sharedMaterial != materialpinched) {
+                gameObject.GetComponent<Renderer>().sharedMaterial = materialpinched;
             }
             if (gameObject.GetComponent<FixedJoint>() == null) {
                 gameObject.AddComponent<FixedJoint>();
@@ -93,12 +93,12 @@ public class IsPinchable : MonoBehaviour
 
         }
         if (pinchable && !pinched) {
-            gameObject.GetComponent<Renderer>().material = materialpinchable;
+            gameObject.GetComponent<Renderer>().sharedMaterial = materialpinchable;
         }
         if (!pinchable && !pinched) {
             
-            if (gameObject.GetComponent<Renderer>().material != materialown) {
-                gameObject.GetComponent<Renderer>().material = materialown;
+            if (gameObject.GetComponent<Renderer>().sharedMaterial != materialown) {
+                gameObject.GetComponent<Renderer>().sharedMaterial = materialown;
             }
         }
     }

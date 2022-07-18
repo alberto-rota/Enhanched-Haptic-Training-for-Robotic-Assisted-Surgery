@@ -24,16 +24,15 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SurfaceGuidanceVF : MonoBehaviour
 {
+    public Transform subject;
     public Transform surface;
     public List<Vector3> surfacePoints;
-    public List<Vector3> surfaceNormals;
-    // public AnimationCurve freedom;
-    [Range(0,10)]
-    public float width = 1;
-    [Range(0,2)]
-    public float slope = 1;
+    List<Vector3> surfaceNormals;
     [Range(0,100)]
-    public float forceAtInfinity = 1;
+    public float gamma = 1; 
+    public float distance10Perc;
+    [Range(0,100)]
+    public float forceOnSurface = 1;
     public float maxForce=100;
     public Vector3 force;
     public bool graphics = true;
@@ -41,14 +40,16 @@ public class SurfaceGuidanceVF : MonoBehaviour
     // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
-    Transform EndEffector;
     Material colorok;
     Material colorred;
-
+    Vector3 tool;
 
     void Start()
     {
-        EndEffector = gameObject.transform;
+        if (subject == null) {
+            subject = GameObject.Find(Global.tooltip_path).transform;
+        }
+        tool = subject.position;
         surfacePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
         colorok = Resources.Load<Material>("Materials/SurfaceGreen");
@@ -61,8 +62,6 @@ public class SurfaceGuidanceVF : MonoBehaviour
         
         for (var i = 0; i < meshVertices.Length; i++){
             surfacePoints.Add(surface.TransformPoint(meshVertices[i]));
-        }
-        for (var i = 0; i < meshNormals.Length; i++){
             surfaceNormals.Add(surface.TransformDirection(meshNormals[i]));
         }
     }
@@ -74,13 +73,13 @@ public class SurfaceGuidanceVF : MonoBehaviour
             the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
             return;
         }
-        // distance10Perc = -Mathf.Log(0.1f)/gamma;
+        distance10Perc = -Mathf.Log(0.1f)/gamma;
         float mindist = 100000;
         Vector3 closestP = Vector3.zero;
         int idx_closest=0;
         int j=0;
         foreach (Vector3 p in surfacePoints) {
-            float d = Vector3.Distance(p, gameObject.transform.position);
+            float d = Vector3.Distance(p, tool);
             if (d < mindist) {
                 mindist = d;
                 closestP = p;
@@ -88,23 +87,23 @@ public class SurfaceGuidanceVF : MonoBehaviour
             }
             j++;
         }
-        float f_mag = forceAtInfinity*(1-Mathf.Exp(-Mathf.Pow((Mathf.Pow(mindist,2)/Mathf.Pow(width,2)), 1/slope)));
-
-        Vector3 f_dir = surfaceNormals[idx_closest];
+        float f_mag = forceOnSurface*Mathf.Exp(-gamma*mindist);
+        Vector3 f_dir = surfaceNormals[idx_closest]*-1;
         force = f_mag*f_dir.normalized;
         if (f_mag > maxForce) {
             f_mag = maxForce;
         }
 
-        // CHECHING IF EE IS CLOSE ENOUGH TO SURFACER
-        if (force.magnitude <= 0.5*forceAtInfinity) {
-            surface.GetComponent<MeshRenderer>().material = colorok;
-        } else {
+        // CHECHING IF EE IS INSIDE OF ORGAN
+        if (Vector3.Dot(tool-closestP,surfaceNormals[idx_closest])>=0) {
             surface.GetComponent<MeshRenderer>().material = colorred;
+        } else {    
+            surface.GetComponent<MeshRenderer>().material = colorok;
         }
+
         if (graphics) {
-            Global.Arrow(EndEffector.position, closestP, Color.red);
-            Global.Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Global.Arrow(tool, closestP, Color.red);
+            Global.Arrow(tool, tool+force*graphicVectorGain, Color.blue);
         }
 
         // DRAWING MESH NORMALS [DEPRECATED]

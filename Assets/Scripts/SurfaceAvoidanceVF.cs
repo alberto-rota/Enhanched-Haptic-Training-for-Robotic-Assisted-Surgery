@@ -24,6 +24,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SurfaceAvoidanceVF : MonoBehaviour
 {
+    public Transform subject;
     public Transform surface;
     public List<Vector3> surfacePoints;
     List<Vector3> surfaceNormals;
@@ -39,13 +40,16 @@ public class SurfaceAvoidanceVF : MonoBehaviour
     // public float normalVectorsLength = 0;
     [Range(0,5)]
     public float graphicVectorGain = 1;
-    Transform EndEffector;
     Material colorok;
     Material colorred;
+    Vector3 tool;
 
     void Start()
     {
-        EndEffector = gameObject.transform;
+        if (subject == null) {
+            subject = GameObject.Find(Global.tooltip_path).transform;
+        }
+        tool = subject.position;
         surfacePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
         colorok = Resources.Load<Material>("Materials/Organ");
@@ -75,7 +79,7 @@ public class SurfaceAvoidanceVF : MonoBehaviour
         int idx_closest=0;
         int j=0;
         foreach (Vector3 p in surfacePoints) {
-            float d = Vector3.Distance(p, gameObject.transform.position);
+            float d = Vector3.Distance(p, tool);
             if (d < mindist) {
                 mindist = d;
                 closestP = p;
@@ -91,15 +95,15 @@ public class SurfaceAvoidanceVF : MonoBehaviour
         }
 
         // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-EndEffector.position,surfaceNormals[idx_closest])>=0) {
+        if (Vector3.Dot(closestP-tool,surfaceNormals[idx_closest])>=0) {
             surface.GetComponent<MeshRenderer>().material = colorred;
         } else {    
             surface.GetComponent<MeshRenderer>().material = colorok;
         }
 
         if (graphics) {
-            Global.Arrow(EndEffector.position, closestP, Color.red);
-            Global.Arrow(EndEffector.position, EndEffector.position+force*graphicVectorGain, Color.blue);
+            Global.Arrow(tool, closestP, Color.red);
+            Global.Arrow(tool, tool+force*graphicVectorGain, Color.blue);
         }
 
         // DRAWING MESH NORMALS [DEPRECATED]

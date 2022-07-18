@@ -25,9 +25,10 @@ public class IsTarget : MonoBehaviour
     Vector3 psm;
     Vector3 tool;
     Vector3 target;
-    public Transform subject;
     float d;
     float targetRadius; 
+    public bool graphics = false;
+    public Transform subject;
     public bool reached = false;
 
     void Start()
@@ -41,7 +42,7 @@ public class IsTarget : MonoBehaviour
         gameObject.GetComponent<SphereCollider>().enabled = true;
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
-        // gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
     }
 
@@ -52,6 +53,11 @@ public class IsTarget : MonoBehaviour
         tool = subject.position;
         target = gameObject.transform.position;
         d = Vector3.Distance(target,tool);
+
+        if (graphics) {
+            Global.Arrow(tool,target,Color.cyan);
+        }
+
         if (d < targetRadius) {
             reached = true;
         } 

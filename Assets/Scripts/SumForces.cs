@@ -78,7 +78,7 @@ public class SumForces : MonoBehaviour
         }
         totalForceMagnitude  = totalForce.magnitude;
         if (graphics) {
-            Global.Arrow(gameObject.transform.position, gameObject.transform.position+totalForce*graphicVectorGain, Color.white);
+            Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+totalForce*graphicVectorGain, Color.white);
         }
         //force applied only if big enough
         if (totalForceMagnitude < minForce) {

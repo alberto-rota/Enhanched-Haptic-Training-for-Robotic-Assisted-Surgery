@@ -22,6 +22,16 @@ public static class Global
     public const string tooltip_path = @"/ROBOT/world/base_link/suj_psm1_L0/suj_psm1_L1/suj_psm1_L2/suj_psm1_L3/"+
     "suj_psm1_L4/psm1/psm1_base_link/psm1_yaw_link/psm1_pitch_back_link/Collisions/psm1_pitch_end_link/"+
     "psm1_main_insertion_link/psm1_tool_roll_link/psm1_tool_pitch_link/psm1_tool_yaw_link/PSM_TIP";
+
+    public const string tooltip_fix_path = @"/ROBOT/world/base_link/suj_psm1_L0/suj_psm1_L1/suj_psm1_L2/"+
+    "suj_psm1_L3/suj_psm1_L4/psm1/psm1_base_link/psm1_yaw_link/psm1_pitch_back_link/Collisions/"+
+    "psm1_pitch_end_link/psm1_main_insertion_link/PSM_TIP_FIX";
+
+    public const string rcm_path = @"/ROBOT/world/base_link/suj_ecm_L0/suj_ecm_L1/suj_ecm_L2/suj_ecm_L3/"+
+    "ecm_base_link/ecm_yaw_link/ecm_pitch_front_link/ecm_pitch_bottom_link/ecm_pitch_end_link/ecm_main_insertion_link/ecm_remote_center_link";
+
+    public const string ecm_path = @"/ROBOT/world/base_link/suj_ecm_L0/suj_ecm_L1/suj_ecm_L2/suj_ecm_L3/ecm_base_link/ecm_yaw_link/"+
+    "ecm_pitch_front_link/ecm_pitch_bottom_link/ecm_pitch_end_link/ecm_main_insertion_link/ecm_tool_link/ecm_end_link";
     
     public const string pinch2 = @"PSM/outer_yaw_joint/outer_yaw_joint_revolute/outer_pitch_joint"+
     "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
@@ -50,7 +60,7 @@ public static class Global
             tipBasePoints.Add(b);
         }
         Vector3 tipcenter = from+stem;
-        //SRAWING THE STEM
+        //DRAWING THE STEM
         Debug.DrawLine(from, tipcenter, color);
         // DRAWING THE TIP
         for (int i=0; i<coneResolution; i++) {
