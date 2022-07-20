@@ -10,13 +10,12 @@ public class AWSDController : MonoBehaviour
     public Vector3 W;
     public Vector3 A;
     public Vector3 P;
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
          Rigidbody rb = GetComponent<Rigidbody>();

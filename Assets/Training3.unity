@@ -1347,13 +1347,14 @@ MonoBehaviour:
   - {x: -0.13069978, y: -0.71533364, z: -0.6864513}
   - {x: 0.43445027, y: -0.76275307, z: -0.4790206}
   - {x: 0.504375, y: -0.7988157, z: -0.32787108}
-  forceFieldGain: 2
-  forceFieldSteepness: 1
-  thresholdDistance: 0.004
-  maxForce: 3
-  force: {x: 0, y: 0, z: 0}
-  graphics: 1
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
+  vectorsGraphics: 1
   graphicVectorGain: 1
+  distanceGraphics: 1
+  force: {x: -6.77518e-10, y: 0.00000000253149, z: -0.000000004472419}
 --- !u!114 &51273415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15024,7 +15025,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5980783670363520847}
   m_LocalRotation: {x: 0.49999815, y: -0.49999997, z: 0.5000019, w: 0.5}
-  m_LocalPosition: {x: 0.2269, y: -0, z: 0.043}
+  m_LocalPosition: {x: 0.306, y: -0, z: 0.043}
   m_LocalScale: {x: 0.9999999, y: 1.0000001, z: 1}
   m_Children:
   - {fileID: 5980783671040376772}
@@ -21502,6 +21503,7 @@ GameObject:
   - component: {fileID: 51273415}
   - component: {fileID: 5980783670880340280}
   - component: {fileID: 5980783670880340281}
+  - component: {fileID: 5980783670880340286}
   - component: {fileID: 51273414}
   - component: {fileID: 5980783670880340285}
   - component: {fileID: 5980783670880340284}
@@ -24941,13 +24943,14 @@ MonoBehaviour:
   - {x: 0.15450434, y: 0.9870075, z: -0.044096325}
   - {x: 0.15450434, y: 0.9870075, z: -0.044096325}
   - {x: 0.1545277, y: 0.9870075, z: -0.044014532}
-  forceFieldGain: 4
-  forceFieldSteepness: 0.5
-  thresholdDistance: 0.006
-  maxForce: 4
-  force: {x: 0, y: 0, z: 0}
-  graphics: 1
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
+  vectorsGraphics: 1
   graphicVectorGain: 1
+  distanceGraphics: 1
+  force: {x: -4.5198897e-10, y: 0.000000003520492, z: -0.0000000037778096}
 --- !u!114 &5980783670880340283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29604,13 +29607,14 @@ MonoBehaviour:
   - {x: 0.97501755, y: -0.21334146, z: 0.061856687}
   - {x: 0.97501755, y: -0.21334146, z: 0.061856687}
   - {x: 0.9750759, y: -0.21306969, z: 0.061875165}
-  forceFieldGain: 4
-  forceFieldSteepness: 0.5
-  thresholdDistance: 0.006
-  maxForce: 4
-  force: {x: 0, y: 0, z: 0}
-  graphics: 1
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
+  vectorsGraphics: 1
   graphicVectorGain: 1
+  distanceGraphics: 1
+  force: {x: 1.0849345e-10, y: 0.0000000041192134, z: -0.0000000031448875}
 --- !u!114 &5980783670880340284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32747,13 +32751,14 @@ MonoBehaviour:
   - {x: 0.030474007, y: 0.51913035, z: -0.85415155}
   - {x: 0.03047508, y: 0.5191301, z: -0.8541516}
   - {x: 0.030474514, y: 0.51913166, z: -0.8541507}
-  forceFieldGain: 4
-  forceFieldSteepness: 0.5
-  thresholdDistance: 0.006
-  maxForce: 4
-  force: {x: 0, y: 0, z: 0}
-  graphics: 1
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
+  vectorsGraphics: 1
   graphicVectorGain: 1
+  distanceGraphics: 1
+  force: {x: 3.4609193e-10, y: 0.000000002817888, z: -0.0000000043370187}
 --- !u!114 &5980783670880340285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39118,13 +39123,30 @@ MonoBehaviour:
   - {x: -0.15797149, y: -0.98641396, z: 0.045085903}
   - {x: -0.15797149, y: -0.98641396, z: 0.045085903}
   - {x: -0.15797149, y: -0.98641396, z: 0.045085903}
-  forceFieldGain: 4
-  forceFieldSteepness: 0.5
-  thresholdDistance: 0.006
-  maxForce: 4
-  force: {x: 0, y: 0, z: 0}
-  graphics: 1
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
+  vectorsGraphics: 1
   graphicVectorGain: 1
+  distanceGraphics: 1
+  force: {x: -0.0000000012339233, y: 0.0000000033053, z: -0.0000000037976875}
+--- !u!114 &5980783670880340286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980783670880340276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a14886a4ff0db4188dd34ec936ab71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gain: 0.001
+  threshold: 0.001
+  half: 0.001
+  slope: 1217
 --- !u!1 &5980783670880452450
 GameObject:
   m_ObjectHideFlags: 0

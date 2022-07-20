@@ -10,7 +10,7 @@ public class DrawTransform : MonoBehaviour
     Vector3 y;
     Vector3 z;
     float sc;
-    // Start is called before the first frame update
+    
     void Start()
     {
         pos = gameObject.transform.position;
@@ -20,7 +20,7 @@ public class DrawTransform : MonoBehaviour
         sc = 0.1f;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         Global.Arrow(pos,pos+x*sc,Color.red);

@@ -26,25 +26,38 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 {
-    float min_dist;
+    [Header("Transforms")]
     public Transform subject;
     public Transform obstacle;
+    // [Space(20)]
+
+    [Header("Mesh")]
     public List<Vector3> obstaclePoints;
     public List<Vector3> surfaceNormals;
+    // [Space(20)]
+
+    [Header("Distance Map")]
     [Range(0,100000f)]
-    public float forceFieldGain = 0.001f;
-    [Range(0,20)]
-    public float forceFieldSteepness = 2;
-    [Range(0,1)]
-    public float thresholdDistance = 0.002f;
-    [Range(0,100)]
-    public float maxForce=100;
-    public Vector3 force;
-    public bool graphics = true;
-    // [Range(0,1  )]  
-    // public float normalVectorsLength = 0;
+    public float gain = 0.001f;
+    [Range(0,0.1f)]
+    public float threshold = 0.002f;
+    [Range(0,0.2f)]
+    public float half = 0.002f;
+    [Range(0,10000)]
+    public float slope = 1f;
+
+    [Header("Graphics")]
+    public bool vectorsGraphics = true;
     [Range(0,5)]
     public float graphicVectorGain = 1;
+    public bool distanceGraphics = true;
+
+    
+    [Header("Output")]
+    public Vector3 force;
+    public float forceMagnitude;
+    float min_dist;
+
     Material materialown;
     Material materialhit;
     Vector3 p;
@@ -67,7 +80,6 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         
         for (var i = 0; i < meshVertices.Length; i++){
             obstaclePoints.Add(obstacle.TransformPoint(meshVertices[i]));
-            // obstaclePoints.Add(obstacle.TransformPoint(meshVertices[i]));
         }
         for (var i = 0; i < meshNormals.Length; i++){
             surfaceNormals.Add(obstacle.TransformDirection(meshNormals[i]));
@@ -76,12 +88,21 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     void Update()
     {
+        if (half < 0 ) {half=0;}
+        if (slope < 1/half) {slope=1/half;}
+
+        if (gameObject.GetComponent<OVF_UniversalParameters>() != null) {
+            gain = gameObject.GetComponent<OVF_UniversalParameters>().gain;
+            threshold = gameObject.GetComponent<OVF_UniversalParameters>().threshold;
+            half = gameObject.GetComponent<OVF_UniversalParameters>().half;
+            slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
+        }
         Vector3 lastforceoutside=Vector3.zero;
         if (obstaclePoints.Count<=0) {
-            Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE' in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
+            Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE'"+
+             "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
         }
         
-        int n_close=0;
         Vector3 com = Vector3.zero;
         Vector3 closestP = Vector3.zero;
         min_dist = 10000;
@@ -95,47 +116,38 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
                 closestP = p;
                 idx_closest = j;
             }
-            if (d < thresholdDistance) {
-                com=com+p;
-                n_close++;
-            }
             j++;
         }   
-        com = com/n_close;
 
-        // ADD DAMP
-        Vector3 f_dir;
-        float f_mag;
-        if (thresholdDistance > Vector3.Distance(subject.position,com)) {
-            f_dir = (subject.position-com).normalized;
-            f_mag = forceFieldGain*(thresholdDistance-Vector3.Distance(subject.position,com))/thresholdDistance;
-            // f_mag = forceFieldGain*Mathf.Exp(-Mathf.Pow(Vector3.Distance(subject.position,com),2)/(thresholdDistance*forceFieldSteepness));
-            force = f_mag*f_dir;
-        }else{
-            force=Vector3.zero;
-            }
+        Vector3 f_dir = (subject.position-closestP).normalized;
+        float f_mag = gain*Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
+        // Debug.Log(f_mag);
 
-        // Rescaling the force the max magnitude if exceeded
-        if (force.magnitude > maxForce) {
-            force = force.normalized * maxForce;
-        }
-        if (graphics) {
+        if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
-            Global.Arrow(subject.position, com, Color.yellow);
+            // Global.Arrow(subject.position, closestP, Color.yellow);
         }
+        if (distanceGraphics) {
+            Vector3 conj = (subject.position-closestP).normalized;
+            Debug.DrawLine(closestP,closestP+conj*threshold+conj*half-conj/slope, Color.red);
+            Global.Arrow(  closestP+conj*threshold-conj/slope+conj*half, closestP+conj*threshold+conj*half, Color.yellow);
+            Global.Arrow(  closestP+conj*threshold+conj/slope+conj*half, closestP+conj*threshold+conj*half, Color.yellow);
+            Debug.DrawLine(closestP+conj*threshold+conj/slope+conj*half, closestP+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.green);
+        }
+        force = f_mag*f_dir;
+
         // CHECHING IF EE IS INSIDE OF ORGAN
         if (Vector3.Dot(closestP-subject.position,surfaceNormals[idx_closest])>=0) {
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
             // force*=-1;
             force = lastforceoutside;
-            // Debug.Log("INSIDE");
         } else {
             lastforceoutside = force;
             obstacle.GetComponent<MeshRenderer>().material = materialown;
-
         }
-        p = subject.position;
-        t = com;
+
+        // CleanUp and Loggings
+        forceMagnitude = force.magnitude;
     }
     
 }

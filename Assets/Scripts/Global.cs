@@ -70,7 +70,11 @@ public static class Global
         }
     }
 
-    public static float DistMap(float d, float threshold, float half, float slope) {
+    public static float DistMapAttraction(float d, float threshold, float half, float slope) {
         return 1/(1+Mathf.Exp(-slope/0.2f*(d-threshold-half)));
+    }
+
+    public static float DistMapRepulsion(float d, float threshold, float half, float slope) {
+        return 1/(1+Mathf.Exp(slope/0.2f*(d-threshold-half)));
     }
 }

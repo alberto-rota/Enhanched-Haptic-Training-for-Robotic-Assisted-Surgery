@@ -21,20 +21,17 @@ using UnityEngine;
 public class SumForces : MonoBehaviour
 {
     public List<MonoBehaviour> activeConstraints;
-    public Vector3 totalForce = Vector3.zero;
-    public float totalForceMagnitude;
-    public bool graphics = true;
-    Vector3 PrevPos; 
-    Vector3 NewPos; 
-    public Queue<Vector3> vf = new Queue<Vector3>();
-    int filtersize = 10;
 
+    [Header("Bounds")]
     [Range(0,5f)]
     public float minForce = 0f;
     [Range(0,5f)]
     public float maxForce = 3f;
     [Range(0,5)]
     public float graphicVectorGain = 1;
+    [Header("Output")]
+    public Vector3 totalForce = Vector3.zero;
+    public float totalForceMagnitude;
 
     void Start()
     {
@@ -48,14 +45,7 @@ public class SumForces : MonoBehaviour
                 && s.enabled == true) {
                 activeConstraints.Add(s);
             }
-        }   
-        PrevPos = GameObject.Find(Global.tooltip_path).transform.position;
-        NewPos = GameObject.Find(Global.tooltip_path).transform.position;
-
-        for (int i = 0; i<filtersize; i++) {
-            vf.Enqueue(Vector3.zero);
         }
-
     }
 
     void FixedUpdate()
@@ -87,36 +77,18 @@ public class SumForces : MonoBehaviour
             }
         }
         totalForceMagnitude  = totalForce.magnitude;
-        if (graphics) {
-            Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+totalForce*graphicVectorGain, Color.white);
-        }
-        //force applied only if big enough
+
         if (totalForceMagnitude < minForce) {
             totalForce = Vector3.zero;
         }
-
         if (totalForceMagnitude > maxForce) {
             totalForce = totalForce.normalized * maxForce;
         }
         totalForceMagnitude  = totalForce.magnitude;
-        //Adds a damp contribution
-        NewPos = GameObject.Find(Global.tooltip_path).transform.position;  
 
-        Vector3 velocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  
-        vf.Enqueue(velocity);  
-        vf.Dequeue();  
-
-        Vector3 smoothVelocity = Vector3.zero;  
-        foreach(Vector3 v in vf) {
-            smoothVelocity+=v/filtersize;
-        }
-        PrevPos = NewPos;  
-
-        if (totalForceMagnitude > 0) {
-            totalForce = totalForce + (-smoothVelocity * 1f);
-        }
-        Debug.Log(velocity.magnitude);
-        Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+smoothVelocity, Color.green);
+        // if (totalForceMagnitude > 0) {
+        //     totalForce = totalForce;
+        // }
     }
     
 }
