@@ -17188,8 +17188,8 @@ MonoBehaviour:
   DisplayInertiaGizmo: 0
   rigidbodyDataSource: 0
   Mass: 0.44569
-  CenterOfMass: {x: 0.010348, y: 0, z: 0.25683}
-  InertiaTensor: {x: 0.000001, y: 0.000001, z: 0.000001}
+  CenterOfMass: {x: 0, y: 0, z: 0}
+  InertiaTensor: {x: 1, y: 1, z: 1}
   InertiaTensorRotation: {x: 0, y: -0, z: -0, w: 1}
   UrdfMass: 0.44569
   UrdfCenterOfMass: {x: 0.010348, y: 0, z: 0.25683}
@@ -21880,7 +21880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ea858067f28f42830a0557b8cbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IPAddress: 192.168.1.1
+  IPAddress: 192.168.1.2
   Port: 9090
 --- !u!4 &754332632277879725
 Transform:
@@ -21951,7 +21951,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configuring: 0
   target: {fileID: 3205126565570240333}
-  coneApertureDegrees: 5.4
+  coneApertureDegrees: 3.3
   dampInsideOfCone: 0.02
   gainOutsideOfCone: 1
   delta: {x: 0.036621332, y: -0.06633152, z: 0.15220284}

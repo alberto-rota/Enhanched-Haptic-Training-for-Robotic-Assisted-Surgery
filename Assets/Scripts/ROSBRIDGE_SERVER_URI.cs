@@ -20,7 +20,7 @@ using UnityEngine;
 public class ROSBRIDGE_SERVER_URI : MonoBehaviour
 {
 
-    public string IPAddress = "192.168.1.1";
+    public string IPAddress = "192.168.1.2";
     public string Port = "9090";
 
     // void Update()

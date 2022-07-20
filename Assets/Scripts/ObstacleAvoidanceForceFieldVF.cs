@@ -20,6 +20,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 [ExecuteInEditMode]
 public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
@@ -31,8 +33,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public List<Vector3> surfaceNormals;
     [Range(0,100000f)]
     public float forceFieldGain = 0.001f;
-    [Range(0,4)]
-    public float forceFieldDegree = 2;
+    [Range(0,20)]
+    public float forceFieldSteepness = 2;
     [Range(0,1)]
     public float thresholdDistance = 0.002f;
     [Range(0,100)]
@@ -74,11 +76,11 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     void Update()
     {
+        Vector3 lastforceoutside=Vector3.zero;
         if (obstaclePoints.Count<=0) {
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE' in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
         }
         
-
         int n_close=0;
         Vector3 com = Vector3.zero;
         Vector3 closestP = Vector3.zero;
@@ -102,9 +104,16 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         com = com/n_close;
 
         // ADD DAMP
+        Vector3 f_dir;
+        float f_mag;
         if (thresholdDistance > Vector3.Distance(subject.position,com)) {
-        force = (subject.position-com).normalized*forceFieldGain*(thresholdDistance-Vector3.Distance(subject.position,com));
-        }else{force=Vector3.zero;}
+            f_dir = (subject.position-com).normalized;
+            f_mag = forceFieldGain*(thresholdDistance-Vector3.Distance(subject.position,com))/thresholdDistance;
+            // f_mag = forceFieldGain*Mathf.Exp(-Mathf.Pow(Vector3.Distance(subject.position,com),2)/(thresholdDistance*forceFieldSteepness));
+            force = f_mag*f_dir;
+        }else{
+            force=Vector3.zero;
+            }
 
         // Rescaling the force the max magnitude if exceeded
         if (force.magnitude > maxForce) {
@@ -117,10 +126,13 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         // CHECHING IF EE IS INSIDE OF ORGAN
         if (Vector3.Dot(closestP-subject.position,surfaceNormals[idx_closest])>=0) {
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
-            force = Vector3.zero;
+            // force*=-1;
+            force = lastforceoutside;
             // Debug.Log("INSIDE");
         } else {
+            lastforceoutside = force;
             obstacle.GetComponent<MeshRenderer>().material = materialown;
+
         }
         p = subject.position;
         t = com;

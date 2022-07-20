@@ -57415,7 +57415,7 @@ MonoBehaviour:
   distance10Perc: 2.3025851
   forceOnSurface: 1
   maxForce: 100
-  force: {x: -0.3629002, y: 0.49853346, z: -0.6950045}
+  force: {x: 0, y: -0, z: 0}
   graphics: 1
   graphicVectorGain: 1
 --- !u!114 &6210097203925862043
@@ -57430,7 +57430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ea858067f28f42830a0557b8cbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IPAddress: 192.168.1.1
+  IPAddress: 192.168.1.2
   Port: 9090
 --- !u!114 &6210097203925862044
 MonoBehaviour:
@@ -57475,7 +57475,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6210097203925862035}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
   m_Name: 

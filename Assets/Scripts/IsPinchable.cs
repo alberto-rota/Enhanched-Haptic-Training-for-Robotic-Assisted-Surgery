@@ -82,7 +82,7 @@ public class IsPinchable : MonoBehaviour
             }
         } else {
             if (gameObject.GetComponent<FixedJoint>() != null) {
-                Destroy(gameObject.GetComponent<FixedJoint>());
+                DestroyImmediate(gameObject.GetComponent<FixedJoint>());
             }
             // gameObject.GetComponent<FixedJoint>().connectedBody = null;
             if (restoreGravity) {

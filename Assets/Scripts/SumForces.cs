@@ -24,7 +24,11 @@ public class SumForces : MonoBehaviour
     public Vector3 totalForce = Vector3.zero;
     public float totalForceMagnitude;
     public bool graphics = true;
-    
+    Vector3 PrevPos; 
+    Vector3 NewPos; 
+    public Queue<Vector3> vf = new Queue<Vector3>();
+    int filtersize = 10;
+
     [Range(0,5f)]
     public float minForce = 0f;
     [Range(0,5f)]
@@ -45,10 +49,16 @@ public class SumForces : MonoBehaviour
                 activeConstraints.Add(s);
             }
         }   
+        PrevPos = GameObject.Find(Global.tooltip_path).transform.position;
+        NewPos = GameObject.Find(Global.tooltip_path).transform.position;
+
+        for (int i = 0; i<filtersize; i++) {
+            vf.Enqueue(Vector3.zero);
+        }
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         totalForce = Vector3.zero;
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
@@ -88,6 +98,25 @@ public class SumForces : MonoBehaviour
         if (totalForceMagnitude > maxForce) {
             totalForce = totalForce.normalized * maxForce;
         }
+        totalForceMagnitude  = totalForce.magnitude;
+        //Adds a damp contribution
+        NewPos = GameObject.Find(Global.tooltip_path).transform.position;  
+
+        Vector3 velocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  
+        vf.Enqueue(velocity);  
+        vf.Dequeue();  
+
+        Vector3 smoothVelocity = Vector3.zero;  
+        foreach(Vector3 v in vf) {
+            smoothVelocity+=v/filtersize;
+        }
+        PrevPos = NewPos;  
+
+        if (totalForceMagnitude > 0) {
+            totalForce = totalForce + (-smoothVelocity * 1f);
+        }
+        Debug.Log(velocity.magnitude);
+        Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+smoothVelocity, Color.green);
     }
     
 }

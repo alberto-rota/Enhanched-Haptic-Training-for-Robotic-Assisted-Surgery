@@ -69,4 +69,8 @@ public static class Global
             else Debug.DrawLine(tipcenter+tipBasePoints[i],tipcenter+tipBasePoints[i+1],color);
         }
     }
+
+    public static float DistMap(float d, float threshold, float half, float slope) {
+        return 1/(1+Mathf.Exp(-slope/0.2f*(d-threshold-half)));
+    }
 }

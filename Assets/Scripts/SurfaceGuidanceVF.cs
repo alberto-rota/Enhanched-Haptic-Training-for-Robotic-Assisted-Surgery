@@ -49,14 +49,13 @@ public class SurfaceGuidanceVF : MonoBehaviour
         if (subject == null) {
             subject = GameObject.Find(Global.tooltip_path).transform;
         }
-        tool = subject.position;
         surfacePoints = new List<Vector3>();
         surfaceNormals= new List<Vector3>();
         colorok = Resources.Load<Material>("Materials/SurfaceGreen");
         colorred = Resources.Load<Material>("Materials/SurfaceRed");
 
         Mesh surgicalMesh;
-        surgicalMesh = surface.GetComponent<MeshFilter>().sharedMesh;
+        surgicalMesh = surface.GetComponent<MeshFilter>().sharedMesh;   
         Vector3[] meshVertices = surgicalMesh.vertices;
         Vector3[] meshNormals = surgicalMesh.normals;
         
@@ -68,6 +67,7 @@ public class SurfaceGuidanceVF : MonoBehaviour
 
     void Update()
     {
+        tool = subject.position;
         if (surfacePoints.Count<=0) {
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE' in 
             the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
@@ -87,8 +87,9 @@ public class SurfaceGuidanceVF : MonoBehaviour
             }
             j++;
         }
-        float f_mag = forceOnSurface*Mathf.Exp(-gamma*mindist);
-        Vector3 f_dir = surfaceNormals[idx_closest]*-1;
+        
+        float f_mag = forceOnSurface*(1-Mathf.Exp(-Mathf.Pow(mindist,8)/gamma));
+        Vector3 f_dir = surfaceNormals[idx_closest];
         force = f_mag*f_dir.normalized;
         if (f_mag > maxForce) {
             f_mag = maxForce;

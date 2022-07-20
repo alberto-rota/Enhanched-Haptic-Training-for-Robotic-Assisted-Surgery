@@ -30992,7 +30992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ea858067f28f42830a0557b8cbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IPAddress: 192.168.1.1
+  IPAddress: 192.168.1.2
   Port: 9090
 --- !u!114 &6210097205200731348
 MonoBehaviour:
@@ -31054,7 +31054,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6210097205200731354}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
   m_Name: 
@@ -31130,8 +31130,8 @@ MonoBehaviour:
   configuring: 0
   target: {fileID: 7047454086635890896}
   coneApertureDegrees: 10
-  dampInsideOfCone: 0.02
-  gainOutsideOfCone: 0.02
+  dampInsideOfCone: 0.04
+  gainOutsideOfCone: 1
   delta: {x: 0.03832507, y: -0.08994113, z: 0.16842628}
   maxForce: 3
   force: {x: -0, y: -0, z: -0}

@@ -27,7 +27,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     public Transform subject;
     public Transform Trajectory;
 
-    [Range(0,100000)]
+    [Range(0,10000000000000000)]
     public float viscousCoefficient = 1;
 
     [SerializeField]
@@ -68,9 +68,10 @@ public class TrajectoryGuidanceVF : MonoBehaviour
             if (d < mindist) {
                 mindist = d;
                 closest = point;
-            }
+            } 
         }
         deviation = closest - subject.position;
+        Debug.Log(deviation);
 
         // VELOCITY
         velocity = subject.GetComponent<Rigidbody>().velocity;
@@ -78,6 +79,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
         f_mag = b*velocity.magnitude;
+        // Debug.Log(velocity.magnitude);
         if (f_mag > maxForce) {
             f_mag = maxForce;
         }
@@ -90,10 +92,11 @@ public class TrajectoryGuidanceVF : MonoBehaviour
                 Vector3.Cross(velocity.normalized,deviation.normalized)
                 )*velocity.normalized;  //Rotation Axis
         }
-        force = f_mag*f_dir;
 
+
+        force = f_mag*f_dir;
         if (graphics) {
-            Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
+            Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain*1e15f, Color.green);
             Global.Arrow(subject.position, closest, Color.red);
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
