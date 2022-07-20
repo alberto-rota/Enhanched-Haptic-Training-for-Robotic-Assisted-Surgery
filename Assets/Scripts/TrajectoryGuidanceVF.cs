@@ -74,7 +74,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         Debug.Log(deviation);
 
         // VELOCITY
-        velocity = subject.GetComponent<Rigidbody>().velocity;
+        velocity = GameObject.Find(Global.tooltip_path).GetComponent<Velocity>().velocity;
 
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);

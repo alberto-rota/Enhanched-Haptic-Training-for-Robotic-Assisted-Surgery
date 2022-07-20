@@ -29,6 +29,11 @@ public class SumForces : MonoBehaviour
     public float maxForce = 3f;
     [Range(0,5)]
     public float graphicVectorGain = 1;
+
+    [Header("Damp")]
+    [Range(0,10f)]
+    public float damp = 1.5f;
+
     [Header("Output")]
     public Vector3 totalForce = Vector3.zero;
     public float totalForceMagnitude;
@@ -76,6 +81,8 @@ public class SumForces : MonoBehaviour
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
             }
         }
+
+        totalForce+=GameObject.Find(Global.tooltip_path).GetComponent<Velocity>().velocity*damp;
         totalForceMagnitude  = totalForce.magnitude;
 
         if (totalForceMagnitude < minForce) {
@@ -86,9 +93,6 @@ public class SumForces : MonoBehaviour
         }
         totalForceMagnitude  = totalForce.magnitude;
 
-        // if (totalForceMagnitude > 0) {
-        //     totalForce = totalForce;
-        // }
     }
     
 }
