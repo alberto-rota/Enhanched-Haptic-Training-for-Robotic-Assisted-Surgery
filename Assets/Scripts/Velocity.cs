@@ -49,9 +49,12 @@ public class Velocity : MonoBehaviour
             smoothVelocity+=v/filterSize;
         }
         velocity = smoothVelocity; 
+        if (velocity.magnitude < 0.001f) {
+            velocity = Vector3.zero;
+        }
         PrevPos = NewPos;  
         
-        Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+smoothVelocity, Color.green);
+        // Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position, GameObject.Find(Global.tooltip_path).transform.position+smoothVelocity, Color.green);
    
     }
 }

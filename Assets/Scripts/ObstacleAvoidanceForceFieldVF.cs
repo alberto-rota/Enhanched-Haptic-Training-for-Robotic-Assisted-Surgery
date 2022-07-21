@@ -34,6 +34,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     [Header("Mesh")]
     public List<Vector3> obstaclePoints;
     public List<Vector3> surfaceNormals;
+    public Material materialown;
+    public Material materialhit;
     // [Space(20)]
 
     [Header("Distance Map")]
@@ -56,10 +58,11 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     [Header("Output")]
     public Vector3 force;
     public float forceMagnitude;
-    float min_dist;
+    public Vector3 closestPcom = Vector3.zero;
+    public Vector3 closestP = Vector3.zero;
+    public float dist;
+    public float distMapped;
 
-    Material materialown;
-    Material materialhit;
     Vector3 p;
     Vector3 t;
 
@@ -68,22 +71,16 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         if (subject == null) {
             subject = GameObject.Find(Global.tooltip_path).transform;
         }
-        obstaclePoints = new List<Vector3>();
-        surfaceNormals= new List<Vector3>();
         materialown = obstacle.GetComponent<MeshRenderer>().sharedMaterial;
         materialhit = Resources.Load<Material>("Materials/ObstacleHit");
 
-        Mesh surgicalMesh;
-        surgicalMesh = obstacle.GetComponent<MeshFilter>().sharedMesh;
-        Vector3[] meshVertices = surgicalMesh.vertices;
-        Vector3[] meshNormals = surgicalMesh.normals;
-        
-        for (var i = 0; i < meshVertices.Length; i++){
-            obstaclePoints.Add(obstacle.TransformPoint(meshVertices[i]));
-        }
-        for (var i = 0; i < meshNormals.Length; i++){
-            surfaceNormals.Add(obstacle.TransformDirection(meshNormals[i]));
-        }
+        // Mesh surgicalMesh;
+        // surgicalMesh = obstacle.GetComponent<MeshFilter>().sharedMesh;
+        // Vector3[] meshVertices = surgicalMesh.vertices;
+        // Vector3[] meshNormals = surgicalMesh.normals;
+
+        obstaclePoints = obstacle.GetComponent<CheckMeshNormals>().surfacePoints;
+        surfaceNormals = obstacle.GetComponent<CheckMeshNormals>().surfaceNormals;
     }
 
     void Update()
@@ -103,46 +100,58 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
              "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
         }
         
-        Vector3 com = Vector3.zero;
-        Vector3 closestP = Vector3.zero;
-        min_dist = 10000;
+        int n_close = 0;
+        closestPcom = Vector3.zero;
+        closestP = Vector3.zero;
         int idx_closest = 0;
-        int j=0;
         force = Vector3.zero;
+        float mind = 1000;
+
         foreach (Vector3 p in obstaclePoints) {
             float d = Vector3.Distance(p, subject.position);
-            if (d < min_dist) {
-                min_dist = d;
-                closestP = p;
-                idx_closest = j;
+            float dcom = threshold+half+5/slope;
+            if (d <= dcom) {
+                closestPcom = closestPcom + p;
+                n_close++;
             }
-            j++;
+            if (d < mind) {
+                mind = d;
+                closestP = p;
+                idx_closest = obstaclePoints.IndexOf(p);
+            }
         }   
+        closestPcom=closestPcom/n_close;
 
-        Vector3 f_dir = (subject.position-closestP).normalized;
+        Vector3 f_dir = (subject.position-closestPcom).normalized;
         float f_mag = gain*Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
+        
+        dist = Vector3.Distance(closestP, subject.position);
+        distMapped = Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
         // Debug.Log(f_mag);
 
         if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
-            // Global.Arrow(subject.position, closestP, Color.yellow);
+            // Global.Arrow(subject.position, closestPcom, Color.yellow);
         }
         if (distanceGraphics) {
-            Vector3 conj = (subject.position-closestP).normalized;
-            Debug.DrawLine(closestP,closestP+conj*threshold+conj*half-conj/slope, Color.red);
-            Global.Arrow(  closestP+conj*threshold-conj/slope+conj*half, closestP+conj*threshold+conj*half, Color.yellow);
-            Global.Arrow(  closestP+conj*threshold+conj/slope+conj*half, closestP+conj*threshold+conj*half, Color.yellow);
-            Debug.DrawLine(closestP+conj*threshold+conj/slope+conj*half, closestP+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.green);
+            Vector3 conj = (subject.position-closestPcom).normalized;
+            Debug.DrawLine(closestPcom,closestPcom+conj*threshold+conj*half-conj/slope, Color.red);
+            Global.Arrow(  closestPcom+conj*threshold-conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
+            Global.Arrow(  closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
+            Debug.DrawLine(closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.green);
         }
         force = f_mag*f_dir;
 
+        // if (dist < threshold) {
+        // Global.Arrow(subject.position, closestP, Color.white);
+        // Global.Arrow(closestP, closestP+surfaceNormals[idx_closest]*0.2f, Color.magenta);
+
         // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-subject.position,surfaceNormals[idx_closest])>=0) {
+        if (Vector3.Dot(closestP-subject.position, surfaceNormals[idx_closest])>=0 || dist < threshold) {
+            force=gain*surfaceNormals[idx_closest];
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
-            // force*=-1;
-            force = lastforceoutside;
+        // }
         } else {
-            lastforceoutside = force;
             obstacle.GetComponent<MeshRenderer>().material = materialown;
         }
 

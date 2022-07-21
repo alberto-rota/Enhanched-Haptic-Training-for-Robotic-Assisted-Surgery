@@ -82,8 +82,10 @@ public class SumForces : MonoBehaviour
             }
         }
 
-        totalForce+=GameObject.Find(Global.tooltip_path).GetComponent<Velocity>().velocity*damp;
         totalForceMagnitude  = totalForce.magnitude;
+        if (totalForceMagnitude > 0) {
+            totalForce-=GameObject.Find(Global.tooltip_path).GetComponent<Velocity>().velocity*damp;
+        }
 
         if (totalForceMagnitude < minForce) {
             totalForce = Vector3.zero;

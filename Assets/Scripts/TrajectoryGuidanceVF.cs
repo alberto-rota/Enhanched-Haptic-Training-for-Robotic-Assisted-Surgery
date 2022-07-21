@@ -48,7 +48,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     void Start()
     {
         if (subject == null) {
-            subject = GameObject.Find("PSM").transform;
+            subject = GameObject.Find(Global.tooltip_path).transform;
         }
         subject.GetComponent<Rigidbody>().solverVelocityIterations = 50;
     }
@@ -74,7 +74,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         Debug.Log(deviation);
 
         // VELOCITY
-        velocity = GameObject.Find(Global.tooltip_path).GetComponent<Velocity>().velocity;
+        velocity = subject.GetComponent<Velocity>().velocity;
 
         // FORCE
         float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
