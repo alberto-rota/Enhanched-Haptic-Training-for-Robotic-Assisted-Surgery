@@ -17,6 +17,13 @@
 //    author = {Jing Ren and Rajni V. Patel and Kenneth A. McIsaac and Gerard Guiraudon and Terry M. Peters},
 //    year = {2008},
 
+//////////////////////////////////////////////////////////////////////////////////
+//                                  OBSOLETE                                    //
+//                      Use "ObstacleAvoidanceForce" instead                    //
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +45,7 @@ public class SurfaceAvoidanceVF : MonoBehaviour
     public bool graphics = true;
     // [Range(0,1  )]
     // public float normalVectorsLength = 0;
-    [Range(0,5)]
+    [Range(0,0.001f)]
     public float graphicVectorGain = 1;
     Material colorok;
     Material colorred;

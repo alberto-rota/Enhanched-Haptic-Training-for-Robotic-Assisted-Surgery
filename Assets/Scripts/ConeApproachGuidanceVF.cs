@@ -25,32 +25,40 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ConeApproachGuidanceVF : MonoBehaviour
 {
-    // Draw draw = new Draw();
-
-    public bool configuring;
+    [Header("Transforms")]
+    public Transform subject;
     public Transform target;
-    Vector3 coneCenter;
+
+    [Header("Virtual Fixture")]
+    public bool configuring;
     [Range(0,30)]
     public float coneApertureDegrees = 10;
     [Range(0,10f)]
     public float dampInsideOfCone = 0.02f; 
     [Range(0,10f)]
     public float gainOutsideOfCone = 0.02f; 
-    public Vector3 delta;
-    List<Vector3> coneBasePoints;
-    public float maxForce = 3;
+    public float relaxDistance = 8;
+
+    [Header("Graphics")]
+    public bool graphics = true;
+    [Range(0,0.001f)]
+    public float graphicVectorGain = 1;
+    public int coneResolution = 10;
+
+    [Header("Output")]
     public Vector3 force;
+    public float forceMagnitude;
+    public Vector3 delta;
+    public Color color = Color.yellow;
+
+    List<Vector3> coneBasePoints;
+    Color coneColor;
+    Vector3 coneCenter;
     Vector3 tp;
     Vector3 ee;
     Vector3 prevl;
     Vector3 preva;
     Vector3 velocity;
-    public bool graphics = true;
-    [Range(0,5)]
-    public float graphicVectorGain = 1;
-    Color coneColor;
-    public Color color = Color.yellow;
-    public int coneResolution = 10;
 
 
     void Start(){
@@ -59,9 +67,13 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         preva = Vector3.zero;
         force = Vector3.zero;
         coneColor = color;
-
         float deltaTheta = 360f/coneResolution;
-        delta = target.position-GameObject.Find(Global.tooltip_path).transform.position;  
+
+        if (subject == null) {
+            subject = GameObject.Find(Global.tooltip_path).transform;
+        }
+
+        delta = target.position-subject.position;  
         coneBasePoints = new List<Vector3>();
         Vector3 b = Vector3.Cross(delta.normalized, Vector3.up)*delta.magnitude*Mathf.Tan(coneApertureDegrees*Mathf.PI/180f);
         coneBasePoints.Add(b);
@@ -70,7 +82,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             b = Quaternion.AngleAxis(deltaTheta,delta.normalized)*b;
             coneBasePoints.Add(b);
         }
-        coneCenter = GameObject.Find(Global.tooltip_path).transform.position;
+        coneCenter = subject.position;
         tp = target.position;
     }
 
@@ -87,7 +99,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         if (configuring) { // THE CONE MOVES WITH THE EE, NO VF APPLIED
             coneColor = color;
             float deltaTheta = 360f/coneResolution;
-            delta = target.position-GameObject.Find(Global.tooltip_path).transform.position;  
+            delta = target.position-subject.position;  
             coneBasePoints = new List<Vector3>();
             Vector3 b = Vector3.Cross(delta.normalized, Vector3.up)*delta.magnitude*Mathf.Tan(coneApertureDegrees*Mathf.PI/180f);
             coneBasePoints.Add(b);
@@ -96,10 +108,10 @@ public class ConeApproachGuidanceVF : MonoBehaviour
                 b = Quaternion.AngleAxis(deltaTheta,delta.normalized)*b;
                 coneBasePoints.Add(b);
             }
-            coneCenter = GameObject.Find(Global.tooltip_path).transform.position;
+            coneCenter = subject.position;
 
         } else { // THE CONE IS ASSUMED SELECTED AND STATIONARY, THE VF IS APPLIED
-            ee = GameObject.Find(Global.tooltip_path).transform.position;
+            ee = subject.position;
             Vector3 l = Vector3.Dot(ee-tp,delta.normalized)*delta.normalized;
             Vector3 a = ee-tp-l;
 
@@ -125,23 +137,13 @@ public class ConeApproachGuidanceVF : MonoBehaviour
                 force = (f_mag*-1*a.normalized);
             }
 
-            // Rescaling the force the max magnitude if exceeded
-            if (force.magnitude > maxForce) {
-                force = force.normalized * maxForce;
-            }
             // When close enough to the target, force is reduced (the cone is too nGlobal.Arrow)
-            if (Vector3.Distance(ee,tp)/delta.magnitude < 0.08f) {
+            if (Vector3.Distance(ee,tp)/delta.magnitude < relaxDistance/100) {
                 force = force*0.2f;
                 coneColor = Color.green;
             }
+            forceMagnitude = force.magnitude;
 
-            // Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+vl*graphicVectorGain, Color.magenta);
-            // Debug.DrawLine(gameObject.transform.position+vl*graphicVectorGain, gameObject.transform.position+(vl+va)*graphicVectorGain, Color.magenta);
-            // Debug.DrawLine(gameObject.transform.position, gameObject.transform.position+(vl+va)*graphicVectorGain, Color.magenta);
-            if (graphics) {
-                Debug.DrawLine(tp,tp+l,Color.white);
-                Debug.DrawLine(tp+l,tp+l+a,Color.white);
-            }
         }
 
         // DRAWING THE CONE
@@ -152,10 +154,12 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         }
 
         if (graphics) {
-            Debug.DrawLine(ee, ee+vl*graphicVectorGain, Color.green);
-            Debug.DrawLine(ee, ee+va*graphicVectorGain, Color.green);
-            Global.Arrow(ee, ee+v*graphicVectorGain, Color.green);
+            Global.Arrow(ee, ee+vl*graphicVectorGain, Color.green);
+            Global.Arrow(ee, ee+va*graphicVectorGain, Color.green);
+            // Global.Arrow(ee, ee+v*graphicVectorGain, Color.green);
             Global.Arrow(ee, ee+force*graphicVectorGain, Color.blue);
+            Debug.DrawLine(tp,tp+l,Color.white);
+            Debug.DrawLine(tp+l,tp+l+a,Color.white);
         }
     }
     

@@ -39,12 +39,12 @@ public class SurfaceGuidanceVF : MonoBehaviour
     public float threshold = 0.002f;
     [Range(0,0.2f)]
     public float half = 0.002f;
-    [Range(0,10000)]
+    [Range(0,10000f)]
     public float slope = 1f;
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
-    [Range(0,5)]
+    [Range(0,0.001f)]
     public float graphicVectorGain = 1;
     public bool distanceGraphics = true;
 

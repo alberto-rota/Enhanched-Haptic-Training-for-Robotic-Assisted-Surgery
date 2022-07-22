@@ -49,7 +49,7 @@ public class Velocity : MonoBehaviour
             smoothVelocity+=v/filterSize;
         }
         velocity = smoothVelocity; 
-        if (velocity.magnitude < 0.001f) {
+        if (velocity.magnitude < 0.0001f) {
             velocity = Vector3.zero;
         }
         PrevPos = NewPos;  

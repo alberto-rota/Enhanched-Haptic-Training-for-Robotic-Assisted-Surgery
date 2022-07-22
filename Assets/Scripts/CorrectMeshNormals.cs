@@ -6,8 +6,8 @@ using UnityEngine;
 public class CorrectMeshNormals : MonoBehaviour
 {
     
-    [Range(0,1  )]
-    public float normalVectorsLength = 1;
+    [Range(0,0.01f)]
+    public float normalVectorsLength = 0.002;
     Transform surface;
     public List<Vector3> surfacePoints;
     public List<Vector3> surfaceNormals;

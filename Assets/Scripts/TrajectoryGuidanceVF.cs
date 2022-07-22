@@ -24,26 +24,28 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TrajectoryGuidanceVF : MonoBehaviour
 {
+    [Header("Transforms")]
     public Transform subject;
+
+    [Header("Virtual Fixture")]
     public Transform Trajectory;
-
-    [Range(0,10000000000000000)]
-    public float viscousCoefficient = 1;
-
-    [SerializeField]
-    float maxForce = 100;
+    [Range(0,5f)]
+    public float gain = 3;
 
 
+    [Header("Graphics")]
+    public bool graphics = true;
+    [Range(0,0.001f)]
+    public float graphicVectorGain = 1;
+
+    [Header("Output")]
     Vector3 closest;
     public Vector3 velocity;
     public Vector3 deviation;
     public  Vector3 force;
     public float f_mag;
     public Vector3 f_dir; 
-    [SerializeField]
-    bool graphics = true;
-    [Range(0,5)]
-    public float graphicVectorGain = 1;
+
 
     void Start()
     {
@@ -71,19 +73,14 @@ public class TrajectoryGuidanceVF : MonoBehaviour
             } 
         }
         deviation = closest - subject.position;
-        Debug.Log(deviation);
 
         // VELOCITY
         velocity = subject.GetComponent<Velocity>().velocity;
 
         // FORCE
-        float b = viscousCoefficient*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
+        float b = gain*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
         f_mag = b*velocity.magnitude;
-        // Debug.Log(velocity.magnitude);
-        if (f_mag > maxForce) {
-            f_mag = maxForce;
-        }
-        // f_dir;
+
         if (Vector3.Dot(velocity.normalized, deviation.normalized)<0) { // When moving away
             f_dir = deviation.normalized;
         } else {  // When approaching
@@ -92,7 +89,6 @@ public class TrajectoryGuidanceVF : MonoBehaviour
                 Vector3.Cross(velocity.normalized,deviation.normalized)
                 )*velocity.normalized;  //Rotation Axis
         }
-
 
         force = f_mag*f_dir;
         if (graphics) {

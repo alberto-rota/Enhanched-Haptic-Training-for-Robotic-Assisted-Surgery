@@ -39,18 +39,18 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     // [Space(20)]
 
     [Header("Distance Map")]
-    [Range(0,100000f)]
-    public float gain = 0.001f;
+    [Range(0,5f)]
+    public float gain = 3;
     [Range(0,0.1f)]
     public float threshold = 0.002f;
     [Range(0,0.2f)]
     public float half = 0.002f;
-    [Range(0,10000)]
+    [Range(0,10000f)]
     public float slope = 1f;
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
-    [Range(0,5)]
+    [Range(0,0.001f)]
     public float graphicVectorGain = 1;
     public bool distanceGraphics = true;
 
