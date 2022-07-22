@@ -158,8 +158,8 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             Global.Arrow(ee, ee+va*graphicVectorGain, Color.green);
             // Global.Arrow(ee, ee+v*graphicVectorGain, Color.green);
             Global.Arrow(ee, ee+force*graphicVectorGain, Color.blue);
-            Debug.DrawLine(tp,tp+l,Color.white);
-            Debug.DrawLine(tp+l,tp+l+a,Color.white);
+            Debug.DrawLine(tp,tp+vl,Color.white);
+            Debug.DrawLine(tp+vl,tp+vl+va,Color.white);
         }
     }
     

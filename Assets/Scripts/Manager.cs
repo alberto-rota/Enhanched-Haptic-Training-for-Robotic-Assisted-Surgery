@@ -52,62 +52,62 @@ public class Manager : MonoBehaviour
 
         // Starts data logging when the R key is pressed
         if(Input.GetKeyDown(KeyCode.R)){    
-            if (robot.GetComponent<LogDataTraining1>() != null){
-                robot.GetComponent<LogDataTraining1>().enabled = !robot.GetComponent<LogDataTraining1>().enabled;
-                if (robot.GetComponent<LogDataTraining1>().enabled) robot.GetComponent<LogDataTraining1>().Start();
-            }else if (robot.GetComponent<LogDataTraining2>() != null){
-                robot.GetComponent<LogDataTraining2>().enabled = !robot.GetComponent<LogDataTraining2>().enabled;
-                if (robot.GetComponent<LogDataTraining2>().enabled) robot.GetComponent<LogDataTraining2>().Start();
-            }else if (robot.GetComponent<LogDataTraining3>() != null){
-                robot.GetComponent<LogDataTraining3>().enabled = !robot.GetComponent<LogDataTraining3>().enabled;
-                if (robot.GetComponent<LogDataTraining3>().enabled) robot.GetComponent<LogDataTraining3>().Start();
-            }else if (robot.GetComponent<LogDataLiverResection>() != null){
-                robot.GetComponent<LogDataLiverResection>().enabled = !robot.GetComponent<LogDataLiverResection>().enabled;
-                if (robot.GetComponent<LogDataLiverResection>().enabled) robot.GetComponent<LogDataLiverResection>().Start();
-            }else if (robot.GetComponent<LogDataThymectomy>() != null){
-                robot.GetComponent<LogDataThymectomy>().enabled = !robot.GetComponent<LogDataThymectomy>().enabled;
-                if (robot.GetComponent<LogDataThymectomy>().enabled) robot.GetComponent<LogDataThymectomy>().Start();
-            }else if (robot.GetComponent<LogDataNephrectomy>() != null){
-                robot.GetComponent<LogDataNephrectomy>().enabled = !robot.GetComponent<LogDataNephrectomy>().enabled;
-                if (robot.GetComponent<LogDataNephrectomy>().enabled) robot.GetComponent<LogDataNephrectomy>().Start();
+            if (gameObject.GetComponent<LogDataTraining1>() != null){
+                gameObject.GetComponent<LogDataTraining1>().enabled = !gameObject.GetComponent<LogDataTraining1>().enabled;
+                if (gameObject.GetComponent<LogDataTraining1>().enabled) gameObject.GetComponent<LogDataTraining1>().Start();
+            }else if (gameObject.GetComponent<LogDataTraining2>() != null){
+                gameObject.GetComponent<LogDataTraining2>().enabled = !gameObject.GetComponent<LogDataTraining2>().enabled;
+                if (gameObject.GetComponent<LogDataTraining2>().enabled) gameObject.GetComponent<LogDataTraining2>().Start();
+            }else if (gameObject.GetComponent<LogDataTraining3>() != null){
+                gameObject.GetComponent<LogDataTraining3>().enabled = !gameObject.GetComponent<LogDataTraining3>().enabled;
+                if (gameObject.GetComponent<LogDataTraining3>().enabled) gameObject.GetComponent<LogDataTraining3>().Start();
+            }else if (gameObject.GetComponent<LogDataLiverResection>() != null){
+                gameObject.GetComponent<LogDataLiverResection>().enabled = !gameObject.GetComponent<LogDataLiverResection>().enabled;
+                if (gameObject.GetComponent<LogDataLiverResection>().enabled) gameObject.GetComponent<LogDataLiverResection>().Start();
+            }else if (gameObject.GetComponent<LogDataThymectomy>() != null){
+                gameObject.GetComponent<LogDataThymectomy>().enabled = !gameObject.GetComponent<LogDataThymectomy>().enabled;
+                if (gameObject.GetComponent<LogDataThymectomy>().enabled) gameObject.GetComponent<LogDataThymectomy>().Start();
+            }else if (gameObject.GetComponent<LogDataNephrectomy>() != null){
+                gameObject.GetComponent<LogDataNephrectomy>().enabled = !gameObject.GetComponent<LogDataNephrectomy>().enabled;
+                if (gameObject.GetComponent<LogDataNephrectomy>().enabled) gameObject.GetComponent<LogDataNephrectomy>().Start();
             }
 
-            if (robot.GetComponent<LogDataTraining1>().enabled) {
+            if (gameObject.GetComponent<LogDataTraining1>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (robot.GetComponent<LogDataTraining2>().enabled) {
+            if (gameObject.GetComponent<LogDataTraining2>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (robot.GetComponent<LogDataTraining3>().enabled) {
+            if (gameObject.GetComponent<LogDataTraining3>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (robot.GetComponent<LogDataThymectomy>().enabled) {
+            if (gameObject.GetComponent<LogDataThymectomy>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (robot.GetComponent<LogDataNephrectomy>().enabled) {
+            if (gameObject.GetComponent<LogDataNephrectomy>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (robot.GetComponent<LogDataLiverResection>().enabled) {
+            if (gameObject.GetComponent<LogDataLiverResection>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {

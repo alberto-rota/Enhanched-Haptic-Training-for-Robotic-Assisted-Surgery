@@ -24,8 +24,8 @@ public class LogDataThymectomy : MonoBehaviour
 {
 
     public List<MonoBehaviour> activeConstraints;
-    // public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Thymectomy";
-    public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\Thymectomy";
+    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Thymectomy";
+    // public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\Thymectomy";
     string foldername;
     string folderpath;
     string path;
@@ -43,8 +43,13 @@ public class LogDataThymectomy : MonoBehaviour
     public void Start() {
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
-        foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {
-            if (s.GetType().Name != "LogData" && s.enabled == true) {
+        foreach (MonoBehaviour s in GameObject.Find("ROBOT").GetComponents<MonoBehaviour>()) {
+            if ((s.GetType().Name == "ConeApproachGuidanceVF"||
+                 s.GetType().Name == "TrajectoryGuidanceVF"||
+                 s.GetType().Name == "ObstacleAvoidanceForceFieldVF"||
+                 s.GetType().Name == "SurfaceGuidanceVF"||
+                 s.GetType().Name == "SurfaceAvoidanceVF")
+             && s.enabled == true) {
                 activeConstraints.Add(s);
             }
         }   
@@ -57,7 +62,7 @@ public class LogDataThymectomy : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy(saveTo+"\\ThymectomyPostOriginal.m", folderpath+"\\ThymectomyPost.m");
+        File.Copy(saveTo+"\\Training2PostOriginal.m", folderpath+"\\Training2Post.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {

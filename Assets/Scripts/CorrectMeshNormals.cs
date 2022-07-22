@@ -7,7 +7,7 @@ public class CorrectMeshNormals : MonoBehaviour
 {
     
     [Range(0,0.01f)]
-    public float normalVectorsLength = 0.002;
+    public float normalVectorsLength = 0.002f;
     Transform surface;
     public List<Vector3> surfacePoints;
     public List<Vector3> surfaceNormals;
