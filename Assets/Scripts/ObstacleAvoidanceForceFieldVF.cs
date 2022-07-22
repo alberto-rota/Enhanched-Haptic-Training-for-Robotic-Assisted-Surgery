@@ -33,7 +33,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     [Header("Mesh")]
     public List<Vector3> obstaclePoints;
-    public List<Vector3> surfaceNormals;
+    public List<Vector3> obstacleNormals;
     public Material materialown;
     public Material materialhit;
     // [Space(20)]
@@ -74,13 +74,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         materialown = obstacle.GetComponent<MeshRenderer>().sharedMaterial;
         materialhit = Resources.Load<Material>("Materials/ObstacleHit");
 
-        // Mesh surgicalMesh;
-        // surgicalMesh = obstacle.GetComponent<MeshFilter>().sharedMesh;
-        // Vector3[] meshVertices = surgicalMesh.vertices;
-        // Vector3[] meshNormals = surgicalMesh.normals;
-
-        obstaclePoints = obstacle.GetComponent<CheckMeshNormals>().surfacePoints;
-        surfaceNormals = obstacle.GetComponent<CheckMeshNormals>().surfaceNormals;
+        obstaclePoints = obstacle.GetComponent<CorrectMeshNormals>().surfacePoints;
+        obstacleNormals = obstacle.GetComponent<CorrectMeshNormals>().surfaceNormals;
     }
 
     void Update()
@@ -94,7 +89,6 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             half = gameObject.GetComponent<OVF_UniversalParameters>().half;
             slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
         }
-        Vector3 lastforceoutside=Vector3.zero;
         if (obstaclePoints.Count<=0) {
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE'"+
              "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
@@ -121,17 +115,16 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             }
         }   
         closestPcom=closestPcom/n_close;
-
-        Vector3 f_dir = (subject.position-closestPcom).normalized;
-        float f_mag = gain*Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
-        
         dist = Vector3.Distance(closestP, subject.position);
         distMapped = Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
-        // Debug.Log(f_mag);
+
+        Vector3 f_dir = (subject.position-closestPcom).normalized;
+        float f_mag = gain*distMapped;
+        
 
         if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
-            // Global.Arrow(subject.position, closestPcom, Color.yellow);
+            Global.Arrow(subject.position, closestPcom, Color.yellow);
         }
         if (distanceGraphics) {
             Vector3 conj = (subject.position-closestPcom).normalized;
@@ -142,15 +135,10 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         }
         force = f_mag*f_dir;
 
-        // if (dist < threshold) {
-        // Global.Arrow(subject.position, closestP, Color.white);
-        // Global.Arrow(closestP, closestP+surfaceNormals[idx_closest]*0.2f, Color.magenta);
-
         // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-subject.position, surfaceNormals[idx_closest])>=0 || dist < threshold) {
-            force=gain*surfaceNormals[idx_closest];
+        if (Vector3.Dot(closestP-subject.position, obstacleNormals[idx_closest])>=0 || dist < threshold) {
+            force=gain*obstacleNormals[idx_closest];
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
-        // }
         } else {
             obstacle.GetComponent<MeshRenderer>().material = materialown;
         }

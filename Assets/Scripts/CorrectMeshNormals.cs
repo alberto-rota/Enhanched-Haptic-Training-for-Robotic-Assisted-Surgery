@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class CheckMeshNormals : MonoBehaviour
+public class CorrectMeshNormals : MonoBehaviour
 {
     
     [Range(0,1  )]
@@ -11,6 +11,8 @@ public class CheckMeshNormals : MonoBehaviour
     Transform surface;
     public List<Vector3> surfacePoints;
     public List<Vector3> surfaceNormals;
+    
+    public bool invert = false;
 
     void Awake()
     {
@@ -40,7 +42,7 @@ public class CheckMeshNormals : MonoBehaviour
         for (int i = 0; i < surfacePoints.Count; i++){
             List<int> sameV = new List<int>();
             Vector3 averageNormal = Vector3.zero;
-            for (int j = 0; j < surfacePoints.Count; j++){
+            for (int j = i; j < surfacePoints.Count; j++){
                 if (surfacePoints[i] == surfacePoints[j]){
                     averageNormal += surfaceNormals[j];
                     sameV.Add(j);
@@ -54,6 +56,11 @@ public class CheckMeshNormals : MonoBehaviour
             }
         }
 
+        if (invert) {
+            for (int i = 0; i < surfaceNormals.Count; i++) {
+                surfaceNormals[i] = -surfaceNormals[i];
+            }
+        }
         // for (int i = 0; i < surfaceNormals.Count-NperV; i+=NperV){
         //     for (int j = 0; j < NperV; j++){    
         //         averageNormal += surfaceNormals[i+j];

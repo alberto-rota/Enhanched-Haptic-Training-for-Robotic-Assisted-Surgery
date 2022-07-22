@@ -24,22 +24,39 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SurfaceGuidanceVF : MonoBehaviour
 {
+    [Header("Transforms")]
     public Transform subject;
     public Transform surface;
+
+    [Header("Mesh")]
     public List<Vector3> surfacePoints;
-    List<Vector3> surfaceNormals;
-    [Range(0,100)]
-    public float gamma = 1; 
-    public float distance10Perc;
-    [Range(0,100)]
-    public float forceOnSurface = 1;
-    public float maxForce=100;
-    public Vector3 force;
-    public bool graphics = true;
-    // [Range(0,1  )]
-    // public float normalVectorsLength = 0;
+    public List<Vector3> surfaceNormals;
+
+    [Header("Distance Map")]
+    [Range(0,100000f)]
+    public float gain = 0.001f;
+    [Range(0,0.1f)]
+    public float threshold = 0.002f;
+    [Range(0,0.2f)]
+    public float half = 0.002f;
+    [Range(0,10000)]
+    public float slope = 1f;
+
+    [Header("Graphics")]
+    public bool vectorsGraphics = true;
     [Range(0,5)]
     public float graphicVectorGain = 1;
+    public bool distanceGraphics = true;
+
+    
+    [Header("Output")]
+    public Vector3 force;
+    public float forceMagnitude;
+    public Vector3 closestPcom = Vector3.zero;
+    public Vector3 closestP = Vector3.zero;
+    public float dist;
+    public float distMapped;
+
     Material colorok;
     Material colorred;
     Vector3 tool;
@@ -49,70 +66,88 @@ public class SurfaceGuidanceVF : MonoBehaviour
         if (subject == null) {
             subject = GameObject.Find(Global.tooltip_path).transform;
         }
-        surfacePoints = new List<Vector3>();
-        surfaceNormals= new List<Vector3>();
+
         colorok = Resources.Load<Material>("Materials/SurfaceGreen");
         colorred = Resources.Load<Material>("Materials/SurfaceRed");
 
-        Mesh surgicalMesh;
-        surgicalMesh = surface.GetComponent<MeshFilter>().sharedMesh;   
-        Vector3[] meshVertices = surgicalMesh.vertices;
-        Vector3[] meshNormals = surgicalMesh.normals;
-        
-        for (var i = 0; i < meshVertices.Length; i++){
-            surfacePoints.Add(surface.TransformPoint(meshVertices[i]));
-            surfaceNormals.Add(surface.TransformDirection(meshNormals[i]));
-        }
+        surfacePoints = surface.GetComponent<CorrectMeshNormals>().surfacePoints;
+        surfaceNormals = surface.GetComponent<CorrectMeshNormals>().surfaceNormals;
+
     }
 
     void Update()
     {
-        tool = subject.position;
-        if (surfacePoints.Count<=0) {
-            Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE' in 
-            the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
-            return;
+        if (half < 0 ) {half=0;}
+        if (slope < 1/half) {slope=1/half;}
+
+        if (gameObject.GetComponent<OVF_UniversalParameters>() != null) {
+            gain = gameObject.GetComponent<OVF_UniversalParameters>().gain;
+            threshold = gameObject.GetComponent<OVF_UniversalParameters>().threshold;
+            half = gameObject.GetComponent<OVF_UniversalParameters>().half;
+            slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
         }
-        distance10Perc = -Mathf.Log(0.1f)/gamma;
-        float mindist = 100000;
-        Vector3 closestP = Vector3.zero;
-        int idx_closest=0;
-        int j=0;
-        foreach (Vector3 p in surfacePoints) {
-            float d = Vector3.Distance(p, tool);
-            if (d < mindist) {
-                mindist = d;
-                closestP = p;
-                idx_closest=j;
-            }
-            j++;
+        if (surfacePoints.Count<=0) {
+            Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE'"+
+             "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
         }
         
-        float f_mag = forceOnSurface*(1-Mathf.Exp(-Mathf.Pow(mindist,8)/gamma));
-        Vector3 f_dir = surfaceNormals[idx_closest];
-        force = f_mag*f_dir.normalized;
-        if (f_mag > maxForce) {
-            f_mag = maxForce;
+        int n_close = 0;
+        closestPcom = Vector3.zero;
+        closestP = Vector3.zero;
+        int idx_closest = 0;
+        force = Vector3.zero;
+        float mind = 1000;
+
+        foreach (Vector3 p in surfacePoints) {
+            float d = Vector3.Distance(p, subject.position);
+            float dcom = threshold+half+5/slope;
+            if (d <= dcom) {
+                closestPcom = closestPcom + p;
+                n_close++;
+            }
+            if (d < mind) {
+                mind = d;
+                closestP = p;
+                idx_closest = surfacePoints.IndexOf(p);
+            }
+        }   
+        closestPcom=closestPcom/n_close;
+        if (float.IsNaN(closestPcom.x)) {
+            closestPcom = closestP;
         }
 
-        // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(tool-closestP,surfaceNormals[idx_closest])>=0) {
+        dist = Vector3.Distance(closestP, subject.position);
+        distMapped = Global.DistMapAttraction(Vector3.Distance(closestP, subject.position), threshold, half, slope);
+
+        Vector3 f_dir = -(subject.position-closestPcom).normalized;
+        float f_mag = gain*distMapped;
+        
+
+        if (vectorsGraphics) {
+            Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
+            Global.Arrow(subject.position, closestPcom, Color.yellow);
+        }
+        if (distanceGraphics) {
+            Vector3 conj = (subject.position-closestPcom).normalized;
+            Debug.DrawLine(closestPcom,closestPcom+conj*threshold+conj*half-conj/slope, Color.green);
+            Global.Arrow(  closestPcom+conj*threshold-conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
+            Global.Arrow(  closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
+            Debug.DrawLine(closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.red);
+        }
+        force = f_mag*f_dir;
+
+        // CHECHING IF EE IS INSIDE THE SURFACE
+        if (Vector3.Dot(closestP-subject.position, surfaceNormals[idx_closest])<=0 || dist < threshold) {
+            force=Vector3.zero;
+            // surface.GetComponent<MeshRenderer>().material = colorok;
+        } 
+        if (dist > threshold+half+5/slope) {
             surface.GetComponent<MeshRenderer>().material = colorred;
-        } else {    
+        }else{
             surface.GetComponent<MeshRenderer>().material = colorok;
         }
 
-        if (graphics) {
-            Global.Arrow(tool, closestP, Color.red);
-            Global.Arrow(tool, tool+force*graphicVectorGain, Color.blue);
-        }
-
-        // DRAWING MESH NORMALS [DEPRECATED]
-        // if (normalVectorsLength > 0 && graphics) {
-        //     for (int i = 0; i<surfaceNormals.Count; i++) {
-        //         Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength);
-        //     }
-        // }
+        // CleanUp and Loggings
+        forceMagnitude = force.magnitude;
     }
-    
 }
