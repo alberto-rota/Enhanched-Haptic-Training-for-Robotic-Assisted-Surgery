@@ -65,6 +65,17 @@ public class LogDataTraining2 : MonoBehaviour
         File.Copy(saveTo+"\\Training2PostOriginal.m", folderpath+"\\Training2Post.m");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
+        path = folderpath+"\\"+foldername+"_scenetransform.csv";
+        Matrix4x4 sceneTransform = GameObject.Find("ROBOT").transform.worldToLocalMatrix;
+        FileStream streamtransf = new FileStream(path, FileMode.Append);  
+        using (StreamWriter writer = new StreamWriter(streamtransf))  
+        {  
+            writer.Write(sceneTransform.m00.ToString()+",");writer.Write(sceneTransform.m01.ToString()+",");writer.Write(sceneTransform.m02.ToString()+",");writer.Write(sceneTransform.m03.ToString()+",\n");
+            writer.Write(sceneTransform.m10.ToString()+",");writer.Write(sceneTransform.m11.ToString()+",");writer.Write(sceneTransform.m12.ToString()+",");writer.Write(sceneTransform.m13.ToString()+",\n");
+            writer.Write(sceneTransform.m20.ToString()+",");writer.Write(sceneTransform.m21.ToString()+",");writer.Write(sceneTransform.m22.ToString()+",");writer.Write(sceneTransform.m23.ToString()+",\n");
+            writer.Write(sceneTransform.m30.ToString()+",");writer.Write(sceneTransform.m31.ToString()+",");writer.Write(sceneTransform.m32.ToString()+",");writer.Write(sceneTransform.m33.ToString()+",\n");
+        }
+
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
             for (int j=0; j<gameObject.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_traj"+j+".csv";
