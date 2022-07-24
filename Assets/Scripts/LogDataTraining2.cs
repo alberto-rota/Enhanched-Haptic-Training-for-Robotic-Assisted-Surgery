@@ -23,9 +23,10 @@ using UnityEngine.SceneManagement;
 public class LogDataTraining2 : MonoBehaviour
 {
 
+    string TASKNAME = "Training2";
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2";
-    // public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\Training2";
+    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\";
+    // public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\";
     string foldername;
     string folderpath;
     string path;
@@ -41,6 +42,8 @@ public class LogDataTraining2 : MonoBehaviour
     }
 
     public void Start() {
+        // saveTo += TASKNAME;
+
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in GameObject.Find("ROBOT").GetComponents<MonoBehaviour>()) {
@@ -62,12 +65,11 @@ public class LogDataTraining2 : MonoBehaviour
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy(saveTo+"\\Training2PostOriginal.m", folderpath+"\\Training2Post.m");
+        File.Copy(saveTo+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
-        Matrix4x4 sceneTransform = GameObject.Find("Training2").transform.worldToLocalMatrix;
-        Debug.Log(sceneTransform);
+        Matrix4x4 sceneTransform = GameObject.Find(TASKNAME).transform.worldToLocalMatrix;
         FileStream streamtransf = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamtransf))  
         {  
@@ -168,7 +170,6 @@ public class LogDataTraining2 : MonoBehaviour
         }
 
         path = folderpath+"\\"+foldername+"_VFs.csv";
-        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
         {  

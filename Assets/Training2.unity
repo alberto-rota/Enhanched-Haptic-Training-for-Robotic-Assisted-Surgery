@@ -1451,13 +1451,29 @@ GameObject:
   - component: {fileID: 6726867284680781887}
   - component: {fileID: 4307984944089931020}
   - component: {fileID: 669019734833073822}
+  - component: {fileID: 669019734833073818}
   m_Layer: 0
-  m_Name: Torus.003
+  m_Name: Ring3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &669019734833073818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669019734833073817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!114 &669019734833073822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37917,13 +37933,29 @@ GameObject:
   - component: {fileID: 8089010945212905002}
   - component: {fileID: 5539017699992612919}
   - component: {fileID: 1564513446065720296}
+  - component: {fileID: 1564513446065720300}
   m_Layer: 0
-  m_Name: Torus.001
+  m_Name: Ring1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1564513446065720300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564513446065720299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &1573294129263366110
 GameObject:
   m_ObjectHideFlags: 0
@@ -43373,13 +43405,29 @@ GameObject:
   - component: {fileID: 5251433606781192542}
   - component: {fileID: 1599406644687155174}
   - component: {fileID: 2912850400392793052}
+  - component: {fileID: 2912850400392793056}
   m_Layer: 0
-  m_Name: Torus.002
+  m_Name: Ring2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2912850400392793056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2912850400392793055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &2916268749213755684
 Transform:
   m_ObjectHideFlags: 0
@@ -43757,6 +43805,7 @@ GameObject:
   - component: {fileID: 3205126565570240339}
   - component: {fileID: 3205126565570240338}
   - component: {fileID: 3205126565570240343}
+  - component: {fileID: 3205126565570240334}
   m_Layer: 0
   m_Name: Subject
   m_TagString: Untagged
@@ -43778,6 +43827,21 @@ Transform:
   m_Father: {fileID: 2823146657342622875}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -51.645, y: 0, z: 0}
+--- !u!114 &3205126565570240334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205126565570240332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!136 &3205126565570240336
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -53720,13 +53784,29 @@ GameObject:
   - component: {fileID: 1426996390341270656}
   - component: {fileID: 1996276081156964966}
   - component: {fileID: 8727118798875464524}
+  - component: {fileID: 8727118798875464528}
   m_Layer: 0
-  m_Name: Torus.004
+  m_Name: Ring4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8727118798875464528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727118798875464527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!23 &8756587379327663480
 MeshRenderer:
   m_ObjectHideFlags: 0

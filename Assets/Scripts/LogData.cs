@@ -20,12 +20,12 @@ using System.IO;
 using UnityEngine.SceneManagement;
 
 
-public class LogDataTraining1 : MonoBehaviour
+public class LogData : MonoBehaviour
 {
 
-    string TASKNAME = "Training1";
+    public string TASKNAME;
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data\";
+    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data";
     // public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\";
     string foldername;
     string folderpath;
@@ -42,7 +42,7 @@ public class LogDataTraining1 : MonoBehaviour
     }
 
     public void Start() {
-        // saveTo += TASKNAME;
+        TASKNAME = SceneManager.GetActiveScene().name;
 
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
@@ -58,14 +58,14 @@ public class LogDataTraining1 : MonoBehaviour
         }   
 
         // Creates the UNIQUE folder to save the logs
-        foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo);
-        folderpath = saveTo+"\\"+foldername;
+        foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
+        folderpath = saveTo+"\\"+TASKNAME+"\\"+foldername;
 
         // Creates the folder
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy(saveTo+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
+        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
