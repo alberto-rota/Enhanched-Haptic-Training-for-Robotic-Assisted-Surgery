@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44386777, g: 0.49323726, b: 0.5727352, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 698030341822314588, guid: cdc4cbcd7f691cc4d8b394b7611862e3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7504339976862235407, guid: cdc4cbcd7f691cc4d8b394b7611862e3, type: 3}
       propertyPath: m_Name
       value: Manager
@@ -11460,6 +11464,7 @@ GameObject:
   - component: {fileID: 4627538814916679299}
   - component: {fileID: 8540522624227195805}
   - component: {fileID: 5259880145917163755}
+  - component: {fileID: 5100553761069452504}
   m_Layer: 0
   m_Name: Kidney.r_grp1.712
   m_TagString: Untagged
@@ -11467,6 +11472,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5100553761069452504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5100553761069452503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\User\Desktop\AR\Nephrectomy\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!33 &5128902913143221542
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -31024,12 +31044,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeConstraints:
   - {fileID: 6210097205200731356}
-  totalForce: {x: 0, y: 0, z: 0}
-  totalForceMagnitude: 0
-  graphics: 1
   minForce: 0
   maxForce: 3
-  graphicVectorGain: 1
+  damp: 1.5
+  totalForce: {x: 0, y: 0, z: 0}
+  totalForceMagnitude: 0
 --- !u!114 &6210097205200731350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31060,6 +31079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
+  forceOverride: 0
 --- !u!4 &6210097205200731352
 Transform:
   m_ObjectHideFlags: 0
@@ -31127,18 +31147,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a49938f2e7cf714a90bc25ba5a2fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configuring: 0
+  subject: {fileID: 373431045142600540}
   target: {fileID: 7047454086635890896}
-  coneApertureDegrees: 10
+  configuring: 0
+  coneApertureDegrees: 4.5
   dampInsideOfCone: 0.04
   gainOutsideOfCone: 1
-  delta: {x: 0.03832507, y: -0.08994113, z: 0.16842628}
-  maxForce: 3
-  force: {x: -0, y: -0, z: -0}
+  relaxDistance: 8
   graphics: 1
   graphicVectorGain: 1
-  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   coneResolution: 10
+  force: {x: -0, y: -0, z: -0}
+  forceMagnitude: 0
+  delta: {x: 0.02566874, y: -0.06695813, z: 0.12624621}
+  color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6210097205201243985
 GameObject:
   m_ObjectHideFlags: 0
@@ -33316,8 +33338,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2448781440608003329}
   m_LocalRotation: {x: -0, y: -0.9951379, z: -0, w: 0.098491594}
-  m_LocalPosition: {x: -1.4598, y: -0.0475, z: -3.1131}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.4732, y: -0.024517, z: -3.159}
+  m_LocalScale: {x: 0.73838, y: 0.73838, z: 0.73838}
   m_Children:
   - {fileID: 3382376168329181669}
   - {fileID: 3382376167699111993}

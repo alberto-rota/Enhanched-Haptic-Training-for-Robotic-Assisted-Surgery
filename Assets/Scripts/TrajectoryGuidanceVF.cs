@@ -29,7 +29,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
 
     [Header("Virtual Fixture")]
     public Transform Trajectory;
-    [Range(0,5f)]
+    [Range(0,100f)]
     public float gain = 3;
 
 
@@ -92,7 +92,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
 
         force = f_mag*f_dir;
         if (graphics) {
-            Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain*1e15f, Color.green);
+            Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
             Global.Arrow(subject.position, closest, Color.red);
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }

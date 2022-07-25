@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44386777, g: 0.49323726, b: 0.5727352, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -565,7 +565,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2379799319638724443, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
 --- !u!4 &910122528 stripped
 Transform:
@@ -584,13 +585,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914365877}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac1b8b010e3f834e8b4a58e09f6ff92, type: 3}
+  m_Script: {fileID: 11500000, guid: c8b5e11b450b8b74383365ab1fef2075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TASKNAME: 
   activeConstraints: []
-  saveTo: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2
+  saveTo: C:\Users\User\Desktop\AR
 --- !u!1 &915295066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 218409658152625845, guid: 0169708582f47e25680b3d2df6485c17, type: 3}
@@ -1468,10 +1470,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 669019734833073817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  folderpath: C:\Users\User\Desktop\AR\Training2\SCENESTLS
   surfacePoints: []
   surfaceNormals: []
 --- !u!114 &669019734833073822
@@ -21853,7 +21855,6 @@ MonoBehaviour:
   - {fileID: 754332632277879728}
   minForce: 0
   maxForce: 3
-  graphicVectorGain: 1
   damp: 1.5
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
@@ -21916,7 +21917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ea858067f28f42830a0557b8cbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IPAddress: 127.0.0.1
+  IPAddress: 192.168.1.2
   Port: 9090
 --- !u!4 &754332632277879725
 Transform:
@@ -21988,7 +21989,7 @@ MonoBehaviour:
   subject: {fileID: 6446883657945312297}
   target: {fileID: 3205126565570240333}
   configuring: 0
-  coneApertureDegrees: 3.3
+  coneApertureDegrees: 4
   dampInsideOfCone: 0.02
   gainOutsideOfCone: 1
   relaxDistance: 8
@@ -37950,10 +37951,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1564513446065720299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  folderpath: C:\Users\User\Desktop\AR\Training2\SCENESTLS
   surfacePoints: []
   surfaceNormals: []
 --- !u!1 &1573294129263366110
@@ -43422,10 +43423,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2912850400392793055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  folderpath: C:\Users\User\Desktop\AR\Training2\SCENESTLS
   surfacePoints: []
   surfaceNormals: []
 --- !u!4 &2916268749213755684
@@ -43664,6 +43665,7 @@ GameObject:
   - component: {fileID: 3205126564759372609}
   - component: {fileID: 3205126564759372608}
   - component: {fileID: 3205126564759372612}
+  - component: {fileID: 3205126564759372613}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -43701,6 +43703,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3205126564759372613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205126564759372610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: C:\Users\User\Desktop\AR\Training2\SCENESTLS
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!23 &3205126564759372614
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43805,7 +43822,6 @@ GameObject:
   - component: {fileID: 3205126565570240339}
   - component: {fileID: 3205126565570240338}
   - component: {fileID: 3205126565570240343}
-  - component: {fileID: 3205126565570240334}
   m_Layer: 0
   m_Name: Subject
   m_TagString: Untagged
@@ -43827,21 +43843,6 @@ Transform:
   m_Father: {fileID: 2823146657342622875}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -51.645, y: 0, z: 0}
---- !u!114 &3205126565570240334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3205126565570240332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
-  surfacePoints: []
-  surfaceNormals: []
 --- !u!136 &3205126565570240336
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -53801,10 +53802,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8727118798875464527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c116175cd0893fc439f907e8a923b2f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  folderpath: C:\Users\alber\Desktop\Active_Constraints\Task_Data\Training2\SCENESTLS
+  folderpath: C:\Users\User\Desktop\AR\Training2\SCENESTLS
   surfacePoints: []
   surfaceNormals: []
 --- !u!23 &8756587379327663480

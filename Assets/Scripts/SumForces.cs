@@ -27,8 +27,6 @@ public class SumForces : MonoBehaviour
     public float minForce = 0f;
     [Range(0,5f)]
     public float maxForce = 3f;
-    [Range(0,0.001f)]
-    public float graphicVectorGain = 1;
 
     [Header("Damp")]
     [Range(0,10f)]

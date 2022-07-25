@@ -25,7 +25,7 @@ public class LogData : MonoBehaviour
 
     public string TASKNAME;
     public List<MonoBehaviour> activeConstraints;
-    public string saveTo = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data";
+    public string saveTo; // = @"C:\Users\alber\Desktop\Active_Constraints\Task_Data";
     // public string saveTo = @"C:\Users\User\Desktop\Alberto_Rota_MScThesis\Task_Data\";
     string foldername;
     string folderpath;

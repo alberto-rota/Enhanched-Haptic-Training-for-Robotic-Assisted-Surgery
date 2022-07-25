@@ -22,7 +22,10 @@ namespace RosSharp.RosBridgeClient{
 
 public class Manager : MonoBehaviour
 {
-    void Start() {}
+    void Start() {
+        gameObject.GetComponent<LogData>().enabled = false;
+        GameObject.Find("ROBOT").GetComponent<SumForces>().enabled = false;
+    }
 
     void Update()
     {
@@ -52,68 +55,68 @@ public class Manager : MonoBehaviour
 
         // Starts data logging when the R key is pressed
         if(Input.GetKeyDown(KeyCode.R)){    
-            if (gameObject.GetComponent<LogDataTraining1>() != null){
-                gameObject.GetComponent<LogDataTraining1>().enabled = !gameObject.GetComponent<LogDataTraining1>().enabled;
-                if (gameObject.GetComponent<LogDataTraining1>().enabled) gameObject.GetComponent<LogDataTraining1>().Start();
-            }else if (gameObject.GetComponent<LogDataTraining2>() != null){
-                gameObject.GetComponent<LogDataTraining2>().enabled = !gameObject.GetComponent<LogDataTraining2>().enabled;
-                if (gameObject.GetComponent<LogDataTraining2>().enabled) gameObject.GetComponent<LogDataTraining2>().Start();
-            }else if (gameObject.GetComponent<LogDataTraining3>() != null){
-                gameObject.GetComponent<LogDataTraining3>().enabled = !gameObject.GetComponent<LogDataTraining3>().enabled;
-                if (gameObject.GetComponent<LogDataTraining3>().enabled) gameObject.GetComponent<LogDataTraining3>().Start();
-            }else if (gameObject.GetComponent<LogDataLiverResection>() != null){
-                gameObject.GetComponent<LogDataLiverResection>().enabled = !gameObject.GetComponent<LogDataLiverResection>().enabled;
-                if (gameObject.GetComponent<LogDataLiverResection>().enabled) gameObject.GetComponent<LogDataLiverResection>().Start();
-            }else if (gameObject.GetComponent<LogDataThymectomy>() != null){
-                gameObject.GetComponent<LogDataThymectomy>().enabled = !gameObject.GetComponent<LogDataThymectomy>().enabled;
-                if (gameObject.GetComponent<LogDataThymectomy>().enabled) gameObject.GetComponent<LogDataThymectomy>().Start();
-            }else if (gameObject.GetComponent<LogDataNephrectomy>() != null){
-                gameObject.GetComponent<LogDataNephrectomy>().enabled = !gameObject.GetComponent<LogDataNephrectomy>().enabled;
-                if (gameObject.GetComponent<LogDataNephrectomy>().enabled) gameObject.GetComponent<LogDataNephrectomy>().Start();
+            if (gameObject.GetComponent<LogData>() != null){
+                gameObject.GetComponent<LogData>().enabled = !gameObject.GetComponent<LogData>().enabled;
+                if (gameObject.GetComponent<LogData>().enabled) gameObject.GetComponent<LogData>().Start();
+            // }else if (gameObject.GetComponent<LogDataTraining2>() != null){
+            //     gameObject.GetComponent<LogDataTraining2>().enabled = !gameObject.GetComponent<LogDataTraining2>().enabled;
+            //     if (gameObject.GetComponent<LogDataTraining2>().enabled) gameObject.GetComponent<LogDataTraining2>().Start();
+            // }else if (gameObject.GetComponent<LogDataTraining3>() != null){
+            //     gameObject.GetComponent<LogDataTraining3>().enabled = !gameObject.GetComponent<LogDataTraining3>().enabled;
+            //     if (gameObject.GetComponent<LogDataTraining3>().enabled) gameObject.GetComponent<LogDataTraining3>().Start();
+            // }else if (gameObject.GetComponent<LogDataLiverResection>() != null){
+            //     gameObject.GetComponent<LogDataLiverResection>().enabled = !gameObject.GetComponent<LogDataLiverResection>().enabled;
+            //     if (gameObject.GetComponent<LogDataLiverResection>().enabled) gameObject.GetComponent<LogDataLiverResection>().Start();
+            // }else if (gameObject.GetComponent<LogDataThymectomy>() != null){
+            //     gameObject.GetComponent<LogDataThymectomy>().enabled = !gameObject.GetComponent<LogDataThymectomy>().enabled;
+            //     if (gameObject.GetComponent<LogDataThymectomy>().enabled) gameObject.GetComponent<LogDataThymectomy>().Start();
+            // }else if (gameObject.GetComponent<LogDataNephrectomy>() != null){
+            //     gameObject.GetComponent<LogDataNephrectomy>().enabled = !gameObject.GetComponent<LogDataNephrectomy>().enabled;
+            //     if (gameObject.GetComponent<LogDataNephrectomy>().enabled) gameObject.GetComponent<LogDataNephrectomy>().Start();
             }
 
-            if (gameObject.GetComponent<LogDataTraining1>().enabled) {
+            if (gameObject.GetComponent<LogData>().enabled) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            if (gameObject.GetComponent<LogDataTraining2>().enabled) {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            }
-            if (gameObject.GetComponent<LogDataTraining3>().enabled) {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            }
-            if (gameObject.GetComponent<LogDataThymectomy>().enabled) {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            }
-            if (gameObject.GetComponent<LogDataNephrectomy>().enabled) {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            }
-            if (gameObject.GetComponent<LogDataLiverResection>().enabled) {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-                GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            }
+            // if (gameObject.GetComponent<LogDataTraining2>().enabled) {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            // } else {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            // }
+            // if (gameObject.GetComponent<LogDataTraining3>().enabled) {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            // } else {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            // }
+            // if (gameObject.GetComponent<LogDataThymectomy>().enabled) {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            // } else {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            // }
+            // if (gameObject.GetComponent<LogDataNephrectomy>().enabled) {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            // } else {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            // }
+            // if (gameObject.GetComponent<LogDataLiverResection>().enabled) {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            // } else {
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
+            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            // }
         }
 
         // Loads a scene of choice when the user presses the corresponding key

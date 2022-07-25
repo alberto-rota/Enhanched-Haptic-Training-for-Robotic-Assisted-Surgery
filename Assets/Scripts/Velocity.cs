@@ -39,7 +39,7 @@ public class Velocity : MonoBehaviour
 
     void FixedUpdate()
     {
-        NewPos = GameObject.Find(Global.tooltip_path).transform.position;  
+        NewPos = gameObject.transform.position;  
         velocity = (NewPos - PrevPos) / Time.fixedDeltaTime;  
         vf.Enqueue(velocity);  
         vf.Dequeue();  

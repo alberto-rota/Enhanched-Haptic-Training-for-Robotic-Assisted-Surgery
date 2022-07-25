@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6128448192796281981}
   - component: {fileID: 6128448192796281982}
+  - component: {fileID: 2379799319638724443}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -43,3 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae3f668d31a6f2419c6fe532be45928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2379799319638724443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128448192796281983}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b5e11b450b8b74383365ab1fef2075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TASKNAME: 
+  activeConstraints: []
+  saveTo: C:\Users\User\Desktop\AR
