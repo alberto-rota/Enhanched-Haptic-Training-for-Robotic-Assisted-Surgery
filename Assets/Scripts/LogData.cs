@@ -30,6 +30,7 @@ public class LogData : MonoBehaviour
     string foldername;
     string folderpath;
     string path;
+    GameObject robot;
 
     string GetUniqueName(string name, string folderPath) {
         string validatedName = name+"_0";
@@ -43,10 +44,11 @@ public class LogData : MonoBehaviour
 
     public void Start() {
         TASKNAME = SceneManager.GetActiveScene().name;
+        robot = GameObject.Find("ROBOT");
 
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
-        foreach (MonoBehaviour s in GameObject.Find("ROBOT").GetComponents<MonoBehaviour>()) {
+        foreach (MonoBehaviour s in robot.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "ConeApproachGuidanceVF"||
                  s.GetType().Name == "TrajectoryGuidanceVF"||
                  s.GetType().Name == "ObstacleAvoidanceForceFieldVF"||
@@ -69,6 +71,8 @@ public class LogData : MonoBehaviour
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
+
+        // Transform matrix
         Matrix4x4 sceneTransform = GameObject.Find(TASKNAME).transform.worldToLocalMatrix;
         FileStream streamtransf = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamtransf))  
@@ -79,15 +83,15 @@ public class LogData : MonoBehaviour
             writer.WriteLine(sceneTransform[3,0]+","+sceneTransform[3,1]+","+sceneTransform[3,2]+","+sceneTransform[3,3]);
         }
 
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<TrajectoryGuidanceVF>())) {
-            for (int j=0; j<GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>().Length; j++) {
+        if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
+            for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_traj"+j+".csv";
                 FileStream streamtraj = new FileStream(path, FileMode.Append);  
                 using (StreamWriter writer = new StreamWriter(streamtraj))  
                 {  
                     writer.Write("X,Y,Z,\n");
-                    for (int i=0; i<GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
-                        Vector3 point = GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().GetPosition(i);
+                    for (int i=0; i<robot.GetComponents<TrajectoryGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
+                        Vector3 point = robot.GetComponents<TrajectoryGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().GetPosition(i);
                         writer.Write(point.x.ToString()+",");
                         writer.Write(point.y.ToString()+",");
                         writer.Write(point.z.ToString()+",\n");
@@ -96,16 +100,16 @@ public class LogData : MonoBehaviour
             }
 
         }
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>())) {
-            for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
+        if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
+            for (int j=0; j<robot.GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_obst"+j+".csv";
                 FileStream streamtraj = new FileStream(path, FileMode.Append);  
                 using (StreamWriter writer = new StreamWriter(streamtraj))  
                 {  
                     writer.Write("X,Y,Z,\n");
-                    Mesh obst_mesh = GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.GetComponent<MeshFilter>().sharedMesh;
+                    Mesh obst_mesh = robot.GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.GetComponent<MeshFilter>().sharedMesh;
                     for (int i=0; i<obst_mesh.vertices.Length; i++) {
-                        Vector3 point = GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.transform.TransformPoint(obst_mesh.vertices[i]);
+                        Vector3 point = robot.GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.transform.TransformPoint(obst_mesh.vertices[i]);
                         writer.Write(point.x.ToString()+",");
                         writer.Write(point.y.ToString()+",");
                         writer.Write(point.z.ToString()+",\n");
@@ -113,16 +117,16 @@ public class LogData : MonoBehaviour
                 }
             }
         }
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceAvoidanceVF>())) {
-            for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>().Length; j++) {
+        if (activeConstraints.Contains(robot.GetComponent<SurfaceAvoidanceVF>())) {
+            for (int j=0; j<robot.GetComponents<SurfaceAvoidanceVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_surfavoid"+j+".csv";
                 FileStream streamtraj = new FileStream(path, FileMode.Append);  
                 using (StreamWriter writer = new StreamWriter(streamtraj))  
                 {  
                     writer.Write("X,Y,Z,\n");
-                    Mesh obst_mesh = GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>()[j].surface.GetComponent<MeshFilter>().sharedMesh;
+                    Mesh obst_mesh = robot.GetComponents<SurfaceAvoidanceVF>()[j].surface.GetComponent<MeshFilter>().sharedMesh;
                     for (int i=0; i<obst_mesh.vertices.Length; i++) {
-                        Vector3 point = GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>()[j].surface.transform.TransformPoint(obst_mesh.vertices[i]);
+                        Vector3 point = robot.GetComponents<SurfaceAvoidanceVF>()[j].surface.transform.TransformPoint(obst_mesh.vertices[i]);
                         writer.Write(point.x.ToString()+",");
                         writer.Write(point.y.ToString()+",");
                         writer.Write(point.z.ToString()+",\n");
@@ -130,16 +134,16 @@ public class LogData : MonoBehaviour
                 }
             }
         }
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceGuidanceVF>())) {
-            for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>().Length; j++) {
+        if (activeConstraints.Contains(robot.GetComponent<SurfaceGuidanceVF>())) {
+            for (int j=0; j<robot.GetComponents<SurfaceGuidanceVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_surfguide"+j+".csv";
                 FileStream streamtraj = new FileStream(path, FileMode.Append);  
                 using (StreamWriter writer = new StreamWriter(streamtraj))  
                 {  
                     writer.Write("X,Y,Z,\n");
-                    Mesh obst_mesh = GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>()[j].surface.GetComponent<MeshFilter>().sharedMesh;
+                    Mesh obst_mesh = robot.GetComponents<SurfaceGuidanceVF>()[j].surface.GetComponent<MeshFilter>().sharedMesh;
                     for (int i=0; i<obst_mesh.vertices.Length; i++) {
-                        Vector3 point = GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>()[j].surface.transform.TransformPoint(obst_mesh.vertices[i]);
+                        Vector3 point = robot.GetComponents<SurfaceGuidanceVF>()[j].surface.transform.TransformPoint(obst_mesh.vertices[i]);
                         writer.Write(point.x.ToString()+",");
                         writer.Write(point.y.ToString()+",");
                         writer.Write(point.z.ToString()+",\n");
@@ -147,14 +151,14 @@ public class LogData : MonoBehaviour
                 }
             }
         }
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>())) {
-            for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>().Length; j++) {
+        if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
+            for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
                 path = folderpath+"\\"+foldername+"_coneapproach"+j+".csv";
                 FileStream streamtraj = new FileStream(path, FileMode.Append);  
                 using (StreamWriter writer = new StreamWriter(streamtraj))  
                 {  
-                        Vector3 start = GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>()[j].target.position-GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>()[j].delta;
-                        Vector3 end = GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>()[j].target.position;
+                        Vector3 start = robot.GetComponents<ConeApproachGuidanceVF>()[j].target.position-robot.GetComponents<ConeApproachGuidanceVF>()[j].delta;
+                        Vector3 end = robot.GetComponents<ConeApproachGuidanceVF>()[j].target.position;
                         writer.Write("X,Y,Z,\n");
                         writer.Write(start.x.ToString()+",");
                         writer.Write(start.y.ToString()+",");
@@ -166,7 +170,7 @@ public class LogData : MonoBehaviour
                 }
             }
         }
-        if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SumForces>())) {
+        if (activeConstraints.Contains(robot.GetComponent<SumForces>())) {
         }
 
         path = folderpath+"\\"+foldername+"_VFs.csv";
@@ -179,43 +183,43 @@ public class LogData : MonoBehaviour
             writer.Write("PositionX,PositionY,PositionZ,");
 
             // VFs HEADERS
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<TrajectoryGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
                     writer.Write("TrajectoryGuidanceVF_X"+j+",");
                     writer.Write("TrajectoryGuidanceVF_Y"+j+",");
                     writer.Write("TrajectoryGuidanceVF_Z"+j+",");
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
+                for (int j=0; j<robot.GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
                     writer.Write("ObstacleAvoidanceForceFieldVF_X"+j+",");
                     writer.Write("ObstacleAvoidanceForceFieldVF_Y"+j+",");
                     writer.Write("ObstacleAvoidanceForceFieldVF_Z"+j+",");
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceAvoidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceAvoidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<SurfaceAvoidanceVF>().Length; j++) {
                     writer.Write("SurfaceAvoidanceVF_X"+j+",");
                     writer.Write("SurfaceAvoidanceVF_Y"+j+",");
                     writer.Write("SurfaceAvoidanceVF_Z"+j+",");
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceGuidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<SurfaceGuidanceVF>().Length; j++) {
                     writer.Write("SurfaceGuidanceVF_X"+j+",");
                     writer.Write("SurfaceGuidanceVF_Y"+j+",");
                     writer.Write("SurfaceGuidanceVF_Z"+j+",");
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
                     writer.Write("ConeApproachGuidanceVF_X"+j+",");
                     writer.Write("ConeApproachGuidanceVF_Y"+j+",");
                     writer.Write("ConeApproachGuidanceVF_Z"+j+",");
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SumForces>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SumForces>().Length; j++) {
+            if (activeConstraints.Contains(robot.GetComponent<SumForces>())) {
+                for (int j=0; j<robot.GetComponents<SumForces>().Length; j++) {
                     writer.Write("TotalForce_X"+j+",");
                     writer.Write("TotalForce_Y"+j+",");
                     writer.Write("TotalForce_Z"+j+",");
@@ -235,59 +239,63 @@ public class LogData : MonoBehaviour
             // Writes the current time since startup
             writer.Write(Time.realtimeSinceStartup); writer.Write(",");
 
-            // Writes the current position
-            writer.Write(GameObject.Find(Global.tooltip_path).transform.position.x); writer.Write(","); 
-            writer.Write(GameObject.Find(Global.tooltip_path).transform.position.y); writer.Write(","); 
-            writer.Write(GameObject.Find(Global.tooltip_path).transform.position.z); writer.Write(","); 
+            Transform subject;
+
             Vector3 f;
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<TrajectoryGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<TrajectoryGuidanceVF>()[j].force;
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
+                subject = robot.GetComponent<TrajectoryGuidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
+                    f = robot.GetComponents<TrajectoryGuidanceVF>()[j].force;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<ObstacleAvoidanceForceFieldVF>()[j].force;
+            if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
+                subject = robot.GetComponent<ObstacleAvoidanceForceFieldVF>().subject;
+                for (int j=0; j<robot.GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
+                    f = robot.GetComponents<ObstacleAvoidanceForceFieldVF>()[j].force;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceAvoidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<SurfaceAvoidanceVF>()[j].force;
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceAvoidanceVF>())) {
+                subject = robot.GetComponent<SurfaceAvoidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<SurfaceAvoidanceVF>().Length; j++) {
+                    f = robot.GetComponents<SurfaceAvoidanceVF>()[j].force;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SurfaceGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<SurfaceGuidanceVF>()[j].force;
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceGuidanceVF>())) {
+                subject = robot.GetComponent<SurfaceGuidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<SurfaceGuidanceVF>().Length; j++) {
+                    f = robot.GetComponents<SurfaceGuidanceVF>()[j].force;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<ConeApproachGuidanceVF>()[j].force;
+            if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
+                subject = robot.GetComponent<ConeApproachGuidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
+                    f = robot.GetComponents<ConeApproachGuidanceVF>()[j].force;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
-            if (activeConstraints.Contains(GameObject.Find("ROBOT").GetComponent<SumForces>())) {
-                for (int j=0; j<GameObject.Find("ROBOT").GetComponents<SumForces>().Length; j++) {
-                    f = GameObject.Find("ROBOT").GetComponents<SumForces>()[j].totalForce;
+            if (activeConstraints.Contains(robot.GetComponent<SumForces>())) {
+                for (int j=0; j<robot.GetComponents<SumForces>().Length; j++) {
+                    f = robot.GetComponents<SumForces>()[j].totalForce;
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                 }
             }
+            
             
             writer.Write("\n");
         }  

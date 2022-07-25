@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6128448192796281981}
   - component: {fileID: 6128448192796281982}
   - component: {fileID: 2379799319638724443}
+  - component: {fileID: 7567336591490214059}
+  - component: {fileID: 7353406081502122864}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -59,3 +61,34 @@ MonoBehaviour:
   TASKNAME: 
   activeConstraints: []
   saveTo: C:\Users\User\Desktop\AR
+--- !u!114 &7567336591490214059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128448192796281983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31611e2f17b3b348a211be9fb8a5d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/footpedals/coag
+  TimeStep: 0
+  pressed: 0
+--- !u!114 &7353406081502122864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128448192796281983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecondsTimeout: 10
+  Serializer: 0
+  protocol: 0
+  RosBridgeServerUrl: ws://192.168.1.1:9090

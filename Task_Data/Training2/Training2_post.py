@@ -55,11 +55,12 @@ def main():
         err[i] = mind
     eval["avg_dist"] = np.mean(err)
     
-    eval["avg_force"] = np.mean(np.linalg.norm(forceL,axis=0))
+    eval["avg_force"] = np.mean(np.linalg.norm(forceL[0:3],axis=0))
     eval_json = json.dumps(eval, indent=4)
     with open(wd+'_eval.json', 'w') as f:
         f.write(eval_json)
     # PLOTTING
+    plt.figure()
     ax = plt.axes(projection='3d')
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
@@ -91,9 +92,9 @@ def main():
                     edgecolors='k', facecolors='w', alpha=0.1, linewidths=0.1))
 
     plt.tight_layout()
-    ax.set_xlim([-4,4])
-    ax.set_ylim([-4,4])
-    ax.set_zlim([-4,4])
+    ax.set_xlim([np.nanmin(posL,axis=1)[0],np.nanmax(posL,axis=1)[0]])
+    ax.set_ylim([np.nanmin(posL,axis=1)[1],np.nanmax(posL,axis=1)[1]])
+    ax.set_zlim([np.nanmin(posL,axis=1)[2],np.nanmax(posL,axis=1)[2]])
 
     
     ax.plot3D(posL[0,:], posL[1,:], posL[2,:], color= "#ff0000",linewidth=1)
@@ -102,6 +103,13 @@ def main():
     
     plt.axis('off')
     plt.show()
+    plt.close()
+    
+    plt.figure()
+    plt.plot(np.arange(0,np.shape(err)[0],1), np.expand_dims(np.linalg.norm(forceL[0:3],axis=0),axis=0).transpose())
+    plt.plot(np.arange(0,np.shape(err)[0],1), err)
+    plt.show()
+    
     
     
 if __name__ == '__main__':

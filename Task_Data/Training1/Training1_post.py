@@ -87,13 +87,13 @@ def main():
                     try:
                         pmesh.vectors[i][j] = scenemeshL.transpose()[int(f[j]),0:3]
                     except: pass
-            ax.add_collection3d(mplot3d.art3d.Poly3DCollection(pmesh.vectors,
-                    edgecolors='k', facecolors='w', alpha=0.1, linewidths=0.1))
+            # ax.add_collection3d(mplot3d.art3d.Poly3DCollection(pmesh.vectors,
+            #         edgecolors='k', facecolors='w', alpha=0.1, linewidths=0.1))
 
     plt.tight_layout()
-    ax.set_xlim([-4,4])
-    ax.set_ylim([-4,4])
-    ax.set_zlim([-4,4])
+    ax.set_xlim([np.nanmin(posL,axis=1)[0],np.nanmax(posL,axis=1)[0]])
+    ax.set_ylim([np.nanmin(posL,axis=1)[1],np.nanmax(posL,axis=1)[1]])
+    ax.set_zlim([np.nanmin(posL,axis=1)[2],np.nanmax(posL,axis=1)[2]])
 
     
     ax.plot3D(posL[0,:], posL[1,:], posL[2,:], color= "#ff0000",linewidth=1)
