@@ -54,7 +54,7 @@ public class Manager : MonoBehaviour
         }
 
         // Starts data logging when the R key is pressed
-        if(Input.GetKeyDown(KeyCode.R)){    
+        if(Input.GetKeyDown(KeyCode.R) || gameObject.GetComponent<PedalBiCoagSubscriber>().pressed){    
             if (gameObject.GetComponent<LogData>() != null){
                 gameObject.GetComponent<LogData>().enabled = !gameObject.GetComponent<LogData>().enabled;
                 if (gameObject.GetComponent<LogData>().enabled) gameObject.GetComponent<LogData>().Start();
@@ -120,7 +120,9 @@ public class Manager : MonoBehaviour
         }
 
         // Loads a scene of choice when the user presses the corresponding key
-        if(Input.GetKey(KeyCode.Alpha1)){
+        if(Input.GetKey(KeyCode.Alpha0)){
+            SceneManager.LoadScene("Assets/Playground.unity");
+        }else if(Input.GetKey(KeyCode.Alpha1)){
             SceneManager.LoadScene("Assets/Training1.unity");
         }else if(Input.GetKey(KeyCode.Alpha2)){
             SceneManager.LoadScene("Assets/Training2.unity"); 
@@ -132,6 +134,25 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
+        }
+
+        if (gameObject.GetComponent<PedalCoagSubscriber>().pressed == true) {
+
+            if(SceneManager.GetActiveScene().name == "Playground"){
+                SceneManager.LoadScene("Assets/Training1.unity");
+            }else if(SceneManager.GetActiveScene().name == "Training1"){
+                SceneManager.LoadScene("Assets/Training2.unity"); 
+            }else if(SceneManager.GetActiveScene().name == "Training2"){
+                SceneManager.LoadScene("Assets/Training3.unity");
+            }else if(SceneManager.GetActiveScene().name == "Training3"){
+                SceneManager.LoadScene("Assets/Thymectomy.unity");
+            }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
+                SceneManager.LoadScene("Assets/Nephrectomy.unity");
+            }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
+                SceneManager.LoadScene("Assets/LiverResection.unity");
+            }else if(SceneManager.GetActiveScene().name == "LiverResection"){
+                SceneManager.LoadScene("Assets/Playground.unity");
+            }
         }
     }
 }

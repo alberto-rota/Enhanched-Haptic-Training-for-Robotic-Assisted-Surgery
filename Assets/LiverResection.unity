@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44386777, g: 0.49323726, b: 0.5727352, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -580,6 +580,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4795973848122261801, guid: cdc4cbcd7f691cc4d8b394b7611862e3, type: 3}
+      propertyPath: saveTo
+      value: C:\Users\alber\Desktop\Active_Constraints\Task_Data
+      objectReference: {fileID: 0}
+    - target: {fileID: 4795973848122261801, guid: cdc4cbcd7f691cc4d8b394b7611862e3, type: 3}
+      propertyPath: TASKNAME
+      value: LiverResection
+      objectReference: {fileID: 0}
     - target: {fileID: 7504339976862235407, guid: cdc4cbcd7f691cc4d8b394b7611862e3, type: 3}
       propertyPath: m_Name
       value: Manager

@@ -179,8 +179,6 @@ public class LogData : MonoBehaviour
         {  
             // TIME HEADER
             writer.Write("Time,");
-            // POSITION HEADER
-            writer.Write("PositionX,PositionY,PositionZ,");
 
             // VFs HEADERS
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
@@ -225,6 +223,8 @@ public class LogData : MonoBehaviour
                     writer.Write("TotalForce_Z"+j+",");
                 }
             }
+            
+            writer.Write("PositionX,PositionY,PositionZ");
 
             writer.Write("\n");
         }  
@@ -239,7 +239,7 @@ public class LogData : MonoBehaviour
             // Writes the current time since startup
             writer.Write(Time.realtimeSinceStartup); writer.Write(",");
 
-            Transform subject;
+            Transform subject = GameObject.Find(Global.tooltip_path).transform;
 
             Vector3 f;
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
@@ -296,7 +296,9 @@ public class LogData : MonoBehaviour
                 }
             }
             
-            
+            writer.Write(subject.position.x); writer.Write(",");
+            writer.Write(subject.position.y); writer.Write(",");
+            writer.Write(subject.position.z);
             writer.Write("\n");
         }  
     }

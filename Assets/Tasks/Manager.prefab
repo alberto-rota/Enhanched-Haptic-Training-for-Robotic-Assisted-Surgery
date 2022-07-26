@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6128448192796281983
+--- !u!1 &378219873037395585
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6128448192796281981}
-  - component: {fileID: 6128448192796281982}
-  - component: {fileID: 2379799319638724443}
-  - component: {fileID: 7567336591490214059}
-  - component: {fileID: 7353406081502122864}
+  - component: {fileID: 378219872604528034}
+  - component: {fileID: 378219873037395590}
+  - component: {fileID: 3428867991526562983}
+  - component: {fileID: 4849216078836586768}
+  - component: {fileID: 6845224960185198214}
+  - component: {fileID: 4908683543354747627}
+  - component: {fileID: 7862002416451348796}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -20,13 +22,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6128448192796281981
+--- !u!4 &378219872604528034
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128448192796281983}
+  m_GameObject: {fileID: 378219873037395585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.078263916, y: 0.04792978, z: -0.20841745}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,25 +36,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6128448192796281982
+--- !u!114 &378219873037395590
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128448192796281983}
+  m_GameObject: {fileID: 378219873037395585}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bae3f668d31a6f2419c6fe532be45928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2379799319638724443
+--- !u!114 &3428867991526562983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128448192796281983}
+  m_GameObject: {fileID: 378219873037395585}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b5e11b450b8b74383365ab1fef2075, type: 3}
@@ -60,29 +62,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TASKNAME: 
   activeConstraints: []
-  saveTo: C:\Users\User\Desktop\AR
---- !u!114 &7567336591490214059
+  saveTo: C:\Users\alber\Desktop\Active_Constraints\Task_Data
+--- !u!114 &4849216078836586768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128448192796281983}
+  m_GameObject: {fileID: 378219873037395585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31611e2f17b3b348a211be9fb8a5d7e, type: 3}
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SecondsTimeout: 10
+  Serializer: 0
+  protocol: 0
+  RosBridgeServerUrl: ws://192.168.1.1:9090
+--- !u!114 &6845224960185198214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378219873037395585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bffd70941a88d384fa531753e4921eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/footpedals/coag
   TimeStep: 0
   pressed: 0
---- !u!114 &7353406081502122864
+--- !u!114 &4908683543354747627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128448192796281983}
+  m_GameObject: {fileID: 378219873037395585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96476760268e46469b8f9ded3e23e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/footpedals/bicoag
+  TimeStep: 0
+  pressed: 0
+--- !u!114 &7862002416451348796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378219873037395585}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}

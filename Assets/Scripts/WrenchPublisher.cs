@@ -25,6 +25,7 @@ namespace RosSharp.RosBridgeClient
         public bool forceOverride = false;
         private MessageTypes.Geometry.Wrench message;
         private MessageTypes.Geometry.Vector3 geometryPoint;
+        private bool exiting = false;
 
         protected override void Start()
         {
@@ -67,11 +68,19 @@ namespace RosSharp.RosBridgeClient
                     Vector3toMessage(Vector3.zero.Unity2Ros(), message.force);
                     Publish(message);
                 }
-            }else{
+            }else if (forceOverride || exiting) {
                 Vector3toMessage(Vector3.zero.Unity2Ros(), message.force);
                 Publish(message);
             }
         }
+
+        // void OnApplicationQuit() {
+        //     exiting = true;
+        //     if (forceOverride || exiting) {
+        //         Vector3toMessage(Vector3.zero.Unity2Ros(), message.force);
+        //         Publish(message);
+        //     }
+        // }
 
         private void Vector3toMessage(Vector3 force, MessageTypes.Geometry.Vector3 geometryPoint)
         {

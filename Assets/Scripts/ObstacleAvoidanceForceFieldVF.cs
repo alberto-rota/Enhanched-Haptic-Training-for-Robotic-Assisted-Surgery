@@ -66,6 +66,9 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     Vector3 p;
     Vector3 t;
 
+    float SqDist(Vector3 a, Vector3 b) {
+        return Vector3.Dot((a-b),(a-b));
+    }
     void Start()
     {
         if (subject == null) {
@@ -102,7 +105,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         float mind = 1000;
 
         foreach (Vector3 p in obstaclePoints) {
-            float d = Vector3.Distance(p, subject.position);
+            float d = SqDist(p, subject.position);
             float dcom = threshold+half+5/slope;
             if (d <= dcom) {
                 closestPcom = closestPcom + p;
