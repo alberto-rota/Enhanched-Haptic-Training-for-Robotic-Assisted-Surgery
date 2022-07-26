@@ -13,7 +13,7 @@ public class MeshExport : MonoBehaviour
 
     void Start()
     {
-        // folderpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\"+SceneManager.GetActiveScene().name+"\\SCENESTLS";
+        folderpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\"+SceneManager.GetActiveScene().name+"\\SCENESTLS";
         path=folderpath+"\\"+gameObject.name+"_global.csv";
         FileStream streamstlglobal = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamstlglobal))  

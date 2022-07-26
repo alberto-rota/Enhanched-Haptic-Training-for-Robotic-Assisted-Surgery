@@ -42,7 +42,7 @@ public class Manager : MonoBehaviour
         }
         
         // Toggles the VFs when the V key is pressed
-        if(Input.GetKeyDown(KeyCode.V)){
+        if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalPlusSubscriber>().pressed){
             robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
             if (robot.GetComponent<SumForces>().enabled) {
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
@@ -57,7 +57,7 @@ public class Manager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) || gameObject.GetComponent<PedalBiCoagSubscriber>().pressed){    
             if (gameObject.GetComponent<LogData>() != null){
                 gameObject.GetComponent<LogData>().enabled = !gameObject.GetComponent<LogData>().enabled;
-                if (gameObject.GetComponent<LogData>().enabled) gameObject.GetComponent<LogData>().Start();
+                // if (gameObject.GetComponent<LogData>().enabled) gameObject.GetComponent<LogData>().Start();
             // }else if (gameObject.GetComponent<LogDataTraining2>() != null){
             //     gameObject.GetComponent<LogDataTraining2>().enabled = !gameObject.GetComponent<LogDataTraining2>().enabled;
             //     if (gameObject.GetComponent<LogDataTraining2>().enabled) gameObject.GetComponent<LogDataTraining2>().Start();

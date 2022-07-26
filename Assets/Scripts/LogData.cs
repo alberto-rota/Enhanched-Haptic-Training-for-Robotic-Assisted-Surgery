@@ -42,7 +42,7 @@ public class LogData : MonoBehaviour
         return validatedName;
     }
 
-    public void Start() {
+    public void OnEnable() {
         TASKNAME = SceneManager.GetActiveScene().name;
         robot = GameObject.Find("ROBOT");
 
@@ -59,6 +59,7 @@ public class LogData : MonoBehaviour
             }
         }   
 
+        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data";
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
         folderpath = saveTo+"\\"+TASKNAME+"\\"+foldername;

@@ -54,14 +54,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7504339976862235407}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b5e11b450b8b74383365ab1fef2075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TASKNAME: 
   activeConstraints: []
-  saveTo: 
+  saveTo: C:\Users\alber\Desktop\Active_Constraints\Task_Data
 --- !u!114 &3337327713595360414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   Topic: /dvrk/footpedals/coag
   TimeStep: 0
   pressed: 0
+  listening: 0
 --- !u!114 &2955579784588359525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,3 +109,4 @@ MonoBehaviour:
   Topic: /dvrk/footpedals/bicoag
   TimeStep: 0
   pressed: 0
+  listening: 0
