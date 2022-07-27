@@ -31026,7 +31026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2ea858067f28f42830a0557b8cbe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IPAddress: 192.168.1.2
+  IPAddress: 127.0.0.1
   Port: 9090
 --- !u!114 &6210097205200731348
 MonoBehaviour:
@@ -31060,7 +31060,6 @@ MonoBehaviour:
   - {fileID: 6210097205200731356}
   minForce: 0
   maxForce: 3
-  damp: 1.5
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
 --- !u!114 &6210097205200731350
