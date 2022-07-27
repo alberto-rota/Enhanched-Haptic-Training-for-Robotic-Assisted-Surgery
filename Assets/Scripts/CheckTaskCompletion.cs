@@ -21,7 +21,8 @@ public class CheckTaskCompletion : MonoBehaviour
 {
     public List<Transform> targets;
     public int targetReached = 0;
-    GameObject canvas;
+    GameObject canvasr;
+    GameObject canvasl;
 
     void Start()
     {
@@ -30,7 +31,8 @@ public class CheckTaskCompletion : MonoBehaviour
         {
             targets.Add(child);
         }
-        canvas = GameObject.Find("Text/Canvas");
+        canvasr = GameObject.Find("Text/Canvas");
+        canvasl = GameObject.Find("Text/CanvasL");
     }
 
     void Update()
@@ -49,9 +51,11 @@ public class CheckTaskCompletion : MonoBehaviour
             }
         }
         if (targetReached == targets.Count) {
-            canvas.SetActive(true); 
+            canvasr.SetActive(true);            
+            canvasl.SetActive(true);  
         } else {
-            canvas.SetActive(false);    
+            canvasr.SetActive(false);            
+            canvasl.SetActive(false);        
         }
     }
 }

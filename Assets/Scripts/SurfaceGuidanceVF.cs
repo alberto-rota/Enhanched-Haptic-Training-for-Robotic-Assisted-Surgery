@@ -54,12 +54,16 @@ public class SurfaceGuidanceVF : MonoBehaviour
     public float forceMagnitude;
     public Vector3 closestPcom = Vector3.zero;
     public Vector3 closestP = Vector3.zero;
-    public float dist;
+    public float distance;
     public float distMapped;
 
     Material colorok;
     Material colorred;
     Vector3 tool;
+
+    float SqDist(Vector3 a, Vector3 b) {
+        return Vector3.Dot((a-b),(a-b));
+    }
 
     void Start()
     {
@@ -99,8 +103,9 @@ public class SurfaceGuidanceVF : MonoBehaviour
         float mind = 1000;
 
         foreach (Vector3 p in surfacePoints) {
-            float d = Vector3.Distance(p, subject.position);
-            float dcom = threshold+half+5/slope;
+            float d = SqDist(p, subject.position);
+            float dcom = Mathf.Pow(threshold+half,2);
+            // Debug.Log(dcom);
             if (d <= dcom) {
                 closestPcom = closestPcom + p;
                 n_close++;
@@ -115,9 +120,9 @@ public class SurfaceGuidanceVF : MonoBehaviour
         if (float.IsNaN(closestPcom.x)) {
             closestPcom = closestP;
         }
+        distance = Vector3.Distance(closestP, subject.position);
+        distMapped = Global.DistMapAttraction(distance, threshold, half, slope);
 
-        dist = Vector3.Distance(closestP, subject.position);
-        distMapped = Global.DistMapAttraction(Vector3.Distance(closestP, subject.position), threshold, half, slope);
 
         Vector3 f_dir = -(subject.position-closestPcom).normalized;
         float f_mag = gain*distMapped;
@@ -137,11 +142,11 @@ public class SurfaceGuidanceVF : MonoBehaviour
         force = f_mag*f_dir;
 
         // CHECHING IF EE IS INSIDE THE SURFACE
-        if (Vector3.Dot(closestP-subject.position, surfaceNormals[idx_closest])<=0 || dist < threshold) {
+        if (distance < threshold ) {
             force=Vector3.zero;
             // surface.GetComponent<MeshRenderer>().material = colorok;
         } 
-        if (dist > threshold+half+5/slope) {
+        if (distance > threshold+half) {
             surface.GetComponent<MeshRenderer>().material = colorred;
         }else{
             surface.GetComponent<MeshRenderer>().material = colorok;

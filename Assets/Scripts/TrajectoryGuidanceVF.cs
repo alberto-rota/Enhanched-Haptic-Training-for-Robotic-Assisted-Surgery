@@ -35,13 +35,14 @@ public class TrajectoryGuidanceVF : MonoBehaviour
 
     [Header("Graphics")]
     public bool graphics = true;
-    [Range(0,0.001f)]
+    [Range(0,0.001f)]   
     public float graphicVectorGain = 1;
 
     [Header("Output")]
     Vector3 closest;
     public Vector3 velocity;
     public Vector3 deviation;
+    public float distance;
     public  Vector3 force;
     public float f_mag;
     public Vector3 f_dir; 
@@ -73,6 +74,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
             } 
         }
         deviation = closest - subject.position;
+        distance = deviation.magnitude;
 
         // VELOCITY
         velocity = subject.GetComponent<Velocity>().velocity;

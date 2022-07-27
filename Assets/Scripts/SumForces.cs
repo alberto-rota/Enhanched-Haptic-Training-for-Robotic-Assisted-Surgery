@@ -30,7 +30,7 @@ public class SumForces : MonoBehaviour
 
     [Header("Damp")]
     [Range(0,10f)]
-    public float damp = 1.5f;
+    public static float damp = 0f;
 
     [Header("Output")]
     public Vector3 totalForce = Vector3.zero;

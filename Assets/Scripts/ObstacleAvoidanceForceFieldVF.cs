@@ -60,7 +60,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public float forceMagnitude;
     public Vector3 closestPcom = Vector3.zero;
     public Vector3 closestP = Vector3.zero;
-    public float dist;
+    public float distance;
     public float distMapped;
 
     Vector3 p;
@@ -106,7 +106,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         foreach (Vector3 p in obstaclePoints) {
             float d = SqDist(p, subject.position);
-            float dcom = threshold+half+5/slope;
+            float dcom = Mathf.Pow(threshold+half+5/slope,2);
+            // Debug.Log(dcom);
             if (d <= dcom) {
                 closestPcom = closestPcom + p;
                 n_close++;
@@ -118,8 +119,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             }
         }   
         closestPcom=closestPcom/n_close;
-        dist = Vector3.Distance(closestP, subject.position);
-        distMapped = Global.DistMapRepulsion(Vector3.Distance(closestP, subject.position), threshold, half, slope);
+        distance = Vector3.Distance(closestP, subject.position);
+        distMapped = Global.DistMapRepulsion(distance, threshold, half, slope);
 
         Vector3 f_dir = (subject.position-closestPcom).normalized;
         float f_mag = gain*distMapped;
@@ -139,7 +140,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         force = f_mag*f_dir;
 
         // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-subject.position, obstacleNormals[idx_closest])>=0 || dist < threshold) {
+        if (Vector3.Dot(closestP-subject.position, obstacleNormals[idx_closest])>=0 || distance < threshold) {
             force=gain*obstacleNormals[idx_closest];
             obstacle.GetComponent<MeshRenderer>().material = materialhit;
         } else {

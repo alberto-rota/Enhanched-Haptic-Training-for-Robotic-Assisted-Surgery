@@ -48,6 +48,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     [Header("Output")]
     public Vector3 force;
     public float forceMagnitude;
+    public float distance;
     public Vector3 delta;
     public Color color = Color.yellow;
 
@@ -129,14 +130,16 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             if (a.magnitude < aperture*l.magnitude) { // INSIDE OF THE CONE,
                 f_mag = dampInsideOfCone;
                 force = (f_mag*-1*va);
-            } else if (a.magnitude < aperture*l.magnitude+eps) { // OUTSIDE OF THE CONE, IN THE SWITCHING REGION
-                f_mag = gainOutsideOfCone/eps*(a.magnitude-(aperture*l.magnitude-eps));
-                force = (f_mag*-1*a.normalized);
+            // } 
+            // else if (a.magnitude < aperture*l.magnitude+eps) { // OUTSIDE OF THE CONE, IN THE SWITCHING REGION
+            //     f_mag = gainOutsideOfCone/eps*(a.magnitude-(aperture*l.magnitude-eps));
+            //     force = (f_mag*-1*a.normalized);
             } else { // Outside of cone
-                f_mag = gainOutsideOfCone;  
+                distance = Global.DistMapAttraction(a.magnitude,aperture*l.magnitude,aperture*delta.magnitude*0.01f,1/aperture*delta.magnitude*0.01f);
+                f_mag = gainOutsideOfCone*distance;  
                 force = (f_mag*-1*a.normalized);
             }
-
+            distance = a.magnitude;
             // When close enough to the target, force is reduced 
             if (Vector3.Distance(ee,tp)/delta.magnitude < relaxDistance/100) {
                 force = force*0.2f;

@@ -47,6 +47,7 @@ public class SurfaceAvoidanceVF : MonoBehaviour
     // public float normalVectorsLength = 0;
     [Range(0,0.001f)]
     public float graphicVectorGain = 1;
+    public float distance;
     Material colorok;
     Material colorred;
     Vector3 tool;
