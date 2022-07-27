@@ -19,9 +19,11 @@ def u2r(df):
     return dff
 
 def plotPosDist(ax,pos,err):
+    ryg = mpl.colors.LinearSegmentedColormap.from_list("", ["red","yellow","green"])
     for i in range(np.shape(pos)[0]-1):
         ax.plot3D(pos.iloc[i:(i+2),0],pos.iloc[i:(i+2),1],pos.iloc[i:(i+2),2],
-                  c=cm.RdYlGn_r(err[i]/np.max(err)),
+                  c=ryg(err[i]/np.max(err)),
+                #   c=cm.RdYlGn_r(err[i]/np.max(err)),
                 #   c=cmapp[err[i]/np.max(err)],
                   linewidth=2
             )
@@ -68,7 +70,7 @@ def on_move(event):
         return
     fig.canvas.draw_idle()
     
-wd = os.path.dirname("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\Training3_0\\Training3_post.py")
+wd = os.path.dirname("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\Training3_1\\Training3_post.py")
 wd+="\\"+os.path.basename(wd)
 
 # ob0 = u2r(pd.read_csv(wd+'_obst0.csv'))
@@ -95,14 +97,25 @@ eval_json = json.dumps(eval, indent=4)
 with open(wd+'_eval.json', 'w') as f:
     f.write(eval_json)
 
-fig = plt.figure(figsize=plt.figaspect(0.5))
+ob0 = u2r(pd.read_csv("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\SCENESTLS\\ob0_global.csv"))
+ob1 = u2r(pd.read_csv("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\SCENESTLS\\ob1_global.csv"))
+ob2 = u2r(pd.read_csv("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\SCENESTLS\\ob2_global.csv"))
+ob3 = u2r(pd.read_csv("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\SCENESTLS\\ob3_global.csv"))
+ob4 = u2r(pd.read_csv("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training3\\SCENESTLS\\ob4_global.csv"))
 
-# cmapp = mpl.colors.ListedColormap.from_list(["green","yellow","red"])
+fig = plt.figure(figsize=plt.figaspect(0.5))
 
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 # axerr.plot3D(traj['X'],traj['Y'],traj['Z'], color= "#0088ff",linewidth=2)
 plotPosDist(axerr,pos,err)
 plt.title("Distance from Reference Trajectory")
+SKIP = 4
+axerr.scatter3D(ob0['X'].iloc[::SKIP],ob0['Y'].iloc[::SKIP],ob0['Z'].iloc[::SKIP], color= "#0088ff",s=0.1)
+axerr.scatter3D(ob1['X'].iloc[::SKIP],ob1['Y'].iloc[::SKIP],ob1['Z'].iloc[::SKIP], color= "#0088ff",s=0.1)
+axerr.scatter3D(ob2['X'].iloc[::SKIP],ob2['Y'].iloc[::SKIP],ob2['Z'].iloc[::SKIP], color= "#0088ff",s=0.1)
+axerr.scatter3D(ob3['X'].iloc[::SKIP],ob3['Y'].iloc[::SKIP],ob3['Z'].iloc[::SKIP], color= "#0088ff",s=0.1)
+axerr.scatter3D(ob4['X'].iloc[::SKIP],ob4['Y'].iloc[::SKIP],ob4['Z'].iloc[::SKIP], color= "#0088ff",s=0.1)
+
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
 # axforce.plot3D(traj['X'],traj['Y'],traj['Z'], color= "#0088ff")

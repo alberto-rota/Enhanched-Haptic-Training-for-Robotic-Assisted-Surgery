@@ -819,34 +819,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
---- !u!21 &1123723418
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!4 &1146215857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5913462726429796312, guid: 7a0ec995c5b744f8fada496053a2d5c0, type: 3}
@@ -1191,7 +1163,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1123723418}
+  - {fileID: 1836095086}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3862,6 +3834,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2009643358220594502, guid: 17c49cd774bcb0ff1b65fc2b6bf54417, type: 3}
   m_PrefabInstance: {fileID: 6210097203776447366}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1836095086
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &1836493126 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 218409658152625845, guid: 0169708582f47e25680b3d2df6485c17, type: 3}
@@ -11511,7 +11511,7 @@ Rigidbody:
   m_Mass: 2.0321
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -11581,7 +11581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_pitch_end_joint
+  JointName: ecm_pitch_bottom_link_ecm_pitch_end_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -11597,7 +11597,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.0001370087, y: -0.0000005960467, z: 0.34040278}
+  m_ConnectedAnchor: {x: 0.0001370683, y: -0.00000074505834, z: 0.34040257}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -12601,7 +12601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_pitch_front_joint
+  JointName: ecm_yaw_link_ecm_pitch_front_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -12617,7 +12617,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000059604656, y: 0.19900216, z: -0.00000022351733}
+  m_ConnectedAnchor: {x: -0.000000499189, y: 0.19900216, z: -0.0000003725289}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -12715,7 +12715,7 @@ Rigidbody:
   m_Mass: 1.6069
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -13434,7 +13434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_yaw_joint
+  JointName: ecm_base_link_ecm_yaw_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -13450,7 +13450,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000016670039, y: 0.101460606, z: 0.07320173}
+  m_ConnectedAnchor: {x: 0.00000009040977, y: 0.101460725, z: 0.07320166}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -13535,7 +13535,7 @@ Rigidbody:
   m_Mass: 6.4168
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -14040,7 +14040,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e47d1787f9a19527a87aaaa93dc20928, type: 2}
 --- !u!1001 &6210097203590989237
@@ -19462,7 +19462,7 @@ Rigidbody:
   m_Mass: 1.9074
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -19502,7 +19502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_tool_joint
+  JointName: ecm_main_insertion_link_ecm_tool_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -19518,7 +19518,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0000006120322, y: -0.0000019923186, z: 0.061003584}
+  m_ConnectedAnchor: {x: -0.0000007312404, y: -0.0000017911525, z: 0.061003197}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -21223,7 +21223,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 8aef603109770c7e185a40a12f604fc6, type: 2}
 --- !u!114 &6210097204154516707
@@ -23088,7 +23088,7 @@ Rigidbody:
   m_Mass: 0.23108
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -23168,7 +23168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2739b11a8980aa48b52271bc429c745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_main_insertion_joint
+  JointName: ecm_pitch_end_link_ecm_main_insertion_link_joint
   _jointType: 4
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -23184,7 +23184,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.086145066, y: -0.0000008600072, z: 0.04200363}
+  m_ConnectedAnchor: {x: 0.0861449, y: -0.00000077060025, z: 0.042003363}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 1
@@ -25493,7 +25493,7 @@ Rigidbody:
   m_Mass: 0.004482
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -25533,7 +25533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074632cab556f5b408839af8574308df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_remote_center_joint
+  JointName: ecm_main_insertion_link_ecm_remote_center_link_joint
   _jointType: 0
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -28074,7 +28074,7 @@ Rigidbody:
   m_Mass: 0.43851
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -28114,7 +28114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_pitch_top_joint
+  JointName: ecm_pitch_front_link_ecm_pitch_top_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -28130,7 +28130,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.3242592, y: -0.00000036507853, z: -0.108470626}
+  m_ConnectedAnchor: {x: 0.3242592, y: -0.00000031292447, z: -0.10847088}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -28209,7 +28209,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: a26f741a0b3376718906d5cb0614a887, type: 2}
 --- !u!1001 &6210097204751838236
@@ -28442,7 +28442,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f51cb97204b0e13599f576287cbe15f8, type: 2}
 --- !u!64 &6210097204774569864
@@ -29776,7 +29776,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c10d52aec7e472713a748979d6c5323c, type: 2}
 --- !u!1001 &6210097204883877982
@@ -29930,7 +29930,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0bd1e911bc56b207ca3bcb8ef1bde197, type: 2}
 --- !u!1001 &6210097204898594893
@@ -30015,7 +30015,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 80dbd70d7822fc54a8164183b5ea6b41, type: 2}
 --- !u!1001 &6210097204912287455
@@ -30507,7 +30507,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 859d126326bb54405ad41077b8e2dc14, type: 2}
 --- !u!1001 &6210097204935745227
@@ -32246,7 +32246,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: d5deec919bde83e43b511b9ceecb9070, type: 2}
 --- !u!1001 &6210097205037869878
@@ -33340,7 +33340,7 @@ Rigidbody:
   m_Mass: 0.35928
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -33420,7 +33420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_pitch_bottom_joint
+  JointName: ecm_pitch_front_link_ecm_pitch_bottom_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -33436,7 +33436,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.28680688, y: -0.00000023096806, z: -0.10299939}
+  m_ConnectedAnchor: {x: 0.28680664, y: -0.00000039488086, z: -0.10299958}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -34436,8 +34436,8 @@ MonoBehaviour:
   DisplayInertiaGizmo: 0
   rigidbodyDataSource: 0
   Mass: 2.6363
-  CenterOfMass: {x: -0, y: 0.068959, z: -0.0048227}
-  InertiaTensor: {x: 0.000001, y: 0.000001, z: 0.000001}
+  CenterOfMass: {x: 0, y: 0, z: 0}
+  InertiaTensor: {x: 1, y: 1, z: 1}
   InertiaTensorRotation: {x: 0, y: -0, z: -0, w: 1}
   UrdfMass: 2.6363
   UrdfCenterOfMass: {x: -0, y: 0.068959, z: -0.0048227}
@@ -34476,7 +34476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074632cab556f5b408839af8574308df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: fixed_joint
+  JointName: ecm_ecm_base_link_joint
   _jointType: 0
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -34506,7 +34506,7 @@ Rigidbody:
   m_Mass: 2.6363
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -35273,7 +35273,7 @@ Rigidbody:
   m_Mass: 0.4214
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -35313,7 +35313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b6193734b4c8444bcfdf4e9953fe2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JointName: ecm_pitch_back_joint
+  JointName: ecm_yaw_link_ecm_pitch_back_link_joint
   _jointType: 2
   EffortLimit: 1000
   VelocityLimit: 1000
@@ -35329,7 +35329,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.009799498, y: 0.16243216, z: -0.00000017881388}
+  m_ConnectedAnchor: {x: 0.009799416, y: 0.16243199, z: -0.0000003427266}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -35847,7 +35847,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1dd822ef981bb1349af75eeb4fd99876, type: 2}
 --- !u!1001 &6210097205356124879

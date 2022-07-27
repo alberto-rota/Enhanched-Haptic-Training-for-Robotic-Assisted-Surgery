@@ -19,9 +19,11 @@ def u2r(df):
     return dff
 
 def plotPosDist(ax,pos,err):
+    gyr = mpl.colors.LinearSegmentedColormap.from_list("", ["green","yellow","red"])
     for i in range(np.shape(pos)[0]-1):
         ax.plot3D(pos.iloc[i:(i+2),0],pos.iloc[i:(i+2),1],pos.iloc[i:(i+2),2],
-                  c=cm.RdYlGn_r(err[i]/np.max(err)),
+                  c=gyr(err[i]/np.max(err)),
+                #   c=cm.RdYlGn_r(err[i]/np.max(err)),
                 #   c=cmapp[err[i]/np.max(err)],
                   linewidth=2
             )

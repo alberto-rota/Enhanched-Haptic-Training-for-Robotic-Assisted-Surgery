@@ -127,18 +127,10 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             float f_mag;
             float eps = 0.05f*a.magnitude; // Switching region is 5% of the radial coordinate 
 
-            if (a.magnitude < aperture*l.magnitude) { // INSIDE OF THE CONE,
-                f_mag = dampInsideOfCone;
-                force = (f_mag*-1*va);
-            // } 
-            // else if (a.magnitude < aperture*l.magnitude+eps) { // OUTSIDE OF THE CONE, IN THE SWITCHING REGION
-            //     f_mag = gainOutsideOfCone/eps*(a.magnitude-(aperture*l.magnitude-eps));
-            //     force = (f_mag*-1*a.normalized);
-            } else { // Outside of cone
-                distance = Global.DistMapAttraction(a.magnitude,aperture*l.magnitude,aperture*delta.magnitude*0.01f,1/aperture*delta.magnitude*0.01f);
-                f_mag = gainOutsideOfCone*distance;  
-                force = (f_mag*-1*a.normalized);
-            }
+            distance = Global.DistMapAttraction(a.magnitude,aperture*l.magnitude,aperture*delta.magnitude*0.05f,1/aperture*delta.magnitude*0.05f);
+            f_mag = gainOutsideOfCone*distance;  
+            force = (f_mag*-1*a.normalized);
+            
             distance = a.magnitude;
             // When close enough to the target, force is reduced 
             if (Vector3.Distance(ee,tp)/delta.magnitude < relaxDistance/100) {

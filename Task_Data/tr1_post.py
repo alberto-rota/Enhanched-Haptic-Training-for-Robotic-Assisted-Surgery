@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.rcParams.update(mpl.rcParamsDefault)
 import numpy as np
-from matplotlib import cm
+from matplotlib.colors import LinearSegmentedColormap
 import pandas as pd
 import os
 import json
@@ -19,9 +19,11 @@ def u2r(df):
     return dff
 
 def plotPosDist(ax,pos,err):
+    gyr = mpl.colors.LinearSegmentedColormap.from_list("", ["green","yellow","red"])
     for i in range(np.shape(pos)[0]-1):
         ax.plot3D(pos.iloc[i:(i+2),0],pos.iloc[i:(i+2),1],pos.iloc[i:(i+2),2],
-                  c=cm.RdYlGn_r(err[i]/np.max(err)),
+                #   c=cm.RdYlGn_r(err[i]/np.max(err)),
+                  c=gyr(err[i]/np.max(err)),
                 #   c=cmapp[err[i]/np.max(err)],
                   linewidth=2
             )
@@ -65,10 +67,9 @@ def on_move(event):
             axerr.set_ylim3d(axforce.get_ylim3d())
             axerr.set_zlim3d(axforce.get_zlim3d())
     else:
-        return
-    fig.canvas.draw_idle()
+        fig.canvas.draw_idle()
     
-wd = os.path.dirname("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training1\\Training1_0\\Training1_post.py")
+wd = os.path.dirname("C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Training1\\Training1_1\\Training1_post.py")
 wd+="\\"+os.path.basename(wd)
 
 traj = u2r(pd.read_csv(wd+'_traj0.csv'))
@@ -97,12 +98,12 @@ fig = plt.figure(figsize=plt.figaspect(0.5))
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 axerr.plot3D(traj['X'],traj['Y'],traj['Z'], color= "#0088ff",linewidth=2)
 plotPosDist(axerr,pos,err)
-plt.title("Distance from Reference Trajectory")
+plt.title("Distance from Reference Trajectory: D = "+str(eval['avg_dist']))
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
 axforce.plot3D(traj['X'],traj['Y'],traj['Z'], color= "#0088ff")
 plotPosDist(axforce,pos,force['X']**2 + force['Y']**2 + force['Z']**2)
-plt.title("Haptic Feedback Force")
+plt.title("Haptic Feedback Force: F = "+str(eval['avg_force']))
 
 c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
 
