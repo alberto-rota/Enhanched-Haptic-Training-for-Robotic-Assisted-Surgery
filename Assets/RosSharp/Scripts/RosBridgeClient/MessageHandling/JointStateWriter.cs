@@ -24,6 +24,7 @@ namespace RosSharp.RosBridgeClient
     {
         private UrdfJoint urdfJoint;
 
+        public float scale = 1;
         private float newState; // rad or m
         private float prevState; // rad or m
         private bool isNewStateReceived;
@@ -43,7 +44,7 @@ namespace RosSharp.RosBridgeClient
         }
         private void WriteUpdate()
         {
-            urdfJoint.UpdateJointState(newState-prevState);
+            urdfJoint.UpdateJointState((newState-prevState)*scale);
 
             prevState = newState;
         }

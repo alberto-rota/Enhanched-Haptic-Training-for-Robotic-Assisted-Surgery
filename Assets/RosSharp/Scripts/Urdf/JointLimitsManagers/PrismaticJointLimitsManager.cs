@@ -50,17 +50,17 @@ namespace RosSharp
             
             if (position - PositionLimitMin < Tolerance)
             {
-                configurableJoint.xMotion = ConfigurableJointMotion.Limited;
+                configurableJoint.yMotion = ConfigurableJointMotion.Limited;
                 configurableJoint.linearLimit = UpdateLimit(configurableJoint.linearLimit, -PositionLimitMin);
             }
             else if (PositionLimitMax - position < Tolerance)
             {
-                configurableJoint.xMotion = ConfigurableJointMotion.Limited;
+                configurableJoint.yMotion = ConfigurableJointMotion.Limited;
                 configurableJoint.linearLimit = UpdateLimit(configurableJoint.linearLimit, PositionLimitMax);
             }
             else
             {
-                configurableJoint.xMotion = ConfigurableJointMotion.Free;
+                configurableJoint.yMotion = ConfigurableJointMotion.Free;
             }
         }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode]
 public class CorrectMeshNormals : MonoBehaviour
 {
     
@@ -61,16 +61,6 @@ public class CorrectMeshNormals : MonoBehaviour
                 surfaceNormals[i] = -surfaceNormals[i];
             }
         }
-        // for (int i = 0; i < surfaceNormals.Count-NperV; i+=NperV){
-        //     for (int j = 0; j < NperV; j++){    
-        //         averageNormal += surfaceNormals[i+j];
-        //     }
-        //     averageNormal /= NperV;
-        //     for (int j = 0; j < NperV; j++){
-        //         surfaceNormals[i+j] = averageNormal;
-        //     }
-        // }
-
     }
 
     void Update() {

@@ -3,7 +3,7 @@
 // All copyrights reserved to this script are entitled to Diego Giacomelli.
 
 // Scene Selection Toolbar - http://diegogiacomelli.com.br/unitytips-scene-selection-toolbar
-
+#if (UNITY_EDITOR)
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -166,3 +166,4 @@ public static class SceneSelectionToolbar
 //         public string Path;
 //     }
 // }
+#endif

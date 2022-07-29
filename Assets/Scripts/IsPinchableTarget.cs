@@ -40,7 +40,7 @@ public class IsPinchableTarget : MonoBehaviour
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");
         materialtargetpinchable = Resources.Load<Material>("Materials/TargetPinchable");
         //Disable the collider
-        gameObject.GetComponent<SphereCollider>().enabled = true;
+        gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         gameObject.GetComponent<Rigidbody>().useGravity = false;

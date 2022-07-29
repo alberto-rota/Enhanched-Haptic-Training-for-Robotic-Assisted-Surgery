@@ -1,3 +1,4 @@
+#if (UNITY_EDITOR)
 using UnityEditor;
  
 public static class CopyPathMenuItem
@@ -30,3 +31,4 @@ public static class CopyPathMenuItem
         return Selection.gameObjects.Length == 1;
     }
 }
+#endif

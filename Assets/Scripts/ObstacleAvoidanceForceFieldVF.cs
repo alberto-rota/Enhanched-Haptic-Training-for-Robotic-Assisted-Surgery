@@ -65,6 +65,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     Vector3 p;
     Vector3 t;
+    float dcom;
 
     float SqDist(Vector3 a, Vector3 b) {
         return Vector3.Dot((a-b),(a-b));
@@ -79,6 +80,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         obstaclePoints = obstacle.GetComponent<CorrectMeshNormals>().surfacePoints;
         obstacleNormals = obstacle.GetComponent<CorrectMeshNormals>().surfaceNormals;
+        dcom = Mathf.Pow(threshold+half+5/slope,2);
     }
 
     void FixedUpdate()
@@ -103,10 +105,9 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         int idx_closest = 0;
         force = Vector3.zero;
         float mind = 1000;
-
+        int j = 0;
         foreach (Vector3 p in obstaclePoints) {
             float d = SqDist(p, subject.position);
-            float dcom = Mathf.Pow(threshold+half+5/slope,2);
             // Debug.Log(dcom);
             if (d <= dcom) {
                 closestPcom = closestPcom + p;
@@ -115,14 +116,16 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             if (d < mind) {
                 mind = d;
                 closestP = p;
-                idx_closest = obstaclePoints.IndexOf(p);
+                idx_closest = j;
             }
+            j++;
         }   
+
         closestPcom=closestPcom/n_close;
         distance = Vector3.Distance(closestP, subject.position);
         distMapped = Global.DistMapRepulsion(distance, threshold, half, slope);
 
-        Vector3 f_dir = (subject.position-closestPcom).normalized;
+        Vector3 f_dir = obstacleNormals[idx_closest].normalized;
         float f_mag = gain*distMapped;
         
 

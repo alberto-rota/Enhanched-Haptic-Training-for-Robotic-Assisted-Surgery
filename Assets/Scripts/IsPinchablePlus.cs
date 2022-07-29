@@ -25,11 +25,16 @@ public class IsPinchablePlus : MonoBehaviour
     Material materialown;
     Material materialpinchable;
     Vector3 tool;
+    Vector3 tool1;
     Vector3 target;
     float d;
+    float d1;
     float targetRadius; 
     public bool graphics = false;
+    public int whopinched = 0;
+    public int whopinchable = 0;
     public Transform pincherObject;
+    public Transform pincherObject1;
     public bool restoreGravity = false;
 
     public bool pinched = false;
@@ -46,6 +51,7 @@ public class IsPinchablePlus : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
         pincherObject = GameObject.Find(Global.tooltip_path).transform;
+        pincherObject1 = GameObject.Find(Global.tooltip_path1).transform;
     }
 
     void Update()
@@ -57,12 +63,28 @@ public class IsPinchablePlus : MonoBehaviour
 
         targetRadius = gameObject.GetComponent<SphereCollider>().radius*gameObject.transform.lossyScale.x;
         tool = pincherObject.position;
+        tool1 = pincherObject1.position;
         target = gameObject.transform.position;
         d = Vector3.Distance(target,tool);
+        d1 = Vector3.Distance(target,tool1);
         if (d < targetRadius) {
             pinchable = true;
+            whopinchable = 0;
             if (pinchingAction) {
                 pinched = true;
+                whopinchable = 0;
+            } else {
+                pinched = false;
+            }
+        } else pinchable = false;
+
+        
+        if (d1 < targetRadius) {
+            pinchable = true;
+            whopinchable = 1;
+            if (pinchingAction) {
+                pinched = true;
+                whopinched = 1;
             } else {
                 pinched = false;
             }
@@ -78,7 +100,11 @@ public class IsPinchablePlus : MonoBehaviour
             }
             if (gameObject.GetComponent<FixedJoint>() == null) {
                 gameObject.AddComponent<FixedJoint>();
-                gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject.gameObject.GetComponent<Rigidbody>();
+                if (whopinched == 0) {
+                    gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject.gameObject.GetComponent<Rigidbody>();
+                } else if (whopinched == 1) {
+                    gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject1.gameObject.GetComponent<Rigidbody>();
+                }
             }
         } else {
             if (gameObject.GetComponent<FixedJoint>() != null) {

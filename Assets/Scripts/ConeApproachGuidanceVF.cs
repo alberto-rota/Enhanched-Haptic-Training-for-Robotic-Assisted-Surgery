@@ -33,10 +33,13 @@ public class ConeApproachGuidanceVF : MonoBehaviour
     public bool configuring;
     [Range(0,30)]
     public float coneApertureDegrees = 10;
-    [Range(0,10f)]
-    public float dampInsideOfCone = 0.02f; 
-    [Range(0,10f)]
-    public float gainOutsideOfCone = 0.02f; 
+    [Range(0,5f)]
+    public float gain = 3;
+    [Range(0,0.2f)]
+    public float half = 0.002f;
+    [Range(0,10000f)]
+    public float slope = 1f;
+
     public float relaxDistance = 8;
 
     [Header("Graphics")]
@@ -89,6 +92,9 @@ public class ConeApproachGuidanceVF : MonoBehaviour
 
     void Update()
     {   
+        if (half < 0 ) {half=0;}
+        if (slope < 1/half) {slope=1/half;}
+
         Vector3 v = GameObject.Find(Global.tooltip_path).GetComponent<Rigidbody>().velocity;
         Vector3 vl = Vector3.Dot(v,delta.normalized)*delta.normalized;
         Vector3 va = v-vl;
@@ -127,8 +133,9 @@ public class ConeApproachGuidanceVF : MonoBehaviour
             float f_mag;
             float eps = 0.05f*a.magnitude; // Switching region is 5% of the radial coordinate 
 
-            distance = Global.DistMapAttraction(a.magnitude,aperture*l.magnitude,aperture*delta.magnitude*0.05f,1/aperture*delta.magnitude*0.05f);
-            f_mag = gainOutsideOfCone*distance;  
+            distance = Global.DistMapAttraction(a.magnitude, aperture*l.magnitude, half, slope);
+
+            f_mag = gain*distance;  
             force = (f_mag*-1*a.normalized);
             
             distance = a.magnitude;

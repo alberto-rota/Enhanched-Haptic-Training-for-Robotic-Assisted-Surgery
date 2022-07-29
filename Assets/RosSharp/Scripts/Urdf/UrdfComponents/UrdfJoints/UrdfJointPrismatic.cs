@@ -30,8 +30,8 @@ namespace RosSharp.Urdf
             ConfigurableJoint configurableJoint = (ConfigurableJoint) urdfJoint.UnityJoint;
 
             // degrees of freedom:
-            configurableJoint.xMotion = ConfigurableJointMotion.Limited;
-            configurableJoint.yMotion = ConfigurableJointMotion.Locked;
+            configurableJoint.xMotion = ConfigurableJointMotion.Locked;
+            configurableJoint.yMotion = ConfigurableJointMotion.Limited;
             configurableJoint.zMotion = ConfigurableJointMotion.Locked;
             configurableJoint.angularXMotion = ConfigurableJointMotion.Locked;
             configurableJoint.angularYMotion = ConfigurableJointMotion.Locked;

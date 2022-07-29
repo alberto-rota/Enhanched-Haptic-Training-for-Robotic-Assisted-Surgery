@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2877652245615297828
+--- !u!1 &3678498915766491327
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,13 +8,14 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2877652245731900935}
-  - component: {fileID: 2877652245615297827}
-  - component: {fileID: 956175742403067650}
-  - component: {fileID: 7033265632401996469}
-  - component: {fileID: 8948602249724790051}
-  - component: {fileID: 7408395187993790798}
-  - component: {fileID: 5749896108830406464}
+  - component: {fileID: 3678498915383960476}
+  - component: {fileID: 3678498915766491320}
+  - component: {fileID: 1848405469713736345}
+  - component: {fileID: 8464783688635393838}
+  - component: {fileID: 7551424329581402296}
+  - component: {fileID: 8227010072987817173}
+  - component: {fileID: 6568608037464320731}
+  - component: {fileID: 5256907846730640767}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -22,13 +23,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2877652245731900935
+--- !u!4 &3678498915383960476
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.078263916, y: 0.04792978, z: -0.20841745}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,25 +37,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2877652245615297827
+--- !u!114 &3678498915766491320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bae3f668d31a6f2419c6fe532be45928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &956175742403067650
+--- !u!114 &1848405469713736345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b5e11b450b8b74383365ab1fef2075, type: 3}
@@ -63,13 +64,13 @@ MonoBehaviour:
   TASKNAME: LiverResection
   activeConstraints: []
   saveTo: C:\Users\alber\Desktop\Active_Constraints\Task_Data
---- !u!114 &7033265632401996469
+--- !u!114 &8464783688635393838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
@@ -79,13 +80,13 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
---- !u!114 &8948602249724790051
+--- !u!114 &7551424329581402296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bffd70941a88d384fa531753e4921eaa, type: 3}
@@ -95,13 +96,13 @@ MonoBehaviour:
   TimeStep: 0
   pressed: 0
   listening: 1
---- !u!114 &7408395187993790798
+--- !u!114 &8227010072987817173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b96476760268e46469b8f9ded3e23e69, type: 3}
@@ -111,19 +112,35 @@ MonoBehaviour:
   TimeStep: 0
   pressed: 0
   listening: 1
---- !u!114 &5749896108830406464
+--- !u!114 &6568608037464320731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877652245615297828}
+  m_GameObject: {fileID: 3678498915766491327}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adf86485daf8d81419522d78e6410b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/footpedals/cam_plus
+  TimeStep: 0
+  pressed: 0
+  listening: 1
+--- !u!114 &5256907846730640767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3678498915766491327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d39cff5777f1df45b7147b64cf79ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/footpedals/cam_minus
   TimeStep: 0
   pressed: 0
   listening: 1

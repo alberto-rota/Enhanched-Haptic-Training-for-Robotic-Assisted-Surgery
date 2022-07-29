@@ -42,12 +42,12 @@ public class Manager : MonoBehaviour
         }
         
         // Toggles the VFs when the V key is pressed
-        if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalPlusSubscriber>().pressed){
+        if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
             robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
             if (robot.GetComponent<SumForces>().enabled) {
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
                 GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
@@ -61,22 +61,6 @@ public class Manager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) || gameObject.GetComponent<PedalBiCoagSubscriber>().pressed){    
             if (gameObject.GetComponent<LogData>() != null){
                 gameObject.GetComponent<LogData>().enabled = !gameObject.GetComponent<LogData>().enabled;
-                // if (gameObject.GetComponent<LogData>().enabled) gameObject.GetComponent<LogData>().Start();
-            // }else if (gameObject.GetComponent<LogDataTraining2>() != null){
-            //     gameObject.GetComponent<LogDataTraining2>().enabled = !gameObject.GetComponent<LogDataTraining2>().enabled;
-            //     if (gameObject.GetComponent<LogDataTraining2>().enabled) gameObject.GetComponent<LogDataTraining2>().Start();
-            // }else if (gameObject.GetComponent<LogDataTraining3>() != null){
-            //     gameObject.GetComponent<LogDataTraining3>().enabled = !gameObject.GetComponent<LogDataTraining3>().enabled;
-            //     if (gameObject.GetComponent<LogDataTraining3>().enabled) gameObject.GetComponent<LogDataTraining3>().Start();
-            // }else if (gameObject.GetComponent<LogDataLiverResection>() != null){
-            //     gameObject.GetComponent<LogDataLiverResection>().enabled = !gameObject.GetComponent<LogDataLiverResection>().enabled;
-            //     if (gameObject.GetComponent<LogDataLiverResection>().enabled) gameObject.GetComponent<LogDataLiverResection>().Start();
-            // }else if (gameObject.GetComponent<LogDataThymectomy>() != null){
-            //     gameObject.GetComponent<LogDataThymectomy>().enabled = !gameObject.GetComponent<LogDataThymectomy>().enabled;
-            //     if (gameObject.GetComponent<LogDataThymectomy>().enabled) gameObject.GetComponent<LogDataThymectomy>().Start();
-            // }else if (gameObject.GetComponent<LogDataNephrectomy>() != null){
-            //     gameObject.GetComponent<LogDataNephrectomy>().enabled = !gameObject.GetComponent<LogDataNephrectomy>().enabled;
-            //     if (gameObject.GetComponent<LogDataNephrectomy>().enabled) gameObject.GetComponent<LogDataNephrectomy>().Start();
             }
 
             if (gameObject.GetComponent<LogData>().enabled) {
@@ -90,41 +74,6 @@ public class Manager : MonoBehaviour
                 GameObject.Find("Text/CanvasVFL/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
                 GameObject.Find("Text/CanvasVFL/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
             }
-            // if (gameObject.GetComponent<LogDataTraining2>().enabled) {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            // } else {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            // }
-            // if (gameObject.GetComponent<LogDataTraining3>().enabled) {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            // } else {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            // }
-            // if (gameObject.GetComponent<LogDataThymectomy>().enabled) {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            // } else {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            // }
-            // if (gameObject.GetComponent<LogDataNephrectomy>().enabled) {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            // } else {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            // }
-            // if (gameObject.GetComponent<LogDataLiverResection>().enabled) {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            // } else {
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nSTOP";
-            //     GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-            // }
         }
 
         // Loads a scene of choice when the user presses the corresponding key
@@ -144,7 +93,8 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("Assets/LiverResection.unity");
         }
 
-        if (gameObject.GetComponent<PedalCoagSubscriber>().pressed == true) {
+        // The PLUS pedal goes to the next scene
+        if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
 
             if(SceneManager.GetActiveScene().name == "Playground"){
                 SceneManager.LoadScene("Assets/Training1.unity");
@@ -162,6 +112,10 @@ public class Manager : MonoBehaviour
                 SceneManager.LoadScene("Assets/Playground.unity");
             }
         }
+
+        // The MINUS pedal reloads the current scene
+        if (gameObject.GetComponent<PedalMinusSubscriber>().pressed == true) 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 }
