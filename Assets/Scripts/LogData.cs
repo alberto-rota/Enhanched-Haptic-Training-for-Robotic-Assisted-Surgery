@@ -69,6 +69,8 @@ public class LogData : MonoBehaviour
         // Creates the .m file to save the logs
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_post.bat", folderpath+"\\"+TASKNAME+"_post.bat");
+        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.py", folderpath+"\\"+TASKNAME+"_graph.py");
+        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.bat", folderpath+"\\"+TASKNAME+"_graph.bat");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";

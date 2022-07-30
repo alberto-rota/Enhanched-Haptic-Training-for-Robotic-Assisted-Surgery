@@ -13,19 +13,20 @@ def u2r(df):
     dff['Y'] = df['Z']*(-1)
     dff['Z'] = df['Y']*(+1)
     return dff
-
+    
 wd = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 wd = os.path.join(wd, os.path.basename(wd))
 
-traj = u2r(pd.read_csv(wd+'_coneapproach0.csv'))
+# ob0 = u2r(pd.read_csv(wd+'_obst0.csv'))
 task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['ConeApproachGuidanceVF_X0','ConeApproachGuidanceVF_Y0','ConeApproachGuidanceVF_Z0']].rename(
-    columns={'ConeApproachGuidanceVF_X0':'X','ConeApproachGuidanceVF_Y0':'Y','ConeApproachGuidanceVF_Z0':'Z'}
+force = u2r(task[['SurfaceGuidanceVF_X0','SurfaceGuidanceVF_Y0','SurfaceGuidanceVF_Z0']].rename(
+    columns={'SurfaceGuidanceVF_X0':'X','SurfaceGuidanceVF_Y0':'Y','SurfaceGuidanceVF_Z0':'Z'}
 ))
-err = task['ConeApproachGuidanceVF_dist0'].to_numpy()
+
+err = task['SurfaceGuidanceVF_dist0'].to_numpy()
 time = task['Time'].to_numpy()
 
 eval = dict()
