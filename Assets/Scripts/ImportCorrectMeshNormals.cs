@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-// [ExecuteInEditMode]
 public class ImportCorrectMeshNormals : MonoBehaviour
-{
+{    
+    [Range(0,0.01f)]
+    public float normalVectorsLength = 0.002f;
     
     public string path;    
     public List<Vector3> surfacePoints;
@@ -14,46 +16,40 @@ public class ImportCorrectMeshNormals : MonoBehaviour
     {
 
         string alltext = System.IO.File.ReadAllText(path+"\\"+gameObject.name+"_points.csv");
-        Debug.Log(alltext);
         string header = alltext.Split("\n"[0])[0];
-        int row = 0;
         foreach (string line in alltext.Split("\n"[0]))
         {
             if (line != header)
             {
-                string[] line_split = line.Split(","[0]);
-                Vector3 point = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
-                Debug.Log(row+" "+gameObject.name);
-                surfacePoints.Add(point);
+                // To be honest I'm using a try-catch here because I have no fucking idea of why it doesnt read the last line
+                // of the CSV correctly
+                try {
+                    string[] line_split = line.Split(","[0]);
+                    Vector3 point = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
+                    surfacePoints.Add(point);
+                } catch (Exception e) { }
             }
-            row++;
         }
         alltext = System.IO.File.ReadAllText(path+"\\"+gameObject.name+"_normals.csv");
-        Debug.Log(alltext);
         header = alltext.Split("\n"[0])[0];
         foreach (string line in alltext.Split("\n"[0]))
         {
             if (line != header)
             {
-                string[] line_split = line.Split(","[0]);
-                Vector3 normal = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
-                surfaceNormals.Add(normal);
+                try{
+                    string[] line_split = line.Split(","[0]);
+                    Vector3 normal = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
+                    surfaceNormals.Add(normal);
+                 } catch (Exception e) { }
             }
         }
-
-
-        // string[] = (lines[0].Trim()).Split(","[0]);
-        // var x : float;
-        // float.TryParse(lineData[0], x);
-
-
-        // obstaclePoints = obstacle.GetComponent<CorrectMeshNormals>().surfacePoints;
-        // obstacleNormals = obstacle.GetComponent<CorrectMeshNormals>().surfaceNormals;
     }
 
-    void Update() 
-    
-    {
-
+    void Update() {
+        if (normalVectorsLength>0) 
+            for (int i = 0; i<surfaceNormals.Count; i++) {
+                Debug.DrawLine(surfacePoints[i], surfacePoints[i]+surfaceNormals[i]*normalVectorsLength, Color.magenta);
+            }
     }
 }
+

@@ -78,8 +78,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         materialown = obstacle.GetComponent<MeshRenderer>().sharedMaterial;
         materialhit = Resources.Load<Material>("Materials/ObstacleHit");
 
-        obstaclePoints = obstacle.GetComponent<CorrectMeshNormals>().surfacePoints;
-        obstacleNormals = obstacle.GetComponent<CorrectMeshNormals>().surfaceNormals;
+        obstaclePoints = obstacle.GetComponent<ImportCorrectMeshNormals>().surfacePoints;
+        obstacleNormals = obstacle.GetComponent<ImportCorrectMeshNormals>().surfaceNormals;
         dcom = Mathf.Pow(threshold+half+5/slope,2);
     }
 
