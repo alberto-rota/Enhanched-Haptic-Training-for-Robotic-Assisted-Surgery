@@ -58,7 +58,7 @@ public class LogData : MonoBehaviour
             }
         }   
 
-        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data";
+        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Subject"+Global.subjectID;
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
         folderpath = saveTo+"\\"+TASKNAME+"\\"+foldername;
@@ -72,9 +72,19 @@ public class LogData : MonoBehaviour
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.py", folderpath+"\\"+TASKNAME+"_graph.py");
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.bat", folderpath+"\\"+TASKNAME+"_graph.bat");
 
+        // SAVES SUBJECT AND REPETITION DATA
+        path = folderpath+"\\"+foldername+"_misc.json";
+        FileStream streammisc = new FileStream(path, FileMode.Append);  
+        using (StreamWriter writer = new StreamWriter(streammisc))  
+        {  
+            writer.Write('{ "subject": ');writer.Write(Global.subjectID+"\n");
+            writer.Write();writer.Write();
+            writer.Write();writer.Write();
+            writer.Write();writer.Write();
+        }
+
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
-
         // Transform matrix
         Matrix4x4 sceneTransform = GameObject.Find(TASKNAME).transform.worldToLocalMatrix;
         FileStream streamtransf = new FileStream(path, FileMode.Append);  
