@@ -1,3 +1,4 @@
+# %%
 import os
 import pandas as pd
 import json
@@ -15,7 +16,6 @@ for s in subjects:
                 jsoneval = [f for f in os.listdir(os.path.join(folder,s,t,tr)) if f.endswith('_eval.json')][0]
                 with open(os.path.join(folder,s,t,tr, jsoneval)) as json_file:
                     eval = json.load(json_file)
-                    print(eval)
                     df = df.append(eval, ignore_index=True)
-                    # print(evaldf)
 print(df)
+df.to_csv("C:\\Users\\alber\\Desktop\\evalbigchungus.csv")
