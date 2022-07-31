@@ -72,17 +72,6 @@ public class LogData : MonoBehaviour
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.py", folderpath+"\\"+TASKNAME+"_graph.py");
         File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.bat", folderpath+"\\"+TASKNAME+"_graph.bat");
 
-        // SAVES SUBJECT AND REPETITION DATA
-        path = folderpath+"\\"+foldername+"_misc.json";
-        FileStream streammisc = new FileStream(path, FileMode.Append);  
-        using (StreamWriter writer = new StreamWriter(streammisc))  
-        {  
-            writer.Write('{ "subject": ');writer.Write(Global.subjectID+"\n");
-            writer.Write();writer.Write();
-            writer.Write();writer.Write();
-            writer.Write();writer.Write();
-        }
-
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
         // Transform matrix

@@ -27,7 +27,9 @@ public class ImportCorrectMeshNormals : MonoBehaviour
                     string[] line_split = line.Split(","[0]);
                     Vector3 point = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
                     surfacePoints.Add(point);
-                } catch (Exception e) { }
+                } catch (Exception e) { 
+                    e = null;
+                }
             }
         }
         alltext = System.IO.File.ReadAllText(path+"\\"+gameObject.name+"_normals.csv");
@@ -40,7 +42,9 @@ public class ImportCorrectMeshNormals : MonoBehaviour
                     string[] line_split = line.Split(","[0]);
                     Vector3 normal = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
                     surfaceNormals.Add(normal);
-                 } catch (Exception e) { }
+                } catch (Exception e) { 
+                    e = null;
+                }
             }
         }
     }
