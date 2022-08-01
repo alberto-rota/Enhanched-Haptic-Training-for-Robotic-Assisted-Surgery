@@ -65,7 +65,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     Vector3 p;
     Vector3 t;
-    float dcom;
+    public float dcom;
 
     float SqDist(Vector3 a, Vector3 b) {
         return Vector3.Dot((a-b),(a-b));
@@ -80,7 +80,6 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         obstaclePoints = obstacle.GetComponent<ImportCorrectMeshNormals>().surfacePoints;
         obstacleNormals = obstacle.GetComponent<ImportCorrectMeshNormals>().surfaceNormals;
-        dcom = Mathf.Pow(threshold+half+5/slope,2);
     }
 
     void FixedUpdate()
@@ -94,6 +93,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             half = gameObject.GetComponent<OVF_UniversalParameters>().half;
             slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
         }
+        dcom = threshold+half+1/slope;
         if (obstaclePoints.Count<=0) {
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE'"+
              "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
@@ -107,7 +107,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         float mind = 1000;
         int j = 0;
         foreach (Vector3 p in obstaclePoints) {
-            float d = SqDist(p, subject.position);
+            float d = Vector3.Distance(p, subject.position);
             // Debug.Log(dcom);
             if (d <= dcom) {
                 closestPcom = closestPcom + p;

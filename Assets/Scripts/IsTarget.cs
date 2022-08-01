@@ -39,7 +39,7 @@ public class IsTarget : MonoBehaviour
         materialtarget = Resources.Load<Material>("Materials/Target");
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");
         //Disable the collider
-        gameObject.GetComponent<SphereCollider>().enabled = true;
+        gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
