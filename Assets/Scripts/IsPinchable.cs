@@ -33,7 +33,7 @@ public class IsPinchable : MonoBehaviour
     public bool restoreGravity = false;
 
     public bool pinched = false;
-    bool pinchable = false;
+    public bool pinchable = false;
 
     void Start()
     {
@@ -45,13 +45,13 @@ public class IsPinchable : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
-        pincherObject = GameObject.Find(Global.tooltip_path).transform;
+        // pincherObject = GameObject.Find(Global.tooltip_path).transform;
     }
 
     void Update()
     {
         bool pinchingAction  = false;
-        if (GameObject.Find("ROBOT").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+        if (pincherObject.GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
             pinchingAction = true;
         }
 
@@ -76,10 +76,10 @@ public class IsPinchable : MonoBehaviour
             if (gameObject.GetComponent<Renderer>().sharedMaterial != materialpinched) {
                 gameObject.GetComponent<Renderer>().sharedMaterial = materialpinched;
             }
-            if (gameObject.GetComponent<FixedJoint>() == null) {
+            // if (gameObject.GetComponent<FixedJoint>() == null) {
                 gameObject.AddComponent<FixedJoint>();
                 gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject.gameObject.GetComponent<Rigidbody>();
-            }
+            // }
         } else {
             if (gameObject.GetComponent<FixedJoint>() != null) {
                 DestroyImmediate(gameObject.GetComponent<FixedJoint>());

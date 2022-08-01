@@ -50,7 +50,7 @@ public class IsPinchableTarget : MonoBehaviour
     void Update()
     {
         bool pinchingAction  = false;
-        if (GameObject.Find("ROBOT").GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+        if (pincherObject.GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
             pinchingAction = true;
         }
         
