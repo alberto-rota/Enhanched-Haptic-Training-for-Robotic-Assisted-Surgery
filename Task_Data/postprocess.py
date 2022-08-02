@@ -17,5 +17,7 @@ for s in subjects:
                 with open(os.path.join(folder,s,t,tr, jsoneval)) as json_file:
                     eval = json.load(json_file)
                     df = df.append(eval, ignore_index=True)
-print(df)
-df.to_csv("C:\\Users\\alber\\Desktop\\evalbigchungus.csv")
+print(df.to_string())
+SAVE_HERE = "C:\\Users\\alber\\Desktop\\evalbigchungus.csv"
+df.to_csv(SAVE_HERE)
+print("Saved to:", SAVE_HERE)
