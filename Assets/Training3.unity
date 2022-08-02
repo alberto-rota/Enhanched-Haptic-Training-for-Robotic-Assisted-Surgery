@@ -307,7 +307,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103163874}
   m_LocalRotation: {x: -0.7071068, y: -0.000000059604645, z: 0.000000029802322, w: 0.70710677}
-  m_LocalPosition: {x: -1.34, y: -0.050000317, z: -1.88}
+  m_LocalPosition: {x: -1.34, y: 0.3, z: -1.88}
   m_LocalScale: {x: 0.62558997, y: 0.6255899, z: 0.6255899}
   m_Children: []
   m_Father: {fileID: 1247831522}
@@ -16125,7 +16125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92116506985230624}
   m_LocalRotation: {x: -0.7075819, y: -0.00019913912, z: 0.0021242201, w: 0.70662826}
-  m_LocalPosition: {x: -0.0043122186, y: -0.0023924196, z: 0.00021402224}
+  m_LocalPosition: {x: -0.01, y: 0.34, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1650054013761265892}
@@ -16710,7 +16710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2169927074887992678}
   m_LocalRotation: {x: -0, y: 0.016071826, z: -0, w: 0.9998709}
-  m_LocalPosition: {x: -1.409, y: -0.10699999, z: 0.025000095}
+  m_LocalPosition: {x: -1.409, y: 0.099, z: 0.025000095}
   m_LocalScale: {x: 0.09401378, y: 0.06500745, z: 0.06500748}
   m_Children:
   - {fileID: 7654779709552763071}
@@ -17314,7 +17314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2988892980378795100}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1650054013761265892}
@@ -26228,7 +26228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7912305235608974712}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1650054013761265892}
@@ -26265,7 +26265,6 @@ GameObject:
   - component: {fileID: 5980783670880340279}
   - component: {fileID: 51273412}
   - component: {fileID: 51273415}
-  - component: {fileID: 5980783670880340280}
   - component: {fileID: 5980783670880340281}
   - component: {fileID: 5980783670880340286}
   - component: {fileID: 5980783670880340287}
@@ -26274,6 +26273,7 @@ GameObject:
   - component: {fileID: 5980783670880340283}
   - component: {fileID: 5980783670880340282}
   - component: {fileID: 5980783670880340288}
+  - component: {fileID: 5980783670880340280}
   m_Layer: 0
   m_Name: ROBOT
   m_TagString: ROBOT
@@ -26336,7 +26336,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5980783670880340276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
@@ -26978,7 +26978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937231517708943834}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1650054013761265892}
