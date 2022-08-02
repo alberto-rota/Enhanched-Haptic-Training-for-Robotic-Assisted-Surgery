@@ -30,23 +30,31 @@ namespace RosSharp.RosBridgeClient
 
         protected override void ReceiveMessage(MessageTypes.Std.String message)
         {
-            if (message.data == "MTMR: control CARTESIAN_SPACE/EFFORT_MODE") {
+            if (message.data == "MTMR: control CARTESIAN_SPACE/EFFORT_MODE" || message.data == "MTML: control CARTESIAN_SPACE/EFFORT_MODE") {
                 mode = "Effort";
-            }else if (message.data == "MTMR: control CARTESIAN_SPACE/TRAJECTORY_MODE") {
+            }else if (message.data == "MTMR: control CARTESIAN_SPACE/TRAJECTORY_MODE" || message.data == "MTML: control CARTESIAN_SPACE/TRAJECTORY_MODE") {
                 mode = "Trajectory";
             }else mode = "Undefined";
         }
 
         private void Update()
         {
+            GameObject robot = GameObject.FindWithTag("ROBOT");
+
             if (mode == "Effort") {
-                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherRight>().enabled = true;                
-                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = true;
-                GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisher>().enabled = true;
+                if (robot.GetComponent<WrenchPublisherRight>() != null) 
+                    robot.GetComponent<WrenchPublisherRight>().enabled = true;
+                if (robot.GetComponent<WrenchPublisherLeft>() != null) 
+                    robot.GetComponent<WrenchPublisherLeft>().enabled = true;
+                if (robot.GetComponent<WrenchPublisher>() != null) 
+                    robot.GetComponent<WrenchPublisher>().enabled = true;
             }else if (mode == "Trajectory") {
-                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherRight>().enabled = false;                
-                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = false;
-                GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisher>().enabled = false;
+                if (robot.GetComponent<WrenchPublisherRight>() != null) 
+                    robot.GetComponent<WrenchPublisherRight>().enabled = false;
+                if (robot.GetComponent<WrenchPublisherLeft>() != null) 
+                    robot.GetComponent<WrenchPublisherLeft>().enabled = false;
+                if (robot.GetComponent<WrenchPublisher>() != null) 
+                    robot.GetComponent<WrenchPublisher>().enabled = false;
             }
         }
     }

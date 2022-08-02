@@ -50,8 +50,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
-    [Range(0,0.001f)]
-    public float graphicVectorGain = 1;
+    [Range(0,0.05f)]
+    public float graphicVectorGain = 0.01f;
     public bool distanceGraphics = true;
 
     

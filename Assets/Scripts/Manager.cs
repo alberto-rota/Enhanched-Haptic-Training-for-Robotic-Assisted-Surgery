@@ -24,7 +24,10 @@ public class Manager : MonoBehaviour
 {
     void Start() {
         gameObject.GetComponent<LogData>().enabled = false;
-        GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = false;
+        if (GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>() != null) 
+           GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().enabled = false;
+        if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) 
+           GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = false;
     }
 
     void Update()
@@ -38,26 +41,49 @@ public class Manager : MonoBehaviour
 
         // Disbles Wrench message when O is pressed
         if(Input.GetKey(KeyCode.O)){
-            // robot.GetComponent<WrenchPublisherRight>().forceOverride = !robot.GetComponent<WrenchPublisherRight>().forceOverride;
-            // robot.GetComponent<WrenchPublisherLeft>().forceOverride = !robot.GetComponent<WrenchPublisherLeft>().forceOverride;
-            robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
+            if (robot.GetComponent<WrenchPublisherRight>() != null) 
+                robot.GetComponent<WrenchPublisherRight>().forceOverride = !robot.GetComponent<WrenchPublisherRight>().forceOverride;
+            if (robot.GetComponent<WrenchPublisherLeft>() != null) 
+                robot.GetComponent<WrenchPublisherLeft>().forceOverride = !robot.GetComponent<WrenchPublisherLeft>().forceOverride;
+            if (robot.GetComponent<WrenchPublisher>() != null) 
+                robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
         }
         
         // Toggles the VFs when the V key is pressed
         if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
-            robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
-            if (robot.GetComponent<SumForces>().enabled) {
-                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
-                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
-                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-            } else {
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
-                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            if (robot.GetComponent<SumForces>() != null) {
+                robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
+                if (robot.GetComponent<SumForces>().enabled) {
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                } else {
+                    GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                }
             }
+
+            if (robot.GetComponent<SumForcesRL>() != null) {
+                robot.GetComponent<SumForcesRL>().enabled = !robot.GetComponent<SumForcesRL>().enabled;
+                if (robot.GetComponent<SumForcesRL>().enabled) {
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                } else {
+                    GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight = Vector3.zero;            
+                    GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceLeft = Vector3.zero;            
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                }
+            }
+
         }
 
         // Starts data logging when the R key is pressed

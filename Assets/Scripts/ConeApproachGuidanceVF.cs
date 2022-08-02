@@ -44,8 +44,8 @@ public class ConeApproachGuidanceVF : MonoBehaviour
 
     [Header("Graphics")]
     public bool graphics = true;
-    [Range(0,0.001f)]
-    public float graphicVectorGain = 1;
+    [Range(0,0.05f)]
+    public float graphicVectorGain = 0.01f;
     public int coneResolution = 10;
 
     [Header("Output")]

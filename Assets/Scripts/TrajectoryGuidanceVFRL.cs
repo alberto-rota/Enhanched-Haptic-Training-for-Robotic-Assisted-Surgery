@@ -22,10 +22,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class TrajectoryGuidanceVF : MonoBehaviour
+public class TrajectoryGuidanceVFRL : MonoBehaviour
 {
     [Header("Transforms")]
     public Transform subject;
+    public bool left = false;
 
     [Header("Virtual Fixture")]
     public Transform Trajectory;
@@ -61,6 +62,11 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         if (Trajectory == null) {
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
+        }
+        if (subject.GetComponent<IsPinchablePlus>().whopinched == 2) {
+            left = true;
+        } else {
+            left = false;
         }
         // DISTANCE
         float mindist = 100000;
