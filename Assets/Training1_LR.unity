@@ -251,34 +251,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12653361}
   m_Mesh: {fileID: 2687839602549289381, guid: 1a6758d21f7d0cd468c363a76f2b87ac, type: 3}
---- !u!21 &195243589
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!1 &225043799
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +302,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8313598463763446393, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 1396464230}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &689511537
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &728039608
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +464,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8534713061865326101, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 1396464230}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &955701633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8534713061865326100, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 1396464230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &955701638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955701633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sc: 0.0075
 --- !u!1001 &1117017042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -604,6 +622,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8534713061865326101, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0091
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534713061865326101, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534713061865326101, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0039
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
 --- !u!4 &1516937528 stripped
@@ -611,6 +641,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 1396464230}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1562846370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8313598463763446394, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 1396464230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1562846375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562846370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sc: 0.0075
 --- !u!1 &1787753657
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +778,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 195243589}
+  - {fileID: 689511537}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9724,11 +9772,12 @@ GameObject:
   - component: {fileID: 6210097203925862043}
   - component: {fileID: 6210097203925862045}
   - component: {fileID: 6210097203925862047}
-  - component: {fileID: 6210097203925862037}
   - component: {fileID: 6210097203925862039}
   - component: {fileID: 6210097203925862038}
   - component: {fileID: 6210097203925862041}
   - component: {fileID: 6210097203925862040}
+  - component: {fileID: 6210097203925862036}
+  - component: {fileID: 6210097203925862037}
   m_Layer: 0
   m_Name: ROBOT
   m_TagString: ROBOT
@@ -9736,6 +9785,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6210097203925862036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210097203925862035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253aaf0b536fe2949a30604d2837c55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/MTMR/status
+  TimeStep: 0
+  mode: 
 --- !u!114 &6210097203925862037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9745,10 +9809,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6210097203925862035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f48907862d4cbe4db10b62198aaac23, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c78bcedd45dc89448f61cfcb2758da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /dvrk/MTMR/status
+  Topic: /dvrk/MTML/status
   TimeStep: 0
   mode: 
 --- !u!114 &6210097203925862038

@@ -24,6 +24,7 @@ public class IsPinchablePlus : MonoBehaviour
     Material materialpinched;
     Material materialown;
     Material materialpinchable;
+    Material materialswitchable;
     Vector3 tool;
     Vector3 tool2;
     Vector3 target;
@@ -45,6 +46,7 @@ public class IsPinchablePlus : MonoBehaviour
         materialpinched = Resources.Load<Material>("Materials/Pinched");
         materialown = gameObject.GetComponent<Renderer>().sharedMaterial;
         materialpinchable = Resources.Load<Material>("Materials/Pinchable");
+        materialswitchable = Resources.Load<Material>("Materials/Switchable");
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
@@ -85,7 +87,7 @@ public class IsPinchablePlus : MonoBehaviour
         if (d < targetRadius) {
             pinchable1 = true;
             whopinchable = 1;
-            if (pinchingAction) {
+            if (pinchingAction && !pinchingAction2) {
                 pinched1 = true;
                 whopinched = 1;
             } else {
@@ -101,7 +103,7 @@ public class IsPinchablePlus : MonoBehaviour
         if (d2 < targetRadius) {
             pinchable2 = true;
             whopinchable = 2;
-            if (pinchingAction2) {
+            if (pinchingAction2 && !pinchingAction) {
                 pinched2 = true;
                 whopinched = 2;
             } else {
@@ -152,6 +154,9 @@ public class IsPinchablePlus : MonoBehaviour
             if (gameObject.GetComponent<Renderer>().sharedMaterial != materialown) {
                 gameObject.GetComponent<Renderer>().sharedMaterial = materialown;
             }
+        }
+        if (d < targetRadius && d2 < targetRadius) {
+            gameObject.GetComponent<Renderer>().sharedMaterial = materialswitchable;
         }
     }
 }
