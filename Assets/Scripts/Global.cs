@@ -21,7 +21,7 @@ public static class Global
 {
     public static string subjectID = "X";
 
-    public static float aid = 1f;
+    public static float assistance = 1f;
 
     public const string tooltip_path = @"/ROBOT/world/base_link/suj_psm1_L0/suj_psm1_L1/suj_psm1_L2/suj_psm1_L3/"+
     "suj_psm1_L4/psm1/psm1_base_link/psm1_yaw_link/psm1_pitch_back_link/Collisions/psm1_pitch_end_link/"+

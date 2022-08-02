@@ -51,7 +51,7 @@ namespace RosSharp.RosBridgeClient
             Vector3 rosforce = Vector3.zero;
 
             if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) {
-                unityforce = GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce;
+                unityforce = GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce*Global.assistance;
             }else {
                 unityforce = Vector3.zero;
             }
