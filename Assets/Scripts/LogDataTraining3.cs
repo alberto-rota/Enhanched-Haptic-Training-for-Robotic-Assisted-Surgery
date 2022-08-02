@@ -43,7 +43,7 @@ public class LogDataTraining3 : MonoBehaviour
     public void Start() {
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();
-        foreach (MonoBehaviour s in GameObject.Find("ROBOT").GetComponents<MonoBehaviour>()) {
+        foreach (MonoBehaviour s in GameObject.FindWithTag("ROBOT").GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "ConeApproachGuidanceVF"||
                  s.GetType().Name == "TrajectoryGuidanceVF"||
                  s.GetType().Name == "ObstacleAvoidanceForceFieldVF"||

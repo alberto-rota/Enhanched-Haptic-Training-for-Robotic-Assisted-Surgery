@@ -506,6 +506,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 962049523}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &962049525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8313598463763446393, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 962049523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1338592085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6497,7 +6502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 962049525}
   reached: 0
 --- !u!1 &5066100958803192439
 GameObject:
@@ -7771,6 +7776,8 @@ MonoBehaviour:
   - {fileID: 6210097205200731356}
   minForce: 0
   maxForce: 3
+  totalForceRight: {x: 0, y: 0, z: 0}
+  totalForceLeft: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
 --- !u!114 &6210097205200731350
@@ -7790,20 +7797,6 @@ MonoBehaviour:
   JointNames: []
   JointStateWriters: []
   jawPosition: 0
---- !u!114 &6210097205200731351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210097205200731354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /dvrk/MTMR/set_wrench_body
-  forceOverride: 0
 --- !u!4 &6210097205200731352
 Transform:
   m_ObjectHideFlags: 0
@@ -7835,14 +7828,14 @@ GameObject:
   - component: {fileID: 6210097205200731355}
   - component: {fileID: 6210097205200731346}
   - component: {fileID: 6210097205200731348}
-  - component: {fileID: 6210097205200731351}
   - component: {fileID: 6210097205200731350}
   - component: {fileID: 6210097205200731349}
   - component: {fileID: 6210097205200731356}
   - component: {fileID: 6210097205200731357}
+  - component: {fileID: 6210097205200731358}
   m_Layer: 0
   m_Name: ROBOT
-  m_TagString: Untagged
+  m_TagString: ROBOT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7872,7 +7865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a49938f2e7cf714a90bc25ba5a2fabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 962049525}
   target: {fileID: 7047454086635890896}
   configuring: 0
   coneApertureDegrees: 4.5
@@ -7885,8 +7878,8 @@ MonoBehaviour:
   coneResolution: 10
   force: {x: -0, y: -0, z: -0}
   forceMagnitude: 0
-  distance: 0.000000016763806
-  delta: {x: 0.02566874, y: -0.06695813, z: 0.12624621}
+  distance: 0
+  delta: {x: 0.034217, y: -1.0395956, z: -2.925774}
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &6210097205200731357
 MonoBehaviour:
@@ -7903,6 +7896,20 @@ MonoBehaviour:
   Topic: /dvrk/MTMR/status
   TimeStep: 0
   mode: 
+--- !u!114 &6210097205200731358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210097205200731354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/MTMR/set_wrench_body
+  forceOverride: 0
 --- !u!4 &6216304296840063013
 Transform:
   m_ObjectHideFlags: 0

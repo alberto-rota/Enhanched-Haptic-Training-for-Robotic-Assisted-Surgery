@@ -24,12 +24,12 @@ public class Manager : MonoBehaviour
 {
     void Start() {
         gameObject.GetComponent<LogData>().enabled = false;
-        GameObject.Find("ROBOT").GetComponent<SumForces>().enabled = false;
+        GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = false;
     }
 
     void Update()
     {
-        GameObject robot = GameObject.Find("ROBOT");
+        GameObject robot = GameObject.FindWithTag("ROBOT");
 
         // Quits when the ESC key is pressed
         if(Input.GetKey(KeyCode.Escape)){
@@ -52,7 +52,7 @@ public class Manager : MonoBehaviour
                 GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
                 GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
             } else {
-                GameObject.Find("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
                 GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
                 GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
@@ -94,6 +94,8 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
+        }else if(Input.GetKey(KeyCode.Alpha9)){
+            SceneManager.LoadScene("Assets/Training1_LR.unity");
         }
 
         // The PLUS pedal goes to the next scene

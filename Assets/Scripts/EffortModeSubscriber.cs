@@ -40,13 +40,13 @@ namespace RosSharp.RosBridgeClient
         private void Update()
         {
             if (mode == "Effort") {
-                // GameObject.Find("ROBOT").GetComponent<WrenchPublisherRight>().enabled = true;                
-                // GameObject.Find("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = true;
-                GameObject.Find("ROBOT").GetComponent<WrenchPublisher>().enabled = true;
+                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherRight>().enabled = true;                
+                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = true;
+                GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisher>().enabled = true;
             }else if (mode == "Trajectory") {
-                // GameObject.Find("ROBOT").GetComponent<WrenchPublisherRight>().enabled = false;                
-                // GameObject.Find("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = false;
-                GameObject.Find("ROBOT").GetComponent<WrenchPublisher>().enabled = false;
+                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherRight>().enabled = false;                
+                // GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisherLeft>().enabled = false;
+                GameObject.FindWithTag("ROBOT").GetComponent<WrenchPublisher>().enabled = false;
             }
         }
     }

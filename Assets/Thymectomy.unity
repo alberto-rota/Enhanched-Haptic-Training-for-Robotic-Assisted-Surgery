@@ -289,6 +289,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 713276524}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &713276526 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8313598463763446393, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 713276524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &908720774
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &53598880016580288
 Rigidbody:
@@ -4083,7 +4088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &3389636312464963641
 Rigidbody:
@@ -6183,7 +6188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &5099733351252682966
 Rigidbody:
@@ -6648,7 +6653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &5471678236226136085
 Rigidbody:
@@ -7103,14 +7108,14 @@ GameObject:
   - component: {fileID: 5980783670880340277}
   - component: {fileID: 5980783670880340284}
   - component: {fileID: 5980783670880340282}
-  - component: {fileID: 5980783670880340281}
   - component: {fileID: 5980783670880340280}
   - component: {fileID: 5980783670880340283}
   - component: {fileID: 5980783670880340279}
   - component: {fileID: 5980783670880340285}
+  - component: {fileID: 5980783670880340281}
   m_Layer: 0
   m_Name: ROBOT
-  m_TagString: Untagged
+  m_TagString: ROBOT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7159,7 +7164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 713276526}
   obstacle: {fileID: 2851395999636381172}
   obstaclePoints: []
   obstacleNormals: []
@@ -7205,7 +7210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5980783670880340276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
@@ -7242,6 +7247,8 @@ MonoBehaviour:
   - {fileID: 5980783670880340279}
   minForce: 0
   maxForce: 3
+  totalForceRight: {x: 0, y: 0, z: 0}
+  totalForceLeft: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
 --- !u!114 &5980783670880340284
@@ -7680,7 +7687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &6360852720802209138
 Rigidbody:
@@ -14816,7 +14823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Thymectomy_meshes
   surfacePoints: []
   surfaceNormals: []
@@ -15892,7 +15899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 713276526}
   reached: 0
 --- !u!54 &9036412868946985453
 Rigidbody:

@@ -43,7 +43,7 @@ public class LogData : MonoBehaviour
 
     public void OnEnable() {
         TASKNAME = SceneManager.GetActiveScene().name;
-        robot = GameObject.Find("ROBOT");
+        robot = GameObject.FindWithTag("ROBOT");
 
         // Checks which VFs are activated and enabled
         activeConstraints = new List<MonoBehaviour>();

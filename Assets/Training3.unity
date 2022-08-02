@@ -413,7 +413,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103163874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
@@ -483,6 +483,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 576326118}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &576326120 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8313598463763446393, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 576326118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &864522596
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 576326120}
   restoreGravity: 0
   pinched: 0
   pinchable: 0
@@ -621,7 +626,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864522596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
@@ -12079,7 +12084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Training3_meshes
   surfacePoints: []
   surfaceNormals: []
@@ -15491,7 +15496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Training3_meshes
   surfacePoints: []
   surfaceNormals: []
@@ -16321,7 +16326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Training3_meshes
   surfacePoints: []
   surfaceNormals: []
@@ -23967,7 +23972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Training3_meshes
   surfacePoints: []
   surfaceNormals: []
@@ -26271,7 +26276,7 @@ GameObject:
   - component: {fileID: 5980783670880340288}
   m_Layer: 0
   m_Name: ROBOT
-  m_TagString: Untagged
+  m_TagString: ROBOT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26356,6 +26361,8 @@ MonoBehaviour:
   - {fileID: 5980783670880340282}
   minForce: 0
   maxForce: 3
+  totalForceRight: {x: 0, y: 0, z: 0}
+  totalForceLeft: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
 --- !u!114 &5980783670880340282
@@ -26370,7 +26377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 576326120}
   obstacle: {fileID: 8987013890712997640}
   obstaclePoints: []
   obstacleNormals: []
@@ -26402,7 +26409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 576326120}
   obstacle: {fileID: 5921972519654446000}
   obstaclePoints: []
   obstacleNormals: []
@@ -26434,7 +26441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 576326120}
   obstacle: {fileID: 792479492841609278}
   obstaclePoints: []
   obstacleNormals: []
@@ -26466,7 +26473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 576326120}
   obstacle: {fileID: 2462790900974953412}
   obstaclePoints: []
   obstacleNormals: []
@@ -26514,7 +26521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3fcb59d86db37545b7a3d4205ae9b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 576326120}
   obstacle: {fileID: 6608703784857774708}
   obstaclePoints: []
   obstacleNormals: []
@@ -43141,7 +43148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Training3_meshes
   surfacePoints: []
   surfaceNormals: []

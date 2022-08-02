@@ -242,6 +242,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 1351970788}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1351970790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8313598463763446393, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+  m_PrefabInstance: {fileID: 1351970788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1925600671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,7 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!114 &119198657561308922
 MonoBehaviour:
@@ -835,7 +840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!114 &288330521004356052
 MonoBehaviour:
@@ -32737,7 +32742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!114 &4378048670604938032
 MonoBehaviour:
@@ -33031,7 +33036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!135 &4493460564628242887
 SphereCollider:
@@ -34161,7 +34166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!135 &5642656341854113653
 SphereCollider:
@@ -34397,7 +34402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: 0
-  pincherObject: {fileID: 0}
+  pincherObject: {fileID: 1351970790}
   reached: 0
 --- !u!1 &5642656341877799615
 GameObject:
@@ -35257,14 +35262,14 @@ GameObject:
   - component: {fileID: 6210097203925862034}
   - component: {fileID: 6210097203925862043}
   - component: {fileID: 6210097203925862045}
-  - component: {fileID: 6210097203925862037}
   - component: {fileID: 6210097203925862047}
   - component: {fileID: 6210097203925862044}
   - component: {fileID: 6210097203925862036}
   - component: {fileID: 6210097203925862038}
+  - component: {fileID: 6210097203925862037}
   m_Layer: 0
   m_Name: ROBOT
-  m_TagString: Untagged
+  m_TagString: ROBOT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35281,7 +35286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5efb8a236fc56594d94f54c1b7afc6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subject: {fileID: 0}
+  subject: {fileID: 1351970790}
   surface: {fileID: 8631050450010647316}
   surfacePoints:
   - {x: -1.4778049, y: 0.021259926, z: -3.1820803}
@@ -61966,11 +61971,11 @@ MonoBehaviour:
   vectorsGraphics: 1
   graphicVectorGain: 1
   distanceGraphics: 1
-  force: {x: 0, y: 0, z: 0}
-  forceMagnitude: 1
-  closestPcom: {x: 0, y: 0, z: 0}
-  closestP: {x: 0, y: 0, z: 0}
-  distance: 0.08240668
+  force: {x: 0.13802814, y: -0.5019158, z: 0.85383177}
+  forceMagnitude: 0.99999994
+  closestPcom: {x: -1.4932878, y: -0.0029316545, z: -3.2273397}
+  closestP: {x: -1.4932878, y: -0.0029316545, z: -3.2273397}
+  distance: 0.11756994
   distMapped: 1
 --- !u!114 &6210097203925862037
 MonoBehaviour:
@@ -61981,7 +61986,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6210097203925862035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
+  m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
@@ -62030,6 +62035,8 @@ MonoBehaviour:
   activeConstraints: []
   minForce: 0.16
   maxForce: 3
+  totalForceRight: {x: 0, y: 0, z: 0}
+  totalForceLeft: {x: 0, y: 0, z: 0}
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
 --- !u!114 &6210097203925862045

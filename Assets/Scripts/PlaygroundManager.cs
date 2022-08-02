@@ -22,16 +22,18 @@ namespace RosSharp.RosBridgeClient{
 
 public class PlaygroundManager : MonoBehaviour
 {
+    bool fakelogdata = false;
+
     void Start() {
         gameObject.GetComponent<LogData>().enabled = false;
-        GameObject.Find("ROBOT").GetComponent<SumForces>().enabled = true;
-        GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;
-        GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;
+        GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = true;
+        GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;
+        GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;
     }
 
     void Update()
     {
-        GameObject robot = GameObject.Find("ROBOT");
+        GameObject robot = GameObject.FindWithTag("ROBOT");
 
         // Quits when the ESC key is pressed
         if(Input.GetKey(KeyCode.Escape)){
@@ -47,33 +49,33 @@ public class PlaygroundManager : MonoBehaviour
         
         // Toggles the VFs when the V key is pressed
         if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
-            if (GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == false && 
-                GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == false) {
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = true;          
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0.002f;  
-                    GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;            
+            if (GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == false && 
+                GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == false) {
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = true;          
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0.002f;  
+                    GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;            
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE: AVOIDANCE";
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
                     GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE: AVOIDANCE";    
                     GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
 
-            }else if (GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == true && 
-                GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == false) {
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;            
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0f;  
-                    GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = true;            
+            }else if (GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == true && 
+                GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == false) {
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;            
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0f;  
+                    GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = true;            
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE: GUIDANCE";
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
                     GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE: GUIDANCE";    
                     GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
 
-            }else if (GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == false && 
-                GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == true) {
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;            
-                    GameObject.Find("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0f;  
-                    GameObject.Find("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;            
-                    GameObject.Find("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
-                    // GameObject.Find("ROBOT").GetComponent<SumForces>().enabled = false;            
+            }else if (GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled == false && 
+                GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled == true) {
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;            
+                    GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().obstacle.gameObject.GetComponent<ImportCorrectMeshNormals>().normalVectorsLength = 0f;  
+                    GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;            
+                    GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
+                    // GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = false;            
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
                     GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
                     GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
@@ -94,13 +96,11 @@ public class PlaygroundManager : MonoBehaviour
             // }
         }
 
-        // Starts data logging when the R key is pressed
+        // Starts data logging when the R key is pressed [FAKE, ONLY FOR SHOWING]
         if(Input.GetKeyDown(KeyCode.R) || gameObject.GetComponent<PedalBiCoagSubscriber>().pressed){    
-            if (gameObject.GetComponent<LogData>() != null){
-                gameObject.GetComponent<LogData>().enabled = !gameObject.GetComponent<LogData>().enabled;
-            }
+            fakelogdata = !fakelogdata;
 
-            if (gameObject.GetComponent<LogData>().enabled) {
+            if (fakelogdata) {
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
                 GameObject.Find("Text/CanvasVF/LoggingText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
                 GameObject.Find("Text/CanvasVFL/LoggingText").GetComponent<UnityEngine.UI.Text>().text="\n\nGO";
@@ -128,7 +128,10 @@ public class PlaygroundManager : MonoBehaviour
             SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
+        }else if(Input.GetKey(KeyCode.Alpha9)){
+            SceneManager.LoadScene("Assets/Training1_LR.unity");
         }
+        
 
         // The PLUS pedal goes to the next scene
         if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
