@@ -251,6 +251,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12653361}
   m_Mesh: {fileID: 2687839602549289381, guid: 1a6758d21f7d0cd468c363a76f2b87ac, type: 3}
+--- !u!21 &195243589
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1 &225043799
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,34 +459,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728039608}
   m_Mesh: {fileID: -8898385632266283163, guid: 1a6758d21f7d0cd468c363a76f2b87ac, type: 3}
---- !u!21 &751435508
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!4 &850056883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8534713061865326101, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
@@ -730,7 +730,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 751435508}
+  - {fileID: 195243589}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9724,10 +9724,11 @@ GameObject:
   - component: {fileID: 6210097203925862043}
   - component: {fileID: 6210097203925862045}
   - component: {fileID: 6210097203925862047}
-  - component: {fileID: 6210097203925862044}
-  - component: {fileID: 6210097203925862036}
   - component: {fileID: 6210097203925862037}
+  - component: {fileID: 6210097203925862039}
   - component: {fileID: 6210097203925862038}
+  - component: {fileID: 6210097203925862041}
+  - component: {fileID: 6210097203925862040}
   m_Layer: 0
   m_Name: ROBOT
   m_TagString: ROBOT
@@ -9735,29 +9736,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6210097203925862036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210097203925862035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a11cab4d901b4141be8c74c78aa8e5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  subject: {fileID: 644626563735826627}
-  Trajectory: {fileID: 1787753658}
-  gain: 30
-  graphics: 0
-  graphicVectorGain: 1
-  velocity: {x: 0, y: 0, z: 0}
-  deviation: {x: 0.0009543896, y: 0.0014391672, z: 0.0060777664}
-  distance: 0.0063183308
-  force: {x: 0, y: 0, z: 0}
-  f_mag: 0
-  f_dir: {x: 0, y: 0, z: 0}
 --- !u!114 &6210097203925862037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9782,7 +9760,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 6210097203925862035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c769fe919b153143b478de62c79a77b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeConstraints:
+  - {fileID: 6210097203925862039}
+  minForce: 0
+  maxForce: 3
+  totalForceRight: {x: 0, y: 0, z: 0}
+  totalForceLeft: {x: 0, y: 0, z: 0}
+  totalForceMagnitudeRight: 0
+  totalForceMagnitudeLeft: 0
+--- !u!114 &6210097203925862039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210097203925862035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38603f7db1b45674d8742c3f3de59167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subject: {fileID: 644626563735826627}
+  left: 0
+  Trajectory: {fileID: 1787753658}
+  gain: 30
+  graphics: 1
+  graphicVectorGain: 0.001
+  velocity: {x: 0, y: 0, z: 0}
+  deviation: {x: 0.0009543896, y: 0.0014391672, z: 0.0060777664}
+  distance: 0.0063183308
+  force: {x: 0, y: 0, z: 0}
+  f_mag: 0
+  f_dir: {x: 0, y: 0, z: 0}
+--- !u!114 &6210097203925862040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210097203925862035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ed87b8754440b3439a5ced2f0703b47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /dvrk/MTML/set_wrench_body
+  forceOverride: 0
+--- !u!114 &6210097203925862041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6210097203925862035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015bddcd9e8771945b1e40e490b791b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
@@ -9801,26 +9837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IPAddress: 192.168.1.2
   Port: 9090
---- !u!114 &6210097203925862044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210097203925862035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b147c10b862fec84cba96b70a43f1bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeConstraints:
-  - {fileID: 6210097203925862036}
-  minForce: 0
-  maxForce: 3
-  totalForceRight: {x: 0, y: 0, z: 0}
-  totalForceLeft: {x: 0, y: 0, z: 0}
-  totalForce: {x: 0, y: 0, z: 0}
-  totalForceMagnitude: 0
 --- !u!114 &6210097203925862045
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -569,7 +569,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1972552653}
+  - {fileID: 1912635441}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3155,7 +3155,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!21 &1972552653
+--- !u!21 &1912635441
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -4675,7 +4675,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960069292704778945}
   m_LocalRotation: {x: -0, y: 0.016071826, z: -0, w: 0.9998709}
-  m_LocalPosition: {x: -1.645, y: 0.057, z: 0.033}
+  m_LocalPosition: {x: -1.645, y: 0.099, z: 0.033}
   m_LocalScale: {x: 0.09401378, y: 0.06500745, z: 0.06500748}
   m_Children:
   - {fileID: 8004457948705255192}
@@ -6946,8 +6946,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8576854004707882458}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2057661, y: 3.5344791, z: 3.6524448}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.2057661, y: 3.5345, z: 3.6524448}
+  m_LocalScale: {x: 1, y: 1.4858, z: 1}
   m_Children: []
   m_Father: {fileID: 5722052843970552262}
   m_RootOrder: 2
@@ -12428,6 +12428,18 @@ PrefabInstance:
     - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
       propertyPath: m_Shadows.m_NearPlane
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574469, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.1086
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574469, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1889
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574469, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0509
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
