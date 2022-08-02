@@ -28,7 +28,7 @@ public class ImportCorrectMeshNormals : MonoBehaviour
                     Vector3 point = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
                     surfacePoints.Add(point);
                 } catch (Exception e) { 
-                    e = null;
+                    if (e == null) {}
                 }
             }
         }
@@ -43,7 +43,7 @@ public class ImportCorrectMeshNormals : MonoBehaviour
                     Vector3 normal = new Vector3(float.Parse(line_split[0]), float.Parse(line_split[1]), float.Parse(line_split[2]));
                     surfaceNormals.Add(normal);
                 } catch (Exception e) { 
-                    e = null;
+                    if (e == null) {}
                 }
             }
         }
