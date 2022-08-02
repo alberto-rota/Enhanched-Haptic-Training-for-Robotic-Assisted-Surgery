@@ -50,8 +50,14 @@ public class IsPinchablePlus : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
-        pincherObject = GameObject.Find(Global.tooltip_path).transform;
-        pincherObject2 = GameObject.Find(Global.tooltip_path2).transform;
+        
+        if (pincherObject == null) {
+            pincherObject = GameObject.Find(Global.tooltip_path).transform;
+        }
+        
+        if (pincherObject2 == null) {
+            pincherObject2 = GameObject.Find(Global.tooltip_path2).transform;
+        }
     }
 
     void Update()

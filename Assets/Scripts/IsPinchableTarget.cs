@@ -36,6 +36,7 @@ public class IsPinchableTarget : MonoBehaviour
         if (pincherObject == null){
             pincherObject = GameObject.Find(Global.tooltip_path).transform;
         }
+        
         materialtarget = Resources.Load<Material>("Materials/Target");
         materialtargethit = Resources.Load<Material>("Materials/TargetReached");
         materialtargetpinchable = Resources.Load<Material>("Materials/TargetPinchable");

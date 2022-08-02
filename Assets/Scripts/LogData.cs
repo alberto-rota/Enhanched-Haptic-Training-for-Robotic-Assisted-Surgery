@@ -58,7 +58,8 @@ public class LogData : MonoBehaviour
             }
         }   
 
-        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Subject"+Global.subjectID;
+        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Subject";
+        saveTo += Global.subjectID;
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
         folderpath = saveTo+"\\"+TASKNAME+"\\"+foldername;

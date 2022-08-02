@@ -33,6 +33,8 @@ public class SumForces : MonoBehaviour
     public static float damp = 0f;
 
     [Header("Output")]
+    public Vector3 totalForceRight = Vector3.zero;
+    public Vector3 totalForceLeft = Vector3.zero;
     public Vector3 totalForce = Vector3.zero;
     public float totalForceMagnitude;
 

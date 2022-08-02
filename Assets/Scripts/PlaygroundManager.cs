@@ -40,6 +40,8 @@ public class PlaygroundManager : MonoBehaviour
 
         // Disbles Wrench message when O is pressed
         if(Input.GetKey(KeyCode.O)){
+            // robot.GetComponent<WrenchPublisherRight>().forceOverride = !robot.GetComponent<WrenchPublisherRight>().forceOverride;
+            // robot.GetComponent<WrenchPublisherLeft>().forceOverride = !robot.GetComponent<WrenchPublisherLeft>().forceOverride;
             robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
         }
         

@@ -45,7 +45,9 @@ public class IsPinchable : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
-        // pincherObject = GameObject.Find(Global.tooltip_path).transform;
+        if (pincherObject == null) {
+            pincherObject = GameObject.Find(Global.tooltip_path).transform;
+        }
     }
 
     void Update()
@@ -76,10 +78,10 @@ public class IsPinchable : MonoBehaviour
             if (gameObject.GetComponent<Renderer>().sharedMaterial != materialpinched) {
                 gameObject.GetComponent<Renderer>().sharedMaterial = materialpinched;
             }
-            // if (gameObject.GetComponent<FixedJoint>() == null) {
+            if (gameObject.GetComponent<FixedJoint>() == null) {
                 gameObject.AddComponent<FixedJoint>();
                 gameObject.GetComponent<FixedJoint>().connectedBody = pincherObject.gameObject.GetComponent<Rigidbody>();
-            // }
+            }
         } else {
             if (gameObject.GetComponent<FixedJoint>() != null) {
                 DestroyImmediate(gameObject.GetComponent<FixedJoint>());
