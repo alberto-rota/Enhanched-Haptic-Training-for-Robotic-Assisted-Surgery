@@ -4,18 +4,36 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
-
 \geometry{
-left=25mm,
-right=25mm,
-top=20mm,
-bottom=25mm
-}
+    left=25mm,
+    right=25mm,
+    top=20mm,
+    bottom=25mm
+    }
 
-\title{\textbf{Report N°1 MSc Thesis: Active Constraints}}
-\author{\textbf{Alberto Rota} - \textit{Supervisor: Prof. Elena De Momi}}
+% Keep Last in the preamble 
+\usepackage{subfiles}
+
+\title{\textbf{Implementation and assessment of Assistance-as-Needed Virtual Fixtures for Surgical Training with a \textit{daVinci} surgical robot: an experimental study}
+\\
+\vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
+\\
+\vspace{0.5cm}\textit{\small{Academic year 2022/2023}}}
+
+\author{}
 \date{}
 
 \begin{document}
-    
+\maketitle
+{\large\noindent \textbf{Candidate: \textit{Alberto Rota}}\newline
+\textbf{Supervisor: \textit{prof. Elena de Momi}}}
+\vspace{1cm}
+
+\section*{Abstract}
+\subfile{Abstract/abstract.tex}
+% \section{Introduction}
+\subfile{Introduction/introduction.tex}
+\section{State of the art}
+\subfile{State_of_the_art/preamble.tex}
+
 \end{document}
