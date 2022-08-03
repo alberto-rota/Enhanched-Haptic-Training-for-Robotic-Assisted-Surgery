@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class SubjectIDSetter : MonoBehaviour
 {
     void Start()
@@ -15,15 +16,8 @@ public class SubjectIDSetter : MonoBehaviour
         }else if (gameObject.GetComponent<UnityEngine.UI.Text>().text != ""){
             Global.subjectID = gameObject.GetComponent<UnityEngine.UI.Text>().text;
         }
-        // if (gameObject.GetComponent<UnityEngine.UI.Text>().text != "" && Global.subjectID == "X"){
-        //     Global.subjectID = gameObject.GetComponent<UnityEngine.UI.Text>().text;
-        // }
 
+        GameObject.Find("/Text/CanvasID/SubjectIDLabel").GetComponent<UnityEngine.UI.Text>().text = "SubjectID: " + Global.subjectID;
 
-        if (Global.subjectID != "X") {
-            GameObject.Find("/Text/Canvas/SubjectIDLabel").GetComponent<UnityEngine.UI.Text>().color = Color.black;
-        } else {
-            GameObject.Find("/Text/Canvas/SubjectIDLabel").GetComponent<UnityEngine.UI.Text>().color = Color.red;
-        }
     }
 }

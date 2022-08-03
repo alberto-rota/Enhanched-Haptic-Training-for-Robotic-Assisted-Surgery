@@ -43,7 +43,7 @@ public class IsPinchable : MonoBehaviour
         //Disable the collider
         gameObject.GetComponent<SphereCollider>().enabled = false;
         gameObject.GetComponent<Rigidbody>().mass = 0;
-        gameObject.GetComponent<Rigidbody>().useGravity = false;
+        // gameObject.GetComponent<Rigidbody>().useGravity = false;
 
         if (pincherObject == null) {
             pincherObject = GameObject.Find(Global.tooltip_path).transform;
