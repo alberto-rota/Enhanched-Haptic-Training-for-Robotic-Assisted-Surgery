@@ -6378,6 +6378,7 @@ GameObject:
   - component: {fileID: 5065878586786909015}
   - component: {fileID: 5065878586786909000}
   - component: {fileID: 5065878586786909001}
+  - component: {fileID: 5065878586786909016}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -6400,6 +6401,18 @@ MonoBehaviour:
   graphics: 0
   pincherObject: {fileID: 193013292}
   reached: 0
+--- !u!122 &5065878586786909016
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065878586786909014}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294963029
+  m_Size: 0.02
 --- !u!1 &5066100958803192439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7765,7 +7778,7 @@ MonoBehaviour:
   target: {fileID: 7047454086635890896}
   configuring: 0
   coneApertureDegrees: 4.5
-  gain: 3
+  gain: 1.5
   half: 0.002
   slope: 499.99997
   relaxDistance: 8
@@ -8839,7 +8852,7 @@ Transform:
   m_GameObject: {fileID: 5065878586786909014}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0.0145}
-  m_LocalScale: {x: 0.0053538163, y: 0.005353815, z: 0.005353815}
+  m_LocalScale: {x: 0.005741968, y: 0.0057419664, z: 0.0057419664}
   m_Children: []
   m_Father: {fileID: 3382376168329181669}
   m_RootOrder: 0

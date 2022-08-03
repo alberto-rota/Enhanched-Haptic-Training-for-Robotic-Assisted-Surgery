@@ -3482,6 +3482,7 @@ GameObject:
   - component: {fileID: 3618846260177619102}
   - component: {fileID: 3618846260177619101}
   - component: {fileID: 3618846260177619100}
+  - component: {fileID: 3618846260177619103}
   m_Layer: 0
   m_Name: ConeTarget
   m_TagString: Untagged
@@ -3533,6 +3534,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.9999999
   m_Center: {x: -0.00000032782552, y: -0.00000032782552, z: 0.00000047683716}
+--- !u!122 &3618846260177619103
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3618846260177619099}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294963029
+  m_Size: 0.01
 --- !u!1 &3621894320352993012
 GameObject:
   m_ObjectHideFlags: 0

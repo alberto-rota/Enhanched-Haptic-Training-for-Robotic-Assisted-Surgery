@@ -1,74 +1,37 @@
+// Copyright (c) 2022 Alberto Rota
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class IsObstacle : MonoBehaviour
 {
-    Material materialown;
-    Material materialhit;
-    public Vector3 psm;
-    float d;
-    public float mindist;
-    public bool hit = false;
     public Transform subject;
-    public List<Vector3> obstaclePoints;
-    public List<Vector3> surfaceNormals;
+    GameObject robot;
 
     void Start()
     {
-        if (subject == null) {
-            subject = GameObject.Find("PSM").transform;
-        }
-
-        obstaclePoints = new List<Vector3>();
-        surfaceNormals = new List<Vector3>();
-        materialown = gameObject.GetComponent<MeshRenderer>().sharedMaterial;
-        materialhit = Resources.Load<Material>("Materials/ObstacleHit");
-
-        Mesh surgicalMesh;
-        surgicalMesh = gameObject.GetComponent<MeshFilter>().sharedMesh;
-        Vector3[] meshVertices = surgicalMesh.vertices;
-        Vector3[] meshNormals = surgicalMesh.normals;
-        
-        for (var i = 0; i < meshVertices.Length; i++){
-            obstaclePoints.Add(gameObject.transform.TransformPoint(meshVertices[i]));
-        }
-        for (var i = 0; i < meshNormals.Length; i++){
-            surfaceNormals.Add(gameObject.transform.TransformDirection(meshNormals[i]));
-        }
-
+        robot = GameObject.FindWithTag("ROBOT");
+        ObstacleAvoidanceForceFieldVF ovf = robot.AddComponent<ObstacleAvoidanceForceFieldVF>();
+        ovf.subject = subject;
+        ovf.obstacle = gameObject.transform;
     }
 
     void Update()
     {
-        psm = subject.transform.position;
-
-        mindist = 100000;
-        Vector3 closestP = Vector3.zero;
-        int idx_closest=0;
-        int j=0;
-        foreach (Vector3 p in obstaclePoints) {
-            d = Vector3.Distance(p, psm);
-            if (d < mindist) {
-                mindist = d;
-                closestP = p;
-                idx_closest=j;
-            }
-            j++;
-        }   
-
-        // CHECHING IF EE IS INSIDE OF ORGAN
-        if (Vector3.Dot(closestP-psm,surfaceNormals[idx_closest])>=0) {
-            hit = true;
-        } else {
-            hit = false;
-        }
-
-        if (hit==true) {
-            gameObject.GetComponent<Renderer>().material = materialhit;
-        } else {
-            gameObject.GetComponent<Renderer>().material = materialown;
-        }
     }
+      
 }

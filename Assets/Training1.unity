@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 12653365}
   - component: {fileID: 12653364}
   - component: {fileID: 12653363}
+  - component: {fileID: 12653368}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -152,8 +153,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12653361}
   m_LocalRotation: {x: -0.8856443, y: 0.08678045, z: 0.0552001, w: 0.45283136}
-  m_LocalPosition: {x: 0.63146555, y: 5.274, z: 3.2349937}
-  m_LocalScale: {x: 1.8028004, y: 1.8028, z: 1.8028003}
+  m_LocalPosition: {x: 0.63146555, y: 5.274, z: 3.61}
+  m_LocalScale: {x: 2.2612526, y: 2.2612522, z: 2.2612524}
   m_Children: []
   m_Father: {fileID: 225043800}
   m_RootOrder: 0
@@ -251,6 +252,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12653361}
   m_Mesh: {fileID: 2687839602549289381, guid: 1a6758d21f7d0cd468c363a76f2b87ac, type: 3}
+--- !u!122 &12653368
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12653361}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294963029
+  m_Size: 0.01
 --- !u!1 &180726954
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +585,34 @@ CapsuleCollider:
   m_Height: 0.8675953
   m_Direction: 0
   m_Center: {x: -0.0073393323, y: 0.7726343, z: -0.3970847}
+--- !u!21 &998432885
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1001 &1117017042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -775,34 +816,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 1396464230}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1635848057
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!1 &1787753657
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +935,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1635848057}
+  - {fileID: 998432885}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7369,7 +7382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8576854004707882458}
   m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.2057661, y: 3.5345, z: 3.6524448}
+  m_LocalPosition: {x: 1.2057661, y: 3.53, z: 4.89}
   m_LocalScale: {x: 1, y: 1.4858, z: 1}
   m_Children: []
   m_Father: {fileID: 5722052843970552262}
@@ -9011,7 +9024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 1a6758d21f7d0cd468c363a76f2b87ac, type: 3}
+  - {fileID: -6478536213147159724, guid: 49aebb07789ab6e4984b3323f71cd715, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
