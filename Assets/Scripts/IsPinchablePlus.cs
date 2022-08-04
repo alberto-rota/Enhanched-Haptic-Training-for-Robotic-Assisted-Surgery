@@ -120,6 +120,7 @@ public class IsPinchablePlus : MonoBehaviour
 
         if (graphics) {
             Global.Arrow(tool,target,Color.yellow);
+            Global.Arrow(tool2,target,Color.yellow);
         }
 
         if (pinched) {

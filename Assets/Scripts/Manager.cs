@@ -120,6 +120,8 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
+        }else if(Input.GetKey(KeyCode.Alpha8)){
+            SceneManager.LoadScene("Assets/Suturing.unity");
         }else if(Input.GetKey(KeyCode.Alpha9)){
             SceneManager.LoadScene("Assets/Training1_LR.unity");
         }
