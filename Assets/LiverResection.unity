@@ -3994,6 +3994,8 @@ GameObject:
   - component: {fileID: 1525416049544852731}
   - component: {fileID: 23597234439279}
   - component: {fileID: 2968307066228853188}
+  - component: {fileID: 2968307066228853189}
+  - component: {fileID: 2968307066228853190}
   m_Layer: 0
   m_Name: cuthere
   m_TagString: Untagged
@@ -4008,7 +4010,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2968307066228853187}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5be5cdfc726b05f45871fea312709116, type: 3}
   m_Name: 
@@ -30691,6 +30693,37 @@ MonoBehaviour:
   - {x: -0.9037727, y: -0.13848546, z: 0.4049901}
   - {x: -0.9037727, y: -0.13848186, z: 0.40499145}
   invert: 1
+--- !u!114 &2968307066228853189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968307066228853187}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31e37b74b119aa418bfde7c8f48c336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfacePoints: []
+  surfaceNormals: []
+  path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\LiverResection_meshes
+--- !u!114 &2968307066228853190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2968307066228853187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalVectorsLength: 0
+  path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\LiverResection_meshes
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!23 &2975251046746001018
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62665,7 +62698,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119198657561308920}
   m_LocalRotation: {x: -0.7158083, y: 0.068197556, z: -0.03622552, w: 0.69401395}
-  m_LocalPosition: {x: 0, y: 0.033394113, z: -0.0261}
+  m_LocalPosition: {x: 0.0117, y: 0.0512, z: -0.0272}
   m_LocalScale: {x: 0.004308528, y: 0.004308528, z: 0.0043085287}
   m_Children: []
   m_Father: {fileID: 5642656341841100045}
