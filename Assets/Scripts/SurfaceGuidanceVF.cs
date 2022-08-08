@@ -56,6 +56,7 @@ public class SurfaceGuidanceVF : MonoBehaviour
     public Vector3 closestP = Vector3.zero;
     public float distance;
     public float distMapped;
+    public float angle;
 
     Material colorok;
     Material colorred;
@@ -140,6 +141,11 @@ public class SurfaceGuidanceVF : MonoBehaviour
             Debug.DrawLine(closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.red);
         }
         force = f_mag*f_dir;
+
+        // Vector3 rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
+        float angle = 90-Mathf.Acos(Vector3.Dot(subject.forward,surfaceNormals[idx_closest]))*180/Mathf.PI;
+        // Quaternion rot = Quaternion.AngleAxis(angle*180f/Mathf.PI,rotaxis);
+        // torque = rot.eulerAngles*torquegain;
 
         // CHECHING IF EE IS INSIDE THE SURFACE
         if (distance < threshold ) {

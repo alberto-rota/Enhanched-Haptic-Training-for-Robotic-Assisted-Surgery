@@ -18,6 +18,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using RosSharp.RosBridgeClient;
+
 
 
 public class LogData : MonoBehaviour
@@ -26,6 +28,7 @@ public class LogData : MonoBehaviour
     public string TASKNAME;
     public List<MonoBehaviour> activeConstraints;
     public string saveTo;
+    public Transform subject;
     string foldername;
     string folderpath;
     string path;
@@ -46,14 +49,18 @@ public class LogData : MonoBehaviour
         robot = GameObject.FindWithTag("ROBOT");
 
         // Checks which VFs are activated and enabled
+        // TODO: Make Two-Hands taks loggable
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in robot.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "ConeApproachGuidanceVF"||
                  s.GetType().Name == "TrajectoryGuidanceVF"||
                  s.GetType().Name == "ObstacleAvoidanceForceFieldVF"||
                  s.GetType().Name == "SurfaceGuidanceVF"||
-                 s.GetType().Name == "SurfaceAvoidanceVF")
-             && s.enabled == true) {
+                 s.GetType().Name == "SurfaceAvoidanceVF"||
+                 s.GetType().Name == "TrajectoryGuidanceVFRL"||
+                 s.GetType().Name == "TrajectoryOrientationGuidanceVFRL"||
+                 s.GetType().Name == "TrajectoryOrientationGuidanceVF")
+                && s.enabled == true) {
                 activeConstraints.Add(s);
             }
         }   
@@ -76,7 +83,6 @@ public class LogData : MonoBehaviour
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
-        // Transform matrix
         Matrix4x4 sceneTransform = GameObject.Find(TASKNAME).transform.worldToLocalMatrix;
         FileStream streamtransf = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamtransf))  
@@ -104,22 +110,59 @@ public class LogData : MonoBehaviour
             }
 
         }
+        if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVFRL>())) {
+            for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVFRL>().Length; j++) {
+                path = folderpath+"\\"+foldername+"_traj"+j+".csv";
+                FileStream streamtraj = new FileStream(path, FileMode.Append);  
+                using (StreamWriter writer = new StreamWriter(streamtraj))  
+                {  
+                    writer.Write("X,Y,Z\n");
+                    for (int i=0; i<robot.GetComponents<TrajectoryGuidanceVFRL>()[j].Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
+                        Vector3 point = robot.GetComponents<TrajectoryGuidanceVFRL>()[j].Trajectory.GetComponent<LineRenderer>().GetPosition(i);
+                        writer.Write(point.x.ToString()+",");
+                        writer.Write(point.y.ToString()+",");
+                        writer.Write(point.z.ToString()+"\n");
+                    }
+                }
+            }
+
+        }
+        if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVF>())) {
+            for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVF>().Length; j++) {
+                path = folderpath+"\\"+foldername+"_traj"+j+".csv";
+                FileStream streamtraj = new FileStream(path, FileMode.Append);  
+                using (StreamWriter writer = new StreamWriter(streamtraj))  
+                {  
+                    writer.Write("X,Y,Z\n");
+                    for (int i=0; i<robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
+                        Vector3 point = robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].Trajectory.GetComponent<LineRenderer>().GetPosition(i);
+                        writer.Write(point.x.ToString()+",");
+                        writer.Write(point.y.ToString()+",");
+                        writer.Write(point.z.ToString()+"\n");
+                    }
+                }
+            }
+
+        }
+        if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVFRL>())) {
+            for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVFRL>().Length; j++) {
+                path = folderpath+"\\"+foldername+"_traj"+j+".csv";
+                FileStream streamtraj = new FileStream(path, FileMode.Append);  
+                using (StreamWriter writer = new StreamWriter(streamtraj))  
+                {  
+                    writer.Write("X,Y,Z\n");
+                    for (int i=0; i<robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].Trajectory.GetComponent<LineRenderer>().positionCount; i++) {
+                        Vector3 point = robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].Trajectory.GetComponent<LineRenderer>().GetPosition(i);
+                        writer.Write(point.x.ToString()+",");
+                        writer.Write(point.y.ToString()+",");
+                        writer.Write(point.z.ToString()+"\n");
+                    }
+                }
+            }
+
+        }
         if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
-            // for (int j=0; j<robot.GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
-                // path = folderpath+"\\"+foldername+"_obst"+j+".csv";
-                // FileStream streamtraj = new FileStream(path, FileMode.Append);  
-                // using (StreamWriter writer = new StreamWriter(streamtraj))  
-                // {  
-                //     writer.Write("X,Y,Z\n");
-                //     Mesh obst_mesh = robot.GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.GetComponent<MeshFilter>().sharedMesh;
-                //     for (int i=0; i<obst_mesh.vertices.Length; i++) {
-                //         Vector3 point = robot.GetComponents<ObstacleAvoidanceForceFieldVF>()[j].obstacle.transform.TransformPoint(obst_mesh.vertices[i]);
-                //         writer.Write(point.x.ToString()+",");
-                //         writer.Write(point.y.ToString()+",");
-                //         writer.Write(point.z.ToString()+"\n");
-                //     }
-                // }
-            // }
+
         }
         if (activeConstraints.Contains(robot.GetComponent<SurfaceAvoidanceVF>())) {
             for (int j=0; j<robot.GetComponents<SurfaceAvoidanceVF>().Length; j++) {
@@ -139,21 +182,7 @@ public class LogData : MonoBehaviour
             }
         }
         if (activeConstraints.Contains(robot.GetComponent<SurfaceGuidanceVF>())) {
-            // for (int j=0; j<robot.GetComponents<SurfaceGuidanceVF>().Length; j++) {
-            //     path = folderpath+"\\"+foldername+"_surfguide"+j+".csv";
-            //     FileStream streamtraj = new FileStream(path, FileMode.Append);  
-            //     using (StreamWriter writer = new StreamWriter(streamtraj))  
-            //     {  
-            //         writer.Write("X,Y,Z\n");
-            //         Mesh obst_mesh = robot.GetComponents<SurfaceGuidanceVF>()[j].surface.GetComponent<MeshFilter>().sharedMesh;
-            //         for (int i=0; i<obst_mesh.vertices.Length; i++) {
-            //             Vector3 point = robot.GetComponents<SurfaceGuidanceVF>()[j].surface.transform.TransformPoint(obst_mesh.vertices[i]);
-            //             writer.Write(point.x.ToString()+",");
-            //             writer.Write(point.y.ToString()+",");
-            //             writer.Write(point.z.ToString()+"\n");
-            //         }
-            //     }
-            // }
+
         }
         if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
             for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
@@ -177,6 +206,7 @@ public class LogData : MonoBehaviour
         if (activeConstraints.Contains(robot.GetComponent<SumForces>())) {
         }
 
+// ! --- HEADERS --- 
         path = folderpath+"\\"+foldername+"_VFs.csv";
         FileStream stream = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(stream))  
@@ -191,6 +221,36 @@ public class LogData : MonoBehaviour
                     writer.Write("TrajectoryGuidanceVF_Y"+j+",");
                     writer.Write("TrajectoryGuidanceVF_Z"+j+",");
                     writer.Write("TrajectoryGuidanceVF_dist"+j+",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVFRL>())) {
+                for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVFRL>().Length; j++) {
+                    writer.Write("TrajectoryGuidanceVFRL_X"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_Y"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_Z"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_dist"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_hand"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_miss"+j+",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVF>().Length; j++) {
+                    writer.Write("TrajectoryOrientationGuidanceVF_X"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_Y"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_dist"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_angle"+j+",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVFRL>())) {
+                for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVFRL>().Length; j++) {
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_X"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_Y"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_dist"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_angle"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_hand"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_miss"+j+",");
                 }
             }
             if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
@@ -225,9 +285,14 @@ public class LogData : MonoBehaviour
                     writer.Write("ConeApproachGuidanceVF_dist"+j+",");
                 }
             }
+            writer.Write("Assisted,");
             
-            writer.Write("PositionX,PositionY,PositionZ");
+            // Subject Transform Headers
+            writer.Write("PositionX,PositionY,PositionZ,");
+            writer.Write("ForwardX,ForwardY,ForwardZ");
 
+            writer.Write("Clutch,");
+            
             writer.Write("\n");
         }  
 
@@ -241,7 +306,9 @@ public class LogData : MonoBehaviour
             // Writes the current time since startup
             writer.Write(Time.realtimeSinceStartup); writer.Write(",");
 
-            Transform subject = GameObject.Find(Global.tooltip_path).transform;
+            if (subject == null) {
+                subject = GameObject.Find(Global.tooltip_path).transform;
+            }
 
             Vector3 f;
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
@@ -252,6 +319,50 @@ public class LogData : MonoBehaviour
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
                     writer.Write(robot.GetComponents<TrajectoryGuidanceVF>()[j].distance);writer.Write(",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVFRL>())) {
+                subject = robot.GetComponent<TrajectoryGuidanceVFRL>().subject;
+                for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVFRL>().Length; j++) {
+                    f = robot.GetComponents<TrajectoryGuidanceVFRL>()[j].force;
+                    writer.Write(f.x); writer.Write(","); 
+                    writer.Write(f.y); writer.Write(","); 
+                    writer.Write(f.z); writer.Write(","); 
+                    writer.Write(robot.GetComponents<TrajectoryGuidanceVFRL>()[j].distance);writer.Write(",");
+                    if (robot.GetComponents<TrajectoryGuidanceVFRL>()[j].left) {
+                        writer.Write("left");writer.Write(",");
+                    } else {                                                      
+                        writer.Write("right");writer.Write(",");
+                    } 
+                    writer.Write(robot.GetComponents<TrajectoryGuidanceVFRL>()[j].missExchanges);writer.Write(",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVF>())) {
+                subject = robot.GetComponent<TrajectoryOrientationGuidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVF>().Length; j++) {
+                    f = robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].force;
+                    writer.Write(f.x); writer.Write(","); 
+                    writer.Write(f.y); writer.Write(","); 
+                    writer.Write(f.z); writer.Write(","); 
+                    writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].distance);writer.Write(",");
+                    writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].angle);writer.Write(",");
+                }
+            }
+            if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVFRL>())) {
+                subject = robot.GetComponent<TrajectoryOrientationGuidanceVFRL>().subject;
+                for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVFRL>().Length; j++) {
+                    f = robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].force;
+                    writer.Write(f.x); writer.Write(","); 
+                    writer.Write(f.y); writer.Write(","); 
+                    writer.Write(f.z); writer.Write(","); 
+                    writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].distance);writer.Write(",");
+                    writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].angle);writer.Write(",");
+                    if (robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].left) {
+                        writer.Write("left");writer.Write(",");
+                    } else {                                                                 
+                        writer.Write("right");writer.Write(",");
+                    }
+                    writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].missExchanges);writer.Write(",");
                 }
             }
             if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
@@ -295,9 +406,23 @@ public class LogData : MonoBehaviour
                 }
             }
             
+            // Assistance ON or OFF
+            writer.Write(robot.GetComponent<SumForces>().enabled); writer.Write(",");
+
+
+            // Subject Transform Data
             writer.Write(subject.position.x); writer.Write(",");
             writer.Write(subject.position.y); writer.Write(",");
-            writer.Write(subject.position.z);
+            writer.Write(subject.position.z); writer.Write(",");
+
+            writer.Write(subject.forward.x); writer.Write(",");
+            writer.Write(subject.forward.y); writer.Write(",");
+            writer.Write(subject.forward.z); 
+
+            // Clutch pressed YES or NO
+            writer.Write(gameObject.GetComponent<PedalClutchSubscriber>().pressed); writer.Write(",");
+
+            // Line End
             writer.Write("\n");
         }  
     }

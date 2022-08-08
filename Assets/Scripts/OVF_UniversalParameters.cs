@@ -13,6 +13,8 @@ public class OVF_UniversalParameters : MonoBehaviour
     public float half = 0.5f;
     [Range(0,10000)]
     public float slope = 0.1f;
+    [Range(0,100)]
+    public float damp = 10f;
 
     void Start()
     {

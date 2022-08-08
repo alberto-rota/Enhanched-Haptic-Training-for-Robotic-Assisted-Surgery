@@ -13,7 +13,7 @@ public class MeshExportForPlotting : MonoBehaviour
 
     void Start()
     {
-        folderpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\"+SceneManager.GetActiveScene().name+"stl";
+        folderpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+SceneManager.GetActiveScene().name+"stl";
         path=folderpath+"\\"+gameObject.name+"_vertices.csv";
         FileStream streamstlglobal = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamstlglobal))  
@@ -27,7 +27,7 @@ public class MeshExportForPlotting : MonoBehaviour
                 writer.Write(point.z.ToString()+"\n");
             }
         }
-        
+        Debug.Log("Wrote mesh vertices csv to: "+path);
         path=folderpath+"\\"+gameObject.name+"_triangulation.csv";
         FileStream streamstllocal = new FileStream(path, FileMode.Append);  
         using (StreamWriter writer = new StreamWriter(streamstllocal))  
@@ -40,6 +40,7 @@ public class MeshExportForPlotting : MonoBehaviour
                     writer.Write(tris[i+2].ToString()+"\n");
                 }
         }
+        Debug.Log("Wrote mesh trainguulation csv to: "+path);
     }
 
     void Update()

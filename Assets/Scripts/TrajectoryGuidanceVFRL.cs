@@ -47,7 +47,8 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
     public  Vector3 force;
     public float f_mag;
     public Vector3 f_dir; 
-
+    public int missExchanges = 0;
+    bool stillmissing = false;
 
     void Start()
     {
@@ -63,7 +64,7 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
         }
-        if (subject.GetComponent<IsPinchablePlus>().whopinched == 2) {
+        if (subject.GetComponent<IsPinchableDuo>().whopinched == 2) {
             left = true;
         } else {
             left = false;
@@ -104,6 +105,14 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
             Global.Arrow(subject.position, closest, Color.red);
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
+        
+        // MISS EXCHANGES INCREASE
+        if (subject.GetComponent<IsPinchableDuo>().missexchange && stillmissing) {
+            missExchanges++;
+        } else {
+            missExchanges = 0;
+        }
+        stillmissing = subject.GetComponent<IsPinchableDuo>().missexchange;
     }
     
 }

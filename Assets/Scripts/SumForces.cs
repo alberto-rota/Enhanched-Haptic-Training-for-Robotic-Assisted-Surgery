@@ -27,25 +27,31 @@ public class SumForces : MonoBehaviour
     public float minForce = 0f;
     [Range(0,5f)]
     public float maxForce = 3f;
+    [Range(0,5f)]
+    public float minTorque = 0f;
+    [Range(0,5f)]
+    public float maxTorque = 0.0001f;
 
     [Header("Damp")]
     [Range(0,10f)]
     public static float damp = 0f;
 
     [Header("Output")]
-    public Vector3 totalForceRight = Vector3.zero;
-    public Vector3 totalForceLeft = Vector3.zero;
     public Vector3 totalForce = Vector3.zero;
     public float totalForceMagnitude;
+    public Vector3 totalTorque = Vector3.zero;
+    public float totalTorqueMagnitude;
 
     void Start()
     {
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "TrajectoryGuidanceVF" ||
+                s.GetType().Name == "TrajectoryOrientationGuidanceVF" ||
                 s.GetType().Name == "ObstacleAvoidanceForceFieldVF" ||
                 s.GetType().Name == "SurfaceAvoidanceVF" ||
                 s.GetType().Name == "SurfaceGuidanceVF" ||
+                s.GetType().Name == "SurfaceOrientationGuidanceVF" ||
                 s.GetType().Name == "ConeApproachGuidanceVF" )
                 && s.enabled == true) {
                 activeConstraints.Add(s);
@@ -61,6 +67,12 @@ public class SumForces : MonoBehaviour
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
             }
         }
+        if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryOrientationGuidanceVF>())) {
+            foreach (TrajectoryOrientationGuidanceVF vf in gameObject.GetComponents<TrajectoryOrientationGuidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+                if (!(float.IsNaN(vf.torque.x) || float.IsNaN(vf.torque.y) || float.IsNaN(vf.torque.z))) totalTorque = totalTorque + vf.torque;
+            }
+        }
         if (activeConstraints.Contains(gameObject.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
             foreach (ObstacleAvoidanceForceFieldVF vf in gameObject.GetComponents<ObstacleAvoidanceForceFieldVF>() ) {
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
@@ -69,6 +81,12 @@ public class SumForces : MonoBehaviour
         if (activeConstraints.Contains(gameObject.GetComponent<SurfaceAvoidanceVF>())) {
             foreach (SurfaceAvoidanceVF vf in gameObject.GetComponents<SurfaceAvoidanceVF>() ) {
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+            }
+        }
+        if (activeConstraints.Contains(gameObject.GetComponent<SurfaceOrientationGuidanceVF>())) {
+            foreach (SurfaceOrientationGuidanceVF vf in gameObject.GetComponents<SurfaceOrientationGuidanceVF>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
+                if (!(float.IsNaN(vf.torque.x) || float.IsNaN(vf.torque.y) || float.IsNaN(vf.torque.z))) totalTorque = totalTorque + vf.torque;
             }
         }
         if (activeConstraints.Contains(gameObject.GetComponent<SurfaceGuidanceVF>())) {
@@ -94,6 +112,14 @@ public class SumForces : MonoBehaviour
             totalForce = totalForce.normalized * maxForce;
         }
         totalForceMagnitude  = totalForce.magnitude;
+
+        if (totalTorqueMagnitude < minTorque) {
+            totalTorque = Vector3.zero;
+        }
+        if (totalTorqueMagnitude > maxTorque) {
+            totalTorque = totalTorque.normalized * maxTorque;
+        }
+        totalTorqueMagnitude  = totalTorque.magnitude;
 
     }
     

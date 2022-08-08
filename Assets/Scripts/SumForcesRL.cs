@@ -27,6 +27,10 @@ public class SumForcesRL : MonoBehaviour
     public float minForce = 0f;
     [Range(0,5f)]
     public float maxForce = 3f;
+    [Range(0,0.0001f)]
+    public float minTorque = 0f;
+    [Range(0,0.0001f)]
+    public float maxTorque = 0.0001f;
 
     [Header("Damp")]
     [Range(0,10f)]
@@ -37,16 +41,18 @@ public class SumForcesRL : MonoBehaviour
     public Vector3 totalForceLeft = Vector3.zero;
     public float totalForceMagnitudeRight;
     public float totalForceMagnitudeLeft;
+    public Vector3 totalTorqueRight = Vector3.zero;
+    public Vector3 totalTorqueLeft = Vector3.zero;
+    public float totalTorqueMagnitudeRight;
+    public float totalTorqueMagnitudeLeft;
 
     void Start()
     {
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "TrajectoryGuidanceVFRL" ||
-                s.GetType().Name == "ObstacleAvoidanceForceFieldVFRL" ||
-                s.GetType().Name == "SurfaceAvoidanceVFRL" ||
-                s.GetType().Name == "SurfaceGuidanceVFRL" ||
-                s.GetType().Name == "ConeApproachGuidanceVFRL" )
+                s.GetType().Name == "TrajectoryOrientationGuidanceVFRL" ||
+                s.GetType().Name == "SurfaceOrientationGuidanceVFRL")
                 && s.enabled == true) {
                 activeConstraints.Add(s);
             }
@@ -65,38 +71,7 @@ public class SumForcesRL : MonoBehaviour
                 }
             }
         }
-        // if (activeConstraints.Contains(gameObject.GetComponent<ObstacleAvoidanceForceFieldVFRL>())) {
-        //     foreach (ObstacleAvoidanceForceFieldVFRL vf in gameObject.GetComponents<ObstacleAvoidanceForceFieldVFRL>() ) {
-        //         if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
-        //             if (vf.left) totalForceLeft = totalForceLeft + vf.force;
-        //             else totalForceRight = totalForceRight + vf.force;
-        //         }
-        //     }
-        // }
-        // if (activeConstraints.Contains(gameObject.GetComponent<SurfaceAvoidanceVFRL>())) {
-        //     foreach (SurfaceAvoidanceVFRL vf in gameObject.GetComponents<SurfaceAvoidanceVFRL>() ) {
-        //         if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
-        //             if (vf.left) totalForceLeft = totalForceLeft + vf.force;
-        //             else totalForceRight = totalForceRight + vf.force;
-        //         }
-        //     }
-        // }
-        // if (activeConstraints.Contains(gameObject.GetComponent<SurfaceGuidanceVFRL>())) {
-        //     foreach (SurfaceGuidanceVFRL vf in gameObject.GetComponents<SurfaceGuidanceVFRL>() ) {
-        //         if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
-        //             if (vf.left) totalForceLeft = totalForceLeft + vf.force;
-        //             else totalForceRight = totalForceRight + vf.force;
-        //         }
-        //     }
-        // }
-        // if (activeConstraints.Contains(gameObject.GetComponent<ConeApproachGuidanceVFRL>())) {
-        //     foreach (ConeApproachGuidanceVFRL vf in gameObject.GetComponents<ConeApproachGuidanceVFRL>() ) {
-        //         if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
-        //             if (vf.left) totalForceLeft = totalForceLeft + vf.force;
-        //             else totalForceRight = totalForceRight + vf.force;
-        //         }
-        //     }
-        // }
+
 
         totalForceMagnitudeRight  = totalForceRight.magnitude;
         totalForceMagnitudeLeft  = totalForceLeft.magnitude;
@@ -123,6 +98,22 @@ public class SumForcesRL : MonoBehaviour
             totalForceLeft = totalForceLeft.normalized * maxForce;
         }
         totalForceMagnitudeLeft  = totalForceLeft.magnitude;
+
+        if (totalTorqueMagnitudeLeft < minTorque) {
+            totalTorqueLeft = Vector3.zero;
+        }
+        if (totalTorqueMagnitudeLeft > maxTorque) {
+            totalTorqueLeft = totalTorqueLeft.normalized * maxTorque;
+        }
+        totalTorqueMagnitudeLeft  = totalTorqueLeft.magnitude;
+
+        if (totalTorqueMagnitudeLeft < minTorque) {
+            totalTorqueLeft = Vector3.zero;
+        }
+        if (totalTorqueMagnitudeLeft > maxTorque) {
+            totalTorqueLeft = totalTorqueLeft.normalized * maxTorque;
+        }
+        totalTorqueMagnitudeLeft  = totalTorqueLeft.magnitude;
     }
     
 }

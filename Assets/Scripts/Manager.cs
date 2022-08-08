@@ -49,7 +49,7 @@ public class Manager : MonoBehaviour
                 robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
         }
         
-        // Toggles the VFs when the V key is pressed
+        // Toggles the VFs when the V key is pressed or COAG pedal is pressed
         if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
             if (robot.GetComponent<SumForces>() != null) {
                 robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
@@ -120,6 +120,8 @@ public class Manager : MonoBehaviour
             SceneManager.LoadScene("Assets/Nephrectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
+        }else if(Input.GetKey(KeyCode.Alpha7)){
+            SceneManager.LoadScene("Assets/Training4.unity");
         }else if(Input.GetKey(KeyCode.Alpha8)){
             SceneManager.LoadScene("Assets/Suturing.unity");
         }else if(Input.GetKey(KeyCode.Alpha9)){

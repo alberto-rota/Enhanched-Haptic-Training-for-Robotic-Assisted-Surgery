@@ -30,6 +30,7 @@ namespace RosSharp.RosBridgeClient
         public RosSocket.SerializerEnum Serializer;
         public Protocol protocol;
         public string RosBridgeServerUrl = "ws://192.168.1.1:9090";
+        public bool debug = false;
         string whoisconnecting;
 
         public ManualResetEvent IsConnected { get; private set; }
@@ -45,9 +46,9 @@ namespace RosSharp.RosBridgeClient
         protected void ConnectAndWait()
         {
             RosSocket = ConnectToRos(protocol, RosBridgeServerUrl, OnConnected, OnClosed, Serializer);
-
-            if (!IsConnected.WaitOne(SecondsTimeout * 1000))
+            if (!IsConnected.WaitOne(SecondsTimeout * 1000) && debug)
                 Debug.LogWarning(whoisconnecting+": FAILED to connect to RosBridge at @ " + RosBridgeServerUrl);
+
         }
 
         public static RosSocket ConnectToRos(Protocol protocolType, string serverUrl, EventHandler onConnected = null, EventHandler onClosed = null, RosSocket.SerializerEnum serializer = RosSocket.SerializerEnum.Microsoft)
@@ -67,13 +68,15 @@ namespace RosSharp.RosBridgeClient
         private void OnConnected(object sender, EventArgs e)
         {
             IsConnected.Set();
-            Debug.Log(whoisconnecting+": CONNECTED to RosBridge @ " + RosBridgeServerUrl);
+            if (debug)
+                Debug.Log(whoisconnecting+": CONNECTED to RosBridge @ " + RosBridgeServerUrl);
         }
 
         private void OnClosed(object sender, EventArgs e)
         {
             IsConnected.Reset();
-            Debug.Log(whoisconnecting+": Disconnected from RosBridge @ " + RosBridgeServerUrl);
+            if (debug)
+                Debug.Log(whoisconnecting+": DISCONNECTED from RosBridge @ " + RosBridgeServerUrl);
         }
     }
 }

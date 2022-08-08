@@ -1,44 +1,79 @@
+
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+%                                      PREAMBLE
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
 \documentclass{article}
+%-----------------------------------------------------------------------------------
+% GENERIC PACKAGES
 \usepackage[utf8]{inputenc}
-\usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
-
+\usepackage{setspace}
+%-----------------------------------------------------------------------------------
+% GEOMETRY
+\usepackage{geometry}
 \geometry{
     left=25mm,
     right=25mm,
-    top=20mm,
+    top=25mm,
     bottom=25mm
     }
+\onehalfspacing
+%-----------------------------------------------------------------------------------
+% ACRONYMS
+\usepackage{acro}
+\DeclareAcronym{hri}{
+  short=HRI,
+  long=Human-Robot Interaction,
+}
+\DeclareAcronym{mis}{
+  short=MIS,
+  long=minimally Invasive Surgery,
+}
+\DeclareAcronym{ramis}{
+  short=RAMIS,
+  long=Robot-Assisted Minimally Invasive Surgery,
+}
+%-----------------------------------------------------------------------------------
+% NEWCOMMANDS AND RENEWCOMMANDS
 
-% Keep Last in the preamble 
+%-----------------------------------------------------------------------------------
+% Usage of Subfiles Last in the preamble 
 \usepackage{subfiles}
-% \usepackage{biblatex}
-% \addbibresource{refs}
 
-
+% TITLE
 \title{\textbf{Implementation and assessment of Assistance-as-Needed Virtual Fixtures for Surgical Training with a \textit{daVinci} surgical robot: an experimental study}
 \\
 \vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
 \\
 \vspace{0.5cm}\textit{\small{Academic year 2022/2023}}}
-
 \author{}
 \date{}
 
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+%                                      BODY
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
 \begin{document}
+% TITLE
 \maketitle
+%-----------------------------------------------------------------------------------
+% AUTHOR
 {\large\noindent \textbf{Candidate: \textit{Alberto Rota}}\newline
 \textbf{Supervisor: \textit{prof. Elena de Momi}}}
 \vspace{1cm}
-
+%-----------------------------------------------------------------------------------
+% SECTIONS
 \subfile{Abstract/abstract.tex}
 \subfile{Introduction/introduction.tex}
 \subfile{State_of_the_art/preamble.tex}
 
-
-% % BIBLIOGRAPHY
+%-----------------------------------------------------------------------------------
+% BIBLIOGRAPHY
 % \bibliographystyle{plain}
 % \bibliography{refs.bib}
-
+%-----------------------------------------------------------------------------------
 \end{document}

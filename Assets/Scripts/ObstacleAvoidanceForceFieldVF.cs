@@ -47,6 +47,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public float half = 0.002f;
     [Range(0,10000f)]
     public float slope = 1f;
+    [Range(0,100)]
+    public float damp = 10;
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
@@ -61,6 +63,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     public Vector3 closestPcom = Vector3.zero;
     public Vector3 closestP = Vector3.zero;
     public float distance;
+    public float pdistance;
+    public float ddistance;
     public float distMapped;
 
     Vector3 p;
@@ -80,6 +84,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         obstaclePoints = obstacle.GetComponent<ImportCorrectMeshNormals>().surfacePoints;
         obstacleNormals = obstacle.GetComponent<ImportCorrectMeshNormals>().surfaceNormals;
+        ddistance = 0;
+        pdistance = 0;
     }
 
     void FixedUpdate()
@@ -92,6 +98,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             threshold = gameObject.GetComponent<OVF_UniversalParameters>().threshold;
             half = gameObject.GetComponent<OVF_UniversalParameters>().half;
             slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
+            damp = gameObject.GetComponent<OVF_UniversalParameters>().damp;
         }
         dcom = threshold+half+1/slope;
         if (obstaclePoints.Count<=0) {
@@ -127,7 +134,6 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         Vector3 f_dir = obstacleNormals[idx_closest].normalized;
         float f_mag = gain*distMapped;
-        
 
         if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
@@ -142,6 +148,11 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         }
         force = f_mag*f_dir;
 
+        // ADDING VISCOUS COMPONENT (Only if we are already applying an elastic component)
+        ddistance = (distance-pdistance)/Time.deltaTime;
+        if (force.magnitude > gain/3)
+            force -= damp*ddistance*f_dir;
+
         // CHECHING IF EE IS INSIDE OF ORGAN
         if (Vector3.Dot(closestP-subject.position, obstacleNormals[idx_closest])>=0 || distance < threshold) {
             force=gain*obstacleNormals[idx_closest];
@@ -149,7 +160,7 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
         } else {
             obstacle.GetComponent<MeshRenderer>().material = materialown;
         }
-
+        pdistance = distance;
         // CleanUp and Loggings
         forceMagnitude = force.magnitude;
     }

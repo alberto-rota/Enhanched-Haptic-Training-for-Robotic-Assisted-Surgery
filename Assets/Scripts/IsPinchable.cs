@@ -53,7 +53,7 @@ public class IsPinchable : MonoBehaviour
     void Update()
     {
         bool pinchingAction  = false;
-        if (pincherObject.GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  0.2f) {
+        if (pincherObject.GetComponent<RosSharp.RosBridgeClient.JointJawSubscriber>().jawPosition <  -1.5f) {
             pinchingAction = true;
         }
 

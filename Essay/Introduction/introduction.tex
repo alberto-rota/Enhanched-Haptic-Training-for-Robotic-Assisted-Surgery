@@ -1,14 +1,28 @@
 \documentclass[../main.tex]{subfiles}
-
 \graphicspath{{\subfix{../images/}}}
+
 \begin{document}
 
 \section{Introduction}
-Since its advent in the middle of the 1980s, robotic surgery has revolutionized the healthcare industry introducting safer, more efficient and more cost-effective solutions to the challenges of surgical practices. By embracing robotic devices in a collaborative effort, surgeons and medical practicioners have been empowered with tools that have been engineered to enhance their skill and optimize the outcomes for the patient. 
-Test citation of \cite{Enayati2016} and of \cite{Bettini2004}
+Since its advent in the middle of the 1980s, robotic surgery has revolutionized the healthcare industry introducting safer nad more efficient solutions to the challenges of surgical practices. By embracing robotic devices in a collaborative effort, surgeons and medical practicioners have been empowered with tools that have been engineered to enhance their skill and optimize the patient outcomes. 
+From dental to orthopedic to neurosurgery, almost every area of the medical panorama has now been reached by robotics, with regulatory organization approving novel procedures with incresing frequency.
+
+Formally, \textit{robot-assisted surgeries} are operations where the medical team works with a robotic device that actively interacts with the patient's body, manipulating tissues with precision instruments that are mounted on the machine itself. 
+However, there is a major distinction among two distinct methodologies of deploying robotic assistance \cite{Hoeckelmann2015}:
+\begin{itemize}
+    \item \textbf{Teleoperated systems} involve a user who directly and continuously interacts with the robot, controlling its motion mainly by hand-held manipulators which replicate the surgeon's movement to the robotic actuaction
+    \item \textbf{Image-guided systems} rely on the acquisition of medical imaging data (in the form of CT scans, MRIs, \textit{etc.}), later used for planning the motion of the robotic tools, without a direct and real-time interface with the surgeon
+\end{itemize}
+Mixed approaches are also possible, where teleoperation is accompained by fully automated sub-tasks or where image-guidance is updated in real time by information gathered from sensors. 
+In all cases, controlling the position, orientation and motion of the robotic system is, however, a resposibility of the surgeon himself, that takes advantage of the high precision potentiality of the mechanical system for achieving a less invasive, less error-prone and safer procedure. These systems are not meant to replace the physician, but rather to augment its capabilities \cite{Cleary2001}. It's inside this cooperative paradigm that the concept of \ac{hri} plays its role, a concept not far from what Asimov expressed in his science fiction novel \cite{Asimov1950}: the main reason of discontinuation of the earliest prototypes were the uncertainities around the safety and controllability of a robot when people (being medical practitioners or patients) are inside its range of motion.  
+
+\subsection{Context}
+
+\subsection{Motivation}
+\textit{}
 
 % BIBLIOGRAPHY
-\bibliographystyle{apalike}
+\bibliographystyle{unsrt}
 \bibliography{refs.bib}
 
 \end{document}

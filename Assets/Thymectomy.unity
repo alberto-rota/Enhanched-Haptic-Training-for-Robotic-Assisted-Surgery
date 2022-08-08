@@ -5727,7 +5727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e46ddb878c35b439463bf78deaa63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalVectorsLength: 0.002
+  normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Thymectomy_meshes
   surfacePoints: []
   surfaceNormals: []

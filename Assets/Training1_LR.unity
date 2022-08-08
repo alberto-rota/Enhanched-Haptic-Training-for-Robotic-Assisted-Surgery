@@ -535,6 +535,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
+--- !u!21 &1172693696
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1001 &1396464230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -635,34 +663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: 0.0075
---- !u!21 &1740376998
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!1 &1787753657
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1740376998}
+  - {fileID: 1172693696}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3867,6 +3867,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://172.23.9.178:9090
+  debug: 0
 --- !u!4 &373431044786953030
 Transform:
   m_ObjectHideFlags: 0
@@ -7695,7 +7696,6 @@ GameObject:
   - component: {fileID: 4310820338202613470}
   - component: {fileID: 4310820338202613469}
   - component: {fileID: 4310820338202613471}
-  - component: {fileID: 4310820338202613468}
   - component: {fileID: 4310820338202613472}
   m_Layer: 0
   m_Name: Subject
@@ -7704,23 +7704,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4310820338202613468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4310820338202613467}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b053e59dc12a5cf4587c1dc55e580e3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphics: 0
-  pincherObject: {fileID: 426054412}
-  restoreGravity: 0
-  pinched: 0
-  pinchable: 0
 --- !u!54 &4310820338202613469
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7782,6 +7765,7 @@ MonoBehaviour:
   pincherObject: {fileID: 426054412}
   pincherObject2: {fileID: 850056883}
   restoreGravity: 0
+  missexchange: 0
   pinched: 0
 --- !u!33 &4379388544686722122
 MeshFilter:
@@ -9775,7 +9759,6 @@ GameObject:
   - component: {fileID: 6210097203925862034}
   - component: {fileID: 6210097203925862043}
   - component: {fileID: 6210097203925862045}
-  - component: {fileID: 6210097203925862047}
   - component: {fileID: 6210097203925862039}
   - component: {fileID: 6210097203925862038}
   - component: {fileID: 6210097203925862041}
@@ -9863,6 +9846,7 @@ MonoBehaviour:
   force: {x: 0, y: 0, z: 0}
   f_mag: 0
   f_dir: {x: 0, y: 0, z: 0}
+  missExchanges: 0
 --- !u!114 &6210097203925862040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9921,23 +9905,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
---- !u!114 &6210097203925862047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6210097203925862035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46567afef7cbf7f4fa1791505f046124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /dvrk/PSM1/state_jaw_current
-  TimeStep: 0
-  JointNames: []
-  JointStateWriters: []
-  jawPosition: 0
+  debug: 0
 --- !u!114 &6210097204511751388
 MonoBehaviour:
   m_ObjectHideFlags: 0
