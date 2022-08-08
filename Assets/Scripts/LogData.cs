@@ -54,12 +54,13 @@ public class LogData : MonoBehaviour
         foreach (MonoBehaviour s in robot.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "ConeApproachGuidanceVF"||
                  s.GetType().Name == "TrajectoryGuidanceVF"||
+                 s.GetType().Name == "TrajectoryGuidanceVFRL"||
+                 s.GetType().Name == "TrajectoryOrientationGuidanceVF"||
+                 s.GetType().Name == "TrajectoryOrientationGuidanceVFRL"||
                  s.GetType().Name == "ObstacleAvoidanceForceFieldVF"||
                  s.GetType().Name == "SurfaceGuidanceVF"||
-                 s.GetType().Name == "SurfaceAvoidanceVF"||
-                 s.GetType().Name == "TrajectoryGuidanceVFRL"||
-                 s.GetType().Name == "TrajectoryOrientationGuidanceVFRL"||
-                 s.GetType().Name == "TrajectoryOrientationGuidanceVF")
+                 s.GetType().Name == "SurfaceOrientationGuidanceVF"||
+                 s.GetType().Name == "SurfaceAvoidanceVF")
                 && s.enabled == true) {
                 activeConstraints.Add(s);
             }
@@ -238,6 +239,9 @@ public class LogData : MonoBehaviour
                     writer.Write("TrajectoryOrientationGuidanceVF_X"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_Y"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_torqueX"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_torqueY"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_torqueZ"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_dist"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_angle"+j+",");
                 }
@@ -247,6 +251,9 @@ public class LogData : MonoBehaviour
                     writer.Write("TrajectoryOrientationGuidanceVFRL_X"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_Y"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_torqueX"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_torqueY"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_torqueZ"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_dist"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_angle"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_hand"+j+",");
@@ -277,6 +284,18 @@ public class LogData : MonoBehaviour
                     writer.Write("SurfaceGuidanceVF_dist"+j+",");
                 }
             }
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceOrientationGuidanceVF>())) {
+                for (int j=0; j<robot.GetComponents<SurfaceOrientationGuidanceVF>().Length; j++) {
+                    writer.Write("SurfaceOrientationGuidanceVF_X"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_Y"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_Z"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_torqueX"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_torqueY"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_torqueZ"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_dist"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_angle"+j+",");
+                }
+            }
             if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
                     writer.Write("ConeApproachGuidanceVF_X"+j+",");
@@ -285,13 +304,20 @@ public class LogData : MonoBehaviour
                     writer.Write("ConeApproachGuidanceVF_dist"+j+",");
                 }
             }
+            // Assistance YES/NO
             writer.Write("Assisted,");
+            // Assistance Factor
+            writer.Write("Assistance,");
             
             // Subject Transform Headers
             writer.Write("PositionX,PositionY,PositionZ,");
             writer.Write("ForwardX,ForwardY,ForwardZ");
 
+            // Clutch pressed YES/NO
             writer.Write("Clutch,");
+
+            //Distance from camera
+            writer.Write("FromCamera");
             
             writer.Write("\n");
         }  
@@ -311,6 +337,7 @@ public class LogData : MonoBehaviour
             }
 
             Vector3 f;
+            Vector3 t;
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
                 subject = robot.GetComponent<TrajectoryGuidanceVF>().subject;
                 for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
@@ -344,6 +371,10 @@ public class LogData : MonoBehaviour
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
+                    t = robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].torque;
+                    writer.Write(t.x); writer.Write(","); 
+                    writer.Write(t.y); writer.Write(","); 
+                    writer.Write(t.z); writer.Write(","); 
                     writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].distance);writer.Write(",");
                     writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVF>()[j].angle);writer.Write(",");
                 }
@@ -355,6 +386,10 @@ public class LogData : MonoBehaviour
                     writer.Write(f.x); writer.Write(","); 
                     writer.Write(f.y); writer.Write(","); 
                     writer.Write(f.z); writer.Write(","); 
+                    t = robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].torque;
+                    writer.Write(t.x); writer.Write(","); 
+                    writer.Write(t.y); writer.Write(","); 
+                    writer.Write(t.z); writer.Write(","); 
                     writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].distance);writer.Write(",");
                     writer.Write(robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].angle);writer.Write(",");
                     if (robot.GetComponents<TrajectoryOrientationGuidanceVFRL>()[j].left) {
@@ -395,6 +430,21 @@ public class LogData : MonoBehaviour
                     writer.Write(robot.GetComponents<SurfaceGuidanceVF>()[j].distance);writer.Write(",");
                 }
             }
+            if (activeConstraints.Contains(robot.GetComponent<SurfaceOrientationGuidanceVF>())) {
+                subject = robot.GetComponent<SurfaceOrientationGuidanceVF>().subject;
+                for (int j=0; j<robot.GetComponents<SurfaceOrientationGuidanceVF>().Length; j++) {
+                    f = robot.GetComponents<SurfaceOrientationGuidanceVF>()[j].force;
+                    writer.Write(f.x); writer.Write(","); 
+                    writer.Write(f.y); writer.Write(","); 
+                    writer.Write(f.z); writer.Write(","); 
+                    t = robot.GetComponents<SurfaceOrientationGuidanceVF>()[j].torque;
+                    writer.Write(t.x); writer.Write(","); 
+                    writer.Write(t.y); writer.Write(","); 
+                    writer.Write(t.z); writer.Write(","); 
+                    writer.Write(robot.GetComponents<SurfaceOrientationGuidanceVF>()[j].distance);writer.Write(",");
+                    writer.Write(robot.GetComponents<SurfaceOrientationGuidanceVF>()[j].angle);writer.Write(",");
+                }
+            }
             if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
                 subject = robot.GetComponent<ConeApproachGuidanceVF>().subject;
                 for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
@@ -407,7 +457,15 @@ public class LogData : MonoBehaviour
             }
             
             // Assistance ON or OFF
-            writer.Write(robot.GetComponent<SumForces>().enabled); writer.Write(",");
+            if (robot.GetComponent<SumForces>() != null) {
+                writer.Write(robot.GetComponent<SumForces>().enabled);
+            } else if (robot.GetComponent<SumForcesRL>() != null) {
+                writer.Write(robot.GetComponent<SumForcesRL>().enabled);
+            }
+            writer.Write(",");
+
+            // Assistance factor
+            writer.Write(Global.assistance); writer.Write(",");
 
 
             // Subject Transform Data
@@ -422,6 +480,8 @@ public class LogData : MonoBehaviour
             // Clutch pressed YES or NO
             writer.Write(gameObject.GetComponent<PedalClutchSubscriber>().pressed); writer.Write(",");
 
+            writer.Write(Vector3.Distance(subject.position, 
+                GameObject.Find("Camera").transform.position)); writer.Write(",");
             // Line End
             writer.Write("\n");
         }  
