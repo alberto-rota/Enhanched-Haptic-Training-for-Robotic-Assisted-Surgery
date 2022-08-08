@@ -32,7 +32,7 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
     public Transform Trajectory;
     [Range(0,100f)]
     public float gain = 30;
-
+    public float distscale = 1;
 
     [Header("Graphics")]
     public bool graphics = true;
@@ -64,10 +64,18 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
         }
-        if (subject.GetComponent<IsPinchableDuo>().whopinched == 2) {
-            left = true;
+        if (subject.GetComponent<IsPinchableDuo>() != null) {
+            if (subject.GetComponent<IsPinchableDuo>().whopinched == 2) {
+                left = true;
+            } else {
+                left = false;
+            }
         } else {
-            left = false;
+            if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().whopinched == 2) {
+                left = true;
+            } else {
+                left = false;
+            }
         }
         // DISTANCE
         float mindist = 100000;
@@ -107,12 +115,19 @@ public class TrajectoryGuidanceVFRL : MonoBehaviour
         }
         
         // MISS EXCHANGES INCREASE
-        if (subject.GetComponent<IsPinchableDuo>().missexchange && stillmissing) {
-            missExchanges++;
+        if (subject.GetComponent<IsPinchableDuo>() != null) {
+            if (subject.GetComponent<IsPinchableDuo>().missexchange && stillmissing) {
+                missExchanges++;
+            } else {
+                missExchanges = 0;
+            }
+            stillmissing = subject.GetComponent<IsPinchableDuo>().missexchange;
         } else {
-            missExchanges = 0;
+            if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().missexchange && !stillmissing) {
+                missExchanges++;
+            } 
+            stillmissing = subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().missexchange;
         }
-        stillmissing = subject.GetComponent<IsPinchableDuo>().missexchange;
     }
     
 }

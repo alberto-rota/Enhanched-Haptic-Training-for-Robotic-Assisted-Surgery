@@ -112,7 +112,7 @@ public class Manager : MonoBehaviour
         }
 
         // Loads a scene of choice when the user presses the corresponding key
-        if(Input.GetKey(KeyCode.Alpha0)){
+              if(Input.GetKey(KeyCode.Alpha0)){
             SceneManager.LoadScene("Assets/Playground.unity");
         }else if(Input.GetKey(KeyCode.Alpha1)){
             SceneManager.LoadScene("Assets/Training1.unity");
@@ -121,13 +121,13 @@ public class Manager : MonoBehaviour
         }else if(Input.GetKey(KeyCode.Alpha3)){
             SceneManager.LoadScene("Assets/Training3.unity");
         }else if(Input.GetKey(KeyCode.Alpha4)){
-            SceneManager.LoadScene("Assets/Thymectomy.unity");
-        }else if(Input.GetKey(KeyCode.Alpha5)){
-            SceneManager.LoadScene("Assets/Nephrectomy.unity");
-        }else if(Input.GetKey(KeyCode.Alpha6)){
-            SceneManager.LoadScene("Assets/LiverResection.unity");
-        }else if(Input.GetKey(KeyCode.Alpha7)){
             SceneManager.LoadScene("Assets/Training4.unity");
+        }else if(Input.GetKey(KeyCode.Alpha5)){
+            SceneManager.LoadScene("Assets/Thymectomy.unity");
+        }else if(Input.GetKey(KeyCode.Alpha6)){
+            SceneManager.LoadScene("Assets/Nephrectomy.unity");
+        }else if(Input.GetKey(KeyCode.Alpha7)){
+            SceneManager.LoadScene("Assets/LiverResection.unity");
         }else if(Input.GetKey(KeyCode.Alpha8)){
             SceneManager.LoadScene("Assets/Suturing.unity");
         }else if(Input.GetKey(KeyCode.Alpha9)){
@@ -138,25 +138,41 @@ public class Manager : MonoBehaviour
         if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
 
             if(SceneManager.GetActiveScene().name == "Playground"){
-                SceneManager.LoadScene("Assets/Training1.unity");
+                SceneManager.LoadScene("Assets/Training1.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Playground");
             }else if(SceneManager.GetActiveScene().name == "Training1"){
-                SceneManager.LoadScene("Assets/Training2.unity"); 
+                SceneManager.LoadScene("Assets/Training2.unity",LoadSceneMode.Single);                 
+                // SceneManager.UnloadSceneAsync("Training1");
             }else if(SceneManager.GetActiveScene().name == "Training2"){
-                SceneManager.LoadScene("Assets/Training3.unity");
+                SceneManager.LoadScene("Assets/Training3.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Training2"); 
             }else if(SceneManager.GetActiveScene().name == "Training3"){
-                SceneManager.LoadScene("Assets/Thymectomy.unity");
+                SceneManager.LoadScene("Assets/Training4.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Training3");
+            }else if(SceneManager.GetActiveScene().name == "Training4"){
+                SceneManager.LoadScene("Assets/Thymectomy.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Training4");
             }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
-                SceneManager.LoadScene("Assets/Nephrectomy.unity");
+                SceneManager.LoadScene("Assets/Nephrectomy.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Thymectomy");
             }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
-                SceneManager.LoadScene("Assets/LiverResection.unity");
+                SceneManager.LoadScene("Assets/LiverResection.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Nephrectomy");
             }else if(SceneManager.GetActiveScene().name == "LiverResection"){
-                SceneManager.LoadScene("Assets/Playground.unity");
+                SceneManager.LoadScene("Assets/Suturing.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("LiverResection");
+            }else if(SceneManager.GetActiveScene().name == "Suturing"){
+                SceneManager.LoadScene("Assets/Training1_LR.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Suturing");
+            }else if(SceneManager.GetActiveScene().name == "Training1_LR"){
+                SceneManager.LoadScene("Assets/Playground.unity",LoadSceneMode.Single);                
+                // SceneManager.UnloadSceneAsync("Training1_LR");
             }
         }
 
         // The MINUS pedal reloads the current scene
         if (gameObject.GetComponent<PedalMinusSubscriber>().pressed == true) 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }
 }

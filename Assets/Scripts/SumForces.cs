@@ -29,8 +29,8 @@ public class SumForces : MonoBehaviour
     public float maxForce = 3f;
     [Range(0,0.0001f)]
     public float minTorque = 0f;
-    [Range(0,0.0001f)]
-    public float maxTorque = 0.0001f;
+    [Range(0,0.1f)]
+    public float maxTorque = 0.1f;
 
     [Header("Damp")]
     [Range(0,10f)]
@@ -113,6 +113,7 @@ public class SumForces : MonoBehaviour
         }
         totalForceMagnitude  = totalForce.magnitude;
 
+        totalTorqueMagnitude  = totalTorque.magnitude;
         if (totalTorqueMagnitude < minTorque) {
             totalTorque = Vector3.zero;
         }

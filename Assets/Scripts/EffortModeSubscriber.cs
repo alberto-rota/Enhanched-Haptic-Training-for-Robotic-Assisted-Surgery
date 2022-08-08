@@ -48,6 +48,8 @@ namespace RosSharp.RosBridgeClient
                 //     robot.GetComponent<WrenchPublisherLeft>().enabled = true;
                 if (robot.GetComponent<WrenchPublisher>() != null) 
                     robot.GetComponent<WrenchPublisher>().enabled = true;
+                if (robot.GetComponent<WrenchFTPublisher>() != null) 
+                    robot.GetComponent<WrenchFTPublisher>().enabled = true;
             }else if (mode == "Trajectory") {
                 // if (robot.GetComponent<WrenchPublisherRight>() != null) 
                 //     robot.GetComponent<WrenchPublisherRight>().enabled = false;
@@ -55,6 +57,8 @@ namespace RosSharp.RosBridgeClient
                 //     robot.GetComponent<WrenchPublisherLeft>().enabled = false;
                 if (robot.GetComponent<WrenchPublisher>() != null) 
                     robot.GetComponent<WrenchPublisher>().enabled = false;
+                if (robot.GetComponent<WrenchFTPublisher>() != null) 
+                    robot.GetComponent<WrenchFTPublisher>().enabled = false;
             }
         }
     }

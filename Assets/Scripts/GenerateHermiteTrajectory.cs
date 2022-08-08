@@ -41,8 +41,7 @@ public class GenerateHermiteTrajectory : MonoBehaviour
 		lineRenderer.startWidth = 0;
 		lineRenderer.endWidth = 0;
 		lineRenderer.useWorldSpace = true;
-		lineRenderer.material = new Material(
-			Shader.Find("Legacy Shaders/Particles/Additive"));	
+		lineRenderer.material = Resources.Load<Material>("Materials/Trajectory");
 	}
 	
 	void Update () 

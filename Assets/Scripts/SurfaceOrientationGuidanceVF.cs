@@ -41,8 +41,8 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
     public float half = 0.002f;
     [Range(0,10000f)]
     public float slope = 1f;
-    [Range(0,0.0001f)]
-    public float torquegain = 0.001f;
+    [Range(0,1f)]
+    public float torquegain = 0.01f;
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
@@ -146,11 +146,28 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
         }
         force = f_mag*f_dir;
 
-        // Vector3 rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
-        angle = 90-Mathf.Acos(Vector3.Dot(subject.forward,surfaceNormals[idx_closest]))*180/Mathf.PI;
-        // Quaternion rot = Quaternion.AngleAxis(angle*180f/Mathf.PI,rotaxis);
-        // torque = rot.eulerAngles*torquegain;
+        Vector3 n = surfaceNormals[idx_closest];
+        Vector3 f_proj = subject.forward - n*Vector3.Dot(subject.forward,n);
+        Global.Arrow(closestPcom, closestPcom+f_proj*graphicVectorGain, Color.magenta);
+        Global.Arrow(closestPcom, closestPcom+subject.forward*graphicVectorGain, Color.cyan);
 
+        Vector3 rotaxis = Vector3.Cross(subject.forward,f_proj).normalized;
+        angle = Vector3.Angle(subject.forward,f_proj);
+        torque = rotaxis*angle*torquegain*(-1);
+        Global.Arrow(closestPcom,closestPcom+rotaxis.normalized*0.01f , Color.yellow);
+        Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position,GameObject.Find(Global.tooltip_path).transform.position+torque.normalized*0.01f , Color.yellow);
+
+        // if (subject.GetComponent<IsPinchableDuo>() != null) {
+        //     if (subject.GetComponent<IsPinchableDuo>().pinched == false) {
+        //         torque = Vector3.zero;
+        //     }
+        // } else if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().pinched == false) {
+        //     torque = Vector3.zero;
+        // }
+
+        // Global.Arrow(closestPcom, closestPcom+rotaxis*graphicVectorGain, Color.yellow);
+
+    
         // CHECHING IF EE IS INSIDE THE SURFACE
         if (distance < threshold ) {
             force=Vector3.zero;

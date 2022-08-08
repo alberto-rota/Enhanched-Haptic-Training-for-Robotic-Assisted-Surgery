@@ -32,7 +32,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
     public Transform Trajectory;
     [Range(0,100f)]
     public float gain = 30;
-    [Range(0,0.1f)]
+    [Range(0,3f)]
     public float torquegain = 0.0001f;
 
 
@@ -47,6 +47,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
     public Vector3 deviation;
     public float distance;
     public Vector3 tangent;
+    public Vector3 rotaxis;
     public float angle;
     public  Vector3 force;
     public float f_mag;
@@ -66,7 +67,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         subject.GetComponent<Rigidbody>().solverVelocityIterations = 50;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Trajectory == null) {
             Debug.LogWarning("The Reference Trajectory must be assigned!");
@@ -120,10 +121,10 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         force = f_mag*f_dir;
 
         // TODO: FIX TORQUE CALCULATION AND SCALING
-        Vector3 rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
+        rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
         angle = Vector3.Angle(subject.forward,tangent);
-        Quaternion rot = Quaternion.AngleAxis(angle,rotaxis);
-        torque = rot.eulerAngles*torquegain;
+        torque = rotaxis*angle*torquegain*(-1);
+
         if (subject.GetComponent<IsPinchableDuo>() != null) {
             if (subject.GetComponent<IsPinchableDuo>().pinched == false) {
                 torque = Vector3.zero;
@@ -131,13 +132,16 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         } else if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().pinched == false) {
             torque = Vector3.zero;
         }
-        
+        t_mag = torque.magnitude;
+        t_dir = torque.normalized;
 
         if (graphics) {
             // Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
             // Global.Arrow(subject.position, closest, Color.red);
             Global.Arrow(closest,closest+tangent.normalized*0.01f , Color.magenta);
             Global.Arrow(closest,closest+subject.forward.normalized*0.01f , Color.cyan);
+            // Global.Arrow(closest,closest+rotaxis.normalized*0.01f , Color.yellow);
+            // Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position,GameObject.Find(Global.tooltip_path).transform.position+torque.normalized*0.01f , Color.yellow);
             // Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
 
@@ -155,7 +159,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
             } 
             stillmissing = subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().missexchange;
         }
-    Global.DebugOnHRSV("Miss Exchanges: " + missExchanges);
+    // Global.DebugOnHRSV("Miss Exchanges: " + missExchanges);
     }
     
 }

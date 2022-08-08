@@ -29,7 +29,7 @@ public class SumForcesRL : MonoBehaviour
     public float maxForce = 3f;
     [Range(0,0.0001f)]
     public float minTorque = 0f;
-    [Range(0,0.01f)]
+    [Range(0,3f)]
     public float maxTorque = 0.01f;
 
     [Header("Damp")]
