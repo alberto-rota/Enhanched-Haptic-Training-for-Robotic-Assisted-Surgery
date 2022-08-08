@@ -60,8 +60,8 @@ public class IsPinchableDuo : MonoBehaviour
         materialswitchable = Resources.Load<Material>("Materials/Switchable");
         materialmissed = Resources.Load<Material>("Materials/MissExchange");
         //Disable the collider
-        gameObject.GetComponent<SphereCollider>().enabled = false;
-        gameObject.GetComponent<Rigidbody>().mass = 0;
+        // gameObject.GetComponent<SphereCollider>().enabled = false;
+        // gameObject.GetComponent<Rigidbody>().mass = 0;
         gameObject.GetComponent<Rigidbody>().useGravity = false;
 
         
@@ -149,8 +149,8 @@ public class IsPinchableDuo : MonoBehaviour
             } 
         }
         // Miss per Drops
-        if (d < targetRadius*1.5f && d > targetRadius && drop2) missexchange = true;
-        if (d2 < targetRadius*1.5f && d2 > targetRadius && drop1) missexchange = true;
+        if (d < targetRadius*1.5f  && drop2 && !pinchingAction1) missexchange = true;
+        if (d2 < targetRadius*1.5f  && drop1 && !pinchingAction2) missexchange = true;
 
 
         pinchable = pinchable1 || pinchable2;

@@ -44,6 +44,8 @@ namespace RosSharp.RosBridgeClient
             if (mode == "Effort") {
                 if (robot.GetComponent<WrenchPublisherRight>() != null) 
                     robot.GetComponent<WrenchPublisherRight>().enabled = true;
+                if (robot.GetComponent<WrenchFTPublisherRight>() != null) 
+                    robot.GetComponent<WrenchFTPublisherRight>().enabled = true;
                 // if (robot.GetComponent<WrenchPublisherLeft>() != null) 
                 //     robot.GetComponent<WrenchPublisherLeft>().enabled = true;
                 // if (robot.GetComponent<WrenchPublisher>() != null) 
@@ -51,6 +53,8 @@ namespace RosSharp.RosBridgeClient
             }else if (mode == "Trajectory") {
                 if (robot.GetComponent<WrenchPublisherRight>() != null) 
                     robot.GetComponent<WrenchPublisherRight>().enabled = false;
+                if (robot.GetComponent<WrenchFTPublisherRight>() != null) 
+                    robot.GetComponent<WrenchFTPublisherRight>().enabled = false;
                 // if (robot.GetComponent<WrenchPublisherLeft>() != null) 
                 //     robot.GetComponent<WrenchPublisherLeft>().enabled = false;
                 // if (robot.GetComponent<WrenchPublisher>() != null) 

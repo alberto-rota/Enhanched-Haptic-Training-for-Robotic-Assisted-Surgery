@@ -29,8 +29,8 @@ public class SumForcesRL : MonoBehaviour
     public float maxForce = 3f;
     [Range(0,0.0001f)]
     public float minTorque = 0f;
-    [Range(0,0.0001f)]
-    public float maxTorque = 0.0001f;
+    [Range(0,0.01f)]
+    public float maxTorque = 0.01f;
 
     [Header("Damp")]
     [Range(0,10f)]
@@ -62,12 +62,32 @@ public class SumForcesRL : MonoBehaviour
     void FixedUpdate()
     {
         totalForceRight = Vector3.zero;
-        totalForceLeft = Vector3.zero;
+        totalForceLeft = Vector3.zero;        
+        totalTorqueRight = Vector3.zero;
+        totalTorqueLeft = Vector3.zero;
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVFRL>())) {
             foreach (TrajectoryGuidanceVFRL vf in gameObject.GetComponents<TrajectoryGuidanceVFRL>() ) {
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
-                    if (vf.left) totalForceLeft = totalForceLeft + vf.force;
-                    else totalForceRight = totalForceRight + vf.force;
+                    if (vf.left) {
+                        totalForceLeft = totalForceLeft + vf.force;                        
+                        // totalTorqueLeft = totalTorqueLeft + vf.torque;
+                    } else { 
+                        totalForceRight = totalForceRight + vf.force;
+                        // totalTorqueRight = totalTorqueRight + vf.torque;
+                    }
+                }
+            }
+        }
+        if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryOrientationGuidanceVFRL>())) {
+            foreach (TrajectoryOrientationGuidanceVFRL vf in gameObject.GetComponents<TrajectoryOrientationGuidanceVFRL>() ) {
+                if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) {
+                    if (vf.left) {
+                        totalForceLeft = totalForceLeft + vf.force;                        
+                        totalTorqueLeft = totalTorqueLeft + vf.torque;
+                    } else { 
+                        totalForceRight = totalForceRight + vf.force;
+                        totalTorqueRight = totalTorqueRight + vf.torque;
+                    }
                 }
             }
         }
@@ -107,13 +127,13 @@ public class SumForcesRL : MonoBehaviour
         }
         totalTorqueMagnitudeLeft  = totalTorqueLeft.magnitude;
 
-        if (totalTorqueMagnitudeLeft < minTorque) {
-            totalTorqueLeft = Vector3.zero;
+        if (totalTorqueMagnitudeRight < minTorque) {
+            totalTorqueRight = Vector3.zero;
         }
-        if (totalTorqueMagnitudeLeft > maxTorque) {
-            totalTorqueLeft = totalTorqueLeft.normalized * maxTorque;
+        if (totalTorqueMagnitudeRight > maxTorque) {
+            totalTorqueRight = totalTorqueRight.normalized * maxTorque;
         }
-        totalTorqueMagnitudeLeft  = totalTorqueLeft.magnitude;
+        totalTorqueMagnitudeRight  = totalTorqueRight.magnitude;
     }
     
 }

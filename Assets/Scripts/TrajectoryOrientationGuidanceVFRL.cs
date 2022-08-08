@@ -33,7 +33,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
     [Range(0,100f)]
     public float gain = 30;
     [Range(0,0.1f)]
-    public float torquegain = 0.001f;
+    public float torquegain = 0.0001f;
 
 
     [Header("Graphics")]
@@ -121,15 +121,23 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 
         // TODO: FIX TORQUE CALCULATION AND SCALING
         Vector3 rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
-        angle = Mathf.Acos(Vector3.Dot(subject.forward,tangent))*180f/Mathf.PI;
+        angle = Vector3.Angle(subject.forward,tangent);
         Quaternion rot = Quaternion.AngleAxis(angle,rotaxis);
         torque = rot.eulerAngles*torquegain;
+        if (subject.GetComponent<IsPinchableDuo>() != null) {
+            if (subject.GetComponent<IsPinchableDuo>().pinched == false) {
+                torque = Vector3.zero;
+            }
+        } else if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().pinched == false) {
+            torque = Vector3.zero;
+        }
+        
 
         if (graphics) {
             // Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
             // Global.Arrow(subject.position, closest, Color.red);
             Global.Arrow(closest,closest+tangent.normalized*0.01f , Color.magenta);
-            Global.Arrow(closest,closest+rotaxis.normalized*0.01f , Color.cyan);
+            Global.Arrow(closest,closest+subject.forward.normalized*0.01f , Color.cyan);
             // Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
         }
 
@@ -147,6 +155,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
             } 
             stillmissing = subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().missexchange;
         }
+    Global.DebugOnHRSV("Miss Exchanges: " + missExchanges);
     }
     
 }

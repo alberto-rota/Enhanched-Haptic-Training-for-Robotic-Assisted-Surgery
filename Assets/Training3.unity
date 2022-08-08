@@ -179,8 +179,24 @@ PrefabInstance:
       value: Lighting
       objectReference: {fileID: 0}
     - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Shadows.m_Type
+      propertyPath: m_Shadows.m_Bias
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0.724
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_Shadows.m_NearPlane
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_Shadows.m_NormalBias
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
+      propertyPath: m_Shadows.m_Resolution
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
@@ -200,6 +216,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.2:9090
+  debug: 0
 --- !u!114 &51273415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +283,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://127.0.0.1:9090
+  debug: 0
 --- !u!114 &88298723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,7 +2386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2169927074887992678}
   m_LocalRotation: {x: -0, y: 0.016071826, z: -0, w: 0.9998709}
-  m_LocalPosition: {x: -1.409, y: 0.099, z: 0.025000095}
+  m_LocalPosition: {x: -1.409, y: 0.1353, z: 0.025000095}
   m_LocalScale: {x: 0.09401378, y: 0.06500745, z: 0.06500748}
   m_Children:
   - {fileID: 7654779709552763071}
@@ -6255,10 +6273,12 @@ MonoBehaviour:
   activeConstraints: []
   minForce: 0
   maxForce: 3
-  totalForceRight: {x: 0, y: 0, z: 0}
-  totalForceLeft: {x: 0, y: 0, z: 0}
+  minTorque: 0
+  maxTorque: 0.0001
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
+  totalTorque: {x: 0, y: 0, z: 0}
+  totalTorqueMagnitude: 0
 --- !u!114 &5980783670880340286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6275,6 +6295,7 @@ MonoBehaviour:
   threshold: 0.001
   half: 0.001
   slope: 999.99994
+  damp: 10
 --- !u!114 &5980783670880340288
 MonoBehaviour:
   m_ObjectHideFlags: 0

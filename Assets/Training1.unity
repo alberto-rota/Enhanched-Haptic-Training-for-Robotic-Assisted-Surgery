@@ -540,34 +540,6 @@ CapsuleCollider:
   m_Height: 0.8675953
   m_Direction: 0
   m_Center: {x: -0.0073393323, y: 0.7726343, z: -0.3970847}
---- !u!21 &712185376
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!1 &820308937
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +783,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+--- !u!21 &1511971472
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!4 &1516937528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
@@ -935,7 +935,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 712185376}
+  - {fileID: 1511971472}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4110,6 +4110,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://172.23.9.178:9090
+  debug: 0
 --- !u!4 &373431044786953030
 Transform:
   m_ObjectHideFlags: 0
@@ -10163,10 +10164,12 @@ MonoBehaviour:
   - {fileID: 6210097203925862036}
   minForce: 0
   maxForce: 3
-  totalForceRight: {x: 0, y: 0, z: 0}
-  totalForceLeft: {x: 0, y: 0, z: 0}
+  minTorque: 0
+  maxTorque: 0.0001
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
+  totalTorque: {x: 0, y: 0, z: 0}
+  totalTorqueMagnitude: 0
 --- !u!114 &6210097203925862045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10183,6 +10186,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
+  debug: 0
 --- !u!114 &6210097203925862047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12824,26 +12828,6 @@ PrefabInstance:
     - target: {fileID: 8882626134801602682, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
       propertyPath: m_Name
       value: Lighting
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Intensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Shadows.m_Bias
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Shadows.m_Strength
-      value: 0.663
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882626135278574468, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
-      propertyPath: m_Shadows.m_NearPlane
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8882626135278574469, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
       propertyPath: m_LocalPosition.x

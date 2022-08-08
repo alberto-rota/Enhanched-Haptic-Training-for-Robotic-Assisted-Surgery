@@ -51,7 +51,7 @@ namespace RosSharp.RosBridgeClient
             Vector3 unitytorque;
             Vector3 rosforce = Vector3.zero;
 
-            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) {
+            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>() != null) {
                 unityforce = GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight*Global.assistance;
                 unitytorque = GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalTorqueRight*Global.assistance;
             }else {
@@ -60,10 +60,11 @@ namespace RosSharp.RosBridgeClient
             }
 
             Vector3 tip = GameObject.Find(Global.tooltip_path).transform.position;
-            Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
+            // Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
 
             if (!forceOverride) {
-                if(unityforce.x !=0.0 || unityforce.y !=0.0 || unityforce.z !=0.0 || float.IsNaN(unityforce.x))
+                if(unityforce.x !=0.0 || unityforce.y !=0.0 || unityforce.z !=0.0 || float.IsNaN(unityforce.x) ||
+                   unitytorque.x !=0.0 || unitytorque.y !=0.0 || unitytorque.z !=0.0 || float.IsNaN(unitytorque.x))
                 {  
                     Vector3toMessage(unityforce.Unity2Ros(), message.force);
                     Vector3toMessage(unitytorque.Unity2Ros(), message.torque);

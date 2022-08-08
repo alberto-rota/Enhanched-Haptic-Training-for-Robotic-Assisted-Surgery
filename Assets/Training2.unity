@@ -262,6 +262,34 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2379799319638724443, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
+--- !u!21 &957377487
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Legacy Shaders/Particles/Additive
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _InvFade: 1
+    m_Colors:
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []
 --- !u!1001 &974641636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,34 +352,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
   m_PrefabInstance: {fileID: 974641636}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &994141595
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!1001 &1020023310
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,7 +526,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 994141595}
+  - {fileID: 957377487}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1264,10 +1264,12 @@ MonoBehaviour:
   - {fileID: 754332632277879728}
   minForce: 0
   maxForce: 3
-  totalForceRight: {x: 0, y: 0, z: 0}
-  totalForceLeft: {x: 0, y: 0, z: 0}
+  minTorque: 0
+  maxTorque: 0.0001
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
+  totalTorque: {x: 0, y: 0, z: 0}
+  totalTorqueMagnitude: 0
 --- !u!114 &754332632277879713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://127.0.0.1
+  debug: 0
 --- !u!114 &754332632277879715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,7 +1400,7 @@ MonoBehaviour:
   force: {x: -0, y: -0, z: -0}
   forceMagnitude: 0
   distance: 0
-  delta: {x: 0.045169592, y: -0.079968944, z: 0.18418264}
+  delta: {x: 0.04432106, y: -0.08338763, z: 0.1810162}
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &754332632277879729
 MonoBehaviour:
@@ -5463,7 +5466,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5146153855139743741}
   m_LocalRotation: {x: -0, y: 0.016071826, z: -0, w: 0.9998709}
-  m_LocalPosition: {x: -1.398, y: -0.10699999, z: 0.025}
+  m_LocalPosition: {x: -1.398, y: 0.08, z: 0.025}
   m_LocalScale: {x: 0.09401378, y: 0.06500745, z: 0.06500748}
   m_Children:
   - {fileID: 3696561464768569892}
@@ -6409,6 +6412,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://172.23.9.178:9090
+  debug: 0
 --- !u!4 &6446883659175450234
 Transform:
   m_ObjectHideFlags: 0

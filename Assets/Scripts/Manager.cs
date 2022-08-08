@@ -47,6 +47,12 @@ public class Manager : MonoBehaviour
                 robot.GetComponent<WrenchPublisherLeft>().forceOverride = !robot.GetComponent<WrenchPublisherLeft>().forceOverride;
             if (robot.GetComponent<WrenchPublisher>() != null) 
                 robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
+            if (robot.GetComponent<WrenchFTPublisherRight>() != null) 
+                robot.GetComponent<WrenchFTPublisherRight>().forceOverride = !robot.GetComponent<WrenchFTPublisherRight>().forceOverride;
+            if (robot.GetComponent<WrenchFTPublisherLeft>() != null) 
+                robot.GetComponent<WrenchFTPublisherLeft>().forceOverride = !robot.GetComponent<WrenchFTPublisherLeft>().forceOverride;
+            if (robot.GetComponent<WrenchFTPublisher>() != null) 
+                robot.GetComponent<WrenchFTPublisher>().forceOverride = !robot.GetComponent<WrenchFTPublisher>().forceOverride;
         }
         
         // Toggles the VFs when the V key is pressed or COAG pedal is pressed
