@@ -57,7 +57,7 @@ namespace RosSharp.RosBridgeClient
             }
 
             Vector3 tip = GameObject.Find(Global.tooltip_path).transform.position;
-            Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
+            // Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
 
             if (!forceOverride) {
                 if(unityforce.x !=0.0 || unityforce.y !=0.0 || unityforce.z !=0.0 || float.IsNaN(unityforce.x))

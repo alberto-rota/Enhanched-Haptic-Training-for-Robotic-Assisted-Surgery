@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2332819316045531972, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2332819316464902804, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -783,34 +787,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
---- !u!21 &1511971472
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Legacy Shaders/Particles/Additive
-  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _InvFade: 1
-    m_Colors:
-    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
-  m_BuildTextureStacks: []
 --- !u!4 &1516937528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2332819314840419802, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
@@ -935,7 +911,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1511971472}
+  - {fileID: 2100000, guid: 38c122044b0672a4ca87b4d21bd4ea52, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10097,8 +10073,8 @@ MonoBehaviour:
   subject: {fileID: 644626563735826627}
   Trajectory: {fileID: 1787753658}
   gain: 30
-  graphics: 0
-  graphicVectorGain: 1
+  graphics: 1
+  graphicVectorGain: 0.008
   velocity: {x: 0, y: 0, z: 0}
   deviation: {x: 0.0009543896, y: 0.0014391672, z: 0.0060777664}
   distance: 0.0063183308
@@ -10186,7 +10162,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
-  debug: 0
+  debug: 1
 --- !u!114 &6210097203925862047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12502,7 +12478,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8551800666518985401}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 
@@ -12575,7 +12551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8576854004707882458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
   m_Name: 

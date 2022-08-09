@@ -8311,8 +8311,11 @@ MonoBehaviour:
   subject: {fileID: 1892277607}
   left: 0
   Trajectory: {fileID: 1053171859}
-  gain: 30
-  torquegain: 0.0004
+  gain: 40
+  torquegain: 0.03
+  threshold: 5
+  half: 15
+  slope: 0
   graphics: 1
   graphicVectorGain: 0.01
   velocity: {x: 0, y: 0, z: 0}
@@ -8345,7 +8348,7 @@ MonoBehaviour:
   minForce: 0
   maxForce: 3
   minTorque: 0
-  maxTorque: 3
+  maxTorque: 0.1
   totalForceRight: {x: 0, y: 0, z: 0}
   totalForceLeft: {x: 0, y: 0, z: 0}
   totalForceMagnitudeRight: 0
@@ -8412,7 +8415,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
-  debug: 0
+  debug: 1
 --- !u!114 &6210097204511751388
 MonoBehaviour:
   m_ObjectHideFlags: 0

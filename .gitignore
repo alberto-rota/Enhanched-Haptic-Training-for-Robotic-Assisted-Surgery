@@ -10,6 +10,9 @@ Assets/Tasks/OBJ_scenes
 # !Task_Data/*/*.stl
 # !Task_Data/*/*.m
 Build
+Assessment/Task_Data
+Assessment/PlotSTLs
+Assessment/Pre-Study
 Assets/3d_models
 Assets/Tasks/Setup_files/*.blend
 Assets/Tasks/Setup_files/*.blend1

@@ -49,7 +49,6 @@ public class LogData : MonoBehaviour
         robot = GameObject.FindWithTag("ROBOT");
 
         // Checks which VFs are activated and enabled
-        // TODO: Make Two-Hands taks loggable
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in robot.GetComponents<MonoBehaviour>()) {
             if ((s.GetType().Name == "ConeApproachGuidanceVF"||
@@ -66,7 +65,7 @@ public class LogData : MonoBehaviour
             }
         }   
 
-        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Task_Data\\Subject";
+        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\Task_Data\\Subject";
         saveTo += Global.subjectID;
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
@@ -75,12 +74,13 @@ public class LogData : MonoBehaviour
         // Creates the folder
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
-        Global.DebugOnHRSV("Task data will be saved to: "+folderpath);
+        // Global.DebugOnHRSV("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
-        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
-        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_post.bat", folderpath+"\\"+TASKNAME+"_post.bat");
-        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.py", folderpath+"\\"+TASKNAME+"_graph.py");
-        File.Copy(saveTo+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.bat", folderpath+"\\"+TASKNAME+"_graph.bat");
+        string originalpostpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PostProcessingScripts";
+        File.Copy(originalpostpath+"\\"+TASKNAME+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
+        File.Copy(originalpostpath+"\\"+TASKNAME+"\\"+TASKNAME+"_post.bat", folderpath+"\\"+TASKNAME+"_post.bat");
+        File.Copy(originalpostpath+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.py", folderpath+"\\"+TASKNAME+"_graph.py");
+        File.Copy(originalpostpath+"\\"+TASKNAME+"\\"+TASKNAME+"_graph.bat", folderpath+"\\"+TASKNAME+"_graph.bat");
 
         // SAVES NON-CHANGING DATA (TRAJECTORIES, OBSTACLES, ...)
         path = folderpath+"\\"+foldername+"_scenetransform.csv";
@@ -226,9 +226,9 @@ public class LogData : MonoBehaviour
             }
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVFRL>())) {
                 for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVFRL>().Length; j++) {
-                    writer.Write("TrajectoryGuidanceVFRL_X"+j+",");
-                    writer.Write("TrajectoryGuidanceVFRL_Y"+j+",");
-                    writer.Write("TrajectoryGuidanceVFRL_Z"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_forceX"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_forceY"+j+",");
+                    writer.Write("TrajectoryGuidanceVFRL_forceZ"+j+",");
                     writer.Write("TrajectoryGuidanceVFRL_dist"+j+",");
                     writer.Write("TrajectoryGuidanceVFRL_hand"+j+",");
                     writer.Write("TrajectoryGuidanceVFRL_miss"+j+",");
@@ -236,9 +236,9 @@ public class LogData : MonoBehaviour
             }
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVF>().Length; j++) {
-                    writer.Write("TrajectoryOrientationGuidanceVF_X"+j+",");
-                    writer.Write("TrajectoryOrientationGuidanceVF_Y"+j+",");
-                    writer.Write("TrajectoryOrientationGuidanceVF_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_forceX"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_forceY"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVF_forceZ"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_torqueX"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_torqueY"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVF_torqueZ"+j+",");
@@ -248,9 +248,9 @@ public class LogData : MonoBehaviour
             }
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryOrientationGuidanceVFRL>())) {
                 for (int j=0; j<robot.GetComponents<TrajectoryOrientationGuidanceVFRL>().Length; j++) {
-                    writer.Write("TrajectoryOrientationGuidanceVFRL_X"+j+",");
-                    writer.Write("TrajectoryOrientationGuidanceVFRL_Y"+j+",");
-                    writer.Write("TrajectoryOrientationGuidanceVFRL_Z"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_forceX"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_forceY"+j+",");
+                    writer.Write("TrajectoryOrientationGuidanceVFRL_forceZ"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_torqueX"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_torqueY"+j+",");
                     writer.Write("TrajectoryOrientationGuidanceVFRL_torqueZ"+j+",");
@@ -262,33 +262,33 @@ public class LogData : MonoBehaviour
             }
             if (activeConstraints.Contains(robot.GetComponent<ObstacleAvoidanceForceFieldVF>())) {
                 for (int j=0; j<robot.GetComponents<ObstacleAvoidanceForceFieldVF>().Length; j++) {
-                    writer.Write("ObstacleAvoidanceForceFieldVF_X"+j+",");
-                    writer.Write("ObstacleAvoidanceForceFieldVF_Y"+j+",");
-                    writer.Write("ObstacleAvoidanceForceFieldVF_Z"+j+",");
+                    writer.Write("ObstacleAvoidanceForceFieldVF_forceX"+j+",");
+                    writer.Write("ObstacleAvoidanceForceFieldVF_forceY"+j+",");
+                    writer.Write("ObstacleAvoidanceForceFieldVF_forceZ"+j+",");
                     writer.Write("ObstacleAvoidanceForceFieldVF_dist"+j+",");
                 }
             }
             if (activeConstraints.Contains(robot.GetComponent<SurfaceAvoidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<SurfaceAvoidanceVF>().Length; j++) {
-                    writer.Write("SurfaceAvoidanceVF_X"+j+",");
-                    writer.Write("SurfaceAvoidanceVF_Y"+j+",");
-                    writer.Write("SurfaceAvoidanceVF_Z"+j+",");
+                    writer.Write("SurfaceAvoidanceVF_forceX"+j+",");
+                    writer.Write("SurfaceAvoidanceVF_forceY"+j+",");
+                    writer.Write("SurfaceAvoidanceVF_forceZ"+j+",");
                     writer.Write("SurfaceAvoidanceVF_dist"+j+",");
                 }
             }
             if (activeConstraints.Contains(robot.GetComponent<SurfaceGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<SurfaceGuidanceVF>().Length; j++) {
-                    writer.Write("SurfaceGuidanceVF_X"+j+",");
-                    writer.Write("SurfaceGuidanceVF_Y"+j+",");
-                    writer.Write("SurfaceGuidanceVF_Z"+j+",");
+                    writer.Write("SurfaceGuidanceVF_forceX"+j+",");
+                    writer.Write("SurfaceGuidanceVF_forceY"+j+",");
+                    writer.Write("SurfaceGuidanceVF_forceZ"+j+",");
                     writer.Write("SurfaceGuidanceVF_dist"+j+",");
                 }
             }
             if (activeConstraints.Contains(robot.GetComponent<SurfaceOrientationGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<SurfaceOrientationGuidanceVF>().Length; j++) {
-                    writer.Write("SurfaceOrientationGuidanceVF_X"+j+",");
-                    writer.Write("SurfaceOrientationGuidanceVF_Y"+j+",");
-                    writer.Write("SurfaceOrientationGuidanceVF_Z"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_forceX"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_forceY"+j+",");
+                    writer.Write("SurfaceOrientationGuidanceVF_forceZ"+j+",");
                     writer.Write("SurfaceOrientationGuidanceVF_torqueX"+j+",");
                     writer.Write("SurfaceOrientationGuidanceVF_torqueY"+j+",");
                     writer.Write("SurfaceOrientationGuidanceVF_torqueZ"+j+",");
@@ -298,9 +298,9 @@ public class LogData : MonoBehaviour
             }
             if (activeConstraints.Contains(robot.GetComponent<ConeApproachGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<ConeApproachGuidanceVF>().Length; j++) {
-                    writer.Write("ConeApproachGuidanceVF_X"+j+",");
-                    writer.Write("ConeApproachGuidanceVF_Y"+j+",");
-                    writer.Write("ConeApproachGuidanceVF_Z"+j+",");
+                    writer.Write("ConeApproachGuidanceVF_forceX"+j+",");
+                    writer.Write("ConeApproachGuidanceVF_forceY"+j+",");
+                    writer.Write("ConeApproachGuidanceVF_forceZ"+j+",");
                     writer.Write("ConeApproachGuidanceVF_dist"+j+",");
                 }
             }
@@ -311,7 +311,7 @@ public class LogData : MonoBehaviour
             
             // Subject Transform Headers
             writer.Write("PositionX,PositionY,PositionZ,");
-            writer.Write("ForwardX,ForwardY,ForwardZ");
+            writer.Write("ForwardX,ForwardY,ForwardZ,");
 
             // Clutch pressed YES/NO
             writer.Write("Clutch,");
@@ -475,7 +475,7 @@ public class LogData : MonoBehaviour
 
             writer.Write(subject.forward.x); writer.Write(",");
             writer.Write(subject.forward.y); writer.Write(",");
-            writer.Write(subject.forward.z); 
+            writer.Write(subject.forward.z); writer.Write(",");
 
             // Clutch pressed YES or NO
             writer.Write(gameObject.GetComponent<PedalClutchSubscriber>().pressed); writer.Write(",");

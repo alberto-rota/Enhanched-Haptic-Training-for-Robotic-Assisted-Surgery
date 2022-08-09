@@ -366,6 +366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: world
       objectReference: {fileID: 0}
+    - target: {fileID: 2332819316045531972, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
 --- !u!4 &713276525 stripped
@@ -10770,6 +10774,7 @@ MonoBehaviour:
   threshold: 0.001
   half: 0.001
   slope: 450
+  damp: 10
   vectorsGraphics: 0
   graphicVectorGain: 1
   distanceGraphics: 0
@@ -10778,6 +10783,8 @@ MonoBehaviour:
   closestPcom: {x: NaN, y: NaN, z: NaN}
   closestP: {x: -1.5127331, y: 0.01409211, z: -3.2899883}
   distance: 0
+  pdistance: 0
+  ddistance: 0
   distMapped: 2.7337761e-30
   dcom: 0
 --- !u!114 &5980783670880340280
@@ -10827,6 +10834,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
+  debug: 1
 --- !u!114 &5980783670880340283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10843,10 +10851,12 @@ MonoBehaviour:
   - {fileID: 5980783670880340279}
   minForce: 0
   maxForce: 3
-  totalForceRight: {x: 0, y: 0, z: 0}
-  totalForceLeft: {x: 0, y: 0, z: 0}
+  minTorque: 0
+  maxTorque: 0.1
   totalForce: {x: 0, y: 0, z: 0}
   totalForceMagnitude: 0
+  totalTorque: {x: 0, y: 0, z: 0}
+  totalTorqueMagnitude: 0
 --- !u!114 &5980783670880340284
 MonoBehaviour:
   m_ObjectHideFlags: 0

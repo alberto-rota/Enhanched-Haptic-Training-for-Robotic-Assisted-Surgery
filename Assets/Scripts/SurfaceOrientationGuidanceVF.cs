@@ -32,17 +32,25 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
     public List<Vector3> surfacePoints;
     public List<Vector3> surfaceNormals;
 
-    [Header("Distance Map")]
+    [Header("Virtual Fixture")]
     [Range(0,100000f)]
-    public float gain = 0.001f;
+    public float forceGain = 0.001f;
     [Range(0,0.1f)]
-    public float threshold = 0.002f;
+    public float distanceThreshold = 0.002f;
     [Range(0,0.2f)]
-    public float half = 0.002f;
+    public float distanceHalf = 0.002f;
     [Range(0,10000f)]
-    public float slope = 1f;
-    [Range(0,1f)]
-    public float torquegain = 0.01f;
+    public float distanceSlope = 1f;
+    [Range(0,3f)]
+    public float torqueGain = 0.01f;
+    [Range(0,90f)]
+    public float angleThreshold = 5f;
+    [Range(0,90f)]
+    public float angleHalf = 15f;
+    [Range(0,10000f)]
+    public float angleSlope = 0f;
+    [Range(0,100)]
+    public float damp = 10;
 
     [Header("Graphics")]
     public bool vectorsGraphics = true;
@@ -59,6 +67,8 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
     public Vector3 closestPcom = Vector3.zero;
     public Vector3 closestP = Vector3.zero;
     public float distance;
+    public float pdistance;
+    public float ddistance;
     public float distMapped;
     public float angle;
 
@@ -84,17 +94,13 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (half < 0 ) {half=0;}
-        if (slope < 1/half) {slope=1/half;}
+        if (distanceHalf < 0 ) {distanceHalf=0;}
+        if (distanceSlope < 1/distanceHalf) {distanceSlope=1/distanceHalf;}
+        if (angleHalf < 0 ) {angleHalf=0;}
+        if (angleSlope < 1/angleHalf) {angleSlope=1/angleHalf;}
 
-        if (gameObject.GetComponent<OVF_UniversalParameters>() != null) {
-            gain = gameObject.GetComponent<OVF_UniversalParameters>().gain;
-            threshold = gameObject.GetComponent<OVF_UniversalParameters>().threshold;
-            half = gameObject.GetComponent<OVF_UniversalParameters>().half;
-            slope = gameObject.GetComponent<OVF_UniversalParameters>().slope;
-        }
         if (surfacePoints.Count<=0) {
             Debug.LogWarning(@"Mesh is not properly defined, check that 'Read/Write enabled = TRUE'"+
              "in the import settings, the Transform is instaced in the Inspector or try re-initialing Play mode");
@@ -109,7 +115,7 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
 
         foreach (Vector3 p in surfacePoints) {
             float d = SqDist(p, subject.position);
-            float dcom = Mathf.Pow(threshold+half,2);
+            float dcom = Mathf.Pow(distanceThreshold+distanceHalf+5/distanceSlope,2);
             // Debug.Log(dcom);
             if (d <= dcom) {
                 closestPcom = closestPcom + p;
@@ -126,25 +132,30 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
             closestPcom = closestP;
         }
         distance = Vector3.Distance(closestP, subject.position);
-        distMapped = Global.DistMapAttraction(distance, threshold, half, slope);
+        distMapped = Global.DistMapAttraction(distance, distanceThreshold, distanceHalf, distanceSlope);
 
-
-        Vector3 f_dir = -(subject.position-closestPcom).normalized;
-        float f_mag = gain*distMapped;
+        Vector3 f_dir = (surfaceNormals[idx_closest]).normalized;
+        float f_mag = forceGain*distMapped;
+        force = f_mag*f_dir;
         
 
         if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
-            Global.Arrow(subject.position, closestPcom, Color.yellow);
+            // Global.Arrow(subject.position, closestPcom, Color.yellow);
         }
         if (distanceGraphics) {
             Vector3 conj = (subject.position-closestPcom).normalized;
-            Debug.DrawLine(closestPcom,closestPcom+conj*threshold+conj*half-conj/slope, Color.green);
-            Global.Arrow(  closestPcom+conj*threshold-conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
-            Global.Arrow(  closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
-            Debug.DrawLine(closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.red);
+            Debug.DrawLine(closestPcom,closestPcom+conj*distanceThreshold+conj*distanceHalf-conj/distanceSlope, Color.green);
+            Global.Arrow(  closestPcom+conj*distanceThreshold-conj/distanceSlope+conj*distanceHalf, closestPcom+conj*distanceThreshold+conj*distanceHalf, Color.yellow);
+            Global.Arrow(  closestPcom+conj*distanceThreshold+conj/distanceSlope+conj*distanceHalf, closestPcom+conj*distanceThreshold+conj*distanceHalf, Color.yellow);
+            Debug.DrawLine(closestPcom+conj*distanceThreshold+conj/distanceSlope+conj*distanceHalf, closestPcom+conj*distanceThreshold+conj/distanceSlope+conj*distanceHalf+conj*4/distanceSlope, Color.red);
         }
-        force = f_mag*f_dir;
+
+        // ADDING VISCOUS COMPONENT (Only if we are already applying an elastic component)
+        ddistance = (distance-pdistance)/Time.deltaTime;
+        if (force.magnitude > forceGain/3)
+            force -= damp*ddistance*f_dir;
+
 
         Vector3 n = surfaceNormals[idx_closest];
         Vector3 f_proj = subject.forward - n*Vector3.Dot(subject.forward,n);
@@ -152,10 +163,10 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
         Global.Arrow(closestPcom, closestPcom+subject.forward*graphicVectorGain, Color.cyan);
 
         Vector3 rotaxis = Vector3.Cross(subject.forward,f_proj).normalized;
-        angle = Vector3.Angle(subject.forward,f_proj);
-        torque = rotaxis*angle*torquegain*(-1);
-        Global.Arrow(closestPcom,closestPcom+rotaxis.normalized*0.01f , Color.yellow);
-        Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position,GameObject.Find(Global.tooltip_path).transform.position+torque.normalized*0.01f , Color.yellow);
+        angle = Global.AngleMapAttraction(Vector3.Angle(subject.forward,f_proj), angleThreshold, angleHalf, angleSlope);
+        torque = rotaxis*angle*torqueGain*(-1);
+        // Global.Arrow(closestPcom,closestPcom+rotaxis.normalized*0.01f , Color.yellow);
+        // Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position,GameObject.Find(Global.tooltip_path).transform.position+torque.normalized*0.01f , Color.yellow);
 
         // if (subject.GetComponent<IsPinchableDuo>() != null) {
         //     if (subject.GetComponent<IsPinchableDuo>().pinched == false) {
@@ -169,17 +180,20 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
 
     
         // CHECHING IF EE IS INSIDE THE SURFACE
-        if (distance < threshold ) {
+        if (distance < distanceThreshold ) {
             force=Vector3.zero;
             // surface.GetComponent<MeshRenderer>().material = colorok;
         } 
-        if (distance > threshold+half) {
+        if (distance > distanceThreshold+distanceHalf) {
             surface.GetComponent<MeshRenderer>().material = colorred;
         }else{
             surface.GetComponent<MeshRenderer>().material = colorok;
         }
 
+        pdistance = distance;
+
         // CleanUp and Loggings
         forceMagnitude = force.magnitude;
+        torqueMagnitude = torque.magnitude;
     }
 }

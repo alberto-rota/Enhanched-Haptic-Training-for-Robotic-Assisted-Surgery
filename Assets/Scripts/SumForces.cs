@@ -62,6 +62,7 @@ public class SumForces : MonoBehaviour
     void FixedUpdate()
     {
         totalForce = Vector3.zero;
+        totalTorque = Vector3.zero;
         if (activeConstraints.Contains(gameObject.GetComponent<TrajectoryGuidanceVF>())) {
             foreach (TrajectoryGuidanceVF vf in gameObject.GetComponents<TrajectoryGuidanceVF>() ) {
                 if (!(float.IsNaN(vf.force.x) || float.IsNaN(vf.force.y) || float.IsNaN(vf.force.z))) totalForce = totalForce + vf.force;
@@ -122,6 +123,14 @@ public class SumForces : MonoBehaviour
         }
         totalTorqueMagnitude  = totalTorque.magnitude;
 
+        GameObject.Find("/Text/CanvasBarL/Background").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
+            GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBar/Background").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
+            GameObject.Find("/Text/CanvasBar/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBar/Background").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBarL/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
+        GameObject.Find("/Text/CanvasBar/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
+   
     }
+
     
 }

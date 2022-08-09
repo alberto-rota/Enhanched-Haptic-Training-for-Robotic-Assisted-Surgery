@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 0.4318007
       objectReference: {fileID: 0}
+    - target: {fileID: 2332819316045531972, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2332819316232204309, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.00000020861631
@@ -332,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534713063196575524, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8534713063526302385, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -8071,7 +8075,7 @@ MonoBehaviour:
   Serializer: 0
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
-  debug: 0
+  debug: 1
 --- !u!114 &6210097205200731349
 MonoBehaviour:
   m_ObjectHideFlags: 0

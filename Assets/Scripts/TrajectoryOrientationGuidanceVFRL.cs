@@ -33,7 +33,13 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
     [Range(0,100f)]
     public float gain = 30;
     [Range(0,3f)]
-    public float torquegain = 0.0001f;
+    public float torquegain = 0.01f;
+    [Range(0,90f)]
+    public float threshold = 5f;
+    [Range(0,90f)]
+    public float half = 5f;
+    [Range(0,10000f)]
+    public float slope = 2f;
 
 
     [Header("Graphics")]
@@ -69,6 +75,9 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (half < 0 ) {half=0;}
+        if (slope < 1/half) {slope=1/half;}
+        
         if (Trajectory == null) {
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
@@ -89,6 +98,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         }
         // DISTANCE AND ANGLE
         float mindist = 100000;
+        int idx_closest = 0;
         for (int i=0; i<Trajectory.GetComponent<LineRenderer>().positionCount-1; i++) {
             Vector3 point = Trajectory.GetComponent<LineRenderer>().GetPosition(i);
             float d = Vector3.Distance(point, subject.position);
@@ -96,6 +106,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
                 mindist = d;
                 closest = point;
                 tangent = Trajectory.GetComponent<LineRenderer>().GetPosition(i+1) - point;
+                idx_closest = i;
             } 
         }
 
@@ -120,9 +131,14 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 
         force = f_mag*f_dir;
 
-        // TODO: FIX TORQUE CALCULATION AND SCALING
+        // When trajectory path is completed, stop applying torque
+        if (idx_closest > Trajectory.GetComponent<LineRenderer>().positionCount*0.95f) {
+            torque = Vector3.zero;
+            return;
+        }
+
         rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
-        angle = Vector3.Angle(subject.forward,tangent);
+        angle = Global.AngleMapAttraction(Vector3.Angle(subject.forward,tangent),threshold,half,slope);
         torque = rotaxis*angle*torquegain*(-1);
 
         if (subject.GetComponent<IsPinchableDuo>() != null) {

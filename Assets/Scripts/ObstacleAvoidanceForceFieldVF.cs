@@ -53,8 +53,8 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
     [Header("Graphics")]
     public bool vectorsGraphics = true;
     [Range(0,0.05f)]
-    public float graphicVectorGain = 0.01f;
-    public bool distanceGraphics = true;
+    public float graphicVectorGain = 0.008f;
+    public bool distanceGraphics = false;
 
     
     [Header("Output")]
@@ -134,10 +134,11 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
 
         Vector3 f_dir = obstacleNormals[idx_closest].normalized;
         float f_mag = gain*distMapped;
+        force = f_mag*f_dir;
 
         if (vectorsGraphics) {
             Global.Arrow(subject.position, subject.position+force*graphicVectorGain, Color.blue);
-            Global.Arrow(subject.position, closestPcom, Color.yellow);
+            // Global.Arrow(subject.position, closestPcom, Color.yellow);
         }
         if (distanceGraphics) {
             Vector3 conj = (subject.position-closestPcom).normalized;
@@ -146,7 +147,6 @@ public class ObstacleAvoidanceForceFieldVF : MonoBehaviour
             Global.Arrow(  closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj*half, Color.yellow);
             Debug.DrawLine(closestPcom+conj*threshold+conj/slope+conj*half, closestPcom+conj*threshold+conj/slope+conj*half+conj*4/slope, Color.green);
         }
-        force = f_mag*f_dir;
 
         // ADDING VISCOUS COMPONENT (Only if we are already applying an elastic component)
         ddistance = (distance-pdistance)/Time.deltaTime;

@@ -60,7 +60,11 @@ namespace RosSharp.RosBridgeClient
             return new RosSocket(protocol, serializer);
         }
 
-        private void OnApplicationQuit()
+
+        // !!!! Change 'OnApplicationQuit()' to 'OnDestroy()' !!!!
+        // Otherwise RosSocket are not closed when the scene is changed: this crowds the networks and produces 
+        // a lot of lag on the ROS communication.
+        private void OnDestroy()
         {
             RosSocket.Close();
         }

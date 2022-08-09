@@ -15,7 +15,7 @@ public class MeshExportCorrect : MonoBehaviour
         surfacePoints = gameObject.GetComponent<CorrectMeshNormals>().surfacePoints;
         surfaceNormals = gameObject.GetComponent<CorrectMeshNormals>().surfaceNormals;
 
-        FileStream points = new FileStream(path+"\\"+gameObject.name+"_points.csv", FileMode.Append);  
+        FileStream points = new FileStream(path+"\\"+gameObject.name+"_points.csv", FileMode.Create);  
         using (StreamWriter writer = new StreamWriter(points))  
         {  
             writer.Write("X,Y,Z\n");
@@ -27,7 +27,7 @@ public class MeshExportCorrect : MonoBehaviour
             writer.Write("\n");
         }
 
-        FileStream normals = new FileStream(path+"\\"+gameObject.name+"_normals.csv", FileMode.Append);  
+        FileStream normals = new FileStream(path+"\\"+gameObject.name+"_normals.csv", FileMode.Create);  
         using (StreamWriter writer = new StreamWriter(normals))  
         {  
             writer.Write("X,Y,Z\n");

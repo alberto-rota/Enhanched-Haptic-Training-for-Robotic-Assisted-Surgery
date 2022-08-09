@@ -51,6 +51,17 @@ public class CheckTaskCompletion : MonoBehaviour
             }
         }
         if (targetReached == targets.Count) {
+            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalTorque = Vector3.zero;
+            }
+            
+            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight = Vector3.zero;            
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceLeft = Vector3.zero;   
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalTorqueRight = Vector3.zero;            
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalTorqueLeft = Vector3.zero;     
+            }
             canvasr.SetActive(true);            
             canvasl.SetActive(true);  
         } else {
