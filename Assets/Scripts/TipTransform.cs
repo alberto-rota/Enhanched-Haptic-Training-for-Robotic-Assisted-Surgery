@@ -25,5 +25,6 @@ public class TipTransform : MonoBehaviour
     void Update()
     {
         gameObject.transform.position = (gr1.position + gr2.position) / 2;
+        // gameObject.transform.eulerAngles = (gr1.eulerAngles + gr2.eulerAngles) / 2;
     }
 }

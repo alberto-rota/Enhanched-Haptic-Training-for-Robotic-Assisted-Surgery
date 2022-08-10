@@ -123,13 +123,12 @@ public class SumForces : MonoBehaviour
         }
         totalTorqueMagnitude  = totalTorque.magnitude;
 
-        GameObject.Find("/Text/CanvasBarL/Background").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
-            GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.z);
-        GameObject.Find("/Text/CanvasBar/Background").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
-            GameObject.Find("/Text/CanvasBar/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBar/Background").transform.localScale.z);
-        GameObject.Find("/Text/CanvasBarL/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
-        GameObject.Find("/Text/CanvasBar/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
-   
+        GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
+            GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale.y,GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBar/Bar").transform.localScale = new Vector3(5*totalForceMagnitude/maxForce+5*totalTorqueMagnitude/maxTorque,
+            GameObject.Find("/Text/CanvasBar/Bar").transform.localScale.y,GameObject.Find("/Text/CanvasBar/Bar").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBarL/Bar").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
+        GameObject.Find("/Text/CanvasBar/Bar").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, totalForceMagnitude/maxForce);
     }
 
     

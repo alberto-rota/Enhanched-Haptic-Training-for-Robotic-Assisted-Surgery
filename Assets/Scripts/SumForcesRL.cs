@@ -135,12 +135,12 @@ public class SumForcesRL : MonoBehaviour
         }
         totalTorqueMagnitudeRight  = totalTorqueRight.magnitude;
 
-        GameObject.Find("/Text/CanvasBarL/Background").transform.localScale = new Vector3(5*totalForceMagnitudeLeft/maxForce+5*totalTorqueMagnitudeLeft/maxTorque+5*totalForceMagnitudeRight/maxForce+5*totalTorqueMagnitudeRight/maxTorque,
-            GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBarL/Background").transform.localScale.z);
-        GameObject.Find("/Text/CanvasBar/Background").transform.localScale = new Vector3(5*totalForceMagnitudeLeft/maxForce+5*totalTorqueMagnitudeLeft/maxTorque+5*totalForceMagnitudeRight/maxForce+5*totalTorqueMagnitudeRight/maxTorque,
-            GameObject.Find("/Text/CanvasBar/Background").transform.localScale.y,GameObject.Find("/Text/CanvasBar/Background").transform.localScale.z);
-        GameObject.Find("/Text/CanvasBarL/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, (totalForceMagnitudeLeft+totalForceMagnitudeRight)/maxForce);
-        GameObject.Find("/Text/CanvasBar/Background").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, (totalForceMagnitudeLeft+totalForceMagnitudeRight)/maxForce);
+        GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale = new Vector3(5*totalForceMagnitudeLeft/maxForce+5*totalTorqueMagnitudeLeft/maxTorque+5*totalForceMagnitudeRight/maxForce+5*totalTorqueMagnitudeRight/maxTorque,
+            GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale.y,GameObject.Find("/Text/CanvasBarL/Bar").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBar/Bar").transform.localScale = new Vector3(5*totalForceMagnitudeLeft/maxForce+5*totalTorqueMagnitudeLeft/maxTorque+5*totalForceMagnitudeRight/maxForce+5*totalTorqueMagnitudeRight/maxTorque,
+            GameObject.Find("/Text/CanvasBar/Bar").transform.localScale.y,GameObject.Find("/Text/CanvasBar/Bar").transform.localScale.z);
+        GameObject.Find("/Text/CanvasBarL/Bar").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, (totalForceMagnitudeLeft+totalForceMagnitudeRight)/maxForce);
+        GameObject.Find("/Text/CanvasBar/Bar").GetComponent<UnityEngine.UI.Image>().color = Color.Lerp(Color.yellow, Color.red, (totalForceMagnitudeLeft+totalForceMagnitudeRight)/maxForce);
 
          
     }

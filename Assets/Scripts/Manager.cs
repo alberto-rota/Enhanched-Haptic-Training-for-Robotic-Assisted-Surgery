@@ -173,6 +173,11 @@ public class Manager : MonoBehaviour
         // The MINUS pedal reloads the current scene
         if (gameObject.GetComponent<PedalMinusSubscriber>().pressed == true) 
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+
+        // Pressind D toggles debug mode
+        if (Input.GetKeyDown(KeyCode.D)) {
+            Global.debugmode = !Global.debugmode;   
+        }
     }
 }
 }

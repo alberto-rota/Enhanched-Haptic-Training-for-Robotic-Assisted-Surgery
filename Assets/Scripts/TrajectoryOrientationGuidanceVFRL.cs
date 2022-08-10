@@ -130,6 +130,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         }
 
         force = f_mag*f_dir;
+        force+=gain/40*Global.DistMapAttraction(distance,0.001f,0.001f,1000)*(closest-subject.position).normalized;
 
         // When trajectory path is completed, stop applying torque
         if (idx_closest > Trajectory.GetComponent<LineRenderer>().positionCount*0.95f) {
@@ -138,8 +139,8 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         }
 
         rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
-        angle = Global.AngleMapAttraction(Vector3.Angle(subject.forward,tangent),threshold,half,slope);
-        torque = rotaxis*angle*torquegain*(-1);
+        angle = Vector3.Angle(subject.forward,tangent);
+        torque = rotaxis*Global.AngleMapAttraction(angle,threshold,half,slope)*torquegain*(-1);
 
         if (subject.GetComponent<IsPinchableDuo>() != null) {
             if (subject.GetComponent<IsPinchableDuo>().pinched == false) {

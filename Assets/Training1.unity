@@ -592,6 +592,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 92933733837126162, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
+      propertyPath: m_Text
+      value: Ready
+      objectReference: {fileID: 0}
+    - target: {fileID: 731826515020621683, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1149636819518751527, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -655,6 +663,10 @@ PrefabInstance:
     - target: {fileID: 3780474566119714283, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223867899602783719, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
+      propertyPath: m_Text
+      value: Ready
       objectReference: {fileID: 0}
     - target: {fileID: 7833996414261922252, guid: 63221d42aff390b4d83f06a07c6da97b, type: 3}
       propertyPath: m_IsActive
@@ -5330,7 +5342,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3678498915383960476, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3678498915383960476, guid: 725d858c3d2e65941a07476973685a6f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9495,7 +9507,7 @@ Transform:
   - {fileID: 1787753658}
   - {fileID: 644626563735826627}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5727018828360111729
 GameObject:
@@ -10019,7 +10031,7 @@ Transform:
   - {fileID: 6210097204511751389}
   - {fileID: 1516937528}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6210097203925862034
 MonoBehaviour:
@@ -12759,7 +12771,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8882626134801602681, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8882626134801602681, guid: de2a1f3be4eb6144cba81d7d3c2551b3, type: 3}
       propertyPath: m_LocalPosition.x

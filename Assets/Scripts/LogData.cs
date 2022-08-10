@@ -65,7 +65,7 @@ public class LogData : MonoBehaviour
             }
         }   
 
-        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\Task_Data\\Subject";
+        saveTo = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\Pre-Study\\Subject";
         saveTo += Global.subjectID;
         // Creates the UNIQUE folder to save the logs
         foldername = GetUniqueName(SceneManager.GetActiveScene().name, saveTo+"\\"+TASKNAME);
@@ -74,7 +74,7 @@ public class LogData : MonoBehaviour
         // Creates the folder
         System.IO.Directory.CreateDirectory(folderpath);    
         Debug.Log("Task data will be saved to: "+folderpath);
-        // Global.DebugOnHRSV("Task data will be saved to: "+folderpath);
+        Global.DebugOnHRSV("Task data will be saved to: "+folderpath);
         // Creates the .m file to save the logs
         string originalpostpath = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PostProcessingScripts";
         File.Copy(originalpostpath+"\\"+TASKNAME+"\\"+TASKNAME+"_post.py", folderpath+"\\"+TASKNAME+"_post.py");
@@ -481,7 +481,7 @@ public class LogData : MonoBehaviour
             writer.Write(gameObject.GetComponent<PedalClutchSubscriber>().pressed); writer.Write(",");
 
             writer.Write(Vector3.Distance(subject.position, 
-                GameObject.Find("Camera").transform.position)); writer.Write(",");
+                GameObject.Find("Camera").transform.position));
             // Line End
             writer.Write("\n");
         }  

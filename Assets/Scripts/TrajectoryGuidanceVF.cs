@@ -93,6 +93,8 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         }
 
         force = f_mag*f_dir;
+        force+=gain/60*Global.DistMapAttraction(distance,0.001f,0.001f,1000)*(closest-subject.position).normalized;
+
         if (graphics) {
             Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);
             Global.Arrow(subject.position, closest, Color.red);

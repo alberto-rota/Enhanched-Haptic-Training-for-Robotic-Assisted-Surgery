@@ -31,6 +31,7 @@ namespace RosSharp.RosBridgeClient
         public Protocol protocol;
         public string RosBridgeServerUrl = "ws://192.168.1.1:9090";
         public bool debug = false;
+        public bool connected = false;
         string whoisconnecting;
 
         public ManualResetEvent IsConnected { get; private set; }
@@ -72,15 +73,21 @@ namespace RosSharp.RosBridgeClient
         private void OnConnected(object sender, EventArgs e)
         {
             IsConnected.Set();
-            if (debug)
+            if (debug){
                 Debug.Log(whoisconnecting+": CONNECTED to RosBridge @ " + RosBridgeServerUrl);
+                connected = true;
+                GameObject.Find("/Text/CanvasROS/Image").GetComponent<UnityEngine.UI.Image>().color = Color.green;
+            }
         }
 
         private void OnClosed(object sender, EventArgs e)
         {
             IsConnected.Reset();
-            if (debug)
+            if (debug){
                 Debug.Log(whoisconnecting+": DISCONNECTED from RosBridge @ " + RosBridgeServerUrl);
+            }
+            connected = false;
+            GameObject.Find("/Text/CanvasROS/Image").GetComponent<UnityEngine.UI.Image>().color = Color.red;
         }
     }
 }

@@ -163,8 +163,8 @@ public class SurfaceOrientationGuidanceVF : MonoBehaviour
         Global.Arrow(closestPcom, closestPcom+subject.forward*graphicVectorGain, Color.cyan);
 
         Vector3 rotaxis = Vector3.Cross(subject.forward,f_proj).normalized;
-        angle = Global.AngleMapAttraction(Vector3.Angle(subject.forward,f_proj), angleThreshold, angleHalf, angleSlope);
-        torque = rotaxis*angle*torqueGain*(-1);
+        angle = Vector3.Angle(subject.forward,f_proj);
+        torque = rotaxis*Global.AngleMapAttraction(angle, angleThreshold, angleHalf, angleSlope)*torqueGain*(-1);
         // Global.Arrow(closestPcom,closestPcom+rotaxis.normalized*0.01f , Color.yellow);
         // Global.Arrow(GameObject.Find(Global.tooltip_path).transform.position,GameObject.Find(Global.tooltip_path).transform.position+torque.normalized*0.01f , Color.yellow);
 

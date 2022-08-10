@@ -1475,7 +1475,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000010032144, y: -0.0006007851, z: 0.008699926}
+  m_ConnectedAnchor: {x: 0.00000043794873, y: -0.0005999748, z: 0.008700104}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -8178,7 +8178,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000044695984, y: 0.000000059604645, z: 0.0000020226214}
+  m_ConnectedAnchor: {x: -0.0000009576152, y: 0.00000017881393, z: 0.0000016093218}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -11983,6 +11983,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
   debug: 0
+  connected: 0
 --- !u!1 &2332819315697934218
 GameObject:
   m_ObjectHideFlags: 0
@@ -14617,6 +14618,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
   debug: 0
+  connected: 0
 --- !u!1 &2332819316065380565
 GameObject:
   m_ObjectHideFlags: 0
@@ -18544,6 +18546,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
   debug: 0
+  connected: 0
 --- !u!114 &7045235862469250946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18655,6 +18658,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
   debug: 0
+  connected: 0
 --- !u!54 &8534713061865326096
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19132,7 +19136,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.5116473, y: 1.0233214, z: -0.24935661}
+  m_ConnectedAnchor: {x: -1.5109888, y: 1.0238385, z: -0.2492237}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -19524,6 +19528,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.1:9090
   debug: 0
+  connected: 0
 --- !u!1 &8534713063292885071
 GameObject:
   m_ObjectHideFlags: 0
@@ -19735,7 +19740,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.5116473, y: 1.0233214, z: -0.24935661}
+  m_ConnectedAnchor: {x: -1.5109888, y: 1.0238385, z: -0.2492237}
   m_UseSpring: 0
   m_Spring:
     spring: 0
