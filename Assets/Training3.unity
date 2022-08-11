@@ -217,6 +217,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://192.168.1.2:9090
   debug: 1
+  connected: 0
 --- !u!114 &51273415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +285,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://127.0.0.1:9090
   debug: 0
+  connected: 0
 --- !u!114 &88298723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6421,7 +6423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
-  forceOverride: 0
+  safetyOverride: 0
 --- !u!114 &5980783670880340281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6459,7 +6461,7 @@ MonoBehaviour:
   threshold: 0.001
   half: 0.002
   slope: 499.99997
-  damp: 10
+  damp: 20
 --- !u!114 &5980783670880340288
 MonoBehaviour:
   m_ObjectHideFlags: 0

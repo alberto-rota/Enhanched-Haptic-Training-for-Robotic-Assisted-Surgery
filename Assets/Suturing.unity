@@ -7327,13 +7327,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subject: {fileID: 1319236699}
-  left: 0
   Trajectory: {fileID: 1418384788}
-  gain: 30
-  torquegain: 0.01
-  threshold: 5
-  half: 5
-  slope: 0
+  left: 0
+  viscousGain: 30
+  elasticGain: 0.5
+  distanceThreshold: 0.001
+  distanceHalf: 0.002
+  distanceSlope: 0
+  torqueGain: 0.01
+  torqueDamp: 0.001
+  angleThreshold: 5
+  angleHalf: 5
+  angleSlope: 2
   graphics: 1
   graphicVectorGain: 0.02
   velocity: {x: 0, y: 0, z: 0}
@@ -7342,6 +7347,8 @@ MonoBehaviour:
   tangent: {x: 0, y: 0, z: 0}
   rotaxis: {x: 0, y: 0, z: 0}
   angle: 0
+  pangle: 0
+  dangle: 0
   force: {x: 0, y: 0, z: 0}
   f_mag: 0
   f_dir: {x: 0, y: 0, z: 0}
@@ -7362,7 +7369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body
-  forceOverride: 0
+  safetyOverride: 0
 --- !u!114 &6210097203925862042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7376,7 +7383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTML/set_wrench_body
-  forceOverride: 0
+  safetyOverride: 0
 --- !u!114 &6210097203925862043
 MonoBehaviour:
   m_ObjectHideFlags: 0

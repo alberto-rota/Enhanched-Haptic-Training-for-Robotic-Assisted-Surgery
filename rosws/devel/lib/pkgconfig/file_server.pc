@@ -1,0 +1,8 @@
+prefix=/mnt/c/Users/alber/Desktop/Active_Constraints/rosws/devel
+
+Name: file_server
+Description: Description of file_server
+Version: 1.0.0
+Cflags: -I/mnt/c/Users/alber/Desktop/Active_Constraints/rosws/devel/include
+Libs: -L${prefix}/lib -lfile_services
+Requires: roscpp rospy std_msgs roslib message_runtime
