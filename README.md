@@ -32,4 +32,4 @@ The image below is a very synthetic block diagram of the negative feedback for t
 
 Here is a preview of some of them.
 
-![tasks](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/wikifiles/gifsalltasks.gif)
+![tasks](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/wikifiles/taskscollage.gif)
