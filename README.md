@@ -28,6 +28,8 @@ The image below is a very synthetic block diagram of the negative feedback for t
 ![diagram](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/readme/diagram.png)
 
 ## The Tasks
-6 Tasks are implemented by default on the simulator: 3 are surgical training tasks, while the others try to emulate a real surgical scenario.
+8 Tasks are implemented by default on the simulator: 4 are surgical training tasks, while the others try to emulate a real surgical scenario.
 
-![tasks](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/readme/tasks.png)
+Here is a preview of some of them.
+
+![tasks](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/wikifiles/gifsalltasks.gif)
