@@ -51,16 +51,29 @@ public class CheckTaskCompletion : MonoBehaviour
             }
         }
         if (targetReached == targets.Count) {
-            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) {
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalTorque = Vector3.zero;
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisher>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisher>().safetyOverride = true;
+                // GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisher>().totalTorque = Vector3.zero;
             }
             
-            if (GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>() != null) {
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight = Vector3.zero;            
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceLeft = Vector3.zero;   
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalTorqueRight = Vector3.zero;            
-                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalTorqueLeft = Vector3.zero;     
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherRight>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherRight>().safetyOverride = true;            
+                // GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherRight>().totalTorqueRight = Vector3.zero;   
+            }
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherLeft>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherLeft>().safetyOverride = true;  
+                // GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchFTPublisherLeft>().totalTorqueLeft = Vector3.zero;     
+            }
+
+            
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisher>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisher>().safetyOverride = true;
+            }
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisherLeft>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisherLeft>().safetyOverride = true;
+            }
+            if (GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisherRight>() != null) {
+                GameObject.FindWithTag("ROBOT").GetComponent<RosSharp.RosBridgeClient.WrenchPublisherRight>().safetyOverride = true;
             }
             canvasr.SetActive(true);            
             canvasl.SetActive(true);  

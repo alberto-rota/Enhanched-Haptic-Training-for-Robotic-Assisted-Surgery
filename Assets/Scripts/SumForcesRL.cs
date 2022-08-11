@@ -46,7 +46,7 @@ public class SumForcesRL : MonoBehaviour
     public float totalTorqueMagnitudeRight;
     public float totalTorqueMagnitudeLeft;
 
-    void Start()
+    void Awake()
     {
         activeConstraints = new List<MonoBehaviour>();
         foreach (MonoBehaviour s in gameObject.GetComponents<MonoBehaviour>()) {

@@ -22,7 +22,7 @@ namespace RosSharp.RosBridgeClient
 {
     public class WrenchFTPublisherLeft : UnityPublisher<MessageTypes.Geometry.Wrench>
     {
-        public bool forceOverride = false;
+        public bool safetyOverride = false;
         private MessageTypes.Geometry.Wrench message;
         private MessageTypes.Geometry.Vector3 geometryPoint;
         private bool exiting = false;
@@ -62,7 +62,7 @@ namespace RosSharp.RosBridgeClient
             Vector3 tip = GameObject.Find(Global.tooltip_path).transform.position;
             // Global.Arrow(tip, tip+unityforce*0.3f, Color.blue);
 
-            if (!forceOverride) {
+            if (!safetyOverride && GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().enabled) {
                 if(unityforce.x !=0.0 || unityforce.y !=0.0 || unityforce.z !=0.0 || float.IsNaN(unityforce.x) ||
                    unitytorque.x !=0.0 || unitytorque.y !=0.0 || unitytorque.z !=0.0 || float.IsNaN(unitytorque.x))
                 {  
@@ -74,7 +74,7 @@ namespace RosSharp.RosBridgeClient
                     Vector3toMessage(Vector3.zero.Unity2Ros(), message.torque);
                     Publish(message);
                 }
-            }else if (forceOverride || exiting) {
+            }else if (safetyOverride || exiting) {
                 Vector3toMessage(Vector3.zero.Unity2Ros(), message.force);
                 Vector3toMessage(Vector3.zero.Unity2Ros(), message.torque);
                 Publish(message);

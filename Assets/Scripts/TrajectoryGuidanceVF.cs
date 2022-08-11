@@ -30,8 +30,15 @@ public class TrajectoryGuidanceVF : MonoBehaviour
     [Header("Virtual Fixture")]
     public Transform Trajectory;
     [Range(0,100f)]
-    public float gain = 30;
-
+    public float viscousGain = 30;
+    [Header("Elastic Virtual Fixture")]
+    public float elasticGain = 1f;
+    [Range(0,0.01f)]
+    public float distanceThreshold = 0.001f;
+    [Range(0,0.01f)]
+    public float distanceHalf = 0.001f;
+    [Range(0,1000f)]
+    public float distanceSlope = 0f;
 
     [Header("Graphics")]
     public bool graphics = true;
@@ -56,8 +63,11 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         subject.GetComponent<Rigidbody>().solverVelocityIterations = 50;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        
+        if (distanceHalf < 0 ) {distanceHalf=0;}
+        if (distanceSlope < 1/distanceHalf) {distanceSlope=1/distanceHalf;}
         if (Trajectory == null) {
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
@@ -80,7 +90,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         velocity = subject.GetComponent<Velocity>().velocity;
 
         // FORCE
-        float b = gain*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
+        float b = viscousGain*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
         f_mag = b*velocity.magnitude;
 
         if (Vector3.Dot(velocity.normalized, deviation.normalized)<0) { // When moving away
@@ -93,7 +103,7 @@ public class TrajectoryGuidanceVF : MonoBehaviour
         }
 
         force = f_mag*f_dir;
-        force+=gain/60*Global.DistMapAttraction(distance,0.001f,0.001f,1000)*(closest-subject.position).normalized;
+        force+=elasticGain*Global.DistMapAttraction(distance,distanceThreshold,distanceHalf,distanceSlope)*(closest-subject.position).normalized;
 
         if (graphics) {
             Global.Arrow(subject.position, subject.position+velocity*graphicVectorGain, Color.green);

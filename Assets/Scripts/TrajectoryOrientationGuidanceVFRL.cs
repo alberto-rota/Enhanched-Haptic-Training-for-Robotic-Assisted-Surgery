@@ -26,20 +26,32 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 {
     [Header("Transforms")]
     public Transform subject;
+    public Transform Trajectory;
     public bool left = false;
 
-    [Header("Virtual Fixture")]
-    public Transform Trajectory;
+    [Header("Viscous Virtual Fixture")]
     [Range(0,100f)]
-    public float gain = 30;
+    public float viscousGain = 30;
     [Range(0,3f)]
-    public float torquegain = 0.01f;
+    [Header("Elastic Virtual Fixture")]
+    public float elasticGain = 1f;
+    [Range(0,0.01f)]
+    public float distanceThreshold = 0.001f;
+    [Range(0,0.01f)]
+    public float distanceHalf = 0.001f;
+    [Range(0,1000f)]
+    public float distanceSlope = 0f;
+    [Header("Angular Virtual Fixture")]
+    [Range(0,0.1f)]
+    public float torqueGain = 0.01f;
+    [Range(0,20f)]
+    public float torqueDamp = 1f;
     [Range(0,90f)]
-    public float threshold = 5f;
+    public float angleThreshold = 5f;
     [Range(0,90f)]
-    public float half = 5f;
+    public float angleHalf = 5f;
     [Range(0,10000f)]
-    public float slope = 2f;
+    public float angleSlope = 2f;
 
 
     [Header("Graphics")]
@@ -55,6 +67,8 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
     public Vector3 tangent;
     public Vector3 rotaxis;
     public float angle;
+    public float pangle = 0;
+    public float dangle = 0;
     public  Vector3 force;
     public float f_mag;
     public Vector3 f_dir; 
@@ -75,9 +89,11 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (half < 0 ) {half=0;}
-        if (slope < 1/half) {slope=1/half;}
-        
+        if (angleHalf < 0 ) {angleHalf=0;}
+        if (angleSlope < 1/angleHalf) {angleSlope=1/angleHalf;}
+        if (distanceHalf < 0 ) {distanceHalf=0;}
+        if (distanceSlope < 1/distanceHalf) {distanceSlope=1/distanceHalf;}
+
         if (Trajectory == null) {
             Debug.LogWarning("The Reference Trajectory must be assigned!");
             return;
@@ -117,7 +133,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         velocity = subject.GetComponent<Velocity>().velocity;
 
         // FORCE
-        float b = gain*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
+        float b = viscousGain*Mathf.Sqrt((1-Vector3.Dot(velocity.normalized,deviation.normalized))/2);
         f_mag = b*velocity.magnitude;
 
         if (Vector3.Dot(velocity.normalized, deviation.normalized)<0) { // When moving away
@@ -130,7 +146,7 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
         }
 
         force = f_mag*f_dir;
-        force+=gain/40*Global.DistMapAttraction(distance,0.001f,0.001f,1000)*(closest-subject.position).normalized;
+        force+=elasticGain*Global.DistMapAttraction(distance,distanceThreshold,distanceHalf,distanceSlope)*(closest-subject.position).normalized;
 
         // When trajectory path is completed, stop applying torque
         if (idx_closest > Trajectory.GetComponent<LineRenderer>().positionCount*0.95f) {
@@ -140,15 +156,19 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
 
         rotaxis = Vector3.Cross(subject.forward,tangent).normalized;
         angle = Vector3.Angle(subject.forward,tangent);
-        torque = rotaxis*Global.AngleMapAttraction(angle,threshold,half,slope)*torquegain*(-1);
-
+        torque = rotaxis*Global.AngleMapAttraction(angle,angleThreshold,angleHalf,angleSlope)*torqueGain*(-1);
+        dangle = (angle - pangle);
+        torque -= rotaxis*torqueDamp*(dangle);
         if (subject.GetComponent<IsPinchableDuo>() != null) {
             if (subject.GetComponent<IsPinchableDuo>().pinched == false) {
-                torque = Vector3.zero;
+                torque = Vector3.zero;                
+                force = Vector3.zero;
             }
         } else if (subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().pinched == false) {
-            torque = Vector3.zero;
+            torque = Vector3.zero;            
+            force = Vector3.zero;
         }
+
         t_mag = torque.magnitude;
         t_dir = torque.normalized;
 
@@ -176,6 +196,8 @@ public class TrajectoryOrientationGuidanceVFRL : MonoBehaviour
             } 
             stillmissing = subject.transform.parent.gameObject.GetComponent<IsPinchableDuo>().missexchange;
         }
+    pangle = angle;
+
     // Global.DebugOnHRSV("Miss Exchanges: " + missExchanges);
     }
     

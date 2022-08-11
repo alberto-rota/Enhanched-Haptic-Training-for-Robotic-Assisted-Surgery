@@ -90,7 +90,7 @@ public class ConeApproachGuidanceVF : MonoBehaviour
         tp = target.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {   
         if (half < 0 ) {half=0;}
         if (slope < 1/half) {slope=1/half;}

@@ -42,17 +42,17 @@ public class Manager : MonoBehaviour
         // Disbles Wrench message when O is pressed
         if(Input.GetKey(KeyCode.O)){
             if (robot.GetComponent<WrenchPublisherRight>() != null) 
-                robot.GetComponent<WrenchPublisherRight>().forceOverride = !robot.GetComponent<WrenchPublisherRight>().forceOverride;
+                robot.GetComponent<WrenchPublisherRight>().safetyOverride = !robot.GetComponent<WrenchPublisherRight>().safetyOverride;
             if (robot.GetComponent<WrenchPublisherLeft>() != null) 
-                robot.GetComponent<WrenchPublisherLeft>().forceOverride = !robot.GetComponent<WrenchPublisherLeft>().forceOverride;
+                robot.GetComponent<WrenchPublisherLeft>().safetyOverride = !robot.GetComponent<WrenchPublisherLeft>().safetyOverride;
             if (robot.GetComponent<WrenchPublisher>() != null) 
-                robot.GetComponent<WrenchPublisher>().forceOverride = !robot.GetComponent<WrenchPublisher>().forceOverride;
+                robot.GetComponent<WrenchPublisher>().safetyOverride = !robot.GetComponent<WrenchPublisher>().safetyOverride;
             if (robot.GetComponent<WrenchFTPublisherRight>() != null) 
-                robot.GetComponent<WrenchFTPublisherRight>().forceOverride = !robot.GetComponent<WrenchFTPublisherRight>().forceOverride;
+                robot.GetComponent<WrenchFTPublisherRight>().safetyOverride = !robot.GetComponent<WrenchFTPublisherRight>().safetyOverride;
             if (robot.GetComponent<WrenchFTPublisherLeft>() != null) 
-                robot.GetComponent<WrenchFTPublisherLeft>().forceOverride = !robot.GetComponent<WrenchFTPublisherLeft>().forceOverride;
+                robot.GetComponent<WrenchFTPublisherLeft>().safetyOverride = !robot.GetComponent<WrenchFTPublisherLeft>().safetyOverride;
             if (robot.GetComponent<WrenchFTPublisher>() != null) 
-                robot.GetComponent<WrenchFTPublisher>().forceOverride = !robot.GetComponent<WrenchFTPublisher>().forceOverride;
+                robot.GetComponent<WrenchFTPublisher>().safetyOverride = !robot.GetComponent<WrenchFTPublisher>().safetyOverride;
         }
         
         // Toggles the VFs when the V key is pressed or COAG pedal is pressed

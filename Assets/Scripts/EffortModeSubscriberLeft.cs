@@ -42,20 +42,20 @@ namespace RosSharp.RosBridgeClient
             GameObject robot = GameObject.FindWithTag("ROBOT");
 
             if (mode == "Effort") {
-                // if (robot.GetComponent<WrenchPublisherRight>() != null) 
-                //     robot.GetComponent<WrenchPublisherRight>().enabled = true;
-                if (robot.GetComponent<WrenchPublisherLeft>() != null) 
+                if (robot.GetComponent<WrenchPublisher>() != null && robot.GetComponent<WrenchPublisher>().enabled == false) 
+                    robot.GetComponent<WrenchPublisher>().enabled = true;
+                if (robot.GetComponent<WrenchPublisherLeft>() != null && robot.GetComponent<WrenchPublisherLeft>().enabled == false) 
                     robot.GetComponent<WrenchPublisherLeft>().enabled = true;
-                if (robot.GetComponent<WrenchFTPublisherLeft>() != null) 
+                if (robot.GetComponent<WrenchFTPublisherLeft>() != null && robot.GetComponent<WrenchFTPublisherLeft>().enabled == false) 
                     robot.GetComponent<WrenchFTPublisherLeft>().enabled = true;
                 // if (robot.GetComponent<WrenchPublisher>() != null) 
                 //     robot.GetComponent<WrenchPublisher>().enabled = true;
             }else if (mode == "Trajectory") {
-                // if (robot.GetComponent<WrenchPublisherRight>() != null) 
-                //     robot.GetComponent<WrenchPublisherRight>().enabled = false;
-                if (robot.GetComponent<WrenchPublisherLeft>() != null) 
+                if (robot.GetComponent<WrenchPublisher>() != null && robot.GetComponent<WrenchPublisher>().enabled == true) 
+                    robot.GetComponent<WrenchPublisher>().enabled = false;
+                if (robot.GetComponent<WrenchPublisherLeft>() != null && robot.GetComponent<WrenchPublisherLeft>().enabled == true) 
                     robot.GetComponent<WrenchPublisherLeft>().enabled = false;
-                if (robot.GetComponent<WrenchFTPublisherLeft>() != null) 
+                if (robot.GetComponent<WrenchFTPublisherLeft>() != null && robot.GetComponent<WrenchFTPublisherLeft>().enabled == true) 
                     robot.GetComponent<WrenchFTPublisherLeft>().enabled = false;
                 // if (robot.GetComponent<WrenchPublisher>() != null) 
                 //     robot.GetComponent<WrenchPublisher>().enabled = false;
