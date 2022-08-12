@@ -1,1 +1,0 @@
-This work is an application of the [official dVRK project](https://github.com/jhu-dvrk/sawIntuitiveResearchKit) developed from Johns Hopskin Univerity. Visit their [Wiki](https://github.com/jhu-dvrk/sawIntuitiveResearchKit/wiki) for further detail on the underlying functioning of the dVRK.
