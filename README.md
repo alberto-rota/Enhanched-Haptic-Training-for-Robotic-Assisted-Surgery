@@ -1,3 +1,5 @@
+
+![banner](Notes/readme/banner.jpg)
 # Virtual Fixtures in Robot-Assisted Minimally Invasive Surgery
 A surgical training simulator integrated with the daVinci surgical system, employing Active Constraints/Virtual Fixtures that provide a haptic force feedback during the surgical task under the assistance-as-needed paradigm.
 
