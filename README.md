@@ -1,7 +1,9 @@
 
 ![banner](Notes/readme/banner.jpg)
+***
 # Virtual Fixtures in Robot-Assisted Minimally Invasive Surgery
-A surgical training simulator integrated with the daVinci surgical system, employing Active Constraints/Virtual Fixtures that provide a haptic force feedback during the surgical task under the assistance-as-needed paradigm.
+### *A study on their implementation, usability and effectiveness it the context of surgical robotics training*
+A surgical training simulator integrated with the *daVinci* surgical system, employing Active Constraints/Virtual Fixtures that provide a haptic force feedback during the surgical task under the **assistance-as-needed** paradigm.
 
 The project, conducted in the Medical Robotics section of [NearLab](https://nearlab.polimi.it/), is Alberto's Master thesis concluding the MSc in Biomedical Engineering at _Politecnico di Milano_.
 
@@ -86,3 +88,11 @@ They have been formulated as follows:
 * **Surface Guidance:** Feedback force and torque are applied to keep the surgical instrument close to a surface (planar or non-planar) and with the same orientation as the surface itself
 * **Trajectory and Orientation Guidance**: A combination of *Trajectory Guidance* and *Orientation Guidance*
 
+# Preliminary Results
+A sample video of a volunteer user with little experience in surgical training **WITHOUT ASSISTANCE**
+
+![gif unassisted](Notes/readme/suturing_unassisted.gif)
+***
+The same subject performing the same task **WITH HAPIC VIRTUAL FIXTRUES APPLIED**
+
+![gif assisted](Notes/readme/suturing_assisted.gif)
