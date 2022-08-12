@@ -7,6 +7,7 @@ A surgical training simulator integrated with the *daVinci* surgical system, emp
 
 The project, conducted in the Medical Robotics section of [NearLab](https://nearlab.polimi.it/), is Alberto's Master thesis concluding the MSc in Biomedical Engineering at _Politecnico di Milano_.
 
+* **Maintainer of the Project:** Alberto Rota
 * **Supervisor:** Prof. De Momi Elena
 * **Co-Supervisor:** Fan Ke
 ***
