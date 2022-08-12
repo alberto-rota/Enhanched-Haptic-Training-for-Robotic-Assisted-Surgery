@@ -34,6 +34,14 @@ The results of the study are anticipated as follows:
 3. Subjects in **A** will better skill retention 
 4. Sbjects in **A** will show better skill transfer
 
+
+|                                   |    Control Group    |  Assisted Group      |
+|----------                         |:---:                |:------:              |
+| Beginning of the training         |Poor performance     |Poor performance      |
+| End of training                   |   Peak Performance  | Discrete Performance |
+| After a period of no training     |   Good Performance  | Mediocre Performance |
+| When presented with un-seen tasks |   Good Performance  | Poor Performance     |
+
 ## Framework
 The trainee sits at the teleoperation console of a *daVinci* surgical robot and manipulates the MTMs
 
@@ -62,3 +70,17 @@ These have been built with the purpose of requiring the trainee to sollecitate 4
 * **Hand-to-hand cooperation:** The capacity of resolving tasks with both manipulators and the prowess is handing objects from one manipulator to another
 
 # The Virtual Fixtures
+An in-depth analysis of the scientific literature combined with further development in the view of optimizing this specific case of surgical training yielded the implementation of 6 types of Virtual Fixtures apt to grant guidance for all surgical abilities (as above *wrist dexterity*, *steady hand*, *visual abstraction* and *hand-to-hand cooperation*) and that can be deployed in each of the surgical task of the simulator. 
+
+They have been formulated as follows:
+
+![vfs](Notes/readme/vfs.png)
+
+
+* **Trajectory Guidance:** The feedback force will act in order to pull the tooltip towards a trajectory planned in the pre-op stage
+* **Insetion Guidance:** The feedback force will keep the tooltip inside a "cone of approach" that is directed towards a target. This cone is set up in pre-op
+* **Orientation Guidance**: A feedback torque will act in order to align the surgical tooltip in a specific orientation set up in pre-op
+* **Obstacle Avoidance**: The feedback force will act in order to keep the surgical tool away from undesired areas
+* **Surface Guidance:** Feedback force and torque are applied to keep the surgical instrument close to a surface (planar or non-planar) and with the same orientation as the surface itself
+* **Trajectory and Orientation Guidance**: A combination of *Trajectory Guidance* and *Orientation Guidance*
+

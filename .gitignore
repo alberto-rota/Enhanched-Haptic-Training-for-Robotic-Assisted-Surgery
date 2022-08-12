@@ -19,8 +19,8 @@ Assets/Tasks/Setup_files/*.blend
 Assets/Tasks/Setup_files/*.blend1
 Assets/Tasks
 PlotSTLs
+rosws
 *.meta
 *.csproj
 *.sln
 ActiveConstraints_Package.unitypackage
-roswsz
