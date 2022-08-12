@@ -78,7 +78,7 @@ An in-depth analysis of the scientific literature combined with further developm
 
 They have been formulated as follows:
 
-![vfs](Notes/readme/vfs.png)
+![vfs](Notes/readme/VFsDiagram.svg)
 
 
 * **Trajectory Guidance:** The feedback force will act in order to pull the tooltip towards a trajectory planned in the pre-op stage
@@ -93,6 +93,13 @@ A sample video of a volunteer user with little experience in surgical training *
 
 ![gif unassisted](Notes/readme/suturing_unassisted.gif)
 ***
-The same subject performing the same task **WITH HAPIC VIRTUAL FIXTRUES APPLIED**
+The same subject performing the same task **WITH HAPTIC VIRTUAL FIXTURES APPLIED**
 
 ![gif assisted](Notes/readme/suturing_assisted.gif)
+
+Following are the plots of the distance and angular errors (in *mm* and *degrees*, respectively) that the trainee issued while performing this suturing task. Position and orientation data are recorded in real time (30 frames per second) by the simulator and are saved as a `.csv` file ready for and extensive data analysis. 
+
+![disterror](Notes/readme/distanceerror.svg)
+![anglerror](Notes/readme/angleerror.svg)
+
+**Even though this is preliminary data and no direct or indirect conclusion can be gathered**, it is still qualitatively evident how in general both the distance and angular error in the task performed with assistance (blue line) are lower than in the unassisted case (orange line)
