@@ -18,8 +18,8 @@ Assets/3d_models
 Assets/Tasks/Setup_files/*.blend
 Assets/Tasks/Setup_files/*.blend1
 Assets/Tasks
+rosws/src/CMakeLists.txt
 PlotSTLs
-rosws
 *.meta
 *.csproj
 *.sln
