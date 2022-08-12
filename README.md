@@ -12,14 +12,12 @@ _As the project is still undergoing development, this README is very synthetic a
 _NOTE_: This repo currently only acts as a dev backup and a version control system for relevant files. **Downloading this repo will not download the simulator**, as larger files (blend, obj, packages, bin, ...) aren't stored here and will only be shared once the project is complete
 ***
 
-# The project 
-This work proposes a surgical simulator built in the Unity 3D environment where a virtual daVinci surgical robot is operated by a real teleoperation console. The user therefore sits at the console and manipulates the MTMs: looking at the oculars of the HRSV system, he/she will see the feed from two virtual cameras placed in the virtual 3D scene, acquiring depth perception as a consequence 
+## The project 
+This work proposes a surgical simulator built in the Unity 3D environment where a virtual daVinci surgical robot is operated by a real teleoperation console. The user therefore sits at the console and grabs the MTMs: looking at the oculars of the HRSV system, he/she will see the feed from two virtual cameras placed in the virtual 3D scene, acquiring depth perception as a consequece
 
-![unity](Notes/readme/unity.png)
+![unity](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/readme/unity.png)
 
-
-### Aim of the project
- The main goal of the work is to **implement and assess** the efficacy of **virtual fixtures**: from the relative position of the surgical tool tip and the one of objects, obstacles, trajectories or guides, a "guidance force" can be computed in such a way that its application to the surgical tooltip will improve the surgical performance. The **"Assistance-as-needed"** paradigm is the main factor that is taken into consideration when deciding weather or not (and how) to apply such force 
+The main goal of the work is to implement and assess the efficacy of **virtual fixtures**: from the relative position of the surgical tool tip and the one of objects, obstacles, trajectories or guides, a "guidance force" can be computed in such a way that its application to the surgical tooltip will improve the surgical performance. The **"Assistance-as-needed"** paradigm is the main factor that is taken into consideration when deciding wether or not (and how) to apply such force 
 
 As an example, this force will be computed so that it pushes the end-effector away from obstacles or, conversely, towards trajectories.
 
@@ -45,20 +43,11 @@ The force computed in the Unity environment is then, frame by frame, applied to 
 
 The image below is a very synthetic block diagram of the negative feedback for the haptic force
 
-![diagram](Notes/readme/diagram.png)
-
+![diagram](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/readme/diagram.png)
 
 # The Surgical Tasks
 8 Tasks are implemented by default on the simulator: 4 are surgical training tasks, while the others try to emulate a real surgical scenario.
 
-This panel shows a preview of them.
+Here is a preview of some of them.
 
-![tasks](Notes/readme/taskscollage.gif)
-
-These have been built with the purpose of requiring the trainee to sollecitate 4 main surgical abilities, in specifics:
-* **Wrist dexterity:** The ability of achieving a wide range of complex orientations of the wrist
-* **Steady hand:** The adherence and stabilization around trajectories/paths
-* **Visual abstraction:** The capability of operating in areas where the surgical tool is not completely visible
-* **Hand-to-hand cooperation:** The capacity of resolving tasks with both manipulators and the prowess is handing objects from one manipulator to another
-
-# The Virtual Fixtures
+![tasks](https://github.com/alberto-rota/Virtual-Fixtures-in-Robotic-Assisted-Surgery/blob/main/Notes/readme/taskscollage.gif)
