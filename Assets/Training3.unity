@@ -6422,7 +6422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c24a4666b70314f815918c5e377d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /dvrk/MTMR/set_wrench_body
+  Topic: /dvrk/MTMR/set_wrench_body_safe
   safetyOverride: 0
 --- !u!114 &5980783670880340281
 MonoBehaviour:

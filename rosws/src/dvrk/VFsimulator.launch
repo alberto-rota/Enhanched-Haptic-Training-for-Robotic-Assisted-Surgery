@@ -1,4 +1,7 @@
 <launch>    
+    <node pkg="dvrk" name="wrench_safety_buffer" type="wrench_safety_buffer.py" output="screen">
+    </node>
+
     <node pkg="dvrk" name="set_wrench_frame_MTMR" type="set_wrench_frame_MTMR.py" output="screen">
     </node>
 

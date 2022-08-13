@@ -23,7 +23,7 @@ def getKey(settings, timeout):
 def saveTerminalSettings():
     return termios.tcgetattr(sys.stdin)
 
-topic = "/dvrk/MTMR/set_wrench_body"
+topic = "/dvrk/MTML/set_wrench_body_safe"
 
 RESOLUTION = 0.1
 
