@@ -6,6 +6,7 @@ a = [a,NaN*ones(1,10)];
 u = [u,NaN*ones(1,10)];
 d = [d,61:70];
 
+interpreterlatex
 a = [a,0.95+0.05*(1-exp(-0.7*d(1:10)))];
 u = [u,0.6+0.2*(1-exp(-0.1*d(1:10)))];
 close all

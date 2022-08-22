@@ -200,6 +200,21 @@ public class PlaygroundManager : MonoBehaviour
         // The MINUS pedal reloads the current scene
         if (gameObject.GetComponent<PedalMinusSubscriber>().pressed == true) 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // Pressind D toggles debug mode
+        if (Input.GetKeyDown(KeyCode.D)) {
+            Global.debugmode = !Global.debugmode;   
+        }
+        
+        // Pressing P toggles the pointer visibility
+        if (Input.GetMouseButton(0)) {
+            GameObject.Find("/Text/CanvasPointer/PointerR").GetComponent<UnityEngine.UI.Image>().enabled = true;
+            GameObject.Find("/Text/CanvasPointerL/PointerL").GetComponent<UnityEngine.UI.Image>().enabled = true;
+        }else{
+            GameObject.Find("/Text/CanvasPointer/PointerR").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            GameObject.Find("/Text/CanvasPointerL/PointerL").GetComponent<UnityEngine.UI.Image>().enabled = false;
+        }
     }
+
 }
 }
