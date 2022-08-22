@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import rospy
 from std_msgs.msg import Bool
+from rich import print
 
 topic = "/dvrk/MTMR/set_wrench_body_orientation_absolute"
 
@@ -10,7 +11,7 @@ def talker():
     # publ = rospy.Publisher(topic_l, Bool, queue_size=10)
     rate = rospy.Rate(20) # 10hz
 
-    print("> Right-MTM RF set to BASE")
+    print("[orange3]> Right-MTM RF set to BASE")
     
     while not rospy.is_shutdown():
         pub.publish(True)

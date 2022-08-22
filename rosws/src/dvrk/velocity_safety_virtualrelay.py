@@ -10,26 +10,26 @@ topicR = "/dvrk/MTMR/state_joint_current"
 topicL = "/dvrk/MTML/state_joint_current"
 unpowertopic = "/dvrk/console/power_off"
 
-MAX_VELOCITY = 12
+MAX_VELOCITY = [4,4,4,8,12,8,24]
 
 
 def callbackR(joints):
     jvels = joints.velocity
     for i,jv in enumerate(jvels):
-        if jv > MAX_VELOCITY:
+        if jv > MAX_VELOCITY[i]:
             pubOFF.publish(Empty())
             print(f"[red]DETECTED HIGH SPEED ON MTMR-Joint{i+1} - Opening Virtual Relay   ",end="")
+            print(f"[yellow] MTMR-Joint{i+1} speed = {jv} > {MAX_VELOCITY[i]} \[deg/s]")
             print(f"[red]>>   Cutting power from all arms")
-            print(f"[yellow] MTMR-Joint{i+1} speed = {jv}")
             return
 
 def callbackL(joints):    
     jvels = joints.velocity
     for i,jv in enumerate(jvels):
-        if jv > MAX_VELOCITY:
+        if jv > MAX_VELOCITY[i]:
             pubOFF.publish(Empty())
             print(f"[red]DETECTED HIGH SPEED ON MTML-Joint{i+1} - Opening Virtual Relay   ",end="")
-            print(f"[yellow] MTML-Joint{i+1} speed = {jv}")
+            print(f"[yellow] MTML-Joint{i+1} speed = {jv} > {MAX_VELOCITY[i]} \[deg/s]")
             print(f"[red]>>   Cutting power from all arms")
             return
 

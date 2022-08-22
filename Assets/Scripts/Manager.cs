@@ -178,6 +178,15 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) {
             Global.debugmode = !Global.debugmode;   
         }
+
+        // Pressing the Left Mouse Button toggles the pointer visibility
+        if (Input.GetMouseButton(0)) {
+            GameObject.Find("/Text/CanvasPointer/PointerR").GetComponent<UnityEngine.UI.Image>().enabled = true;
+            GameObject.Find("/Text/CanvasPointerL/PointerL").GetComponent<UnityEngine.UI.Image>().enabled = true;
+        }else{
+            GameObject.Find("/Text/CanvasPointer/PointerR").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            GameObject.Find("/Text/CanvasPointerL/PointerL").GetComponent<UnityEngine.UI.Image>().enabled = false;
+        }
     }
 }
 }

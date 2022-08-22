@@ -206,7 +206,7 @@ public class PlaygroundManager : MonoBehaviour
             Global.debugmode = !Global.debugmode;   
         }
         
-        // Pressing P toggles the pointer visibility
+        // Pressing the Left Mouse Button toggles the pointer visibility
         if (Input.GetMouseButton(0)) {
             GameObject.Find("/Text/CanvasPointer/PointerR").GetComponent<UnityEngine.UI.Image>().enabled = true;
             GameObject.Find("/Text/CanvasPointerL/PointerL").GetComponent<UnityEngine.UI.Image>().enabled = true;
