@@ -74,6 +74,7 @@ def bufferL(wrench):
         print(f"[red] DANGER: Force on MTML over unpowering limit: {math.sqrt(wrenchforcemag)} > {UNPOWER_FORCE} [N]  ",end="")
         print(f"[red] >>   Cutting power from all arms")
         pubOFF.publish(Empty())
+        pubR.publish(Wrench())
         return
 
     elif wrenchforcemag >= CUTOFF_FORCE**2:
@@ -84,6 +85,7 @@ def bufferL(wrench):
         print(f"[red] DANGER: Torque on MTML over unpowering limit: {math.sqrt(wrenchtorquemag)} > {UNPOWER_TORQUE} [Nm]  ",end="")
         print(f"[red] >>   Cutting power from all arms")
         pubOFF.publish(Empty())
+        pubL.publish(Wrench())
         return
 
     elif wrenchtorquemag >= CUTOFF_TORQUE**2:
@@ -102,7 +104,7 @@ pubOFF = rospy.Publisher(unpowertopic, Empty, queue_size=10)
 
 def wrench_safety_buffer():
     rate = rospy.Rate(20) 
-    print("> Wrench Safety buffer initialized")
+    print("[spring_green3]> Wrench Safety buffer initialized")
     
     # pub.publish(wrench)
     # rate.sleep()
