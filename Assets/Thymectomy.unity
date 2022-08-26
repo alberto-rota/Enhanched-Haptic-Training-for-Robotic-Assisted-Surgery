@@ -1238,6 +1238,7 @@ GameObject:
   - component: {fileID: 236771231097829069}
   - component: {fileID: 236771231097829068}
   - component: {fileID: 236771231097829067}
+  - component: {fileID: 236771231097829070}
   m_Layer: 0
   m_Name: t3
   m_TagString: Untagged
@@ -1289,6 +1290,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: 0.00000005948823, y: 1.7462311e-10, z: -0.000000014901161}
+--- !u!114 &236771231097829070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236771231097829066}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &245445237543019789
 Transform:
   m_ObjectHideFlags: 0
@@ -2916,6 +2932,7 @@ GameObject:
   - component: {fileID: 1036817496692258320}
   - component: {fileID: 1036817496692258319}
   - component: {fileID: 1036817496692258318}
+  - component: {fileID: 1036817496692258321}
   m_Layer: 0
   m_Name: t1
   m_TagString: Untagged
@@ -2967,6 +2984,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: 0.00000005948823, y: 1.7462311e-10, z: -0.000000014901161}
+--- !u!114 &1036817496692258321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036817496692258317}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &1038012844548789072
 Transform:
   m_ObjectHideFlags: 0
@@ -4566,6 +4598,7 @@ GameObject:
   - component: {fileID: 2146672765351019377}
   - component: {fileID: 2146672765351019376}
   - component: {fileID: 2146672765351019375}
+  - component: {fileID: 2146672765351019378}
   m_Layer: 0
   m_Name: t5
   m_TagString: Untagged
@@ -4617,6 +4650,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: 0.00000005948823, y: 0.00000011938391, z: -0.000000029802322}
+--- !u!114 &2146672765351019378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146672765351019374}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &2159444329791462898
 Transform:
   m_ObjectHideFlags: 0
@@ -5681,6 +5729,7 @@ GameObject:
   - component: {fileID: 2885204402464451044}
   - component: {fileID: 2885204402464451043}
   - component: {fileID: 2885204402464451045}
+  - component: {fileID: 2885204402464451046}
   m_Layer: 0
   m_Name: Phrenic
   m_TagString: Untagged
@@ -5733,6 +5782,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalVectorsLength: 0
   path: C:\Users\alber\Desktop\Active_Constraints\Assets\Tasks\Thymectomy_meshes
+  surfacePoints: []
+  surfaceNormals: []
+--- !u!114 &2885204402464451046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885204402464451042}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
   surfacePoints: []
   surfaceNormals: []
 --- !u!33 &2902904110813966984
@@ -7821,6 +7885,7 @@ GameObject:
   - component: {fileID: 4101376249763749880}
   - component: {fileID: 4101376249763749879}
   - component: {fileID: 4101376249763749878}
+  - component: {fileID: 4101376249763749881}
   m_Layer: 0
   m_Name: t4
   m_TagString: Untagged
@@ -7872,6 +7937,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: -1.1641536e-10, y: 1.7462311e-10, z: -0.000000014901161}
+--- !u!114 &4101376249763749881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101376249763749877}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &4127473082077739705
 GameObject:
   m_ObjectHideFlags: 0
@@ -9317,6 +9397,7 @@ GameObject:
   - component: {fileID: 4986225571571818659}
   - component: {fileID: 4986225571571818658}
   - component: {fileID: 4986225571571818657}
+  - component: {fileID: 4986225571571818660}
   m_Layer: 0
   m_Name: t
   m_TagString: Untagged
@@ -9368,6 +9449,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: 0.00000005948823, y: 1.7462311e-10, z: -0.000000014901161}
+--- !u!114 &4986225571571818660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4986225571571818656}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &4996751772644987160
 GameObject:
   m_ObjectHideFlags: 0
@@ -10817,7 +10913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body_safe
-  forceOverride: 0
+  safetyOverride: 0
 --- !u!114 &5980783670880340282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13739,6 +13835,7 @@ GameObject:
   - component: {fileID: 7676000859834279468}
   - component: {fileID: 7676000859834279467}
   - component: {fileID: 7676000859834279466}
+  - component: {fileID: 7676000859834279469}
   m_Layer: 0
   m_Name: t2
   m_TagString: Untagged
@@ -13790,6 +13887,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.0010000006
   m_Center: {x: 0.00000005948823, y: 0.0000002385932, z: -0.000000014901161}
+--- !u!114 &7676000859834279469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676000859834279465}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &7678250992463321352
 GameObject:
   m_ObjectHideFlags: 0

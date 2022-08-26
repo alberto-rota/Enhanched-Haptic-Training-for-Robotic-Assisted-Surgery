@@ -85,52 +85,65 @@ def centerandequal(ax,pos):
     ax.set_ylim3d([(ylim[0]+ylim[1])/2-maxrange/BORDERS,(ylim[0]+ylim[1])/2+maxrange/BORDERS])
     ax.set_zlim3d([(zlim[0]+zlim[1])/2-maxrange/BORDERS,(zlim[0]+zlim[1])/2+maxrange/BORDERS])
     
-    
+def rms(data):
+    return np.sqrt(np.mean(data**2))
+
 wd = os.path.dirname(os.path.realpath(__file__))
 wd+="\\"+os.path.basename(wd)
 
 traj = u2r(pd.read_csv(wd+'_traj0.csv'))
+
 task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['TrajectoryGuidanceVF_X0','TrajectoryGuidanceVF_Y0','TrajectoryGuidanceVF_Z0']].rename(
-    columns={'TrajectoryGuidanceVF_X0':'X','TrajectoryGuidanceVF_Y0':'Y','TrajectoryGuidanceVF_Z0':'Z'}
+force = u2r(task[['TrajectoryOrientationGuidanceVFRL_forceX0','TrajectoryOrientationGuidanceVFRL_forceY0','TrajectoryOrientationGuidanceVFRL_forceZ0']].rename(
+    columns={'TrajectoryOrientationGuidanceVFRL_forceX0':'X','TrajectoryOrientationGuidanceVFRL_forceY0':'Y','TrajectoryOrientationGuidanceVFRL_forceZ0':'Z'}
 ))
-err = task['TrajectoryGuidanceVF_dist0'].to_numpy()
+torque = u2r(task[['TrajectoryOrientationGuidanceVFRL_torqueX0','TrajectoryOrientationGuidanceVFRL_torqueY0','TrajectoryOrientationGuidanceVFRL_torqueZ0']].rename(
+    columns={'TrajectoryOrientationGuidanceVFRL_torqueX0':'X','TrajectoryOrientationGuidanceVFRL_torqueY0':'Y','TrajectoryOrientationGuidanceVFRL_torqueZ0':'Z'}
+))
+
+err = task['TrajectoryOrientationGuidanceVFRL_dist0'].to_numpy()
+angle = task['TrajectoryOrientationGuidanceVFRL_angle0'].to_numpy()
 time = task['Time'].to_numpy()
 
 eval = dict()
 eval["subject"] = wd.split("\\")[-4][-1]
 eval["task"] = wd.split("\\")[-3]
 eval["repetition"] = wd.split("\\")[-2][-1]
+eval["assisted"] = np.count_nonzero(task["Assisted"]) > 0.8*len(task)
+eval["assistance"] = np.mean(task["Assistance"])
 eval["time"] = time[-1]-time[0]
-eval["avg_dist"] = np.mean(err)
-eval["avg_force"] = np.mean(np.linalg.norm(force.to_numpy(),axis=1))
+eval["clutch_time"] = np.count_nonzero(task["Clutch"])/len(task)
+eval["avg_dist"] = rms(err)
+eval["avg_angle"] = rms(angle)
+eval["avg_force"] = rms(np.linalg.norm(force.to_numpy(),axis=1))
+eval["avg_torque"] = rms(np.linalg.norm(torque.to_numpy(),axis=1))
 eval_json = json.dumps(eval, indent=4)
 with open(wd+'_eval.json', 'w') as f:
     f.write(eval_json)
+    
+traj = u2r(pd.read_csv(wd+'_traj0.csv'))
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
 
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
-axerr.plot(traj['X'],traj['Y'],traj['Z'],color="#0090FF",linewidth=2)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
-
+axerr.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
 plt.title("D = "+str(eval['avg_dist']))
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
-axforce.plot(traj['X'],traj['Y'],traj['Z'],color="#0090FF",linewidth=2)
 plotPosForce(axforce,pos,force['X']**2 + force['Y']**2 + force['Z']**2)
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+centerandequal(axerr,pos)
 STRIDE = 5
 axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos['Z'].to_numpy()[::STRIDE],  
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
-
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
-centerandequal(axforce,pos)
+axforce.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
 plt.title("F = "+str(eval['avg_force']))
 
 c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)

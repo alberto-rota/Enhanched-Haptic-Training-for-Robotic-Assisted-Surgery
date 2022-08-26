@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 659059987}
   - component: {fileID: 659059986}
   - component: {fileID: 659059985}
+  - component: {fileID: 659059990}
   m_Layer: 0
   m_Name: Entry2
   m_TagString: Untagged
@@ -561,6 +562,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659059983}
   m_Mesh: {fileID: 7192691051385846374, guid: 472e780c1ce4422428a66a0ea50469dc, type: 3}
+--- !u!114 &659059990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659059983}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &690793030
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,6 +916,7 @@ GameObject:
   - component: {fileID: 1166262022}
   - component: {fileID: 1166262021}
   - component: {fileID: 1166262020}
+  - component: {fileID: 1166262025}
   m_Layer: 0
   m_Name: Exit2
   m_TagString: Untagged
@@ -1014,6 +1031,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166262018}
   m_Mesh: {fileID: 7192691051385846374, guid: 472e780c1ce4422428a66a0ea50469dc, type: 3}
+--- !u!114 &1166262025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166262018}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!1 &1221512805
 GameObject:
   m_ObjectHideFlags: 0

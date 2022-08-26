@@ -92,8 +92,8 @@ task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['ConeApproachGuidanceVF_X0','ConeApproachGuidanceVF_Y0','ConeApproachGuidanceVF_Z0']].rename(
-    columns={'ConeApproachGuidanceVF_X0':'X','ConeApproachGuidanceVF_Y0':'Y','ConeApproachGuidanceVF_Z0':'Z'}
+force = u2r(task[['ConeApproachGuidanceVF_forceX0','ConeApproachGuidanceVF_forceY0','ConeApproachGuidanceVF_forceZ0']].rename(
+    columns={'ConeApproachGuidanceVF_forceX0':'X','ConeApproachGuidanceVF_forceY0':'Y','ConeApproachGuidanceVF_forceZ0':'Z'}
 ))
 err = task['ConeApproachGuidanceVF_dist0'].to_numpy()
 time = task['Time'].to_numpy()
@@ -111,19 +111,21 @@ with open(wd+'_eval.json', 'w') as f:
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
+axerr.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
 plt.title("D = "+str(eval['avg_dist']))
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
+axforce.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
 plotPosForce(axforce,pos,force['X']**2 + force['Y']**2 + force['Z']**2)
 STRIDE = 5
 axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos['Z'].to_numpy()[::STRIDE],  
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
 
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axforce,pos)
 plt.title("F = "+str(eval['avg_force']))
 

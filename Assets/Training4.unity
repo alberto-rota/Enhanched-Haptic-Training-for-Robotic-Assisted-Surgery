@@ -5736,6 +5736,7 @@ GameObject:
   - component: {fileID: 5468237648527427116}
   - component: {fileID: 21570391096252270}
   - component: {fileID: 2826578543939915810}
+  - component: {fileID: 3537126356480083013}
   m_Layer: 0
   m_Name: Stand2
   m_TagString: Untagged
@@ -5743,6 +5744,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3537126356480083013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537126356480083012}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &3570024388256722024
 Transform:
   m_ObjectHideFlags: 0
@@ -8497,6 +8513,7 @@ GameObject:
   - component: {fileID: 6385294074962773096}
   - component: {fileID: 6385294074962773095}
   - component: {fileID: 6385294074962773094}
+  - component: {fileID: 6385294074962773097}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -8548,6 +8565,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.0000007
   m_Center: {x: 0, y: 0.00012207031, z: 0}
+--- !u!114 &6385294074962773097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6385294074962773093}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!33 &6420828744137854438
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10274,6 +10306,7 @@ GameObject:
   - component: {fileID: 1981543917154500441}
   - component: {fileID: 2386877895177299700}
   - component: {fileID: 945156174242364966}
+  - component: {fileID: 8050807036835793251}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
@@ -10281,6 +10314,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8050807036835793251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050807036835793250}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!4 &8107154550291736113
 Transform:
   m_ObjectHideFlags: 0
@@ -10845,6 +10893,7 @@ GameObject:
   - component: {fileID: 7746283893387242754}
   - component: {fileID: 7544861103780762292}
   - component: {fileID: 3674226723989276240}
+  - component: {fileID: 8776110697436258124}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -10852,6 +10901,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8776110697436258124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8776110697436258123}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995d1d5088a57a645b1d391c2ddfab09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  folderpath: 
+  surfacePoints: []
+  surfaceNormals: []
 --- !u!33 &8896986001683889466
 MeshFilter:
   m_ObjectHideFlags: 0

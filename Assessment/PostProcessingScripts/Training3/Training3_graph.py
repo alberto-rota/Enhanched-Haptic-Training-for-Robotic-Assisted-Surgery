@@ -93,9 +93,9 @@ pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
 ))
 force = np.zeros(np.shape(pos))
 err = 1000*np.ones((np.shape(pos)[0],))
-for o in range(0,(np.shape(task)[1]-4)//4):
-    force = force + u2r(task[['ObstacleAvoidanceForceFieldVF_X'+str(o),'ObstacleAvoidanceForceFieldVF_Y'+str(o),'ObstacleAvoidanceForceFieldVF_Z'+str(o)]].rename(
-        columns={'ObstacleAvoidanceForceFieldVF_X'+str(o):'X','ObstacleAvoidanceForceFieldVF_Y'+str(o):'Y','ObstacleAvoidanceForceFieldVF_Z'+str(o):'Z'}
+for o in range(0,(np.shape(task)[1]-4)//4-1):
+    force = force + u2r(task[['ObstacleAvoidanceForceFieldVF_forceX'+str(o),'ObstacleAvoidanceForceFieldVF_forceY'+str(o),'ObstacleAvoidanceForceFieldVF_forceZ'+str(o)]].rename(
+        columns={'ObstacleAvoidanceForceFieldVF_forceX'+str(o):'X','ObstacleAvoidanceForceFieldVF_forceY'+str(o):'Y','ObstacleAvoidanceForceFieldVF_forceZ'+str(o):'Z'}
     )).to_numpy()
     err = np.amin(np.concatenate((np.expand_dims(err,axis=1), np.expand_dims(task['ObstacleAvoidanceForceFieldVF_dist'+str(o)].to_numpy(),axis=1)), axis=1),axis=1)
     
@@ -117,7 +117,7 @@ fig = plt.figure(figsize=plt.figaspect(0.5))
 
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
 
 plt.title("D = "+str(eval['avg_dist']))
@@ -130,7 +130,7 @@ axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
 
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axforce,pos)
 
 plt.title("F = "+str(eval['avg_force']))

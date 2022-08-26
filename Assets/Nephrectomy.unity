@@ -8187,7 +8187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 193013292}
   target: {fileID: 7047454086635890896}
-  configuring: 1
+  configuring: 0
   coneApertureDegrees: 3.2
   gain: 1.5
   half: 0.002
@@ -8196,7 +8196,7 @@ MonoBehaviour:
   graphics: 1
   graphicVectorGain: 1
   coneResolution: 10
-  force: {x: -0, y: -0, z: -0}
+  force: {x: 0, y: 0, z: 0}
   forceMagnitude: 0
   distance: 0
   delta: {x: 0.03336847, y: -0.08401424, z: 0.15505958}

@@ -97,15 +97,15 @@ task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['SurfaceOrientationGuidanceVF_forceX0','SurfaceOrientationGuidanceVF_forceY0','SurfaceOrientationGuidanceVF_forceZ0']].rename(
-    columns={'SurfaceOrientationGuidanceVF_forceX0':'X','SurfaceOrientationGuidanceVF_forceY0':'Y','SurfaceOrientationGuidanceVF_forceZ0':'Z'}
+force = u2r(task[['TrajectoryOrientationGuidanceVFRL_forceX0','TrajectoryOrientationGuidanceVFRL_forceY0','TrajectoryOrientationGuidanceVFRL_forceZ0']].rename(
+    columns={'TrajectoryOrientationGuidanceVFRL_forceX0':'X','TrajectoryOrientationGuidanceVFRL_forceY0':'Y','TrajectoryOrientationGuidanceVFRL_forceZ0':'Z'}
 ))
-torque = u2r(task[['SurfaceOrientationGuidanceVF_torqueX0','SurfaceOrientationGuidanceVF_torqueY0','SurfaceOrientationGuidanceVF_torqueZ0']].rename(
-    columns={'SurfaceOrientationGuidanceVF_torqueX0':'X','SurfaceOrientationGuidanceVF_torqueY0':'Y','SurfaceOrientationGuidanceVF_torqueZ0':'Z'}
+torque = u2r(task[['TrajectoryOrientationGuidanceVF_RLtorqueX0','TrajectoryOrientationGuidanceVF_RLtorqueY0','TrajectoryOrientationGuidanceVF_RLtorqueZ0']].rename(
+    columns={'TrajectoryOrientationGuidanceVF_RLtorqueX0':'X','TrajectoryOrientationGuidanceVF_RLtorqueY0':'Y','TrajectoryOrientationGuidanceVF_RLtorqueZ0':'Z'}
 ))
 
-err = task['SurfaceOrientationGuidanceVF_dist0'].to_numpy()
-angle = task['SurfaceOrientationGuidanceVF_angle0'].to_numpy()
+err = task['TrajectoryOrientationGuidanceRLVF_dist0'].to_numpy()
+angle = task['TrajectoryOrientationGuidanceVRLF_angle0'].to_numpy()
 time = task['Time'].to_numpy()
 
 eval = dict()

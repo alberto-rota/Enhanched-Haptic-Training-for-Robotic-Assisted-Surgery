@@ -1263,6 +1263,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://127.0.0.1
   debug: 1
+  connected: 0
 --- !u!114 &754332632277879715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,7 +1374,7 @@ MonoBehaviour:
   graphics: 1
   graphicVectorGain: 0.008
   coneResolution: 10
-  force: {x: -0, y: -0, z: -0}
+  force: {x: 0, y: 0, z: 0}
   forceMagnitude: 0
   distance: 0
   delta: {x: 0.04432106, y: -0.08338763, z: 0.1810162}
@@ -1406,7 +1407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /dvrk/MTMR/set_wrench_body_safe
-  forceOverride: 0
+  safetyOverride: 0
 --- !u!1 &823656516850157820
 GameObject:
   m_ObjectHideFlags: 0
@@ -6389,6 +6390,7 @@ MonoBehaviour:
   protocol: 0
   RosBridgeServerUrl: ws://172.23.9.178:9090
   debug: 0
+  connected: 0
 --- !u!4 &6446883659175450234
 Transform:
   m_ObjectHideFlags: 0
