@@ -218,9 +218,9 @@ public class LogData : MonoBehaviour
             // VFs HEADERS
             if (activeConstraints.Contains(robot.GetComponent<TrajectoryGuidanceVF>())) {
                 for (int j=0; j<robot.GetComponents<TrajectoryGuidanceVF>().Length; j++) {
-                    writer.Write("TrajectoryGuidanceVF_X"+j+",");
-                    writer.Write("TrajectoryGuidanceVF_Y"+j+",");
-                    writer.Write("TrajectoryGuidanceVF_Z"+j+",");
+                    writer.Write("TrajectoryGuidanceVF_forceX"+j+",");
+                    writer.Write("TrajectoryGuidanceVF_forceY"+j+",");
+                    writer.Write("TrajectoryGuidanceVF_forceZ"+j+",");
                     writer.Write("TrajectoryGuidanceVF_dist"+j+",");
                 }
             }

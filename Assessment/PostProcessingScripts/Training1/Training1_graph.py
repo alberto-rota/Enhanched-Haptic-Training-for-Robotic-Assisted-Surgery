@@ -92,8 +92,8 @@ task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['TrajectoryGuidanceVF_X0','TrajectoryGuidanceVF_Y0','TrajectoryGuidanceVF_Z0']].rename(
-    columns={'TrajectoryGuidanceVF_X0':'X','TrajectoryGuidanceVF_Y0':'Y','TrajectoryGuidanceVF_Z0':'Z'}
+force = u2r(task[['TrajectoryGuidanceVF_forceX0','TrajectoryGuidanceVF_forceY0','TrajectoryGuidanceVF_forceZ0']].rename(
+    columns={'TrajectoryGuidanceVF_forceX0':'X','TrajectoryGuidanceVF_forceY0':'Y','TrajectoryGuidanceVF_forceZ0':'Z'}
 ))
 err = task['TrajectoryGuidanceVF_dist0'].to_numpy()
 time = task['Time'].to_numpy()
@@ -114,7 +114,7 @@ fig = plt.figure(figsize=plt.figaspect(0.5))
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 axerr.plot(traj['X'],traj['Y'],traj['Z'],color="#0090FF",linewidth=2)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
 
 plt.title("D = "+str(eval['avg_dist']))
@@ -127,7 +127,7 @@ axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
 
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axforce,pos)
 plt.title("F = "+str(eval['avg_force']))
 

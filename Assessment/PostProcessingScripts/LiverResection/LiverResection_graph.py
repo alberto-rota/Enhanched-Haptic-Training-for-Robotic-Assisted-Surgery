@@ -86,39 +86,56 @@ def on_move(event):
 wd = os.path.join(os.path.dirname(os.path.realpath(__file__)))
 wd = os.path.join(wd, os.path.basename(wd))
 
+def rms(data):
+    return np.sqrt(np.mean(data**2))
+    
+wd = os.path.join(os.path.dirname(os.path.realpath(__file__)))
+wd = os.path.join(wd, os.path.basename(wd))
+
+# ob0 = u2r(pd.read_csv(wd+'_obst0.csv'))
 task = pd.read_csv(wd+'_VFs.csv')
 pos = u2r(task[['PositionX','PositionY','PositionZ']].rename(
     columns={'PositionX':'X','PositionY':'Y','PositionZ':'Z'}
 ))
-force = u2r(task[['SurfaceGuidanceVF_X0','SurfaceGuidanceVF_Y0','SurfaceGuidanceVF_Z0']].rename(
-    columns={'SurfaceGuidanceVF_X0':'X','SurfaceGuidanceVF_Y0':'Y','SurfaceGuidanceVF_Z0':'Z'}
+force = u2r(task[['SurfaceOrientationGuidanceVF_forceX0','SurfaceOrientationGuidanceVF_forceY0','SurfaceOrientationGuidanceVF_forceZ0']].rename(
+    columns={'SurfaceOrientationGuidanceVF_forceX0':'X','SurfaceOrientationGuidanceVF_forceY0':'Y','SurfaceOrientationGuidanceVF_forceZ0':'Z'}
+))
+torque = u2r(task[['SurfaceOrientationGuidanceVF_torqueX0','SurfaceOrientationGuidanceVF_torqueY0','SurfaceOrientationGuidanceVF_torqueZ0']].rename(
+    columns={'SurfaceOrientationGuidanceVF_torqueX0':'X','SurfaceOrientationGuidanceVF_torqueY0':'Y','SurfaceOrientationGuidanceVF_torqueZ0':'Z'}
 ))
 
-err = task['SurfaceGuidanceVF_dist0'].to_numpy()
+err = task['SurfaceOrientationGuidanceVF_dist0'].to_numpy()
+angle = task['SurfaceOrientationGuidanceVF_angle0'].to_numpy()
 time = task['Time'].to_numpy()
 
 eval = dict()
 eval["subject"] = wd.split("\\")[-4][-1]
 eval["task"] = wd.split("\\")[-3]
 eval["repetition"] = wd.split("\\")[-2][-1]
+eval["assisted"] = np.count_nonzero(task["Assisted"]) > 0.8*len(task)
+eval["assistance"] = np.mean(task["Assistance"])
 eval["time"] = time[-1]-time[0]
-eval["avg_dist"] = np.mean(err)
-eval["avg_force"] = np.mean(np.linalg.norm(force.to_numpy(),axis=1))
+eval["clutch_time"] = np.count_nonzero(task["Clutch"])/len(task)
+eval["avg_dist"] = rms(err)
+eval["avg_angle"] = rms(angle)
+eval["avg_force"] = rms(np.linalg.norm(force.to_numpy(),axis=1))
+eval["avg_torque"] = rms(np.linalg.norm(torque.to_numpy(),axis=1))
 eval_json = json.dumps(eval, indent=4)
 with open(wd+'_eval.json', 'w') as f:
     f.write(eval_json)
+
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
 
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
 plt.title("D = "+str(eval['avg_dist']))
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
 plotPosForce(axforce,pos,force['X']**2 + force['Y']**2 + force['Z']**2)
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
 centerandequal(axerr,pos)
 STRIDE = 5
 axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos['Z'].to_numpy()[::STRIDE],  
