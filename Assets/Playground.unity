@@ -7456,7 +7456,7 @@ MonoBehaviour:
   slope: 0
   damp: 10
   vectorsGraphics: 1
-  graphicVectorGain: 1
+  graphicVectorGain: 0.001
   distanceGraphics: 1
   force: {x: 0, y: 0, z: 0}
   forceMagnitude: 0

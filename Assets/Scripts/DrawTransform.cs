@@ -9,6 +9,9 @@ public class DrawTransform : MonoBehaviour
     Vector3 x;
     Vector3 y;
     Vector3 z;
+    public bool boolx = true;
+    public bool booly = true;
+    public bool boolz = true;
     [Range(0,0.05f)]
     public float sc=0.05f;
     
@@ -23,8 +26,11 @@ public class DrawTransform : MonoBehaviour
         x = gameObject.transform.right;
         y = gameObject.transform.up;   
         z = gameObject.transform.forward;
-        Global.Arrow(pos,pos+x*sc,Color.red);
-        Global.Arrow(pos,pos+y*sc,Color.green);
-        Global.Arrow(pos,pos+z*sc,Color.blue);
+        if (boolx)
+            Global.Arrow(pos,pos+x*sc,Color.red);
+        if (booly)
+            Global.Arrow(pos,pos+y*sc,Color.green);
+        if (boolz)
+            Global.Arrow(pos,pos+z*sc,Color.blue);
     }
 }
