@@ -105,7 +105,7 @@ time = task['Time'].to_numpy()
 eval = dict()
 eval["subject"] = wd.split("\\")[-4][-1]
 eval["task"] = wd.split("\\")[-3]
-eval["repetition"] = wd.split("\\")[-2][-1]
+eval["repetition"] = wd.split("\\")[-2].split("_")[-1]
 eval["time"] = time[-1]-time[0]
 eval["avg_dist"] = np.mean(err)
 eval["avg_force"] = np.mean(np.linalg.norm(force.to_numpy(),axis=1))

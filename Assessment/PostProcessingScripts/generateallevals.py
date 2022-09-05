@@ -21,7 +21,9 @@ for s in subjects:
             if generated == 1: 
                 print("[red]Error generating post-processing script for "+os.path.join(prestudyfolder, s,t,r,t))
                 errs+=1
-
+            else:
+                print("[green]Correctly Generated post-processing script for "+os.path.join(prestudyfolder, s,t,r,t))
+                
 subjects = [s for s in os.listdir(evalstudyfolder) if not s.endswith('.py') and not s.endswith('.bat')]
 for s in subjects:
     tasks = [t for t in os.listdir(os.path.join(evalstudyfolder, s)) if not t.endswith('.py') and not t.endswith('.bat')]
@@ -34,5 +36,7 @@ for s in subjects:
             if generated == 1: 
                 print("[red]Error generating post-processing script for "+os.path.join(evalstudyfolder, s,t,r,t))
                 errs+=1
+            else:
+                print("[green]Correctly Generated post-processing script for "+os.path.join(evalstudyfolder, s,t,r,t))
                 
 print(f"{errs} errors occured while trying to generate {n} json evals")
