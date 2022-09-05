@@ -23,6 +23,7 @@ namespace RosSharp.RosBridgeClient{
 public class PlaygroundManager : MonoBehaviour
 {
     bool fakelogdata = false;
+    List<string> scenes = new List<string>();
 
     void Start() {
         gameObject.GetComponent<LogData>().enabled = false;
@@ -30,6 +31,15 @@ public class PlaygroundManager : MonoBehaviour
         GameObject.FindWithTag("ROBOT").GetComponent<ConeApproachGuidanceVF>().enabled = false;
         GameObject.FindWithTag("ROBOT").GetComponent<ObstacleAvoidanceForceFieldVF>().enabled = false;
         GameObject.FindWithTag("ROBOT").GetComponent<TrajectoryOrientationGuidanceVFRL>().enabled = false;    
+                // List of scene name for random selection
+        scenes.Add("Training1");
+        scenes.Add("Training2");
+        scenes.Add("Training3");
+        scenes.Add("Training4");
+        scenes.Add("Thymectomy");
+        scenes.Add("Nephrectomy");
+        scenes.Add("LiverResection");
+        scenes.Add("Suturing");
     }
 
     void Update()
@@ -176,27 +186,35 @@ public class PlaygroundManager : MonoBehaviour
             SceneManager.LoadScene("Assets/Training1_LR.unity");
         }
         
-
         // The PLUS pedal goes to the next scene
+        // if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
+        //     if(SceneManager.GetActiveScene().name == "Playground"){
+        //         SceneManager.LoadScene("Assets/Training1.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training1"){
+        //         SceneManager.LoadScene("Assets/Training2.unity",LoadSceneMode.Single);                 
+        //     }else if(SceneManager.GetActiveScene().name == "Training2"){
+        //         SceneManager.LoadScene("Assets/Training3.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training3"){
+        //         SceneManager.LoadScene("Assets/Training4.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training4"){
+        //         SceneManager.LoadScene("Assets/Thymectomy.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
+        //         SceneManager.LoadScene("Assets/Nephrectomy.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
+        //         SceneManager.LoadScene("Assets/LiverResection.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "LiverResection"){
+        //         SceneManager.LoadScene("Assets/Suturing.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Suturing"){
+        //         SceneManager.LoadScene("Assets/Training1_LR.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training1_LR"){
+        //         SceneManager.LoadScene("Assets/Playground.unity",LoadSceneMode.Single);                
+        //     }
+        // }
+
+        // The PLUS pedal goes to the next scene at random
         if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
-
-            if(SceneManager.GetActiveScene().name == "Playground"){
-                SceneManager.LoadScene("Assets/Training1.unity");
-            }else if(SceneManager.GetActiveScene().name == "Training1"){
-                SceneManager.LoadScene("Assets/Training2.unity"); 
-            }else if(SceneManager.GetActiveScene().name == "Training2"){
-                SceneManager.LoadScene("Assets/Training3.unity");
-            }else if(SceneManager.GetActiveScene().name == "Training3"){
-                SceneManager.LoadScene("Assets/Thymectomy.unity");
-            }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
-                SceneManager.LoadScene("Assets/Nephrectomy.unity");
-            }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
-                SceneManager.LoadScene("Assets/LiverResection.unity");
-            }else if(SceneManager.GetActiveScene().name == "LiverResection"){
-                SceneManager.LoadScene("Assets/Playground.unity");
-            }
+            SceneManager.LoadScene("Assets/"+scenes[Random.Range(0,scenes.Count)]+".unity",LoadSceneMode.Single); 
         }
-
         // The MINUS pedal reloads the current scene
         if (gameObject.GetComponent<PedalMinusSubscriber>().pressed == true) 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

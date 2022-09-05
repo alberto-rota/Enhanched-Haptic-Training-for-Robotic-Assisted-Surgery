@@ -22,12 +22,25 @@ namespace RosSharp.RosBridgeClient{
 
 public class Manager : MonoBehaviour
 {
+
+    List<string> scenes = new List<string>();
+
     void Start() {
         gameObject.GetComponent<LogData>().enabled = false;
         if (GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>() != null) 
-           GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().enabled = false;
+           GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().enabled = Global.vfactive;
         if (GameObject.FindWithTag("ROBOT").GetComponent<SumForces>() != null) 
-           GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = false;
+           GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = Global.vfactive;
+        
+        // List of scene name for random selection
+        scenes.Add("Training1");
+        scenes.Add("Training2");
+        scenes.Add("Training3");
+        scenes.Add("Training4");
+        scenes.Add("Thymectomy");
+        scenes.Add("Nephrectomy");
+        scenes.Add("LiverResection");
+        scenes.Add("Suturing");
     }
 
     void Update()
@@ -57,40 +70,47 @@ public class Manager : MonoBehaviour
         
         // Toggles the VFs when the V key is pressed or COAG pedal is pressed
         if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
-            if (robot.GetComponent<SumForces>() != null) {
-                robot.GetComponent<SumForces>().enabled = !robot.GetComponent<SumForces>().enabled;
-                if (robot.GetComponent<SumForces>().enabled) {
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                } else {
-                    GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-                }
-            }
-
-            if (robot.GetComponent<SumForcesRL>() != null) {
-                robot.GetComponent<SumForcesRL>().enabled = !robot.GetComponent<SumForcesRL>().enabled;
-                if (robot.GetComponent<SumForcesRL>().enabled) {
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
-                } else {
-                    GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight = Vector3.zero;            
-                    GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceLeft = Vector3.zero;            
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                    GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
-                    GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
-                }
-            }
-
+            Global.vfactive = !Global.vfactive;
         }
+        Debug.Log(Global.vfactive);
+
+        if (robot.GetComponent<SumForces>() != null) {
+
+            robot.GetComponent<SumForces>().enabled = Global.vfactive;
+
+            if (robot.GetComponent<SumForces>().enabled) {
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            } else {
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().totalForce = Vector3.zero;            
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            }
+        }
+
+        if (robot.GetComponent<SumForcesRL>() != null) {
+
+            robot.GetComponent<SumForcesRL>().enabled = Global.vfactive;
+
+            if (robot.GetComponent<SumForcesRL>().enabled) {
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF ACTIVE";    
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.green;
+            } else {
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceRight = Vector3.zero;            
+                GameObject.FindWithTag("ROBOT").GetComponent<SumForcesRL>().totalForceLeft = Vector3.zero;            
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                GameObject.Find("Text/CanvasVF/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().text="VF INACTIVE";
+                GameObject.Find("Text/CanvasVFL/VFActiveText").GetComponent<UnityEngine.UI.Text>().color=Color.red;
+            }
+        }
+
 
         // Starts data logging when the R key is pressed
         if(Input.GetKeyDown(KeyCode.R) || gameObject.GetComponent<PedalBiCoagSubscriber>().pressed){    
@@ -112,7 +132,7 @@ public class Manager : MonoBehaviour
         }
 
         // Loads a scene of choice when the user presses the corresponding key
-              if(Input.GetKey(KeyCode.Alpha0)){
+        if(Input.GetKey(KeyCode.Alpha0)){
             SceneManager.LoadScene("Assets/Playground.unity");
         }else if(Input.GetKey(KeyCode.Alpha1)){
             SceneManager.LoadScene("Assets/Training1.unity");
@@ -135,39 +155,32 @@ public class Manager : MonoBehaviour
         }
 
         // The PLUS pedal goes to the next scene
+        // if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
+        //     if(SceneManager.GetActiveScene().name == "Playground"){
+        //         SceneManager.LoadScene("Assets/Training1.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training1"){
+        //         SceneManager.LoadScene("Assets/Training2.unity",LoadSceneMode.Single);                 
+        //     }else if(SceneManager.GetActiveScene().name == "Training2"){
+        //         SceneManager.LoadScene("Assets/Training3.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training3"){
+        //         SceneManager.LoadScene("Assets/Training4.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training4"){
+        //         SceneManager.LoadScene("Assets/Thymectomy.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
+        //         SceneManager.LoadScene("Assets/Nephrectomy.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
+        //         SceneManager.LoadScene("Assets/LiverResection.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "LiverResection"){
+        //         SceneManager.LoadScene("Assets/Suturing.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Suturing"){
+        //         SceneManager.LoadScene("Assets/Training1_LR.unity",LoadSceneMode.Single);                
+        //     }else if(SceneManager.GetActiveScene().name == "Training1_LR"){
+        //         SceneManager.LoadScene("Assets/Playground.unity",LoadSceneMode.Single);                
+        //     }
+        // }
+        // The PLUS pedal goes to the next scene picked at RANDOM
         if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
-
-            if(SceneManager.GetActiveScene().name == "Playground"){
-                SceneManager.LoadScene("Assets/Training1.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Playground");
-            }else if(SceneManager.GetActiveScene().name == "Training1"){
-                SceneManager.LoadScene("Assets/Training2.unity",LoadSceneMode.Single);                 
-                // SceneManager.UnloadSceneAsync("Training1");
-            }else if(SceneManager.GetActiveScene().name == "Training2"){
-                SceneManager.LoadScene("Assets/Training3.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Training2"); 
-            }else if(SceneManager.GetActiveScene().name == "Training3"){
-                SceneManager.LoadScene("Assets/Training4.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Training3");
-            }else if(SceneManager.GetActiveScene().name == "Training4"){
-                SceneManager.LoadScene("Assets/Thymectomy.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Training4");
-            }else if(SceneManager.GetActiveScene().name == "Thymectomy"){
-                SceneManager.LoadScene("Assets/Nephrectomy.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Thymectomy");
-            }else if(SceneManager.GetActiveScene().name == "Nephrectomy"){
-                SceneManager.LoadScene("Assets/LiverResection.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Nephrectomy");
-            }else if(SceneManager.GetActiveScene().name == "LiverResection"){
-                SceneManager.LoadScene("Assets/Suturing.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("LiverResection");
-            }else if(SceneManager.GetActiveScene().name == "Suturing"){
-                SceneManager.LoadScene("Assets/Training1_LR.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Suturing");
-            }else if(SceneManager.GetActiveScene().name == "Training1_LR"){
-                SceneManager.LoadScene("Assets/Playground.unity",LoadSceneMode.Single);                
-                // SceneManager.UnloadSceneAsync("Training1_LR");
-            }
+            SceneManager.LoadScene("Assets/"+scenes[Random.Range(0,scenes.Count)]+".unity",LoadSceneMode.Single); 
         }
 
         // The MINUS pedal reloads the current scene
