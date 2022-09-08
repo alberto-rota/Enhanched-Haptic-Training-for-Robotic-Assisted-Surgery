@@ -17,6 +17,6 @@
     <node pkg="dvrk" name="gravitycomp_MTML" type="gravitycomp_MTML.py" output="screen">
     </node>
 
-    <node pkg="dvrk" name="setscale" type="setscale.py" output="screen">
-    </node>
+    <!-- <node pkg="dvrk" name="setscale" type="setscale.py" output="screen">
+    </node> -->
 </launch>
