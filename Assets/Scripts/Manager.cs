@@ -75,7 +75,7 @@ public class Manager : MonoBehaviour
         Debug.Log(Global.vfactive);
 
         if (robot.GetComponent<SumForces>() != null) {
-
+            // Toogles the boolan for the virtual fixtures
             robot.GetComponent<SumForces>().enabled = Global.vfactive;
 
             if (robot.GetComponent<SumForces>().enabled) {

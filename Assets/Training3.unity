@@ -6457,10 +6457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a14886a4ff0db4188dd34ec936ab71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gain: 1.5
-  threshold: 0.001
-  half: 0.002
-  slope: 499.99997
+  gain: 1
+  threshold: 0.0005
+  half: 0.0005
+  slope: 2000
   damp: 20
 --- !u!114 &5980783670880340288
 MonoBehaviour:

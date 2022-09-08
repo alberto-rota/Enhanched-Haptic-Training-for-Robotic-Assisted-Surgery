@@ -134,6 +134,12 @@ public class IsPinchableDuo : MonoBehaviour
             pinchable2 = false;
         }
 
+        if (!pinchingAction1) {
+            pinched1 = false;
+        }   
+        if (!pinchingAction2) {
+            pinched2 = false;
+        }
         missexchange = false;
         // Miss per pinch "a vuoto"
         if (pinched1 && !pinched2) {

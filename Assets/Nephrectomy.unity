@@ -8194,7 +8194,7 @@ MonoBehaviour:
   slope: 499.99997
   relaxDistance: 8
   graphics: 1
-  graphicVectorGain: 1
+  graphicVectorGain: 0.01
   coneResolution: 10
   force: {x: 0, y: 0, z: 0}
   forceMagnitude: 0
