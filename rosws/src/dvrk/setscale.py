@@ -3,31 +3,30 @@
 import rospy
 from std_msgs.msg import Float32
 
-topic_r = "/dvrk/console/teleop/set_scale"
-# topic_l = "/dvrk/MTML/set_gravity_compensation"
-
+topic = "/dvrk/console/teleop/set_scale"
 
 def talker():   
     rospy.init_node('console_setscale', anonymous=True)
-    pubr = rospy.Publisher(topic_r, Float32, queue_size=10)
-    # publ = rospy.Publisher(topic_l, Bool, queue_size=10)
+    pub = rospy.Publisher(topic, Float32, queue_size=10)
     rate = rospy.Rate(20) # 10hz
 
     SCALE = 0.5
     
-    print("> Teleoperation scale set to", SCALE)
-    # print("Gravity compensation is ACTIVE on MTML")
     
-    pubr.publish(SCALE)
-    while not rospy.is_shutdown():
+    print("> Teleoperation scale initialized to", SCALE)
+    
+    # Must publish a few times to get recieved by subscribers
+    for _ in range(10):
+        pub.publish(SCALE)
         rate.sleep()
-        # rospy.loginfo(True)
-        # publ.publish(True)
-        # rospy.loginfo(True)
-        # rate.sleep()
-    # pass
   
-if __name__ == '__main__':
+    # Empty loop: Scale is only initialized at 0.5, operator will have the chance to change it from the console
+    # ! PUBLISH INSIIDE THE WHILE LOOP TO KEEP THE SCALE FIXED !
+    while not rospy.is_shutdown():
+        pass
+        
+        
+if __name__ == '__main__':  
     try:
         talker()
     except rospy.ROSInterruptException:
