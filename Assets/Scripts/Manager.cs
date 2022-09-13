@@ -72,7 +72,6 @@ public class Manager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.V) || gameObject.GetComponent<PedalCoagSubscriber>().pressed){
             Global.vfactive = !Global.vfactive;
         }
-        Debug.Log(Global.vfactive);
 
         if (robot.GetComponent<SumForces>() != null) {
             // Toogles the boolan for the virtual fixtures

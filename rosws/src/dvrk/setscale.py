@@ -13,19 +13,19 @@ def talker():
     # publ = rospy.Publisher(topic_l, Bool, queue_size=10)
     rate = rospy.Rate(20) # 10hz
 
-    SCALE = 0.2
+    SCALE = 0.5
     
     print("> Teleoperation scale set to", SCALE)
     # print("Gravity compensation is ACTIVE on MTML")
     
+    pubr.publish(SCALE)
     while not rospy.is_shutdown():
-    
-        pubr.publish(SCALE)
+        rate.sleep()
         # rospy.loginfo(True)
         # publ.publish(True)
         # rospy.loginfo(True)
-        rate.sleep()
-    pass
+        # rate.sleep()
+    # pass
   
 if __name__ == '__main__':
     try:
