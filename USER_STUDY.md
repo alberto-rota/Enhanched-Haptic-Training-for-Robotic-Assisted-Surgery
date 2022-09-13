@@ -32,7 +32,7 @@ You'll either be assigned to a "control" group or to an "assisted" group, at ran
 You will train on a few surgical tasks from Tuesday to Friday, and then you'll be asked to perform on different surgical tasks on Monday.
 
 #### Agenda (not definitive)
-![calendar](Notes\readme\experimental_calendar.png)
+![calendar](Notes/readme/experimental_calendar.png)
 
 #### **🎯What is the aim of the study?**
 We hope to demonstrate that the users in the "assisted" group:
