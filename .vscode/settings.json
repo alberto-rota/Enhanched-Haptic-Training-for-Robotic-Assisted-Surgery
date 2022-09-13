@@ -53,5 +53,11 @@
         "temp/":false,
         "Temp/":false
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "grammarly.selectors": [
+        {
+            "language": "markdown",
+            "scheme": "file"
+        }
+    ]
 }

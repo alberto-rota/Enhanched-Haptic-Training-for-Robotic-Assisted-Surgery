@@ -10,6 +10,8 @@ The project, conducted in the Medical Robotics section of [NearLab](https://near
 * **Maintainer of the Project:** Alberto Rota
 * **Supervisor:** Prof. De Momi Elena
 * **Co-Supervisor:** Fan Ke
+
+Want to partecipate to the experimental phase of this project? Read this [webpage](USER_STUDY.md) and then [contact the researchers](mailto:alberto2.rota@mail.polimi.it)
 ***
 _As the project is still undergoing development, this README is very synthetic and above all **INCOMPLETE**. Additional information and details are available by [contacting the author](mailto:alberto2.rota@mail.polimi.it)_
 
