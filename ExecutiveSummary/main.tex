@@ -1,0 +1,96 @@
+
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+%                                      PREAMBLE
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+\documentclass{article}
+%-----------------------------------------------------------------------------------
+% GENERIC PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{blindtext}
+%-----------------------------------------------------------------------------------
+% GEOMETRY
+\usepackage{geometry}
+\geometry{
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm
+    }
+\onehalfspacing
+%-----------------------------------------------------------------------------------
+% ACRONYMS
+\usepackage{acro}
+\DeclareAcronym{hri}{
+  short=HRI,
+  long=Human-Robot Interaction,
+}
+\DeclareAcronym{mis}{
+  short=MIS,
+  long=minimally Invasive Surgery,
+}
+\DeclareAcronym{ramis}{
+  short=RAMIS,
+  long=Robot-Assisted Minimally Invasive Surgery,
+}
+%-----------------------------------------------------------------------------------
+% NEWCOMMANDS AND RENEWCOMMANDS
+
+%-----------------------------------------------------------------------------------
+
+% TITLE
+\title{
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\textwidth]{images/logo_polimi_scritta2.eps}
+\end{figure}
+\textbf{Implementation and assessment of Assistance-as-Needed Virtual Fixtures for Surgical Training with a \textit{daVinci} surgical robot: an experimental study}
+\\
+\vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
+\\
+\vspace{0.5cm}\textit{\small{Academic year 2022/2023}}\vspace{0.5cm}\\
+{\large \textbf{Candidate: \textit{Alberto Rota}}\\
+\textbf{Supervisor: \textit{prof. Elena de Momi}}}}
+\author{}
+\date{}
+
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+%                                      BODY
+%-----------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------
+\begin{document}
+% TITLE
+\maketitle
+%-----------------------------------------------------------------------------------
+% AUTHOR
+
+% \vspace{1cm}
+
+\begin{multicols}{2}
+%-----------------------------------------------------------------------------------
+\section{Introduction}
+\blindtext
+\section{State of the art}
+\blindtext
+\section{Materials and methods}
+\blindtext
+\section{Results}
+\blindtext
+\section{Discussion}
+\blindtext
+\section{Conclusions}
+\blindtext
+%-----------------------------------------------------------------------------------
+% BIBLIOGRAPHY
+% \bibliographystyle{plain}
+% \bibliography{refs.bib}
+%-----------------------------------------------------------------------------------
+\end{multicols}
+\end{document}
