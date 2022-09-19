@@ -20,7 +20,7 @@ Additional detail about the project is available on this [webpage](README.md)
 **NearLab**, Building 7, Politecnico di Milano Leornardo campus ([here on the map](https://www.google.com/maps/place/Leonardo+Robotics+Labs,+Politecnico+di+Milano/@45.4776364,9.2293809,17.82z/data=!4m12!1m6!3m5!1s0x4786c7db599d5577:0xfd22cbc3f2315d09!2sNearlab+-+Neuroengineering+and+medical+robotics+laboratory!8m2!3d45.4721119!4d9.2272232!3m4!1s0x0:0x1b49fbc2f4773784!8m2!3d45.4781377!4d9.2294154))
 
 #### 📅 **When?**
-**From Tuesday 4th October to Monday 10th October** (Satuday 8th and Sunday 9th excluded), for a maximum of 30 minutes each day. 
+**From Tuesday 11th October to Monday 17th October** (Satuday 15th and Sunday 16th excluded), for a maximum of 30 minutes each day. 
 
 The exact time on each day will be agreed in order to accommodate your availability and the availability of the other participants.
 
@@ -45,3 +45,5 @@ Not at all. In the rare case that the forces applied to your wrist exceed the th
 
 #### **💰Do I get paid?**
 Nope. But you will be included in the acknowledgements of my thesis and of the research paper we will write.
+
+**However**, on Monday 17th October there will be a cake and some sweets for you to enjoy! 😃
