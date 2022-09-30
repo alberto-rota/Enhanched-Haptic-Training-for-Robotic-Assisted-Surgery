@@ -177,13 +177,15 @@ public class PlaygroundManager : MonoBehaviour
         }else if(Input.GetKey(KeyCode.Alpha3)){
             SceneManager.LoadScene("Assets/Training3.unity");
         }else if(Input.GetKey(KeyCode.Alpha4)){
-            SceneManager.LoadScene("Assets/Thymectomy.unity");
+            SceneManager.LoadScene("Assets/Training4.unity");
         }else if(Input.GetKey(KeyCode.Alpha5)){
-            SceneManager.LoadScene("Assets/Nephrectomy.unity");
+            SceneManager.LoadScene("Assets/Thymectomy.unity");
         }else if(Input.GetKey(KeyCode.Alpha6)){
+            SceneManager.LoadScene("Assets/Nephrectomy.unity");
+        }else if(Input.GetKey(KeyCode.Alpha7)){
             SceneManager.LoadScene("Assets/LiverResection.unity");
-        }else if(Input.GetKey(KeyCode.Alpha9)){
-            SceneManager.LoadScene("Assets/Training1_LR.unity");
+        }else if(Input.GetKey(KeyCode.Alpha8)){
+            SceneManager.LoadScene("Assets/Suturing.unity");
         }
         
         // The PLUS pedal goes to the next scene

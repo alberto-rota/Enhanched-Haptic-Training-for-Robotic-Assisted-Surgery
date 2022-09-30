@@ -1442,7 +1442,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1506725845050569527, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2332819314435812863, guid: b7034559ba6efde4fbc6a744d8a0ef7c, type: 3}
       propertyPath: m_ConnectedAnchor.x
