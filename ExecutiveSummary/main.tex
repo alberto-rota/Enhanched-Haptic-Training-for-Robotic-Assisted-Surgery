@@ -13,6 +13,7 @@
 \usepackage{setspace}
 \usepackage[T1]{fontenc}
 \usepackage{multicol}
+\usepackage{textcomp}
 \usepackage{blindtext}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
@@ -39,9 +40,30 @@
   short=RAMIS,
   long=Robot-Assisted Minimally Invasive Surgery,
 }
+\DeclareAcronym{vf}{
+  short=VF,
+  long=Virtual Fixture,
+}
+\DeclareAcronym{psm}{
+  short=PSM,
+  long=Patient-Side Manipulator,
+}
+\DeclareAcronym{mtm}{
+  short=MTM,
+  long=Master Tool Manipulator,
+}
+\DeclareAcronym{hrsv}{
+  short=HRSV,
+  long=High-Resolution Stereo Viewer,
+}
+\DeclareAcronym{ecm}{
+  short=ECM,
+  long=Endoscope Camera Manipulator,
+}
+
 %-----------------------------------------------------------------------------------
 % NEWCOMMANDS AND RENEWCOMMANDS
-
+\newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
 %-----------------------------------------------------------------------------------
 
 % TITLE
@@ -56,7 +78,7 @@
 \\
 \vspace{0.5cm}\textit{\small{Academic year 2022/2023}}\vspace{0.5cm}\\
 {\large \textbf{Candidate: \textit{Alberto Rota}}\\
-\textbf{Supervisor: \textit{prof. Elena de Momi}}}}
+\textbf{Supervisor: \textit{prof. Elena De Momi}}}}
 \author{}
 \date{}
 
@@ -78,16 +100,41 @@
 \section{Introduction}
 Since the introduction of \ac{ramis} in the healthcare market, patients have benefited from the diminishing of postoperative complications and an increase in the safety of procedures, while surgeons have been empowered by sophisticated robotic systems allowing the execution of complex tasks in adverse contexts. 
 
-Surgical teams have been joined by robotic systems because of the number of benefits that result from the collaborative effort of the surgeon and the robot, combining the know-how and adaptation skills of the former and the high accuracy and stability of the latter. Such a synergistic perspective highlights the role of the \ac{hri} paradigm, which involves all aspects of understanding, designing, and evaluating robotic systems for use by or with humans \cite{Goodrich2007}. Most of the surgical robotics solutions on the market consist of a teleoperation console that interfaces with the practicioner and, separate from it, the surgical robot itself, which mimics the movements of the surgeon in real-time. This setup allows for higher motion accuracy, tremor filtration and magnified viewing of the surgical area; nonetheless tactile forces, friction and texture perception arez
+Surgical teams have been joined by robotic systems because of the number of benefits that result from the collaborative effort of the surgeon and the robot, combining the know-how and adaptation skills of the former and the high accuracy and stability of the latter. Such a synergistic perspective highlights the role of the \ac{hri} paradigm, which involves all aspects of understanding, designing, and evaluating robotic systems for use by or with humans \cite{Goodrich2007}. Most of the surgical robotics solutions on the market consist of a teleoperation console that interfaces with the practicioner and, separate from it, the surgical robot itself, which mimics the movements of the surgeon in real-time. This setup allows for higher motion accuracy, tremor filtration and magnified viewing of the surgical area; nonetheless tactile forces, friction and texture perception are excluded from the so crucial visuo-haptic feedback loop that would guide the surgeon in a standard "non-robotic" procedure.
+
+This work, specifically, studies and evaluates the role of Virtual Fixtures in the context of surgical training. \acp{vf} are high-level control strategies employed for assisting humans in man-machine collaboration tasks \cite{Bowyer2014}. In the context of surgical robotics, \acp{vf} assist the surgeon by providing haptic guidance at the level of the "master" manipulator, generating mechanical forces and torques which re-direct the motion of the surgeon's hands. These assistance strategies may be most beneficial in the training process that aspiring surgeons undertake, which often takes place in a simulated virtual environment. Exploiting the customizability of simulated surgical tasks together with the implementation of \acp{vf} will enhance the process of learning key surgical skills, in terms of performance, retention and transfer.
 \section{State of the art}
+Surgical robotics companies usually commercialize a simulation framework in parallel to clinical robots. A survey of the most relevant training simulators on the market was conducted in \cite{Bric2016}, a review that also assesses the suitability of virtual environments as comparable to the one of dry-lab setups. However, since no commercially available clinical system implements a force-based assistive modality similar to the one of virtual fixtures, none of the training simulators employ \acp{vf} either. The role of such assistive strategies in a real surgical scenario is still uncertain and shall be assessed only through an extensive clinical trial, and as a matter of fact the vast majority of training protocols implementing \acp{vf} regards \textit{ad-hoc} systems like \cite{Lin2014}, which are limited both in terms of tasks implemented and in terms of evaluation protocols. Indeed, few studies \cite{Enayati2018} have evaluated the trainee's performance on multiple diverse tasks and over the course of multiple training days, and none has yet investigated the role of haptic assistance on skill retention and skill transfer. 
+
+This work proposes an evaluation of the role of \acp{vf} in surgical training with a multi-day experimental protocol articulated in two phases, designed in order to highlight the difference in the transfer and retention of skills between a control group and an assisted group. 
 \section{Materials and methods}
+\subsection{Surgical Simulator}
+This research was conducted on a \textit{daVinci}\cright surgical robot integrated with the open-source dVRK \cite{Kazanzidesf2014} framework. The \acp{mtm} of the \textit{daVinci}\cright are in fact equipped with motors usually employed for the sake of homing and calibration; the \ac{vf} forces and torques are generated by energizing these motors according to the inverse kinematics of the manipulators. A ROS \cite{ros} framework manages the communication between the teleoperation console of the dVRK and the virtual surgical scene, which is built upon the Unity\cright physics engine: therefore, the real \acp{psm} do not move during teleoperation, as the joint coordinates are communicated only to the virtual 3D objects.
+
+The simulator comprises eight surgical tasks, four of which are simplistic training tasks built with objects of simple geometry, while the remaining four emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Fig.!!!!! collects snapshots of the tasks. All of these are constructed and set-up in order to be as challenging as possible in relation to a specific surgical skill. A set of fundamental pre-operative and intra-operative skills that any robotic surgeon should acquire during training was proposed in \cite{Smith2014}. Specifically:
+\begin{itemize}
+  \item \textit{Training1} and \textit{Liver Resection} require articulate wrist motion and stability
+  \item \textit{Training2} and \textit{Nephrectomy} survey the depth perception skills
+  \item \textit{Training3} and \textit{Thymectomy} are hand-eye coordination tasks
+  \item \textit{Training4} and \textit{Suturing}, both bi-manual tasks, challenge the capabilities in terms of instrument exchange 
+\end{itemize}
+Each training task having a corresponding emulated surgical procedure will allow, during the experimental phase, to evaluate the transferability of skills.
+
+The simulator also exploits 3D viewing capability of the \ac{hrsv} installed on the teleoperation surgical console: two virtual cameras are positioned in the Unity\cright scene at a distance of 5.3mm, as their feed is sent separately on the left and right oculars at the console achieving a three-dimensional perception of the virtual environment.
+\subsection{Virtual Fixtures}
+z
+\subsection{Experimental Protocol}
+
 \section{Results}
 \section{Discussion}
 \section{Conclusions}
 %-----------------------------------------------------------------------------------
 % BIBLIOGRAPHY
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{refs.bib}
 %-----------------------------------------------------------------------------------
 \end{multicols}
 \end{document}
+
+
+
