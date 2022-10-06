@@ -10866,11 +10866,11 @@ MonoBehaviour:
   obstacleNormals: []
   materialown: {fileID: 7082238553250909873, guid: 6347f95fb771ab349ac44716ab28bab0, type: 3}
   materialhit: {fileID: 2100000, guid: a9644f76baad0d54a9a1a50ac7c7bcec, type: 2}
-  gain: 1.5
-  threshold: 0.002
+  gain: 1
+  threshold: 0.0005
   half: 0.001
   slope: 1000
-  damp: 20
+  damp: 15
   vectorsGraphics: 0
   graphicVectorGain: 1
   distanceGraphics: 0

@@ -6459,9 +6459,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gain: 1
   threshold: 0.0005
-  half: 0.0005
-  slope: 2000
-  damp: 20
+  half: 0.001
+  slope: 999.99994
+  damp: 15
 --- !u!114 &5980783670880340288
 MonoBehaviour:
   m_ObjectHideFlags: 0

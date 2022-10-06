@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.11)  30 SEP 2022 16:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.11)  2 OCT 2022 22:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,15 +436,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 95.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 95.
+ [1
 
-
-LaTeX Warning: Citation `Goodrich2007' on page 1 undefined on input line 103.
-
-
-LaTeX Warning: Citation `Bowyer2014' on page 1 undefined on input line 105.
-
-[1
-
-{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+{c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 !pdfTeX error: pdflatex.exe (file c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map): fflush() failed (Invalid argument)
  ==> Fatal error occurred, no output PDF file produced!

@@ -10217,11 +10217,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: {fileID: 644626563735826627}
   Trajectory: {fileID: 1787753658}
-  viscousGain: 30
-  elasticGain: 0.5
-  distanceThreshold: 0.001
-  distanceHalf: 0.003
-  distanceSlope: 0
+  viscousGain: 15
+  elasticGain: 0.8
+  distanceThreshold: 0.002
+  distanceHalf: 0.002
+  distanceSlope: 500
   graphics: 1
   graphicVectorGain: 0.008
   velocity: {x: 0, y: 0, z: 0}
