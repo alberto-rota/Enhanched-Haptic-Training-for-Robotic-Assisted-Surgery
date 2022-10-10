@@ -133,7 +133,16 @@ In the context Virtual Fixtures, also known as Active Constraints, a haptic forc
   \vect{f}_{MTM} = T_{PSM}^{MTM}\cdot \vect{f}_{PSM}
 \end{equation}
 
-A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory. For this \ac{vf}, the force is computed as:
+\subsection{Distance Mapping}
+Most of the assistance strategies implemented here will use the distance from the \ac{psm} to the target or obstacle as the primary metric for determining the intensity of the feedback force or torque. However, different surgical tasks and situations require a level of control over how the distance is taken into account, and for this reason a sigmoidal mapping function was employed for the normalization of the linear or angular error into a suitable interval. Specifically, such mapping is formulated as:
+\begin{equation}
+  f_{map}(x) = \frac{1}{1+e^{\frac{\delta\cdot w(x-t-h)}{0.2}}}
+  \label{eq:sigmoidalmap}
+\end{equation}
+with $\delta = +1$ for guidance \acp{vf} and $\delta = -1$ for avoidance \acp{vf}
+
+\subsection{Trajectory Guidance}
+A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory and maintaining the correct orientation of the surgical tool. For this \ac{vf}, the feedback force is computed as:
 \begin{equation}
     \vect{f} = k \cdot \vect{d} + \eta \cdot
     \begin{cases} 
@@ -144,7 +153,7 @@ A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a r
     \end{cases}
 \end{equation} 
 
-% TODO: VF DESCRITPIONS + FORMULAS
+
 \subsection{Clinical Validation}
 Two resident surgeons from \textit{Istituto Europeo di Oncologia}, both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
 

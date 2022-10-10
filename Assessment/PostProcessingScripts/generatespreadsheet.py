@@ -16,7 +16,7 @@ subjects = [s for s in os.listdir(evalstudyfolder) if not s.endswith('.py') and 
 for s in subjects:
     tasks = [t for t in os.listdir(os.path.join(evalstudyfolder, s)) if not t.endswith('.py') and not t.endswith('.bat')]
     for t in tasks:
-        reps = [r for r in os.listdir(os.path.join(evalstudyfolder, s, st)) if not r.endswith('.py') and not r.endswith('.bat')]
+        reps = [r for r in os.listdir(os.path.join(evalstudyfolder, s,t)) if not r.endswith('.py') and not r.endswith('.bat')]
         for r in reps:
             print(os.path.join(evalstudyfolder, s,t,r,r)+"_eval.json")
             with open(os.path.join(evalstudyfolder, s,t,r,r)+"_eval.json") as jsonfile:
