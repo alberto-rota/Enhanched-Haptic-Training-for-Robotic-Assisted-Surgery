@@ -8073,6 +8073,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 860281014479617356, guid: 37e01bc9a7f876844b09f8db738e5a99, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5214465403446176499, guid: 37e01bc9a7f876844b09f8db738e5a99, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -8672,13 +8676,13 @@ MonoBehaviour:
   surfaceNormals: []
   forceGain: 1
   distanceThreshold: 0.002
-  distanceHalf: 0.003
+  distanceHalf: 0.005
   distanceSlope: 1
-  torqueGain: 0.03
+  torqueGain: 0
   angleThreshold: 5
   angleHalf: 15
   angleSlope: 0
-  damp: 10
+  damp: 0
   vectorsGraphics: 1
   graphicVectorGain: 0.008
   distanceGraphics: 0

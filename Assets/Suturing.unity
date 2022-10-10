@@ -169,6 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.003
 --- !u!96 &224374449
 TrailRenderer:
@@ -341,6 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!1 &277247584
 GameObject:
@@ -418,6 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!4 &321181945
 Transform:
@@ -714,6 +723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!4 &690793033
 Transform:
@@ -1075,6 +1087,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!4 &1221512807
 Transform:
@@ -1135,6 +1150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.003
 --- !u!114 &1319236701
 MonoBehaviour:
@@ -2084,6 +2102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!1001 &1709144906
 PrefabInstance:
@@ -2356,6 +2377,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!4 &1762756990
 Transform:
@@ -2522,6 +2546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2bb661926bb34aa3de05e436e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boolx: 1
+  booly: 1
+  boolz: 1
   sc: 0.0043
 --- !u!33 &17546332311260513
 MeshFilter:
@@ -7361,10 +7388,10 @@ MonoBehaviour:
   subject: {fileID: 1319236699}
   Trajectory: {fileID: 1418384788}
   left: 0
-  viscousGain: 30
+  viscousGain: 20
   elasticGain: 0.5
   distanceThreshold: 0.001
-  distanceHalf: 0.002
+  distanceHalf: 0.003
   distanceSlope: 0
   torqueGain: 0.01
   torqueDamp: 0.001
