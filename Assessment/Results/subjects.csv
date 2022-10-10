@@ -1,7 +1,7 @@
-ID,Name,Surname,Age,Gender,DominantHand,Experience
-A,Alberto,Rota,24,M,right,3
-,Andrea ,Pagliari,24,M,,
-,Gabriele ,Santicchi,24,M,,
-,Irene,Venturelli,24,F,,
-,Alessandro,Durat,23,M,,
-,Valentina,Soliani,24,F,,
+ID,Name,Surname,Age,Gender,DominantHand,Experience,C/A
+A,Alberto,Rota,24,M,right,3,C
+P,Andrea ,Pagliari,24,M,right,0,C
+S,Gabriele ,Santicchi,24,M,right,0,C
+I,Irene,Venturelli,24,F,right,0,A
+D,Alessandro,Durat,23,M,right,0,A
+V,Valentina,Soliani,24,F,right,0,A
