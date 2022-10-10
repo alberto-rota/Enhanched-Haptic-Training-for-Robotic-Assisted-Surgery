@@ -26,7 +26,7 @@ namespace RosSharp.RosBridgeClient
 
         protected override void ReceiveMessage(MessageTypes.Sensor.JointState message)
         {  
-            int index;
+            // int index;
             for (int i = 0; i < message.name.Length; i++)
             {
                 // index = JointNames.IndexOf(message.name[i]);

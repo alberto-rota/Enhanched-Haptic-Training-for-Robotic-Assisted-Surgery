@@ -22,7 +22,6 @@ namespace RosSharp.RosBridgeClient{
 
 public class Manager : MonoBehaviour
 {
-
     List<string> scenes = new List<string>();
 
     void Start() {
@@ -33,14 +32,16 @@ public class Manager : MonoBehaviour
            GameObject.FindWithTag("ROBOT").GetComponent<SumForces>().enabled = Global.vfactive;
         
         // List of scene name for random selection
-        scenes.Add("Training1");
-        scenes.Add("Training2");
-        scenes.Add("Training3");
-        scenes.Add("Training4");
-        scenes.Add("Thymectomy");
-        scenes.Add("Nephrectomy");
-        scenes.Add("LiverResection");
-        scenes.Add("Suturing");
+        for (int i = 0; i < 3; i++) {
+            scenes.Add("Training1");
+            scenes.Add("Training2");
+            scenes.Add("Training3");
+            scenes.Add("Training4");
+        }
+        // scenes.Add("Thymectomy");
+        // scenes.Add("Nephrectomy");
+        // scenes.Add("LiverResection");
+        // scenes.Add("Suturing");
     }
 
     void Update()
@@ -179,7 +180,14 @@ public class Manager : MonoBehaviour
         // }
         // The PLUS pedal goes to the next scene picked at RANDOM
         if (gameObject.GetComponent<PedalPlusSubscriber>().pressed == true) {
-            SceneManager.LoadScene("Assets/"+scenes[Random.Range(0,scenes.Count)]+".unity",LoadSceneMode.Single); 
+            int rmidx = Random.Range(0,scenes.Count);
+            if (scenes.Count > 0) {
+                SceneManager.LoadScene("Assets/"+scenes[rmidx]+".unity",LoadSceneMode.Single); 
+                scenes.RemoveAt(rmidx);
+            } else {
+                SceneManager.LoadScene("Assets/Playground.unity",LoadSceneMode.Single); 
+            }
+            Debug.Log(scenes.Count);
         }
 
         // The MINUS pedal reloads the current scene

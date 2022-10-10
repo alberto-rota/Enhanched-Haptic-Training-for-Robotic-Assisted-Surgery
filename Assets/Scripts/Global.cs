@@ -19,7 +19,7 @@ using UnityEngine;
 
 public static class Global
 {
-    public static string subjectID = "X";
+    public static string subjectID = "K";
 
     public static float assistance = 1f;
 
@@ -54,7 +54,7 @@ public static class Global
     "/outer_pitch_joint_revolute/outer_insertion_joint/outer_insertion_joint_prismatic/"+
     "outer_roll_joint/outer_roll_joint_revolute/outer_wrist_pitch_joint/"+
     "outer_wrist_pitch_joint_revolute/outer_wrist_yaw_joint/outer_wrist_yaw_joint_revolute/jaw_mimic_1_joint";
-
+    
     public static void Arrow(Vector3 from, Vector3 to, Color color) {
         int coneResolution=20;
         float deltaTheta = 360f/coneResolution;

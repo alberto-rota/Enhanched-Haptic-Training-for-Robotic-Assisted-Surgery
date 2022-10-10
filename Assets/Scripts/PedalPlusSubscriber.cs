@@ -41,7 +41,7 @@ namespace RosSharp.RosBridgeClient
 
         private void Update()
         {
-            if ((Time.realtimeSinceStartup - lastT) > 1f) {
+            if ((Time.realtimeSinceStartup - lastT) > 0.5f) {
                 listening = true;
             } else listening = false;
 
