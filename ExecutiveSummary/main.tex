@@ -8,6 +8,7 @@
 %-----------------------------------------------------------------------------------
 % GENERIC PACKAGES
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{setspace}
@@ -129,21 +130,35 @@ During teleoperation the surgeon is de-coupled from the patient: this is necessa
 In the context Virtual Fixtures, also known as Active Constraints, a haptic force is applied to the manipulators at the surgical console, which re-directs the motion of the surgeon's hands in case of improper or unsafe maneuvers. The magnitude and direction of the \acp{vf} force are computed from the \ac{psm} position and orientation relative to the surgical space and the position of objects in the scene, in a true feedback fashion. A transformation mapping the \ac{psm} operatory space to the \ac{mtm} console space is necessary in order to sensibly use the feedback force as a corrective strategy.
 
 \begin{equation}
-  \textbf{f}_{MTM} = T_{PSM}^{MTM}\cdot \textbf{f}_{PSM}
+  \vect{f}_{MTM} = T_{PSM}^{MTM}\cdot \vect{f}_{PSM}
 \end{equation}
 
 A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory. For this \ac{vf}, the force is computed as:
 \begin{equation}
-  \textbf{f} = k \cdot \textbf{d} + \eta 
-  \begin{cases} 
-    $$
-    \textbf{d}, & \textit{if         } \textbf{v}\cdot\textbf{d}<0 \\
-     rotate(\textbf{v},\theta,\textbf{r}), & \textit{otherwise}
-    $$
-  \end{cases}
-\end{equation}
+    \vect{f} = k \cdot \vect{d} + \eta \cdot
+    \begin{cases} 
+        $$
+        \vect{d}, & \textit{if         } \vect{v}\cdot\vect{d}<0 \\
+         rotate(\vect{v},\theta,\vect{r}), & \textit{otherwise}
+        $$
+    \end{cases}
+\end{equation} 
+
+% TODO: VF DESCRITPIONS + FORMULAS
+\subsection{Clinical Validation}
+Two resident surgeons from \textit{Istituto Europeo di Oncologia}, both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
 
 \subsection{Experimental Protocol}
+The effectiveness of the haptic virtual fixture paradigm has been assessed with an experimental study where the performance of un-assisted subjects in a control group was compared to the one recorded from subject to whom was provided haptic assistance. Since the aim of this work is to establish the role of \acp{vf} in the training context, eight novice subjects with little to no experience with surgical robotics were recruited for the study. Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all right-handed and either had never teleoperated a surgical robot or did it less than 5 times. Assignation to the control or assisted group was random.
+
+The subjects underwent a week-long training phase:
+\begin{itemize}
+  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 10 minutes in a \textit{Playground} environment, purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
+  \item From \textit{Day 2} to \textit{Day 5} they were asked to execute the four training tasks of the simulator (\textit{Training1, Training2, Training3} and \textit{Training4}), each one for a total of 3 repetitions. Tasks appeared sequentially in a random order, contributing to un-bias the results. At the beginning of each daily session, subjects could interact with the \textit{Playground} task for 1 minute at maximum.
+  \item On \textit{Day 6} and \textit{Day 7} subjects were given a break period and no training was performed
+  \item On \textit{Day 8} they were asked to execute the four validation tasks of the simulator (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}), each one for a total of 3 repetitions. Again, tasks appeared sequentially in a random order, contributing to un-bias the results.
+\end{itemize}
+
 
 \section{Results}
 \section{Discussion}
