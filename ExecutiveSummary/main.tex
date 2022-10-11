@@ -72,6 +72,7 @@
 % NEWCOMMANDS AND RENEWCOMMANDS
 \newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
 \newcommand{\vect}[1]{\textbf{#1}}
+\newcommand{\fcaption}[1]{\captionof{figure}{\textit{\small #1}}}
 
 %-----------------------------------------------------------------------------------
 
@@ -150,22 +151,32 @@ with $\delta = +1$ for guidance \acp{vf} and $\delta = -1$ for avoidance \acp{vf
 \begin{Figure}
   \centering
       \includegraphics[width=\linewidth]{images/mappingfunction.eps}
-      \captionof{figure}{Plot of the Error Mapping function}
+      \fcaption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy}
       \label{fig:mappingfunctiion}
 \end{Figure}
 
 \subsection{Trajectory Guidance}
-A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory and maintaining the correct orientation of the surgical tool. For this \ac{vf}, the feedback force is computed as:
+A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory and maintaining the correct orientation of the surgical tool. For this \ac{vf}, the feedback force is computed as the sum of a viscous and an elastic contribution, weighted by the parameters $k$ and $\eta$ respectively.
 \begin{equation}
     \vect{f} = k \cdot \vect{d} + \eta \cdot
     \begin{cases} 
-        $$
         \vect{d}, & \textit{if         } \vect{v}\cdot\vect{d}<0 \\
          rotate(\vect{v},\theta,\vect{r}), & \textit{otherwise}
-        $$
     \end{cases}
+    \label{eq:trajVFforce}
 \end{equation} 
 
+\noindent Similarly, a torque feedback is computed as
+
+\begin{equation}
+  \vect{T} = k \cdot acos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t} + \eta \cdot acos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
+    \label{eq:trajVFtorque}
+  \end{equation}
+with $\theta = (1+\vect{v}\cdot\vect{d})\cdot\frac{\pi}{2}$ and $\vect{r} = \vect{v}\times\vect{d}$ the angle and axis of rotation respectively
+
+\subsection{Insertion Guidance}
+\subsection{Obstacle Avoidance}
+\subsection{Surface Guidance}
 
 \subsection{Clinical Validation}
 Two resident surgeons from \textit{Istituto Europeo di Oncologia}, both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
