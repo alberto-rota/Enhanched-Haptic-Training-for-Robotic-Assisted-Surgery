@@ -14,8 +14,14 @@
 \usepackage{setspace}
 \usepackage[T1]{fontenc}
 \usepackage{multicol}
+\usepackage{caption}
 \usepackage{textcomp}
 \usepackage{blindtext}
+\usepackage{layouts}
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
 \usepackage{geometry}
@@ -140,6 +146,13 @@ Most of the assistance strategies implemented here will use the distance from th
   \label{eq:sigmoidalmap}
 \end{equation}
 with $\delta = +1$ for guidance \acp{vf} and $\delta = -1$ for avoidance \acp{vf}
+
+\begin{Figure}
+  \centering
+      \includegraphics[width=\linewidth]{images/mappingfunction.eps}
+      \captionof{figure}{Plot of the Error Mapping function}
+      \label{fig:mappingfunctiion}
+\end{Figure}
 
 \subsection{Trajectory Guidance}
 A \textit{Trajectory Guidance Virtual Fixture} aids the surgeon in following a reference trajectory and maintaining the correct orientation of the surgical tool. For this \ac{vf}, the feedback force is computed as:
