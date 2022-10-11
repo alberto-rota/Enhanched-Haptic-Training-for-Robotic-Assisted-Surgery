@@ -19,7 +19,7 @@ using UnityEngine;
 
 public static class Global
 {
-    public static string subjectID = "A";
+    public static string subjectID = "D";
 
     public static float assistance = 1f;
 

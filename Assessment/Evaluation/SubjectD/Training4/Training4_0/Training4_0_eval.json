@@ -1,0 +1,14 @@
+{
+    "subject": "D",
+    "task": "Training4",
+    "repetition": "0",
+    "assisted": true,
+    "assistance": 1.0,
+    "time": 64.85929999999996,
+    "missexchanges": 0.0,
+    "clutch_time": 0.14014801110083255,
+    "avg_dist": 0.004187798712997998,
+    "avg_angle": 18.471386990427984,
+    "avg_force": 0.4367718312250652,
+    "avg_torque": 0.007189748018252431
+}
