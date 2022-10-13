@@ -19,9 +19,9 @@ using UnityEngine;
 
 public static class Global
 {
-    public static string subjectID = "D";
+    public static string subjectID = "S";
 
-    public static float assistance = 1f;
+    public static float assistance = 0.75f;
 
     public static bool debugmode = false;
 
