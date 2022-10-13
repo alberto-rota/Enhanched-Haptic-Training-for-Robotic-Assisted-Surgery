@@ -10,7 +10,6 @@ resultsfolder = "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\Resu
 n = 0
 errs=0
 idx = 0
-open(os.path.join(resultsfolder,"Suturing.csv"), "w")
 
 subjects = [s for s in os.listdir(evalstudyfolder) if not s.endswith('.py') and not s.endswith('.bat')]
 for s in subjects:

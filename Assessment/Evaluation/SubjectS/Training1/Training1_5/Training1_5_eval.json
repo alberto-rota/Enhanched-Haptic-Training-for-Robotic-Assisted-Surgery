@@ -1,0 +1,10 @@
+{
+    "subject": "S",
+    "task": "Training1",
+    "repetition": "5",
+    "assisted": false,
+    "assistance": 0.75,
+    "time": 15.033900000000017,
+    "avg_dist": 0.0030212558119849563,
+    "avg_force": 0.3788735385467454
+}
