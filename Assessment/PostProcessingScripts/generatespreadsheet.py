@@ -11,6 +11,12 @@ n = 0
 errs=0
 idx = 0
 
+for t in ["Training1","Training2","Training3","Training4","LiverResection","Thymectomy","Nephrectomy","Suturing"]:
+    if os.path.exists(os.path.join(resultsfolder, t)+".csv"):
+        print("[yellow]Results file already exists for "+t+", creating a blank file")
+        os.remove(os.path.join(resultsfolder, t)+".csv")
+
+  
 subjects = [s for s in os.listdir(evalstudyfolder) if not s.endswith('.py') and not s.endswith('.bat')]
 for s in subjects:
     tasks = [t for t in os.listdir(os.path.join(evalstudyfolder, s)) if not t.endswith('.py') and not t.endswith('.bat')]
@@ -34,19 +40,17 @@ for s in subjects:
                         
                 taskdf = pd.concat([taskdf, d],)
                 taskdf.to_csv(os.path.join(resultsfolder, t)+".csv",index_label="idx")
-                print(taskdf)
                 idx += 1
+for t in ["Training1","Training2","Training3","Training4"]:
+    print(pd.read_csv(os.path.join(resultsfolder, t)+".csv"))
+    
+# for t in ["LiverResection","Thymectomy","Nephrectomy","Suturing"]:
+#     print(pd.read_csv(os.path.join(resultsfolder, t)+".csv"))
 
-# subjects = [s for s in os.listdir(evalstudyfolder) if not s.endswith('.py') and not s.endswith('.bat')]
-# for s in subjects:
-#     tasks = [t for t in os.listdir(os.path.join(evalstudyfolder, s)) if not t.endswith('.py') and not t.endswith('.bat')]
-#     for t in tasks:
-#         reps = [r for r in os.listdir(os.path.join(evalstudyfolder, s, t)) if not r.endswith('.py') and not r.endswith('.bat')]
-#         for r in reps:
-#             print(os.path.join(evalstudyfolder, s,t,r,t)+"_post.bat")
-#             generated = subprocess.call([os.path.join(evalstudyfolder, s,t,r,t)+"_post.bat"])
-#             n+=1
-#             if generated == 1: 
-#                 print("[red]Error generating post-processing script for "+os.path.join(evalstudyfolder, s,t,r,t))
-#                 errs+=1
-                
+for t in ["Training1","Training2","Training3","Training4"]:
+    print(t+" shape: ",end="")
+    print(pd.read_csv(os.path.join(resultsfolder, t)+".csv").shape)
+
+# for t in ["LiverResection","Thymectomy","Nephrectomy","Suturing"]:
+#     print(t+" shape: ",end="")
+#     print(pd.read_csv(os.path.join(resultsfolder, t)+".csv").shape)
