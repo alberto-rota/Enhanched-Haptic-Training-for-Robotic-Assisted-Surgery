@@ -110,8 +110,8 @@ eval["time"] = time[-1]-time[0]
 eval["avg_dist"] = np.mean(err)
 eval["avg_force"] = np.mean(np.linalg.norm(force.to_numpy(),axis=1))
 eval_json = json.dumps(eval, indent=4)
-with open(wd+'_eval.json', 'w') as f:
-    f.write(eval_json)
+# with open(wd+'_eval.json', 'w') as f:
+#     f.write(eval_json)
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
 

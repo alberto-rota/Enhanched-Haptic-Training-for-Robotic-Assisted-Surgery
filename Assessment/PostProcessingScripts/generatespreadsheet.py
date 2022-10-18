@@ -23,7 +23,7 @@ for s in subjects:
     for t in tasks:
         reps = [r for r in os.listdir(os.path.join(evalstudyfolder, s,t)) if not r.endswith('.py') and not r.endswith('.bat')]
         for r in reps:
-            print(os.path.join(evalstudyfolder, s,t,r,r)+"_eval.json")
+            print(f"> {s}: {r}")
             with open(os.path.join(evalstudyfolder, s,t,r,r)+"_eval.json") as jsonfile:
                 d = pd.DataFrame(dict(json.load(jsonfile)),index = [idx])
                 
@@ -41,13 +41,14 @@ for s in subjects:
                 taskdf = pd.concat([taskdf, d],)
                 taskdf.to_csv(os.path.join(resultsfolder, t)+".csv",index_label="idx")
                 idx += 1
-for t in ["Training1","Training2","Training3","Training4"]:
+    print("")
+for t in ["Training1","Training2","Training3","Training4","LiverResection","Thymectomy","Nephrectomy","Suturing"]:
     print(pd.read_csv(os.path.join(resultsfolder, t)+".csv"))
     
 # for t in ["LiverResection","Thymectomy","Nephrectomy","Suturing"]:
 #     print(pd.read_csv(os.path.join(resultsfolder, t)+".csv"))
 
-for t in ["Training1","Training2","Training3","Training4"]:
+for t in ["Training1","Training2","Training3","Training4","LiverResection","Thymectomy","Nephrectomy","Suturing"]:
     print(t+" shape: ",end="")
     print(pd.read_csv(os.path.join(resultsfolder, t)+".csv").shape)
 

@@ -121,8 +121,8 @@ eval["avg_angle"] = rms(angle)
 eval["avg_force"] = rms(np.linalg.norm(force.to_numpy(),axis=1))
 eval["avg_torque"] = rms(np.linalg.norm(torque.to_numpy(),axis=1))
 eval_json = json.dumps(eval, indent=4)
-with open(wd+'_eval.json', 'w') as f:
-    f.write(eval_json)
+# with open(wd+'_eval.json', 'w') as f:
+#     f.write(eval_json)
 
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
