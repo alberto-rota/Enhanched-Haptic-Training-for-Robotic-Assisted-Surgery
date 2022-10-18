@@ -1,0 +1,13 @@
+{
+    "subject": "P",
+    "task": "LiverResection",
+    "repetition": "1",
+    "assisted": false,
+    "assistance": 0.0,
+    "time": 25.780500000000075,
+    "clutch_time": 0.0,
+    "avg_dist": 0.004288394569848619,
+    "avg_angle": 8.509802991989329,
+    "avg_force": 0.22809897797443304,
+    "avg_torque": 0.0
+}

@@ -1,0 +1,14 @@
+{
+    "subject": "D",
+    "task": "Suturing",
+    "repetition": "2",
+    "assisted": false,
+    "assistance": 0.0,
+    "time": 48.74940000000004,
+    "missexchanges": 0.0,
+    "clutch_time": 0.023823704586063133,
+    "avg_dist": 0.004925267808625232,
+    "avg_angle": 22.50641170413964,
+    "avg_force": 0.19360335232286027,
+    "avg_torque": 0.006097943469787453
+}
