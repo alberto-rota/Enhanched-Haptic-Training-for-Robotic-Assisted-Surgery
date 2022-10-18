@@ -23,8 +23,6 @@ def getKey(settings, timeout):
 def saveTerminalSettings():
     return termios.tcgetattr(sys.stdin)
 
-topic = "/dvrk/PSM1/state_joint_current"
-
 YAW = 0
 PITCH = 1
 INSERTION = 2
@@ -38,7 +36,7 @@ RESOLUTION_I = 0.001
 
 def talker():
     pinched = False;
-    pub = rospy.Publisher(topic, JointState, queue_size=10)
+    pub = rospy.Publisher("/dvrk/PSM1/state_joint_current", JointState, queue_size=10)
     pub2 = rospy.Publisher("/dvrk/PSM1/state_jaw_current", JointState, queue_size=10)
 
     rospy.init_node('keyboard_teleop', anonymous=True)
