@@ -228,10 +228,29 @@ A quantative estimation of surgical performance is obtained by combining metrics
 \end{itemize} 
 These values are logged at each frame of the task execution, and are then averaged once the task is complete. Indeed, a statistical analysis will be conducted on these averaged values, where $X_{u,r}$ is the averaged generic metric $X$ for the $r$-th repetion performed by the $u$-th user.
 
-Considering "optimal execution" the one achieved by the resident surgeon, the quantitative performance index P is the ratio of the 
+Considering "optimal execution" the one achieved by the resident surgeon, the quantitative performance index P is the ratio of the task metrics gathered from the optimal execution from the surgeons and the one recorded from the training subjects.
 
 \section{Results}
-Fig.!!! reports the performance trends for the 4 training tasks averaged on users: assisted subjects  
+\begin{figure*}
+  \centering
+      \includegraphics[width=\linewidth]{images/performance_training.png}
+      \small{
+      \caption{\textit{
+        Performance Trend for the four Training Tasks. The value at each repetition is averaged across the subjects belonging to the same group. Errorbars show the standard variation at each repetition
+      }}}
+      \label{fig:performancetraining}
+\end{figure*}
+\begin{figure*}
+  \centering
+      \includegraphics[width=\linewidth]{images/performance_validation.png}
+      \small{
+      \caption{\textit{
+        Boxplots of the average performance of assisted subjects (blue) and unassisted subjects (orange) on the four validation tasks
+      }}}
+      \label{fig:performancevalidation}
+\end{figure*}
+Fig.\ref{fig:performancetraining} shows the performance trends for the 4 training tasks, where the performance at each repetition is the average among the subjects in the assisted or control group. Apart from the \textit{Pillars} task, the trends are increasing both for the assisted group and the unassisted group. Most significantly, the performance in the assisted group is consistently higher than the one in the control group in all training tasks. 
+
 \section{Discussion}
 \section{Conclusions}
 %-----------------------------------------------------------------------------------
