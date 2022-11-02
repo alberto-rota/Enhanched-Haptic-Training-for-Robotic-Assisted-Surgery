@@ -6,11 +6,12 @@
 %-----------------------------------------------------------------------------------
 \documentclass{article}
 %-----------------------------------------------------------------------------------
-% GENERIC PACKAGES
+% PACKAGES IMPORTING
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{setspace}
+\usepackage{parskip}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
 \usepackage{geometry}
@@ -21,6 +22,8 @@
     bottom=25mm
     }
 \onehalfspacing
+% \setlength\parindent{0pt}
+
 %-----------------------------------------------------------------------------------
 % ACRONYMS
 \usepackage{acro}
@@ -36,15 +39,46 @@
   short=RAMIS,
   long=Robot-Assisted Minimally Invasive Surgery,
 }
+\DeclareAcronym{vf}{
+  short=VF,
+  long=Virtual Fixture,
+}
+\DeclareAcronym{psm}{
+  short=PSM,
+  long=Patient-Side Manipulator,
+}
+\DeclareAcronym{mtm}{
+  short=MTM,
+  long=Master Tool Manipulator,
+}
+\DeclareAcronym{hrsv}{
+  short=HRSV,
+  long=High-Resolution Stereo Viewer,
+}
+\DeclareAcronym{ecm}{
+  short=ECM,
+  long=Endoscope Camera Manipulator,
+}
+\DeclareAcronym{ee}{
+  short=EE,
+  long=End-Effector,
+}
+\DeclareAcronym{vr}{
+  short=VR,
+  long=Virtual Reality,
+}
 %-----------------------------------------------------------------------------------
 % NEWCOMMANDS AND RENEWCOMMANDS
+\newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
+\newcommand{\vect}[1]{\textbf{\textit{#1}}}
+\newcommand{\fcaption}[1]{\captionof{figure}{\textit{\small #1}}}
 
 %-----------------------------------------------------------------------------------
-% Usage of Subfiles Last in the preamble 
+% Keeo ussage of Subfiles Last in the preamble 
 \usepackage{subfiles}
 
 % TITLE
-\title{\textbf{Implementation and assessment of Assistance-as-Needed Virtual Fixtures for Surgical Training with a \textit{daVinci} surgical robot: an experimental study}
+\title{\textbf{Implementation and assessment of Assistance-as-Needed Virtual Fixtures for VR Surgical Training with a \textit{daVinci} surgical robot: an experimental study}
 \\
 \vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
 \\
