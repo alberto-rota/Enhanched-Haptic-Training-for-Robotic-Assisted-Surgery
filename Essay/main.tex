@@ -12,6 +12,7 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{parskip}
+\usepackage{xspace}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
 \usepackage{geometry}
@@ -59,6 +60,10 @@
   short=ECM,
   long=Endoscope Camera Manipulator,
 }
+\DeclareAcronym{suj}{
+  short=SUJ,
+  long=Set-Up Joint,
+}
 \DeclareAcronym{ee}{
   short=EE,
   long=End-Effector,
@@ -67,11 +72,25 @@
   short=VR,
   long=Virtual Reality,
 }
+\DeclareAcronym{or}{
+  short=OR,
+  long=Operatory Room,
+}
 %-----------------------------------------------------------------------------------
 % NEWCOMMANDS AND RENEWCOMMANDS
 \newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
 \newcommand{\vect}[1]{\textbf{\textit{#1}}}
 \newcommand{\fcaption}[1]{\captionof{figure}{\textit{\small #1}}}
+\newcommand{\mtm}{\ac{mtm}\xspace}
+\newcommand{\mtms}{\acp{mtm}\xspace}
+\newcommand{\psm}{\ac{psm}\xspace}
+\newcommand{\psms}{\acp{psm}\xspace}
+\newcommand{\ecm}{\ac{ecm}\xspace}
+\newcommand{\ecms}{\acp{ecm}\xspace}
+\newcommand{\vf}{\ac{vf}\xspace}
+\newcommand{\vfs}{\acp{vf}\xspace}
+\newcommand{\hrsv}{\acp{hrsv}\xspace}
+\newcommand{\davinci}{\textit{daVinci}\cright}
 
 %-----------------------------------------------------------------------------------
 % Keeo ussage of Subfiles Last in the preamble 
@@ -103,7 +122,7 @@
 % SECTIONS
 \subfile{Abstract/abstract.tex}
 \subfile{Introduction/introduction.tex}
-\subfile{State_of_the_art/preamble.tex}
+\subfile{State_of_the_art/state_of_the_art.tex}
 
 %-----------------------------------------------------------------------------------
 % BIBLIOGRAPHY

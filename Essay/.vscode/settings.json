@@ -4,6 +4,11 @@
             "language": "latex",
             "scheme": "file",
             "pattern": "Introduction/introduction.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "State_of_the_art/state_of_the_art.tex"
         }
     ]
 }
