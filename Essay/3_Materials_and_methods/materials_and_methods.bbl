@@ -1,0 +1,25 @@
+\begin{thebibliography}{1}
+
+\bibitem{Kazanzides2014}
+Peter Kazanzidesf, Zihan Chen, Anton Deguet, Gregory~S. Fischer, Russell~H.
+  Taylor, and Simon~P. Dimaio.
+\newblock An open-source research kit for the da vinci® surgical system.
+\newblock pages 6434--6439. Institute of Electrical and Electronics Engineers
+  Inc., 9 2014.
+
+\bibitem{Quigley2009}
+Morgan Quigley, Ken Conley, Brian Gerkey, Josh Faust, Tully Foote, Jeremy
+  Leibs, Rob Wheeler, Andrew~Y Ng, et~al.
+\newblock Ros: an open-source robot operating system.
+\newblock In {\em ICRA workshop on open source software}, volume~3, page~5.
+  Kobe, Japan, 2009.
+
+\bibitem{Smith2014}
+Roger Smith, Vipul Patel, and Richard Satava.
+\newblock Fundamentals of robotic surgery: A course of basic robotic surgery
+  skills based upon a 14-society consensus template of outcomes measures and
+  curriculum development.
+\newblock {\em International Journal of Medical Robotics and Computer Assisted
+  Surgery}, 10:379--384, 9 2014.
+
+\end{thebibliography}
