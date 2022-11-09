@@ -15,6 +15,7 @@
 \usepackage{xspace}
 \usepackage{pdfpages}
 \usepackage{siunitx}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
 \usepackage{geometry}
@@ -25,7 +26,9 @@
     bottom=25mm
     }
 \onehalfspacing
-% \setlength\parindent{0pt}
+
+%-----------------------------------------------------------------------------------
+% CAPTIONS
 
 %-----------------------------------------------------------------------------------
 % ACRONYMS
@@ -78,6 +81,10 @@
   short=OR,
   long=Operatory Room,
 }
+\DeclareAcronym{rf}{
+  short=RF,
+  long=Reference Frame,
+}
 %-----------------------------------------------------------------------------------
 % NEWCOMMANDS AND RENEWCOMMANDS
 \newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
@@ -92,7 +99,8 @@
 \newcommand{\vf}{\ac{vf}\xspace}
 \newcommand{\vfs}{\acp{vf}\xspace}
 \newcommand{\hrsv}{\ac{hrsv}\xspace}
-\newcommand{\davinci}{\textit{daVinci}\cright}
+\newcommand{\davinci}{\textit{daVinci}\cright\xspace}
+\newcommand{\rf}{\ac{rf}\xspace}
 
 %-----------------------------------------------------------------------------------
 % Keeo ussage of Subfiles Last in the preamble 

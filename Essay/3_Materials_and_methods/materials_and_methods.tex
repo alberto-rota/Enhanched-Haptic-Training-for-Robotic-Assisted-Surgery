@@ -17,7 +17,7 @@ The simulator is based on \textit{Unity}, a cross-platform game engine that allo
 
 Two virtual cameras are positioned in the Unity scene on the tip of the endoscope mounted on the \ecm: the horizontal distance between the two virtual cameras ($5.3 \unit{mm}$) matches the one of the real endoscope, as does the Field-of-View ($80 \unit{deg^2}$). The feeds of the virtual cameras, rendering the 3D scene in real-time, are sent separately to the two oculars of the \hrsv. The slightly different images from the left and right eye yield the sensation of depth perception and allow the user to perceive the virtual scene in three dimensions, as it happens when teleoperating with the real robot. 
 
-The training surgeon interacts with the console in the same exact way as he would when teleoperating the real robot: he views the surgical scene in the oculars, the virtual instruments respond in real-time to the movements of the manipulators and with the same kinematics, and the 3D objects behave in the same way as they would if they were real thanks to the simulated physics computed by the Unity Engine.   
+The training surgeon interacts with the console in the same exact way as he would when teleoperating in the \ac{or}: he views the surgical scene in the oculars, the virtual instruments respond in real-time to the movements of the manipulators and with the same kinematics, and the 3D objects behave in the same way as they would if they were real thanks to the simulated physics computed by the Unity Engine.   
 
 \subsubsection{The Surgical Tasks}
 The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Fig.\ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set up in order to be as challenging as possible in relation to a specific surgical skill. Specifically:
@@ -38,15 +38,68 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 
 \paragraph{Path} Objective of this task is to grab a torus-like object and carry it along a reference trajectory. To achieve this, discrete wrist articulation and motion smoothness are required. The reference trajectory is set up in order to require a wrist rotation of at least $90 \unit{deg}$ around 2 perpendicular axes, the one pointing from right to left and the one pointing forward with respect to the camera view.
 \paragraph{Rings} In this task, the operator is required to precisely insert the instrument inside a narrow constrained space defined by a set of increasingly smaller rings, grab a target object and carry it out of the constrained space. The task tests the depth perception skills of the operator, as the rings are positioned at an angle with respect to the camera view.
-\paragraph{Pillars}
-\paragraph{Exchange}
-\paragraph{Thymectomy}
-\paragraph{Nephrectomy}
-\paragraph{Liver Resection}
-\paragraph{Suturing}
-\paragraph{Playgrounf}
-
+\paragraph{Pillars} This task test the trainee's steady-hand skills, as well as hand-eye coordination. While carrying an object through a set of obstacles that most times obscure the free path, the operator is also required to extrapolate the path that he must take to reach the intended target.
+\paragraph{Exchange} To test the bi-manual coordination and the ability to exchange an object from one hand to another, this task demands the operator to carry a cylinder-shaped object from a starting position to a target location, exchanging it from the right to the left hand at the mid-point of the path. 
+\paragraph{Thymectomy} In a surgical thymectomy, a lobe of the thymus gland is cut and removed. The vicinity of the so delicate phrenic nerve requires the utmost care and precision and, in most cases, a minimally-invasive approach is, indeed, preferred. In the emulated version of this task, the surgeon shall pinch a set of 6 targets located on the surface of the virtual thymus while staying as far as possible from the phrenic nerve. 
+\paragraph{Nephrectomy} A careful insertion of the surgical instrument inside the abdominal cavity is required to perform a nephrectomy. The insertion is often performed at a steep angle with respect to the camera view, and the surgeon must be able to perceive the depth of the target object. This virtual nephrectomy re-creates both of these aspects.
+\paragraph{Liver Resection} The surgeon must perform a series of cuts along the surface between two lobes of the liver to perform a successful liver resection. Naturally, to minimize tissue damage, the instrument's tooltip shall remain as close as possible to the surface between the two lobes to be separated.
+\paragraph{Suturing} Suturing with a recurve circular needle is a challenging task requiring the medical doctor to approach the tissue at an optimal angle and to properly exchange the needle from one hand to the other.  
+\paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \ac{vr} environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
+\
 \subsection{Virtual Fixtures}
+The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Fig.\ref{fig:consoletocarttransform}. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{images/console_to_cart_transform.png}
+    \caption{The equivalence of transformations between the console space and the surgical space. The transformation matrix that expresses the pose of the manipulator in the \hrsv reference frame is used to compute the desired pose of the \psm in the \rf of the endoscope camera.}
+    \label{fig:consoletocarttransform}
+\end{figure}
+
+In the real surgical context, the motors are used to automatically position the manipulators at the start of the procedure, for gravity compensation and for exploiting the redundancy of the kinematic chain to optimally position the links of the \mtm in order to avoid collisions with the surgeon's wrist. However, the same dynamic model used for these purposes can be exploited to apply assistive mechanical forces to the manipulators, the direction and magnitude of which are determined from the pose of the \psms's tooltip in the surgical \rf. A force to be applied to the manipulator tooltip is converted to the set of torques to be applied at each joint by the respective actuators. The parameters of this inverse dynamics model \cite{Fontanelli2017} for the generic i-\textit{th} link are:
+\begin{itemize}
+  \item The mass $m_i$ of the link
+  \item The three components of the first moment $\textbf{m}_i$ of the link
+  \item The six independent elements of the inertia tensor $\textbf{I}_i$ of the link
+  \item The static and viscous coefficients of the link, $F_{s,i}$ and $F_{v,i}$ respectively
+\end{itemize}
+
+The \vf force computed in the virtual surgical space - in the simulator - is therefore converted, in real-time, to a set of 7 torques to be communicated as a ROS message to the \mtms. 
+The same inverse dynamics model converts a torque to be applied to the end effector into a set of 7 torques to be applied to the joint motors. 
+
+\subsubsection{Error Mapping}
+Most of the assistance strategies implemented here will use the distance from the \psm to the target or obstacle as the primary metric for determining the intensity of the feedback force or torque. However, different surgical tasks and situations require a level of control over how the distance is taken into account. For this reason a sigmoidal mapping function is employed for the normalization of the linear or angular error into a suitable interval. Specifically, such mapping is formulated as:
+
+\begin{equation}
+  f_{map}(x) = \frac{1}{1+e^{5\delta w(x-t-h)}}
+  \label{eq:sigmoidalmap}
+\end{equation}
+
+with $\delta = +1$ for guidance \vfs and $\delta = -1$ for avoidance \vfs ($\delta$ determines if the function increases or decreases monotonically). Here:
+\begin{itemize}
+  \item $t$ is the fixture \textit{threshold}, hence the value at which the sigmoid starts to significantly increase from zero
+  \item $h$ is the distance from the threshold at which \textit{half} of the maximum force is provided
+  \item $w$ controls the \textit{width} of the linear region, hence the steepness of the curve 
+\end{itemize}
+For example, if $t=2\si{mm}$ and $h=3\si{mm}$ the surgeon will start to feel a force for errors higher than 2\si{mm}, and at 5\si{mm} he will experience half of the maximum force that can be delivered.
+
+% !!! CHANGE:     NORMALIZED ERROR --> MAPPED ERROR,     TITLE AND LABELS FONT SIZE
+\begin{figure}[h!]
+  \centering
+      \includegraphics[width=0.45\textwidth]{images/mappingfunction.jpg}
+      \caption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy}
+      \label{fig:mappingfunctiion}
+\end{figure}
+
+The values of $t$, $h$ and $w$ are set manually. Their values, different from task to task, are reported in Tab.\ref{tab:mappingvalues}.
+
+\begin{table}
+  \centering
+  \caption{Mapping function parameters for the different tasks}
+  || c || c |
+  \label{tab:mappingvalues}
+\end{table}
+
 \subsection{Clinical Validation}
 \subsection{Experimental Protocol}
 \subsection{Performance Metrics}
