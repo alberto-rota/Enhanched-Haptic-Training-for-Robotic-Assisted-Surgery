@@ -45,7 +45,8 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 \paragraph{Liver Resection} The surgeon must perform a series of cuts along the surface between two lobes of the liver to perform a successful liver resection. Naturally, to minimize tissue damage, the instrument's tooltip shall remain as close as possible to the surface between the two lobes to be separated.
 \paragraph{Suturing} Suturing with a recurve circular needle is a challenging task requiring the medical doctor to approach the tissue at an optimal angle and to properly exchange the needle from one hand to the other.  
 \paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \ac{vr} environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
-\
+
+
 \subsection{Virtual Fixtures}
 The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Fig.\ref{fig:consoletocarttransform}. 
 
@@ -83,22 +84,114 @@ with $\delta = +1$ for guidance \vfs and $\delta = -1$ for avoidance \vfs ($\del
 \end{itemize}
 For example, if $t=2\si{mm}$ and $h=3\si{mm}$ the surgeon will start to feel a force for errors higher than 2\si{mm}, and at 5\si{mm} he will experience half of the maximum force that can be delivered.
 
-% !!! CHANGE:     NORMALIZED ERROR --> MAPPED ERROR,     TITLE AND LABELS FONT SIZE
 \begin{figure}[h!]
   \centering
-      \includegraphics[width=0.45\textwidth]{images/mappingfunction.jpg}
-      \caption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy}
+      \includegraphics[width=0.75\textwidth]{images/mappingfunction.png}
+      \caption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy. The x-axis refers to a generic error shown in millimeters, but the same mapping function can be applied to an angular error.} 
       \label{fig:mappingfunctiion}
 \end{figure}
 
-The values of $t$, $h$ and $w$ are set manually. Their values, different from task to task, are reported in Tab.\ref{tab:mappingvalues}.
+$t$, $h$ and $w$ are set manually in order to achieve an optimal "feeling" of the \vf. Their values, different from task to task, are reported in Tab.\ref{tab:thwvalues}.
 
 \begin{table}
-  \centering
-  \caption{Mapping function parameters for the different tasks}
-  || c || c |
-  \label{tab:mappingvalues}
+    \centering
+    \caption{Error mapping parameters for the different tasks. \textit{Exchange}, \textit{Liver Resection} and \textit{Suturing} map both the distance error and the angular error, so the values of both mapping functions are reported.}
+    \begin{tabular}{||c||c|c|c||}
+        \hline
+        \textbf{Task} & $\textbf{t} $ & $\textbf{h}$ & $\textbf{w}$ \\
+        \hline\hline
+        Path            & 2 mm & 2 mm & 500 \\ 
+        \hline
+        Rings           & 2 mm & 2 mm & 500 \\ 
+        \hline
+        Pillars         & 0.5 mm & 1 mm & 1000 \\ 
+        \hline
+        Exchange (distance)        & 3 mm & 2 mm & 500 \\ 
+        \hline
+        Exchange (angular)        & 5$^{\circ}$  & 5$^{\circ}$ & 2 \\ 
+        \hline
+        Thymectomy      & 0.5 mm & 1 mm & 1000 \\ 
+        \hline
+        Nephrectomy     & 2 mm & 2 mm & 500 \\ 
+        \hline
+        Liver Resection (distance) & 2 mm & 5 mm & 200 \\ 
+        \hline
+        Liver Resection (angular) & 5$^{\circ}$ & 15$^{\circ}$ & 1\\ 
+        \hline
+        Suturing (distance) & 1 mm & 3 mm & 300 \\ 
+        \hline
+        Suturing (angular) & 5$^{\circ}$ & 5$^{\circ}$ & 2\\ 
+        \hline
+    \end{tabular}
+    \label{tab:thwvalues}
 \end{table}
+
+\subsubsection{Virtual Fixtures Algorithms}
+As stated previously the force feedback delivered at the level of \mtm is computed, in terms of magnitude and direction, from the surgical space and therefore based on the relative position and orientation of the \psm's tooltip with respect to the objects in the virtual surgical scene. The simulator features 4 assistance algorithms implementing 4 different declinations of haptic assistance. Different algorithms are deployed inside specific surgical tasks based on the task morphology and goals:
+\begin{itemize}
+  \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic toorque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
+  \item \textbf{Obstacle Avoidance:} An Obstacle Avoidance algorithm prevents the practicioner from colliding with the virtual objects in the scene, which may represent, for example, delicate anatomical structures that must not be touched during surgery. A visco-elastic force is, therefore, applied to the \ee tooltip in order to push it away from the closest point of the obstacle.
+  \item \textbf{Insertion Guidance:} Some surgical tasks require the insertion of the instrument's tooltip into a narrow space. This algorithm, from an initial position of the \psm and a target position, aid the surgeon in approaching the target on an optimal insertion path, without deviating from it.
+  \item \textbf{Surface Guidance:} After defining, in the pre-operative stage, an ideal surface of operation (the surface can be of any morphology and should be defined as a mesh of points), a Surface Guidance algorithm generates forces and torques that keep the surgical tool on such surface and with an orientation tangent to it. 
+\end{itemize} 
+
+Fig.\ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/vfs_graphics.png}
+    \caption{Graphics scheme of the 4 virtual fixtures featured as assistance strategies in the surgical simulator. \textbf{a.} Trajectory Guidance; \textbf{b.} Obstacle Avoidance; \textbf{c.} Surface Guidance; \textbf{d.} Insertion Guidance. A representative \psm's pose is shown, and a target pose is also depicted in a green hue, together with the force (orange arrows) and torque (blue arrows) that will guide the motion toward the target pose.}
+    \label{fig:vfsgraphics}
+\end{figure}
+
+\paragraph{Trajectory Guidance} 
+Considering a generic three-dimensional trajectory planned in the pre-operative stage, the feedback forces will be calculated according to the relative position and orientation of the trajectory itself and the tooltip reference frame. Both the forces and torques are computed in real-time as the sum of an elastic and a viscous contribution: while the elastic component accounts for the positional or angular error to the closest point of the reference trajectory - and the tangent computed in such point, accordingly - the viscous components are proportional to the temporal rate of change of the errors themselves. 
+
+A viscoelastic model allows to achieve a guidance and error-compensating assistance that is less prone to overshooting behaviors and to oscillations. Moreover, with the force and torque being calculated as 
+\begin{equation}
+    \vect{F} = k_F\cdot\vect{F}_{elastic} + \eta_F\cdot\vect{F}_{viscous} 
+    \label{eq:force}
+\end{equation}
+\begin{equation}
+    \vect{T} = k_T\cdot\vect{T}_{elastic} + \eta_T\cdot\vect{T}_{viscous}
+    \label{eq:torque}
+\end{equation}
+one tunes the elastic gains $k_F$ and $k_T$ and the viscous damping coefficients $\eta_F$ and $\eta_T$ in order to achieve a comfortable balance between the components and a stable behavior of the feedback force, which may vary from operator to operator, as well as from task to task.
+
+Fig. \ref{fig:vfsgraphics}a illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq.\ref{eq:force} expanded as:
+\begin{equation}
+    \vect{F}_{elastic} = \vect{d}
+\end{equation} 
+\begin{equation}
+    \vect{F}_{viscous} = 
+    \begin{cases} 
+        \vect{d}, & \textit{if         } \vect{v}\cdot\vect{d}<0 \\
+         rotate(\vect{v},\theta,\vect{r}), & \textit{otherwise}
+    \end{cases}
+\end{equation} 
+
+Here, $\vect{d}$ is the distance vector going from the surgical instrument to the closest point in the trajectory, $\vect{v}$ is the velocity of the surgical instrument, while $\theta$ and $\vect{r}$ are the angle and axis of rotation which will align the velocity vector $\vect{v}$ with $\vect{d}$, respectively:
+\begin{equation}
+    \theta = (1+\vect{v}\cdot\vect{d})\cdot\frac{\pi}{2}
+\end{equation}
+\begin{equation}
+    \vect{r} = \vect{v}\times\vect{d}
+\end{equation}
+This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Eq.\ref{eq:torque}) are expanded as: 
+\begin{equation}
+    \vect{T}_{elastic} = acos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
+    \label{eq:telastic}
+\end{equation}
+\begin{equation}
+    \vect{T}_{viscous} = \frac{d}{dt} \left[ acos (\vect{z}\cdot\vect{t} ) \right] \cdot \vect{z} \times \vect{t}
+    \label{eq:tviscous}
+\end{equation}
+The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq.\ref{eq:telastic} and Eq.\ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $acos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
+
+\paragraph{Obstacle Avoidance}
+\paragraph{Surface Guidance}
+\paragraph{Insertion Guidance}
+
 
 \subsection{Clinical Validation}
 \subsection{Experimental Protocol}

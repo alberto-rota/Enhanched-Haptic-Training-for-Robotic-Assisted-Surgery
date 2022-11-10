@@ -36,5 +36,19 @@
 			"    \\label{eq:}",
 			"\\end{equation}"
 		],
+	},
+	"Table": {
+		"scope": "latex",
+		"prefix": "\\table",
+		"body": [
+			"\\begin{table}",			
+			"    \\centering",			
+			"    \\begin{tabular}{$0}",
+			"        ",
+			"    \\end{tabular}",		
+			"    \\caption{}",		
+			"    \\label{tab:}",		
+			"\\end{table}"
+		],
 	}
 }
