@@ -129,9 +129,9 @@ $t$, $h$ and $w$ are set manually in order to achieve an optimal "feeling" of th
 \subsubsection{Virtual Fixtures Algorithms}
 As stated previously the force feedback delivered at the level of \mtm is computed, in terms of magnitude and direction, from the surgical space and therefore based on the relative position and orientation of the \psm's tooltip with respect to the objects in the virtual surgical scene. The simulator features 4 assistance algorithms implementing 4 different declinations of haptic assistance. Different algorithms are deployed inside specific surgical tasks based on the task morphology and goals:
 \begin{itemize}
-  \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic toorque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
+  \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic torrque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
   \item \textbf{Obstacle Avoidance:} An Obstacle Avoidance algorithm prevents the practicioner from colliding with the virtual objects in the scene, which may represent, for example, delicate anatomical structures that must not be touched during surgery. A visco-elastic force is, therefore, applied to the \ee tooltip in order to push it away from the closest point of the obstacle.
-  \item \textbf{Insertion Guidance:} Some surgical tasks require the insertion of the instrument's tooltip into a narrow space. This algorithm, from an initial position of the \psm and a target position, aid the surgeon in approaching the target on an optimal insertion path, without deviating from it.
+  \item \textbf{Insertion Guidance:} Some surgical tasks require the insertion of the instrument's tooltip into a narrow space. This algorithm, from an initial position of the \psm and a target position, aids the surgeon in approaching the target on an optimal insertion path, without deviating from it.
   \item \textbf{Surface Guidance:} After defining, in the pre-operative stage, an ideal surface of operation (the surface can be of any morphology and should be defined as a mesh of points), a Surface Guidance algorithm generates forces and torques that keep the surgical tool on such surface and with an orientation tangent to it. 
 \end{itemize} 
 
@@ -145,9 +145,9 @@ Fig.\ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as describe
 \end{figure}
 
 \paragraph{Trajectory Guidance} 
-Considering a generic three-dimensional trajectory planned in the pre-operative stage, the feedback forces will be calculated according to the relative position and orientation of the trajectory itself and the tooltip reference frame. Both the forces and torques are computed in real-time as the sum of an elastic and a viscous contribution: while the elastic component accounts for the positional or angular error to the closest point of the reference trajectory - and the tangent computed in such point, accordingly - the viscous components are proportional to the temporal rate of change of the errors themselves. 
+Considering a generic three-dimensional reference trajectory planned in the pre-operative stage, the feedback forces will be calculated according to the relative position and orientation of the trajectory itself and the tooltip reference frame. Both the forces and torques are computed in real-time as the sum of an elastic and a viscous contribution: while the elastic component accounts for the positional or angular error to the closest point of the reference trajectory - and the tangent computed in such point, accordingly - the viscous components are proportional to the temporal rate of change of the errors themselves. 
 
-A viscoelastic model allows to achieve a guidance and error-compensating assistance that is less prone to overshooting behaviors and to oscillations. Moreover, with the force and torque being calculated as 
+A viscoelastic model allows to achieve a guidance and error-compensating assistance that is less prone to overshooting behaviors and to oscillations. Moreover, with the force and torque calculated as 
 \begin{equation}
     \vect{F} = k_F\cdot\vect{F}_{elastic} + \eta_F\cdot\vect{F}_{viscous} 
     \label{eq:force}
@@ -158,15 +158,15 @@ A viscoelastic model allows to achieve a guidance and error-compensating assista
 \end{equation}
 one tunes the elastic gains $k_F$ and $k_T$ and the viscous damping coefficients $\eta_F$ and $\eta_T$ in order to achieve a comfortable balance between the components and a stable behavior of the feedback force, which may vary from operator to operator, as well as from task to task.
 
-Fig. \ref{fig:vfsgraphics}a illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq.\ref{eq:force} expanded as:
+Fig. \ref{fig:trajectoryguidance} illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq.\ref{eq:force} expanded as:
 \begin{equation}
-    \vect{F}_{elastic} = \vect{d}
+    \vect{F}_{elastic} = f_{map}(||\vect{d}||)\cdot\frac{\vect{d}}{\vect{d}}
 \end{equation} 
 \begin{equation}
     \vect{F}_{viscous} = 
     \begin{cases} 
         \vect{d}, & \textit{if         } \vect{v}\cdot\vect{d}<0 \\
-         rotate(\vect{v},\theta,\vect{r}), & \textit{otherwise}
+         \texttt{rotate}(\vect{v},\theta,\vect{r}), & \textit{otherwise}
     \end{cases}
 \end{equation} 
 
@@ -179,17 +179,65 @@ Here, $\vect{d}$ is the distance vector going from the surgical instrument to th
 \end{equation}
 This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Eq.\ref{eq:torque}) are expanded as: 
 \begin{equation}
-    \vect{T}_{elastic} = acos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
+    \vect{T}_{elastic} = \arccos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
     \label{eq:telastic}
 \end{equation}
 \begin{equation}
-    \vect{T}_{viscous} = \frac{d}{dt} \left[ acos (\vect{z}\cdot\vect{t} ) \right] \cdot \vect{z} \times \vect{t}
+    \vect{T}_{viscous} = \frac{d}{dt} \left[ \arccos (\vect{z}\cdot\vect{t} ) \right] \cdot \vect{z} \times \vect{t}
     \label{eq:tviscous}
 \end{equation}
-The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq.\ref{eq:telastic} and Eq.\ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $acos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
+The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq.\ref{eq:telastic} and Eq.\ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $\arccos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
 
-\paragraph{Obstacle Avoidance}
-\paragraph{Surface Guidance}
+% !!! ADD FIGURE OF TRAJECTORY GUIDANCE
+
+\paragraph{Obstacle Avoidance} The format for representing 3D objects in the simulator developed for this work is \texttt{stl} (Standard Triangle Language): in this format, a solid is defined as a list of 3D spatial coordinates of vertex points and a list of edges connecting them in groups of 3. Under a different light, an \texttt{stl} solid is a group of triangles, or ``subsurfaces'', sharing sides: the \texttt{stl} format also embeds a list of unique vector normals, one for each triangle, useful for easily accessing the orientation of each. The closest vertex point to the \psm's tooltip is identified and, with $\vect{d}$ as the normalized distance vector going from such point to the tooltip and $\vect{n}$ as the normal vector of the object mesh at that point, the force is again computed as the sum of an elastic component, modulated by $k$, and a viscous one, modulated by $\eta$:
+\begin{equation}
+    \vect{F} = \left[k\cdot f_{map}(||\vect{d}||) + \eta\cdot \frac{d}{dt} \left( f_{map}(||\vect{d}||)\right)\right]\cdot \frac{\vect{n}}{||\vect{n}||} 
+    \label{eq:obstacleavoidancef}
+\end{equation}
+$k$ and $\eta$ can be adjusted while performing the task and the visco-elastic balance will change accordingly, in real-time. Here, the addition of viscous component was suggested by clinical experts, as the elastic-only model was felt ``jelly-like'' and, in a few cases, oscillating. $f_{map}(\cdot)$ is the error mapping function with $\delta=-1$With the addition of the viscous component, the same clinicians confirmed a more appropriate behavior of the assistance force.
+
+% !!! ADD FIGURE OF OBSTACLE AVOIDANCE
+
+
+It is to be highlighted that, for meshes with particularly sharp edges, the normal vector $\vect{n}$ at the closest point may not be optimally defined: in Fig.\ref{fig:normalsaveraging} (left), the closest point normals points upwards, which is not necessarily the motion direction that maximizes the distance with the \psm's tooltip. To solve this, instead of defining the normal vectors at the centerpoint of each subsurface, the normals taken into consideration are defined at the vertex points and are computed as the average of the normals of the subsurfaces that share the vertex point. This is illustrated in Fig.\ref{fig:normalsaveraging} (right), where it's also evident how the direction of the force generated in this case actually maximizes the distance with the \ee.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/normals_averaging.png}
+    \caption{On the left, the assistance force is generated from the non-averaged normals, defined at the subsurface centerpoints. On the right, the assistance force is generated from the averaged normals, defined at the vertices. In this figure, the mesh is composed of 4-vertices ``quads'', but the same concept holds to meshes with subsurface triangles.}
+    \label{fig:normalsaveraging}
+\end{figure}
+
+\paragraph{Surface Guidance}  to the Obstacle Avoidance algorithm, an \texttt{stl} surface may be used in some context as a reference for guidance: this implementation indeed computes a force and a torque that attracts and align the surgical \ee towards the surface itself. 
+
+The force is computed with the same logic as in the Obstacle Avoidance algorithm, with the distance vector $\vect{d}$ from the \psm tooltip to the closest point of the surface mesh, and $\vect{n}$ the normal vector of the surface at that point. However, in the error mapping function $f_{map}(\cdot)$ the value of $\delta$ is set to $+1$ and the curve increases monotonically, so that the force is always attractive and is highest when the \psm is furthest from the surface mesh. The formula for the force is:
+\begin{equation}
+    \vect{F} = \left[k_F\cdot f_{map}(||\vect{d}||) + \eta_F\cdot \frac{d}{dt} \left( f_{map}(||\vect{d}||)\right)\right]\cdot \frac{\vect{-n}}{||\vect{n}||} 
+\end{equation}
+Compared to Eq.\ref{eq:obstacleavoidancef}, the sign of the normal vector $\vect{n}$ is inverted.
+
+To compute the torque, one considers the relative orientation of the $\vect{z}$-axis of the \psm's tooltip reference frame and the normal vector $\vect{n}$ at the closest point on the surface. In particular, the torque generated on the manipulator will aim at aligning the $\vect{z}$-axis with its projection on the tangent plane of the surface, defined by the normal vector $\vect{n}$ at the closest point. The vector projection on the tangent plane is the difference between the vector itself and its projection on the normal vector $\vect{n}$, obtained from the dot product operator:
+\begin{equation}
+    \vect{z}_{proj} = \vect{z} - (\vect{z}\cdot\vect{n})\vect{n}
+\end{equation} 
+
+From this, the torque is again the sum of an elastic component dependent on the angle $\theta$ between $\vect{z}$ and $\vect{z}_{proj}$ (specifically $\theta = \arccos(\vect{z}\cdot\vect{z}_{proj})$) , and a viscous one proportional to the angle's derivative in time. The formula for the torque is
+\begin{equation}
+    \vect{T} = \left[k_T\cdot f_{map}(\theta) + \eta_T\cdot \frac{d}{dt} \left( f_{map}(\theta)\right)\right]\cdot \frac{\vect{z} \times \vect{z}_{proj}}{||\vect{z} \times \vect{z}_{proj}||}
+    \label{eq:}
+\end{equation}
+
+where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/surface_guidance.png}
+    \caption{Vectors involved in the computation of the Surface Guidance \vf. The \psm is shown in an example representative pose with respect to the surface mesh.}
+    \label{fig:surfaceguidance}
+\end{figure}
+
+
 \paragraph{Insertion Guidance}
 
 
