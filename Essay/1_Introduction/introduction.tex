@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\section{Introduction}
+\chapter{Introduction}
 Since its advent in the middle of the 1980s, robotic surgery has revolutionized the healthcare industry introducing safer and more efficient solutions to the challenges of surgical practices. By embracing robotic devices in a collaborative effort, surgeons and medical practitioners have been empowered with tools engineered to enhance their skills and optimize patient outcomes. 
 From dental to orthopedic to neurosurgery, almost every area of the medical panorama has now been reached by robotics, with regulatory organizations approving novel procedures with increasing frequency.
 
@@ -29,19 +29,19 @@ Most of the surgical robotics solutions on the market consist of a teleoperation
     \label{fig:davincior}
 \end{figure}
 
-\subsection{Context}
+\section{Context}
 Surgical robotics training is a crucial aspect of the medical education process: aspiring robotic surgeons should develop a highly-specific skillset that includes cognitive, motor, and perceptual abilities that are not typical of any other medical field. Usually, medical facilities collaborate with the company commercializing the robot with the aim of defining a correct, extensive and effective training program that will yield skilled surgeons who will make the most out of the robot utilization in the \ac{or}. If in the past these training programs were targeted only to experienced surgeons with established surgical skillsets, more recently they have been extended to medical students and residents, who conduct this phase in parallel to the standard medical education program: this attests how the surgical robotics field is becoming more and more mainstream, and how the medical community is embracing this new technology. 
 
 Assistance strategies are usually featured in the training programs, and they are meant to guide the trainee toward the optimal execution of a surgical task or to help him overcome a specific difficulty. This role is also covered by an expert supervisor, who is usually present alongside the trainee and provides suggestions and corrections regarding the execution of the procedure. With simulated environments and \ac{vr}, a supervision of this kind can be implemented in the software and delivered autonomously, for example showing the trainee the correct way to perform a specific maneuver or highlighting the presence of an error. 
 
 Haptic assistance however is not yet a common feature in surgical robotics training programs. In a few cases, this is due to the lack of a haptic interface in the training setup (the manipulators may not be equipped with motors able to generate a force), but in most cases it is due to the lack of a clear understanding of the role of haptic feedback in the training process. Purpose of this work is, therefore, to investigate if the introduction of a haptic interface in the training setup can be beneficial for the trainee and which aspects of the learning process can be improved by such a feature.
-\subsection{Motivation}
+\section{Motivation}
 A single surgical robot on the market, the \textit{Senhance}\cright (Asensus Surgical Inc.), is equipped with a force-torque sensor exploited for providing haptic feedback to the surgeon at the console: the sensor measures the forces and torques received by the end-effector when it comes in contact with the tissues and organs in the operatory space, which are then re-created in real-time by actuators integrated to the manipulators at the teleopereation station. As beneficial and effective as it is, it is not an assistance strategy since it cannot be used to re-direct the surgeon's movement towards targets or away from obstacles.
 
 Moreover, none of the surgical simulators on the market include haptics as a tool for error correction and enhanced learning. A few research projects have developed highly specific applications where mechanical feedback was applied for training purposes, but none of them evaluates haptic assistance in the context of a generic surgical training program. The lack of a clear understanding of this concept is what motivates this project toward the implementation and assessment of a haptic interface in a surgical training setup where a \ac{vr} simulator is built \textit{ad-hoc} and from scratch.
 
 % BIBLIOGRAPHY
-\bibliographystyle{unsrt}
-\bibliography{refs.bib}
+% \bibliographystyle{unsrt}
+% \bibliography{refs.bib}
 
 \end{document}

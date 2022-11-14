@@ -3,14 +3,14 @@
 
 \begin{document}
 
-\section{Materials and Methods}
+\chapter{Materials and Methods}
 
-\subsection{Equipment}
+\section{Equipment}
 This research has been conducted on a first-generation \davinci surgical system decommissioned in 2016 and equipped with the dVRK (\davinci Research Kit) framework. The dVRK \cite{Kazanzides2014} is an open-source mechatronics system, consisting of electronics, firmware, and software, that is being used to control research systems based on the first-generation \davinci systems. Based on a ROS \cite{Quigley2009} framework, the dVRK implements high-level accessibility to the sensors, actuators and control algorithms of the \davinci robot, making it more easily interfaceable with advanced strategies and algorithms developed in the most diverse software environments.
 
 The simulator developed for this project renders necessary only the surgeon console, as the ROS messages are sent solely to the virtual surgical scene and not to the physical robot. However, all features of the \psms and of the \ecm are implemented: the \hrsv shows the 3D virtual surgical scene, the \mtms correctly controls the virtual surgical tools, and the clutch foot-switch allows proper repositioning maneuvers. 
 
-\subsection{The Surgical Simulator} 
+\section{The Surgical Simulator} 
 The objective of investigating a high-specificity aspect regarding the impact of \vfs introduced the necessity of developing an \textit{ad-hoc} surgical simulator with specialized surgical tasks and training exercises: this would allow quantifying surgical performance and monitor training over the key surgical skills as indicated by Smith \textit{et al.} in \cite{Smith2014}. 
 
 The simulator is based on \textit{Unity}, a cross-platform game engine that allows the development of 3D applications and games. The Unity engine is a powerful tool for the development of virtual environments, as it allows the creation of complex 3D scenes with a high level of realism, and the implementation of complex interactions between the virtual objects and the user. Specifically, the simulator implements gravity, object collisions and manipulation. A 3D model of the \davinci patient cart is present in the simulator and responds in real-time to the ROS messages received from the console, therefore the virtual \psms replicate the motion of the real ones. 
@@ -19,8 +19,8 @@ Two virtual cameras are positioned in the Unity scene on the tip of the endoscop
 
 The training surgeon interacts with the console in the same exact way as he would when teleoperating in the \ac{or}: he views the surgical scene in the oculars, the virtual instruments respond in real-time to the movements of the manipulators and with the same kinematics, and the 3D objects behave in the same way as they would if they were real thanks to the simulated physics computed by the Unity Engine.   
 
-\subsubsection{The Surgical Tasks}
-The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Fig.\ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set up in order to be as challenging as possible in relation to a specific surgical skill. Specifically:
+\subsection{The Surgical Tasks}
+The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Fig. \ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set up in order to be as challenging as possible in relation to a specific surgical skill. Specifically:
 
 \begin{itemize}
   \item \textit{Path} and \textit{Liver Resection} require articulate wrist motion and stability
@@ -47,8 +47,8 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 \paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \ac{vr} environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
 
 
-\subsection{Virtual Fixtures}
-The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Fig.\ref{fig:consoletocarttransform}. 
+\section{Virtual Fixtures}
+The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Fig. \ref{fig:consoletocarttransform}. 
 
 \begin{figure}[h]
     \centering
@@ -68,7 +68,7 @@ In the real surgical context, the motors are used to automatically position the 
 The \vf force computed in the virtual surgical space - in the simulator - is therefore converted, in real-time, to a set of 7 torques to be communicated as a ROS message to the \mtms. 
 The same inverse dynamics model converts a torque to be applied to the end effector into a set of 7 torques to be applied to the joint motors. 
 
-\subsubsection{Error Mapping}
+\subsection{Error Mapping}
 Most of the assistance strategies implemented here will use the distance from the \psm to the target or obstacle as the primary metric for determining the intensity of the feedback force or torque. However, different surgical tasks and situations require a level of control over how the distance is taken into account. For this reason a sigmoidal mapping function is employed for the normalization of the linear or angular error into a suitable interval. Specifically, such mapping is formulated as:
 
 \begin{equation}
@@ -126,7 +126,7 @@ $t$, $h$ and $w$ are set manually in order to achieve an optimal "feeling" of th
     \label{tab:thwvalues}
 \end{table}
 
-\subsubsection{Virtual Fixtures Algorithms}
+\subsection{Virtual Fixtures Algorithms}
 As stated previously the force feedback delivered at the level of \mtm is computed, in terms of magnitude and direction, from the surgical space and therefore based on the relative position and orientation of the \psm's tooltip with respect to the objects in the virtual surgical scene. The simulator features 4 assistance algorithms implementing 4 different declinations of haptic assistance. Different algorithms are deployed inside specific surgical tasks based on the task morphology and goals:
 \begin{itemize}
   \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic torrque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
@@ -135,7 +135,7 @@ As stated previously the force feedback delivered at the level of \mtm is comput
   \item \textbf{Surface Guidance:} After defining, in the pre-operative stage, an ideal surface of operation (the surface can be of any morphology and should be defined as a mesh of points), a Surface Guidance algorithm generates forces and torques that keep the surgical tool on such surface and with an orientation tangent to it. 
 \end{itemize} 
 
-Fig.\ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
+Fig. \ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
 
 \begin{figure}
     \centering
@@ -158,9 +158,16 @@ A viscoelastic model allows to achieve a guidance and error-compensating assista
 \end{equation}
 one tunes the elastic gains $k_F$ and $k_T$ and the viscous damping coefficients $\eta_F$ and $\eta_T$ in order to achieve a comfortable balance between the components and a stable behavior of the feedback force, which may vary from operator to operator, as well as from task to task.
 
-Fig. \ref{fig:trajectoryguidance} illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq.\ref{eq:force} expanded as:
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/trajectory_guidance.png}
+    \caption{Vectors involved in the computation of the Trajectory Guidance \vf. The \psm is shown in an example representative pose with respect to the reference trajectory.}
+    \label{fig:trajectoryguidance}
+\end{figure}
+
+Fig. \ref{fig:trajectoryguidance} illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq. \ref{eq:force} expanded as:
 \begin{equation}
-    \vect{F}_{elastic} = f_{map}(||\vect{d}||)\cdot\frac{\vect{d}}{\vect{d}}
+    \vect{F}_{elastic} = f_{map}(\|\vect{d}\|)\cdot\frac{\vect{d}}{\vect{d}}
 \end{equation} 
 \begin{equation}
     \vect{F}_{viscous} = 
@@ -177,7 +184,7 @@ Here, $\vect{d}$ is the distance vector going from the surgical instrument to th
 \begin{equation}
     \vect{r} = \vect{v}\times\vect{d}
 \end{equation}
-This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Eq.\ref{eq:torque}) are expanded as: 
+This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Eq. \ref{eq:torque}) are expanded as: 
 \begin{equation}
     \vect{T}_{elastic} = \arccos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
     \label{eq:telastic}
@@ -186,21 +193,31 @@ This implementation is adapted from \cite{Enayati2016}. Similarly, contributions
     \vect{T}_{viscous} = \frac{d}{dt} \left[ \arccos (\vect{z}\cdot\vect{t} ) \right] \cdot \vect{z} \times \vect{t}
     \label{eq:tviscous}
 \end{equation}
-The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq.\ref{eq:telastic} and Eq.\ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $\arccos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
+The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq. \ref{eq:telastic} and Eq. \ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $\arccos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
 
-% !!! ADD FIGURE OF TRAJECTORY GUIDANCE
 
-\paragraph{Obstacle Avoidance} The format for representing 3D objects in the simulator developed for this work is \texttt{stl} (Standard Triangle Language): in this format, a solid is defined as a list of 3D spatial coordinates of vertex points and a list of edges connecting them in groups of 3. Under a different light, an \texttt{stl} solid is a group of triangles, or ``subsurfaces'', sharing sides: the \texttt{stl} format also embeds a list of unique vector normals, one for each triangle, useful for easily accessing the orientation of each. The closest vertex point to the \psm's tooltip is identified and, with $\vect{d}$ as the normalized distance vector going from such point to the tooltip and $\vect{n}$ as the normal vector of the object mesh at that point, the force is again computed as the sum of an elastic component, modulated by $k$, and a viscous one, modulated by $\eta$:
+\paragraph{Obstacle Avoidance} The format for representing 3D objects in the simulator developed for this work is \texttt{stl} (Standard Triangle Language): in this format, a solid is defined as a list of 3D spatial coordinates of vertex points and a list of edges connecting them in groups of 3. Under a different light, an \texttt{stl} solid is a group of triangles, or ``subsurfaces'', sharing sides: the \texttt{stl} format also embeds a list of unique vector normals, one for each triangle, useful for easily accessing the orientation of each. The closest vertex point to the \psm's tooltip is identified and, with $\vect{d}$ as the normalized distance vector going from such point to the tooltip and $\vect{n}$ as the normal vector of the object mesh at that point (a graphic representation is depicted in Fig. \ref{fig:obstacleavoidance}), the force is again computed as the sum of an elastic component, modulated by $k$, and a viscous one, modulated by $\eta$:
 \begin{equation}
-    \vect{F} = \left[k\cdot f_{map}(||\vect{d}||) + \eta\cdot \frac{d}{dt} \left( f_{map}(||\vect{d}||)\right)\right]\cdot \frac{\vect{n}}{||\vect{n}||} 
+    \vect{F} = \left[k\cdot f_{map}(\|\vect{d}\|) + \eta\cdot \frac{d}{dt} \left( f_{map}(\|\vect{d}\|)\right)\right]\cdot \frac{\vect{n}}{\|\vect{n}\|} 
     \label{eq:obstacleavoidancef}
 \end{equation}
 $k$ and $\eta$ can be adjusted while performing the task and the visco-elastic balance will change accordingly, in real-time. Here, the addition of viscous component was suggested by clinical experts, as the elastic-only model was felt ``jelly-like'' and, in a few cases, oscillating. $f_{map}(\cdot)$ is the error mapping function with $\delta=-1$With the addition of the viscous component, the same clinicians confirmed a more appropriate behavior of the assistance force.
 
-% !!! ADD FIGURE OF OBSTACLE AVOIDANCE
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/obstacle_avoidance.png}
+    \caption{Vectors involved in the computation of the Obstacle Avoidance \vf. The \psm is shown in an example representative pose with respect to the obstacle mesh.}
+    \label{fig:obstacleavoidance}
+\end{figure}
 
+It is to be highlighted that, for meshes with particularly sharp edges, the normal vector $\vect{n}$ at the closest point may not be optimally defined: in Fig. \ref{fig:normalsaveraging} (left), the closest point normals points upwards, which is not necessarily the motion direction that maximizes the distance with the \psm's tooltip. To solve this, instead of defining the normal vectors at the centerpoint of each subsurface, the normals taken into consideration are defined at the vertex points and are computed as the average of the normals of the subsurfaces that share the vertex point. This is illustrated in Fig. \ref{fig:normalsaveraging} (right), where it's also evident how the direction of the force generated in this case actually maximizes the distance with the \ee. With this adjustment, the spatial distribution of normal vectors is smoothed and so is the force field generated by the obstacle avoidance module.
 
-It is to be highlighted that, for meshes with particularly sharp edges, the normal vector $\vect{n}$ at the closest point may not be optimally defined: in Fig.\ref{fig:normalsaveraging} (left), the closest point normals points upwards, which is not necessarily the motion direction that maximizes the distance with the \psm's tooltip. To solve this, instead of defining the normal vectors at the centerpoint of each subsurface, the normals taken into consideration are defined at the vertex points and are computed as the average of the normals of the subsurfaces that share the vertex point. This is illustrated in Fig.\ref{fig:normalsaveraging} (right), where it's also evident how the direction of the force generated in this case actually maximizes the distance with the \ee.
+Numerically, if a vertex is shared among $S$ subsurfaces, the averaged normal vector $\hat{\vect{n}}$ at that vertex is computed as:
+\begin{equation}
+    \hat{\vect{n}} = \frac{1}{S}\sum_{i=1}^{S} \vect{n}_i
+    \label{eq:normalsaveraging}
+\end{equation}
+
 
 \begin{figure}
     \centering
@@ -209,13 +226,15 @@ It is to be highlighted that, for meshes with particularly sharp edges, the norm
     \label{fig:normalsaveraging}
 \end{figure}
 
-\paragraph{Surface Guidance}  to the Obstacle Avoidance algorithm, an \texttt{stl} surface may be used in some context as a reference for guidance: this implementation indeed computes a force and a torque that attracts and align the surgical \ee towards the surface itself. 
+\paragraph{Surface Guidance} Similarly to the Obstacle Avoidance algorithm, an \texttt{stl} surface may be used in some context as a reference for guidance: this implementation indeed computes a force and a torque that attracts and align the surgical \ee towards the surface itself. 
 
 The force is computed with the same logic as in the Obstacle Avoidance algorithm, with the distance vector $\vect{d}$ from the \psm tooltip to the closest point of the surface mesh, and $\vect{n}$ the normal vector of the surface at that point. However, in the error mapping function $f_{map}(\cdot)$ the value of $\delta$ is set to $+1$ and the curve increases monotonically, so that the force is always attractive and is highest when the \psm is furthest from the surface mesh. The formula for the force is:
+
 \begin{equation}
-    \vect{F} = \left[k_F\cdot f_{map}(||\vect{d}||) + \eta_F\cdot \frac{d}{dt} \left( f_{map}(||\vect{d}||)\right)\right]\cdot \frac{\vect{-n}}{||\vect{n}||} 
+    \vect{F} = \left[k_F\cdot f_{map}(\|\vect{d}\|) + \eta_F\cdot \frac{d}{dt} \left( f_{map}(\|\vect{d}\|)\right)\right]\cdot \frac{\vect{-n}}{\|\vect{n}\|} 
 \end{equation}
-Compared to Eq.\ref{eq:obstacleavoidancef}, the sign of the normal vector $\vect{n}$ is inverted.
+
+Compared to Eq. \ref{eq:obstacleavoidancef}, the sign of the normal vector $\vect{n}$ is inverted.
 
 To compute the torque, one considers the relative orientation of the $\vect{z}$-axis of the \psm's tooltip reference frame and the normal vector $\vect{n}$ at the closest point on the surface. In particular, the torque generated on the manipulator will aim at aligning the $\vect{z}$-axis with its projection on the tangent plane of the surface, defined by the normal vector $\vect{n}$ at the closest point. The vector projection on the tangent plane is the difference between the vector itself and its projection on the normal vector $\vect{n}$, obtained from the dot product operator:
 \begin{equation}
@@ -224,11 +243,13 @@ To compute the torque, one considers the relative orientation of the $\vect{z}$-
 
 From this, the torque is again the sum of an elastic component dependent on the angle $\theta$ between $\vect{z}$ and $\vect{z}_{proj}$ (specifically $\theta = \arccos(\vect{z}\cdot\vect{z}_{proj})$) , and a viscous one proportional to the angle's derivative in time. The formula for the torque is
 \begin{equation}
-    \vect{T} = \left[k_T\cdot f_{map}(\theta) + \eta_T\cdot \frac{d}{dt} \left( f_{map}(\theta)\right)\right]\cdot \frac{\vect{z} \times \vect{z}_{proj}}{||\vect{z} \times \vect{z}_{proj}||}
+    \vect{T} = \left[k_T\cdot f_{map}(\theta) + \eta_T\cdot \frac{d}{dt} \left( f_{map}(\theta)\right)\right]\cdot \frac{\vect{z} \times \vect{z}_{proj}}{\|\vect{z} \times \vect{z}_{proj}\|}
     \label{eq:}
 \end{equation}
 
 where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation.
+
+The surface mesh is submitted to the same smoothing procedure as the obstacle mesh (Fig. \ref{fig:normalsaveraging}, Eq. \ref{eq:normalsaveraging}).
 
 \begin{figure}
     \centering
@@ -238,12 +259,92 @@ where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation.
 \end{figure}
 
 
-\paragraph{Insertion Guidance}
+\paragraph{Insertion Guidance} From a starting pose and a target object it's possible to define an \textit{insertion cone} that defines a safe space for the \ee to move while approaching the target object. An insertion angle $\alpha$ determines the conical aperture and, therefore, how narrow the safe space is as the tooltip gets closer to the target. The vector $\vect{\textdelta}$ links the initial \psm position to the target. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/insertion_guidance.png}
+    \caption{Vectors involved in the computation of the Insertion Guidance \vf. The \psm is shown in a ``current'' example representative pose with respect to the insertion cone, which is defined from the initial \psm position and the target position.}
+    \label{fig:insertionguidance}
+\end{figure}
+
+The position of the \ee in its longitudinal and radial components with respect to the reference insertion cone, $\vect{l}$ and $\vect{r}$ respectively, as follows:
+
+\begin{equation}
+    \vect{l} =  \left(\vect{d}\cdot \frac{\vect{\textdelta}}{\|\vect{\textdelta}\|} \right) \frac{\vect{\textdelta}}{\|\vect{\textdelta}\|}
+\end{equation} 
+\begin{equation}
+    \vect{r} = \vect{d} - \vect{l}
+\end{equation}
+
+Fig. \ref{fig:insertionguidance} shows a representative example for the calculations of the Insertion Guidance \vf force, and the vectors involved.
+
+For the insertion cone, fixed in space, the aperture $a$ relates the longitudinal and radial components through the angle $\alpha$ (expressed in degrees) as follows:
+\begin{equation}
+    a = \tan\left(\alpha\cdot\frac{\pi}{180}\right)
+\end{equation}
+\begin{equation}
+    \|\vect{r}\| = \|\vect{l}\|\cdot a
+\end{equation}
 
 
-\subsection{Clinical Validation}
-\subsection{Experimental Protocol}
-\subsection{Performance Metrics}
+The computed feedback force aims at maintaining the \ee position inside the safe insertion cone, therefore the threshold in the error mapping function $f_{map}(\cdot)$ is set to $t = \|\vect{r}\|$, the value of which varies over time and depends on the longitudinal coordinate $\|\vect{l}\|$. When the tooltip of the surgical instrument is very close to the target, the threshold becomes very small and the force gets very close to the maximum value very rapidly, which causes instabilities. To solve this issue, a ``relax distance'' $d_r$ is introduced: when the \ee is close enough to the target, the force is relaxed and scaled down to half of its value to interfere less with the surgeon's motion so close to the target. A clinical expert suggested that $d_r$ should be 20\% of the height of the cone. Considering this adjustment, the force feedback for the Insertion Guidance assistance strategy is:
+\begin{equation}
+    \vect{F} = r(\|l\|)\left[k\cdot f_{map}(\|\vect{a}\|) + \eta\cdot \frac{d}{dt} \left( f_{map}(\|\vect{a}\|)\right)\right]\cdot \frac{\vect{a}}{\|\vect{a}\|}
+    \label{eq:insertionguidance}
+\end{equation}
+
+with
+
+\begin{equation}
+    r(\|l\|) = 
+    \begin{cases}
+        1 & \text{if } \|l\| > d_r \\
+        0.5 & \text{if } \|l\| \leq d_r
+    \end{cases}
+\end{equation}
+
+scaling the force down to its relaxed value depending on the insertion depth. As per all the other assistance algorithms, $k$ and $\eta$ control the PD gains of the force feedback and are set manually by the practitioner, who is also able to adjust them in real-time.
+
+A similar implementation of this \vf, from which this algorithm is inspired, was proposed by Bettini \textit{et al.} \cite{Bettini2004}.
+
+\section{Clinical Validation}
+Two resident surgeons from the \textit{Istituto Europeo di Oncologia} (Milano, MI, Italy), both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
+Moreover, the most expert resident surgeon allowed to have his performance recorded when practicing with the simulator, which will be considered ``peak performance'' in the experimental analysis. 
+
+\section{Experimental Protocol}
+In order to assess the effectiveness and benefits of the developed assistance strategies and the simulator they have been implemented in, an experimental study was conducted on a group of novice users interfacing with the simulated surgical environment. 
+
+A group of 8 volunteers was asked to execute the surgical tasks implemented in the simulator over multiple repetitions: some of the subjects were assisted with the \vf algorithms described in the previous paragraphs, and others performed the tasks without any haptic assistance. Considering that the scope is to evaluate the role of haptic assistance in the learning process, the program was carried out over the course of a week in order to appreciate a possible variation in performance, which does not usually occur in the context of learning surgical skills.
+
+The 8 volunteers participating in the study were divided into 2 groups:
+\begin{itemize}
+    \item An \textbf{Assited Group} (Group A) of 4 subjects, who received haptic assistance while performing the tasks.
+    \item A \textbf{Control Group} (Group C) of 4 subjects, who were not assisted by \vfs while teleoperating.
+\end{itemize}
+
+Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all right-handed and either had never teleoperated a surgical robot or did it less than 5 times. Assignation to the control or assisted group was random.
+
+The subjects underwent a week-long training phase:
+\begin{itemize}
+  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment (Fig. \ref{fig:taskspanel}), purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
+  \item From \textit{Day 1} to \textit{Day 4}, after familiarizing with in the \textit{Playground}, they were asked to execute the four training tasks of the simulator (\textit{Path, Rings, Pillars} and \textit{Exchange}), each one for a total of 3 repetitions. Tasks appeared sequentially in a random order, contributing to un-bias the results. Subjects in group A were assisted by the \vfs while training, while subjects in group C received no mechanical assistance force. At the beginning of each daily session, subjects could interact with the \textit{Playground} environment for 1 minute at maximum.  
+  \item On \textit{Day 5} and \textit{Day 6} subjects were given a break period and no training was performed.
+  \item On \textit{Day 7} they were asked to execute the four surgical evaluation tasks of the simulator (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}), each one for a total of 3 repetitions. Again, tasks appeared sequentially in a random order, contributing to unbiasing the results. On this day, neither group A nor group C was assisted by the \vf algorithms.
+\end{itemize}
+This training protocol is schematized in Fig. \ref{fig:trainingprotocol}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/training_protocol.png}
+    \caption{Schematic of the training protocol applied to the subject undergoing the experimental phase. On the days highlighted in orange, the \vf assistance was provided to the group indicated; on the days highlighted in blue, the subjects were not assisted by \vfs. In green, the \textit{Playground} environment is a propedeutic task shown on the first day only, to familiarize the subjects with the simulator and the \davinci system.}
+    \label{fig:trainingprotocol}
+\end{figure}
+
+The layout of the training phase was studied and developed with a focus on examining how an enhanced training phase influences performance in a real surgical scenario. This aspect is known as \textit{Skill Transfer} and it is crucial in the development of a surgical simulator which, no matter how realistic and true-to-life it is, will never be able to replicate the complexity of a real surgical environment. To compensate for this, the 4 evaluation tasks executed on the last day were never shown to the subjects during the first 6 days, thus allowing to study if and to what extent the skills learned with the training tasks were transferred to the evaluation tasks. Naturally, to ensure a correct comparison of skill transfer, no assistance was provided to the subjects in the assisted group while performing the evaluation tasks on the last day.
+
+The 2-days break was, instead, introduced to indagate the \textit{Skill Retention} that may be introduced by augmented training: a positive skill retention occurs if the performance drop caused by a break period is reduced compared to normal. In this case, it is of interest to understand if the haptic assistance provided during the training phase causes a decrease in the performance drop across the break period.
+
+\section{Performance Metrics}   
 
 
 % BIBLIOGRAPHY

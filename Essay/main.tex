@@ -4,7 +4,7 @@
 %                                      PREAMBLE
 %-----------------------------------------------------------------------------------
 %-----------------------------------------------------------------------------------
-\documentclass[12pt]{article}
+\documentclass[twoside,openright,12pt]{report}
 %-----------------------------------------------------------------------------------
 % PACKAGES IMPORTING
 \usepackage[utf8]{inputenc}
@@ -15,7 +15,9 @@
 \usepackage{parskip}
 \usepackage{xspace}
 \usepackage{pdfpages}
+\usepackage{textgreek}
 \usepackage{siunitx}
+\usepackage{lipsum}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
@@ -113,7 +115,13 @@
 \\
 \vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
 \\
-\vspace{0.5cm}\textit{\small{Academic year 2022/2023}}}
+\vspace{0.5cm}\textit{\small{Academic year 2022/2023}}
+\\
+\vspace{1.5cm}
+{\large\noindent \textbf{Candidate: \textit{Alberto Rota}\\}
+\textbf{Supervisor: \textit{prof. Elena de Momi}\\}
+\textbf{Co-Supervisors: \textit{Ke Fan}}}
+\vspace{1cm}}
 \author{}
 \date{}
 
@@ -123,26 +131,32 @@
 %-----------------------------------------------------------------------------------
 %-----------------------------------------------------------------------------------
 \begin{document}
+
 % TITLE
-\maketitle
+% \maketitle
+% FRONTPAGE
+\includepdf[pages=-]{frontpage.pdf}
 %-----------------------------------------------------------------------------------
 % AUTHOR
-{\large\noindent \textbf{Candidate: \textit{Alberto Rota}}\newline
-\textbf{Supervisor: \textit{prof. Elena de Momi}}\newline
-\textbf{Co-Supervisors: \textit{dott. Matteo Fontana, MD - Ke Fan}}}
-\vspace{1cm}
+% {\large\noindent \textbf{Candidate: \textit{Alberto Rota}}\newline
+% \textbf{Supervisor: \textit{prof. Elena de Momi}}\newline
+% \textbf{Co-Supervisors: \textit{Ke Fan}}}
+% \vspace{1cm}
 %-----------------------------------------------------------------------------------
 % SECTIONS
-\subfile{0_Others/abstract.tex}
-\subfile{1_Introduction/introduction.tex}
-\subfile{2_State_of_the_art/state_of_the_art.tex}
-\subfile{3_Materials_and_methods/materials_and_methods.tex}
-\subfile{4_Results/results.tex}
-\subfile{5_Discussion_and_conclusion/discussion_and_conclusion.tex}
+\subfile{0_Others/abstract.tex} \newpage
+\subfile{1_Introduction/introduction.tex} \newpage
+\subfile{2_State_of_the_art/state_of_the_art.tex} \newpage
+\subfile{3_Materials_and_methods/materials_and_methods.tex} \newpage
+\subfile{4_Results/results.tex} \newpage
+\subfile{5_Discussion_and_conclusion/discussion_and_conclusion.tex} \newpage
 
 %-----------------------------------------------------------------------------------
 % BIBLIOGRAPHY
-% \bibliographystyle{plain}
-% \bibliography{refs.bib}
+
+\newpage
+\bibliographystyle{unsrt}
+\bibliography{refs.bib}
+
 %-----------------------------------------------------------------------------------
 \end{document}

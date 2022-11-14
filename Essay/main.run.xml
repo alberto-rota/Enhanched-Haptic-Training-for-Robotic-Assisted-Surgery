@@ -79,7 +79,7 @@
       <file>main.bcf</file>
     </requires>
     <requires type="editable">
-      <file>refs</file>
+      <file>refs.bib</file>
     </requires>
   </external>
 </requests>

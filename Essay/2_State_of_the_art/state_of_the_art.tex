@@ -3,9 +3,9 @@
 
 \begin{document}
 
-\section{State of the Art}
+\chapter{State of the Art}
 
-\subsection{The \davinci Surgical System}
+\section{The \davinci Surgical System}
 Since the FDA approval recieved by Intuitive Surgical Inc. (Sunnyvale, CA, USA) in 2000, the surgical robotics market has been dominated by the \davinci surgical system and its multiple evolutions (\textit{daVinci X}, \textit{daVinci Xi}, \textit{daVinci Si} and most recently the \textit{daVinci SP}). In 2021 there were more than 6,500 \textit{da Vinci} surgical systems installed in 67 countries, and more than 55000 surgeons worldwide have trained on the use of \textit{da Vinci} systems \cite{Intuitive2021}. The numerous advantages in safety, non-invasiveness, precision and dexterity were the key factors that made this technology so disruptive, as well as the role that this surgical robot was designed to undertake in the \ac{or}: it is, as a matter of fact, a tool for the surgeon to exploit to enhance his performance, and not a replacement for the surgeon himself.
 
 Three distinct componets make up a \textit{daVinci} surgical system:
@@ -22,7 +22,7 @@ Three distinct componets make up a \textit{daVinci} surgical system:
     \label{fig:davincisystem}
 \end{figure}
 
-\subsubsection{The Surgeon Console}
+\subsection{The Surgeon Console}
 The console is the main input-output interface between the surgeon and the robotic arms. The surgeon, in fact, holds the grippers of the \mtms (one for the right hand and one for the left hand) and moves his hands, wrists and fingers. Each \mtm is a 8 degrees-of-freedom serial kinematic chain: by knowing the coordinate of each rotational joint in the chain, the position and orientation of the gripper in the cart reference frame is know through forward kinematics. A detailed kinematics analysis of the \davinci was conducted in \cite{Fontanelli2017}, and the Denavit-Hartenberg (DH) parameter for FK and IK are determined asweel. 
 
 The pose of the \mtms grippers with respect to the console reference frame will then be used to compute the desired position of the end-effector of the \psms, and inherently the joint coordinates through an inverse kinematics algorithm.
@@ -38,7 +38,7 @@ Finally, the operator has also available a set of four foot switches that may be
     \label{fig:surgeonconsolepanel}
 \end{figure}
 
-\subsubsection{The Patient Cart}
+\subsection{The Patient Cart}
 A robot-assisted surgery with the \davinci is set up by positioning the patient cart in proximity of the surgical table: the relative position of the two depends on the type of operation to be executed. 
 The cart is the frame of allocation for the \psms and the \ecm: the \ecm is the kinematic structure that controls the pose of the stereo endoscope camera, while the \psms are the robot arms that are used to position and rotate the surgical instruments. A standard \davinci robot mounts four \psms, controllable by two surgeons independently seated at two different consoles; however, a single surgeon can teleoperate a two-\psms-robot by himself as it's the case for this study.
 The position of both \psms and the \ecm relative to the frame of the patient cart can be further adjusted to optimize their pose with respect to the surgical site and the type of operation to be performed: a set of 4 \acp{suj} can be used to position in space the base of each of the \psms and \ecm. The \ac{suj} kinematic chain consists of 1 prismatic joint and 3 revolute joints moved manually by the surgeon or the OR nurse during the pre-operative phase.
@@ -66,10 +66,10 @@ Each of the available instruments designed by Intuitive Surgical exploits the \t
     \label{fig:patientcartpanel}
 \end{figure}
 
-\subsubsection{The Vision Cart} 
+\subsection{The Vision Cart} 
 The computational, control and communication hardware are hosted on the vision cart, which acts as the main interface between the components. It is also responsible for computing FK and IK and for powering the motors, sensors and endoscope camera.
 
-\subsection{VR Surgical Simulators}
+\section{VR Surgical Simulators}
 Aghazadeh A. \textit{et al.} \cite{Aghazadeh2016} demonstrated a statistical correlation between robotic performance in a simulated environment and robotic clinical performance, effectively showcasing the potential of VR simulators for surgical training and their comparability to the standard dry-lab phantom training. Most of the surgical robotics companies on the market have developed and marketed their own general-purpose VR simulator, and a lot of research projects have been conducted to develop simulators for specific robotic platforms or for testing specialized applications.
 
 Intuitive Surgical commercializes the \textit{daVinci SimNow} virtual surgical simulator  (previously \textit{dVSS, daVinci Skill Simulator}) as a skill-building framework for learning how to safely and successfully operate its surgical robot. It offers a realistic simulated environment comprising 47 skill exercises and 33 virtual surgical procedures, with performance tracking and procedure-specific feedback. 
@@ -81,10 +81,10 @@ An anticipation of the role of virtual reality environments in surgery was publi
 
 
 
-\subsection{Virtual Fixtures}
+\section{Virtual Fixtures}
 
 % BIBLIOGRAPHY
-\bibliographystyle{unsrt}
-\bibliography{refs.bib}
+% \bibliographystyle{unsrt}
+% \bibliography{refs.bib}
 
 \end{document}
