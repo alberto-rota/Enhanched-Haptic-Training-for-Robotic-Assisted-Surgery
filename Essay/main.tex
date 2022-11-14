@@ -17,7 +17,8 @@
 \usepackage{pdfpages}
 \usepackage{textgreek}
 \usepackage{siunitx}
-\usepackage{lipsum}
+\usepackage{blindtext}
+\usepackage[nottoc]{tocbibind}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
@@ -90,7 +91,7 @@
 }
 %-----------------------------------------------------------------------------------
 % NEWCOMMANDS AND RENEWCOMMANDS
-\newcommand{\cright}{\textsuperscript{\textregistered}\phantom{..}}
+\newcommand{\cright}{\textsuperscript{\textregistered}}
 \newcommand{\vect}[1]{\textbf{\textit{#1}}}
 \newcommand{\fcaption}[1]{\captionof{figure}{\textit{\small #1}}}
 \newcommand{\mtm}{\ac{mtm}\xspace}
@@ -100,12 +101,14 @@
 \newcommand{\ecm}{\ac{ecm}\xspace}
 \newcommand{\ecms}{\acp{ecm}\xspace}
 \newcommand{\vf}{\ac{vf}\xspace}
+\newcommand{\vr}{\ac{vr}\xspace}
 \newcommand{\vfs}{\acp{vf}\xspace}
 \newcommand{\hrsv}{\ac{hrsv}\xspace}
 \newcommand{\davinci}{\textit{daVinci}\cright\xspace}
 \newcommand{\rf}{\ac{rf}\xspace}
 \newcommand{\ee}{\ac{ee}\xspace}
 
+\renewcommand{\bibname}{References}
 %-----------------------------------------------------------------------------------
 % Keeo ussage of Subfiles Last in the preamble 
 \usepackage{subfiles}
@@ -144,18 +147,23 @@
 % \vspace{1cm}
 %-----------------------------------------------------------------------------------
 % SECTIONS
-\subfile{0_Others/abstract.tex} \newpage
+\tableofcontents \newpage
+\subfile{0_Others/abstract.tex} \newpage\newpage
 \subfile{1_Introduction/introduction.tex} \newpage
 \subfile{2_State_of_the_art/state_of_the_art.tex} \newpage
 \subfile{3_Materials_and_methods/materials_and_methods.tex} \newpage
 \subfile{4_Results/results.tex} \newpage
 \subfile{5_Discussion_and_conclusion/discussion_and_conclusion.tex} \newpage
-
+%-----------------------------------------------------------------------------------
+% LIST OF FIGURES AND TABLES
+\listoffigures 
+\listoftables
+\newpage
 %-----------------------------------------------------------------------------------
 % BIBLIOGRAPHY
-
 \newpage
 \bibliographystyle{unsrt}
+% \addcontentsline{toc}{chapter}{References}
 \bibliography{refs.bib}
 
 %-----------------------------------------------------------------------------------

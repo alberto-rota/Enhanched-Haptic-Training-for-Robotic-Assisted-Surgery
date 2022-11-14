@@ -44,7 +44,7 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 \paragraph{Nephrectomy} A careful insertion of the surgical instrument inside the abdominal cavity is required to perform a nephrectomy. The insertion is often performed at a steep angle with respect to the camera view, and the surgeon must be able to perceive the depth of the target object. This virtual nephrectomy re-creates both of these aspects.
 \paragraph{Liver Resection} The surgeon must perform a series of cuts along the surface between two lobes of the liver to perform a successful liver resection. Naturally, to minimize tissue damage, the instrument's tooltip shall remain as close as possible to the surface between the two lobes to be separated.
 \paragraph{Suturing} Suturing with a recurve circular needle is a challenging task requiring the medical doctor to approach the tissue at an optimal angle and to properly exchange the needle from one hand to the other.  
-\paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \ac{vr} environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
+\paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \vr environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
 
 
 \section{Virtual Fixtures}
@@ -309,6 +309,7 @@ scaling the force down to its relaxed value depending on the insertion depth. As
 A similar implementation of this \vf, from which this algorithm is inspired, was proposed by Bettini \textit{et al.} \cite{Bettini2004}.
 
 \section{Clinical Validation}
+\label{sec:clinicalvalidation}
 Two resident surgeons from the \textit{Istituto Europeo di Oncologia} (Milano, MI, Italy), both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
 Moreover, the most expert resident surgeon allowed to have his performance recorded when practicing with the simulator, which will be considered ``peak performance'' in the experimental analysis. 
 
@@ -345,10 +346,34 @@ The layout of the training phase was studied and developed with a focus on exami
 The 2-days break was, instead, introduced to indagate the \textit{Skill Retention} that may be introduced by augmented training: a positive skill retention occurs if the performance drop caused by a break period is reduced compared to normal. In this case, it is of interest to understand if the haptic assistance provided during the training phase causes a decrease in the performance drop across the break period.
 
 \section{Performance Metrics}   
+The simulator keeps track in real time of the pose of all the objects in the scene, as well as other relevant parameters that can be employed to quantify performance. In order to properly conduct a comparative study between the two groups, the execution of the subjects involved in the training phase was considered in relation to the execution of the expert clinicians, as in Section \ref{sec:clinicalvalidation}. Their expertise, the number of robotic surgeries in their curricula and their daily usage of a \davinci robot made it possible to consider their execution of the training and evaluation surgical tasks as ``peak performance''. Therefore, the quality of the execution of a subject is always considered in relation to the execution of expert clinicians.
 
+A group of \textit{metrics} is recorded at each frame of the simulation and then logged automatically in a \texttt{.csv} file. The simulator begins and ends the metrics acquisition automatically, detecting if the user has begun interacting with the objects and tools as well as if he has reached the target. This level of automatization guarantees that the metrics are logged in the same way for all subjects, and prevents the introduction of human errors when deciding when to start and terminate the logging. The metrics are the following:
+\begin{itemize}
+    \item $D$: Distance error, from the \ee to the closest point of the target (trajectory, surface or object)
+    \item $A$: Angular error, from the \ee to tangent vector in the closest point of the reference trajectory or to the tangent plane in the closest point of a surface
+    \item $F$: Feedback force, computed from the \vf. The force is computed also for the subjects in the non-assisted control group, but it's not delivered during the operation
+    \item $T$: Feedback torque, computed from the \vf. The torque is computed also for the subjects in the non-assisted control group, but it's not delivered during the operation
+    \item $M$: Missed exchanges. When, in the bi-manual tasks, an object is dropped when passing it from the left \psm to the right, or vice versa
+    \item $C$: Clutch time, the fraction of the total task time during which the clutch pedal was pressed for repositioning
+\end{itemize}  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/metrics.png}
+    \caption{Graphical representation of some of the performance metrics recorded during task execution. }
+    \label{fig:metrics}
+\end{figure}
+
+As stated previously, in order to sensibly account a metric as a performance indicator for a comparative study, it must be normalized in relation to the execution of the expert clinicians. This is done by considering a \textit{relative metric} $\hat{X}$ as follows:
+\begin{equation}
+    \hat{X} = \frac{X_{subject}}{X_{expert}}
+\end{equation}
+
+The numerical value of performance is then established as a weighted average of the relative metrics. The weights are chosen to reflect the   
 
 % BIBLIOGRAPHY
-\bibliographystyle{unsrt}
-\bibliography{refs.bib}
+% \bibliographystyle{unsrt}
+% \bibliography{refs.bib}
 
 \end{document}
