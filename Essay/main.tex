@@ -18,6 +18,8 @@
 \usepackage{textgreek}
 \usepackage{siunitx}
 \usepackage{blindtext}
+\usepackage{tabularx}
+
 \usepackage[nottoc]{tocbibind}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 %-----------------------------------------------------------------------------------
@@ -109,6 +111,9 @@
 \newcommand{\ee}{\ac{ee}\xspace}
 
 \renewcommand{\bibname}{References}
+
+\newcolumntype{A}{>{\centering\arraybackslash\hsize=1.1\hsize\linewidth=\hsize}X}
+\newcolumntype{B}{>{\centering\arraybackslash\hsize=0.96666\hsize\linewidth=\hsize}X}
 %-----------------------------------------------------------------------------------
 % Keeo ussage of Subfiles Last in the preamble 
 \usepackage{subfiles}
@@ -134,7 +139,6 @@
 %-----------------------------------------------------------------------------------
 %-----------------------------------------------------------------------------------
 \begin{document}
-
 % TITLE
 % \maketitle
 % FRONTPAGE

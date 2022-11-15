@@ -42,11 +42,11 @@
 		"prefix": "\\table",
 		"body": [
 			"\\begin{table}",			
+			"    \\caption{}",		
 			"    \\centering",			
 			"    \\begin{tabular}{$0}",
 			"        ",
 			"    \\end{tabular}",		
-			"    \\caption{}",		
 			"    \\label{tab:}",		
 			"\\end{table}"
 		],

@@ -129,12 +129,36 @@ $t$, $h$ and $w$ are set manually in order to achieve an optimal "feeling" of th
 \subsection{Virtual Fixtures Algorithms}
 As stated previously the force feedback delivered at the level of \mtm is computed, in terms of magnitude and direction, from the surgical space and therefore based on the relative position and orientation of the \psm's tooltip with respect to the objects in the virtual surgical scene. The simulator features 4 assistance algorithms implementing 4 different declinations of haptic assistance. Different algorithms are deployed inside specific surgical tasks based on the task morphology and goals:
 \begin{itemize}
-  \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic torrque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
-  \item \textbf{Obstacle Avoidance:} An Obstacle Avoidance algorithm prevents the practicioner from colliding with the virtual objects in the scene, which may represent, for example, delicate anatomical structures that must not be touched during surgery. A visco-elastic force is, therefore, applied to the \ee tooltip in order to push it away from the closest point of the obstacle.
+  \item \textbf{Trajectory Guidance:} This algorithm outputs a force vector that assists the surgeon in following a pre-defined 3D trajectory. A visco-elastic force pulls the \ee tooltip towards the closest point of the trajectory, and a visco-elastic torque aligns the tooltip's orientation with the trajectory tangent vector, computed at the closest point.
+  \item \textbf{Obstacle Avoidance:} An Obstacle Avoidance algorithm prevents the practitioner from colliding with the virtual objects in the scene, which may represent, for example, delicate anatomical structures that must not be touched during surgery. A visco-elastic force is, therefore, applied to the \ee tooltip in order to push it away from the closest point of the obstacle.
   \item \textbf{Insertion Guidance:} Some surgical tasks require the insertion of the instrument's tooltip into a narrow space. This algorithm, from an initial position of the \psm and a target position, aids the surgeon in approaching the target on an optimal insertion path, without deviating from it.
   \item \textbf{Surface Guidance:} After defining, in the pre-operative stage, an ideal surface of operation (the surface can be of any morphology and should be defined as a mesh of points), a Surface Guidance algorithm generates forces and torques that keep the surgical tool on such surface and with an orientation tangent to it. 
 \end{itemize} 
-
+Tab. \ref{tab:taskswithvfs} highlights which of these \vf algorithms are used in each of the task featured in the simulator.
+\begin{table}
+    \caption{The surgical tasks featured in the simulator and the virtual fixtures algorithms used for each of them. Although the modular implementation of the simulator allows to include multiple \vf algorithms in a single task (multiple-steps executions will be included in the future), for this study only one \vf algorithm is used per task.}
+    \centering
+    \begin{tabular}{||c|c||}
+        \hline
+        \textbf{Path} & \textit{Trajectory Guidance} \\
+        \hline
+        \textbf{Rings} & \textit{Insertion Guidance} \\
+        \hline
+        \textbf{Pillars} & \textit{Obstacle Avoidance} \\
+        \hline
+        \textbf{Exchange} & \textit{Trajectory Guidance} \\
+        \hline
+        \textbf{Thymectomy} & \textit{Obstacle Avoidance}  \\
+        \hline
+        \textbf{Nephrectomy} & \textit{Insertion Guidance} \\
+        \hline
+        \textbf{Liver Resection} & \textit{Surface Guidance} \\
+        \hline
+        \textbf{Suturing} & \textit{Trajectory Guidance} \\
+        \hline
+    \end{tabular}
+    \label{tab:taskswithvfs}
+\end{table}
 Fig. \ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
 
 \begin{figure}
@@ -358,6 +382,8 @@ A group of \textit{metrics} is recorded at each frame of the simulation and then
     \item $C$: Clutch time, the fraction of the total task time during which the clutch pedal was pressed for repositioning
 \end{itemize}  
 
+Such parameters are recorded and logged at every frame, and they are averaged at the time of task completion in order to obtain a single mean value that refers to the execution as a whole. Thus, a set of 6 averaged metrics is available for each task execution.
+
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{images/metrics.png}
@@ -370,7 +396,44 @@ As stated previously, in order to sensibly account a metric as a performance ind
     \hat{X} = \frac{X_{subject}}{X_{expert}}
 \end{equation}
 
-The numerical value of performance is then established as a weighted average of the relative metrics. The weights are chosen to reflect the   
+The numerical value of performance is then established as a weighted average of the relative metrics. Depending on the surgical skills that each task requires, the weights are determined to reflect a resulting performance that properly accounts for the metrics themselves. The values of the weights in each task are reported in Tab. \ref{tab:performanceweights}
+
+\begin{table}
+    \caption{Weights assigned to the metrics in the computation of the performance score. The weight of a generic relative metric $\hat{X}$ is denoted as $w_{\hat{X}}$.}
+    \centering
+    \begin{tabular}{||c||c|c|c|c|c|c||}
+        \hline
+        \textbf{Task} & $w_{\hat{D}}$ & $w_{\hat{A}}$ & $w_{\hat{F}}$ & $w_{\hat{T}}$ & $w_{\hat{M}}$ & $w_{\hat{C}}$ \\
+        \hline\hline
+        \textit{Path}            & 3 & 2 & 3 & 1 & 0 & 1 \\
+        \hline
+        \textit{Rings}           & 5 & 0 & 4 & 0 & 0 & 1 \\
+        \hline
+        \textit{Pillars}         & 5 & 0 & 4 & 0 & 0 & 1 \\
+        \hline
+        \textit{Exchange}        & 2 & 2 & 2 & 1 & 2 & 1 \\
+        \hline
+        \textit{Thymectomy}      & 5 & 0 & 4 & 0 & 0 & 1 \\
+        \hline
+        \textit{Nephrectomy}     & 5 & 0 & 4 & 0 & 0 & 1 \\
+        \hline
+        \textit{Liver Resection} & 3 & 2 & 3 & 1 & 0 & 1 \\
+        \hline
+        \textit{Suturing}        & 2 & 3 & 1 & 2 & 1 & 1 \\
+        \hline
+    \end{tabular}
+    \label{tab:performanceweights}
+\end{table} 
+
+If one defines the set of normalized metrics as $M = \left\{ w_{\hat{D}}, w_{\hat{A}}, w_{\hat{F}}, w_{\hat{T}}, w_{\hat{M}}, w_{\hat{C}}\right\}$, the numerical formulation for the performance score $P$ is:
+\begin{equation}
+    P = \frac{1}{10}\sum_{m\in M} w_{\hat{m}}\cdot\hat{m}
+    \label{eq:performance}
+\end{equation}
+
+The value of $P$ gets closer to 1 if the performance of the subject is similar to the performance of the expert clinicians: in a few cases, some subjects recorded metrics that, when averaged, were better than the ones obtained from the execution of the surgeons. For this reason, in a few cases the value of $P$ slightly exceeds 1.
+
+During the experimental phase of this study, all the averaged metrics, the performance scores and the relative task, repetition and subjects were progressively logged and stored in a database: associating the performance to the subject and repetition allows to analyze its variations and trends.
 
 % BIBLIOGRAPHY
 % \bibliographystyle{unsrt}
