@@ -93,7 +93,7 @@
 \centering
 \includegraphics[width=0.5\textwidth]{images/logo_polimi_scritta2.eps}
 \end{figure}
-\textbf{Implementation and Assessment of Augmented Surgical Training with a \textit{daVinci} robot: an experimental study}
+\textbf{Implementation and Assessment of an Augmented Surgical Training Curriculum with a \textit{daVinci} robot: an experimental study}
 \\
 \vspace{0.5cm}\large{\textit{Politecnico di Milano - Master of Science in Biomedical Engineering}}
 \\
@@ -118,9 +118,9 @@
 \begin{multicols}{2}
 %-----------------------------------------------------------------------------------
 \section{Introduction}
-% Since the introduction of \ac{ramis} in the healthcare market, patients have benefited from a diminishing of postoperative complications and an increase in the safety of procedures, while surgeons have been empowered by sophisticated robots which allowed the execution of complex tasks in adverse contexts. 
+% Since the introduction of Robot-Assisted Minimally Invasive Surgery in the healthcare market, patients have benefited from a diminishing of postoperative complications and an increase in the safety of procedures, while surgeons have been empowered by sophisticated robots which allowed the execution of complex tasks in adverse contexts. 
 
-The increase of minimally invasive surgical robotics procedures in the last decade demands an increasingly higher number of trained surgeons, capable of teleoperating such advanced and complex systems and at the same time able to take advantage of the benefits of Robotic-Assisted-Minimally-Invasive-Surgery safely and effectively. 
+The increase of minimally invasive surgical robotics procedures in the last decade demands an increasingly higher number of trained surgeons, capable of teleoperating such advanced and complex systems and at the same time able to take advantage of the benefits of Robot-Assisted Minimally Invasive Surgery safely and effectively. 
 
 % Surgical teams have been joined by robotic systems because of the number of benefits that result from the collaborative effort of the surgeon and the robot, combining the know-how and adaptation skills of the former and the high accuracy and stability of the latter. Such a synergistic perspective highlights the role of the \ac{hri} paradigm, which involves all aspects of understanding, designing, and evaluating robotic systems for use by or with humans \cite{Goodrich2007}. Most of the surgical robotics solutions on the market consist of a teleoperation console that interfaces with the practitioner and, separate from it, the surgical robot itself, which mimics the movements of the surgeon in real-time. This setup allows for higher motion accuracy, tremor filtration and magnified viewing of the surgical area; nonetheless tactile forces, friction and texture perception are excluded from the so crucial visuo-haptic feedback loop that would guide the surgeon in a standard ``non-robotic'' procedure.
 
@@ -128,7 +128,7 @@ This work studies and evaluates the role of haptic assistance strategies, also k
 
 
 \section{State of the art}
-Surgical robotics companies usually commercialize a simulation framework in parallel to clinical robots. A survey of the most relevant training simulators on the market was conducted in \cite{Bric2016}: this review also assesses the suitability of virtual environments in comparison to that of dry-lab setups. However, since no commercially available clinical system implements a force-based assistive modality similar to that of virtual fixtures, none of the training simulators employ \acp{vf} either. The role of such assistive strategies in a real surgical scenario is still uncertain and shall be assessed only through an extensive clinical trial and, as a matter of fact, the vast majority of training protocols implementing \acp{vf} regards \textit{ad-hoc} systems like \cite{Lin2014}, which are limited both in terms of tasks implemented and in terms of evaluation protocols. Indeed, few studies \cite{Enayati2018} have evaluated the trainee's performance on multiple diverse tasks and over the course of multiple training days, and none has yet investigated the role of haptic assistance on skill retention and skill transfer. 
+Surgical robotics companies usually commercialize a simulation framework in parallel to clinical robots. A survey of the most relevant training simulators on the market was conducted in \cite{Bric2016}: this review also assesses the suitability of virtual environments in comparison to that of dry-lab setups. However, since no commercially available clinical system implements a force-based assistive modality similar to that of Virtual Fixtures, none of the training simulators employ \acp{vf} either. The role of such assistive strategies in a real surgical scenario is still uncertain and shall be assessed only through an extensive clinical trial and, as a matter of fact, the vast majority of training protocols implementing \acp{vf} regards \textit{ad-hoc} systems like \cite{Lin2014}, which are limited both in terms of tasks implemented and in terms of evaluation protocols. Indeed, few studies \cite{Enayati2018} have evaluated the trainee's performance on multiple diverse tasks and over the course of multiple training days, and none has yet investigated the role of haptic assistance on skill retention and skill transfer. 
 
 This work proposes an evaluation of the role of \acp{vf} in the context of surgical training with a multi-day experimental protocol articulated in two phases, designed in order to highlight the difference in the transfer and retention of skills between a control group and an assisted group. 
 \section{Materials and methods}
@@ -141,7 +141,7 @@ This work proposes an evaluation of the role of \acp{vf} in the context of surgi
       \label{fig:taskspanel}
 \end{figure*}
 
-This research was conducted on a \textit{daVinci}\cright surgical robot integrated with the open-source dVRK \cite{Kazanzidesf2014} framework. The \acp{mtm} of the \textit{daVinci}\cright are in fact equipped with motors usually employed for the sake of homing and calibration; the \ac{vf} forces and torques are generated by energizing these motors according to the inverse kinematics of the manipulators. A ROS framework manages the communication between the teleoperation console of the dVRK and the virtual surgical scene, which is built upon the Unity\cright physics engine: therefore, the real \acp{psm} do not move during teleoperation, as the joint coordinates are communicated only to the virtual 3D objects.
+This research was conducted on a \textit{daVinci}\cright surgical robot integrated with the open-source dVRK \cite{Kazanzidesf2014} framework. The \acp{mtm} of the \textit{daVinci}\cright are in fact equipped with motors usually employed for the sake of homing and calibration; the \ac{vf} forces and torques are generated by energizing these motors according to the inverse dynamics model of the manipulators. A ROS framework manages the communication between the teleoperation console of the dVRK and the virtual surgical scene, which is built upon the Unity\cright physics engine: therefore, the real \acp{psm} do not move during teleoperation, as the joint coordinates are communicated only to the virtual 3D objects.
 The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Figure \ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set-up in order to be as challenging as possible in relation to a specific surgical skill. A set of fundamental pre-operative and intra-operative skills that any robotic surgeon should acquire during training was proposed in \cite{Smith2014}. Specifically:
 
 \begin{itemize}
@@ -205,25 +205,26 @@ For the purpose of stability and, therefore, safety in the assistive feedback lo
 \end{equation}    
 which will ultimately result in the haptic outputs provided to the actuators.
 
-The four types of \acp{vf} featured in the surgical simulator are described in the following paragraphs:
+The four types of \acp{vf} featured in the surgical simulator are described in the following paragraphs.
 \paragraph{Trajectory Guidance} Given a reference trajectory - planned in the pre-operative phase - this \ac{vf} steers the surgeon's hands in order to align the robotic \ac{ee} with the closest point on the trajectory itself. The feedback force attracts the \ac{ee} towards the reference, while the torque rotates it so that it's aligned with the tangent vector at the closest point. Graphics in Figure \ref{fig:vfs_scheme}a.
 \paragraph{Obstacle Avoidance} Having identified a 3D mesh as an obstacle, the distance to the robotic tooltip and its rate of change are used for computing the force feedback. By setting $\delta = -1$ in Equation \ref{eq:sigmoidalmap}, the sigmoidal mapping function is flipped and higher forces will be generated from small distance errors.  Graphics in Figure \ref{fig:vfs_scheme}b.
-\paragraph{Insertion Guidance} This \ac{vf} aids the surgical insertion of the \ac{ee} towards a target point, maintaining the path of the tooltip stable inside an insertion cone. Here the feedback force has the same direction as the radial conical coordinate and a magnitude that is proportional both to the distance to the cone centerline and the distance to the target point. With this configuration, the \ac{psm}'s tooltip will be kept inside the reference insertion cone. Graphics in Figure \ref{fig:vfs_scheme}d.
 \paragraph{Surface Guidance} Similarly to the \textit{Trajectory Guidance} \ac{vf}, the distance vector to the closest point belonging to a reference surface (planar or non-planar) determines the force feedback, while the torque aligns the \ac{ee} to the tangent plane at the closest point. Graphics in Figure \ref{fig:vfs_scheme}c.
+\paragraph{Insertion Guidance} This \ac{vf} aids the surgical insertion of the \ac{ee} towards a target point, maintaining the path of the tooltip stable inside an insertion cone. Here the feedback force has the same direction as the radial conical coordinate and a magnitude that is proportional both to the distance to the cone centerline and the distance to the target point. With this configuration, the \ac{psm}'s tooltip will be kept inside the reference insertion cone. Graphics in Figure \ref{fig:vfs_scheme}d.
 
-\subsection{Clinical Validation}
-Two resident surgeons from the \textit{Istituto Europeo di Oncologia}, both regularly performing \ac{ramis} procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the virtual fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
-Moreover, the most expert resident surgeon allowed to have his performance recorded when practicing with the simulator, which will be considered ``peak performance'' in the experimental analysis. 
 \begin{figure*}
   \centering
       \includegraphics[width=\linewidth]{images/training_protocol.png}
       \caption{Schematic of the training protocol applied to the subject undergoing the experimental phase. On the days highlighted in orange,  assistance was provided to the group indicated; on the days highlighted in blue, the subjects were not assisted by Virtual Fxtures. In green, the \textit{Playground} environment is a propedeutic task shown on the first day only, to familiarize the subjects with the simulator and the \textit{daVinci}\cright system.}
-      \label{fig:training_protocol}
+      \label{fig:training_protocol} 
 \end{figure*}
-\subsection{Experimental Protocol}
-The effectiveness of the haptic virtual fixture paradigm has been assessed with an experimental study where the performance of un-assisted subjects in a control group was compared to the one recorded from subjects to whom was provided haptic assistance. Since the aim of this work is to establish the role of \acp{vf} in the training context, eight novice subjects with little to no experience with surgical robots were recruited for the study. Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all right-handed and either had never teleoperated a surgical robot or did it less than 5 times. Assignation to the control or assisted group was random.
 
-The subjects underwent a week-long training phase, the curriculum of which is schematized in Figure \ref{fig:training_protocol}. Most importantly, on the last day, both the assisted and the control group were asked to execute never-seen-before surgical tasks without assistance: this feature allows to evaluate how the skillset acquired during the training phase is transferred to an unassisted and untrained execution.
+\subsection{Clinical Validation}
+Two resident surgeons from the \textit{Istituto Europeo di Oncologia}, both regularly performing Robot-Assisted Minimally Invasive Surgery procedures with the \textit{daVinci}\cright robot, kindly dedicated their time in testing the surgical simulator in all its aspects, from the motion truthfulness to the complexity of the wrist articulation to the invasiveness and visco-elastic balance of the Virtual Fixtures. Their opinion and expertise were precious and insightful tools that guided the development towards a clinically validated robotic surgical simulator. 
+Moreover, the most expert resident surgeon allowed to have his performance recorded when practicing with the simulator, which will be considered ``peak performance'' in the experimental analysis. 
+\subsection{Experimental Protocol}
+The effectiveness of the haptic Virtual Fixture paradigm has been assessed with an experimental study where the performance of un-assisted subjects in a control group was compared to the one recorded from subjects to whom was provided haptic assistance. Since the aim of this work is to establish the role of \acp{vf} in the training context, eight novice subjects with little to no experience with surgical robots were recruited for the study. Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all right-handed and either had never teleoperated a surgical robot or did it less than 5 times. Assignation to the control or assisted group was random.
+
+The subjects underwent a week-long training phase, the curriculum of which is schematized in Figure \ref{fig:training_protocol}. Most relevantly, on the last day, both the assisted and the control group were asked to execute never-seen-before surgical tasks without assistance: this feature allows to evaluate how the skillset acquired during the training phase is transferred to an unassisted and untrained execution.
 % \begin{itemize}
 %   \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment (Figure \ref{fig:taskspanel}), purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
 %   \item From \textit{Day 2} to \textit{Day 5} they were asked to execute the four training tasks of the simulator (\textit{Path, Rings, Pillars} and \textit{Exchange}), each one for a total of 3 repetitions. Tasks appeared sequentially in a random order, contributing to un-bias the results. At the beginning of each daily session, subjects could interact with the \textit{Playground} environment for 1 minute at maximum.
@@ -231,28 +232,28 @@ The subjects underwent a week-long training phase, the curriculum of which is sc
 %   \item On \textit{Day 8} they were asked to execute the four surgical evaluation tasks of the simulator (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}), each one for a total of 3 repetitions. Again, tasks appeared sequentially in a random order, contributing to un-bias the results.
 % \end{itemize}
 \subsection{Metrics}
-A quantitative estimation of surgical performance is obtained by combining metrics recorded in real time during the execution of the task. The simulator logs these metrics autonomously detecting when the user initiates the execution and when the task is completed, at a framerate of 30 Hz. The metrics are:
+A quantitative estimation of surgical performance is obtained by combining metrics recorded in real-time during the execution of the task. The simulator logs these metrics autonomously detecting when the user initiates the execution and when the task is completed, at a framerate of 30 Hz. The metrics are:
 \begin{center}
-  \begin{tabular}{||p{0.075\columnwidth }|p{0.8\columnwidth }||}
+  \begin{tabular}{||p{0.05\columnwidth }|p{0.82\columnwidth }||}
       \hline
-      $D$ & Distance Error (to target or obstacle)\\
+      $D$ & Distance Error (to target or obstacle) \\
       \hline
-      $A$ & Angular Error  (to normal or tangent vector)\\
+      $A$ & Angular Error  (to normal or tangent vector) \\
       \hline
-      $F$ & Force Feedback Magnitude\\
+      $F$ & Force Feedback Magnitude \\
       \hline
-      $T$ & Torque Feedback Magnitude\\
+      $T$ & Torque Feedback Magnitude \\
       \hline
-      $M$ & Number of drops when exchanging an instrument\\
+      $M$ & Number of drops when exchanging an instrument \\
       \hline
-      $C$ & Fraction of task time spent repositioning   \\
+      $C$ & Fraction of task time spent repositioning \\
       \hline
   \end{tabular}
 \end{center}
 \begin{figure*}
   \centering
       \includegraphics[width=\linewidth]{images/results_compact.png}
-      \caption{Boxplots of the average performance of assisted subjects (blue) and unassisted subjects (orange) on the four validation tasks}
+      \caption{\textbf{Left: }Performance trend of assisted subjects (blue) and unassisted subjects (orange) of the \textit{Path} training task; \textbf{Right: }Boxplots of the average performance of assisted subjects (blue) and unassisted subjects (orange) of the \textit{Thymectomy} evaluation task}
       \label{fig:results_compact}
 \end{figure*}
 
@@ -261,13 +262,13 @@ These values are logged at each frame of the task execution and are then average
 Considering ``optimal execution'' the one achieved by the resident surgeon, the quantitative performance index $P$ is the ratio of the task combined metrics gathered from the optimal execution from the surgeons and the one recorded from the training subjects. 
 
 \section{Results}
-Figure \ref{fig:performancetraining} shows the performance trends for the four training tasks (\textit{Path, Rings, Pillars} and \textit{Exchange}), where the performance at each repetition is the average among the subjects in the assisted or control group. Apart from the \textit{Pillars} task, the trends are increasing both for the assisted group and the unassisted group. Most significantly, the performance in the assisted group is consistently higher than the one in the control group in all training tasks. 
+Figure \ref{fig:results_compact} shows the performance trends for one of the four training tasks, where the performance at each repetition is the average among the subjects in the assisted or control group. The trends are increasing both for the assisted group and the unassisted group. Most significantly, the performance in the assisted group is consistently higher than the one in the control group. The performance trends shown for \textit{Path} are representative of the other three training tasks (\textit{Rings, Pillars} and \textit{Exchange}).
 
-The performance on the four validation tasks (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}) recorded on the last day of the experimental phase is shown in Figure \ref{fig:performancevalidation} with boxplots. For each task, the graph reports the distribution of performances collected from the 4 subjects executing 3 repetitions. Crucially, neither the subjects in the assisted group nor the ones in the control group were guided with \acp{vf} on these tasks, nevertheless the performance recorded from the assisted subjects is distributed on higher values for all the tasks. 
+The performance on one of the four validation tasks recorded on the last day of the experimental phase is also shown in Figure \ref{fig:results_compact} with boxplots. The graph reports the distribution of performances collected from the 4 subjects executing 3 repetitions. Crucially, neither the subjects in the assisted group nor the ones in the control group were guided with \acp{vf} on these tasks, nevertheless the performance recorded from the assisted subjects is distributed on higher values for all the tasks. The performance distribution shown for \textit{Nephrectomy, Liver Resection} and \textit{Suturing} mimic the one reported in the figure and referred to \textit{Thymectomy}.
 
-Quantitative results are reported in the tables below: for each task, the mean, standard deviation and median values of performance are compared between the assisted and the control group. Given the data scarcity and their non-Gaussian distribution, the most meaningful conclusions will be drawn from the median values. Apart from \textit{Nephrectomy} showing a slightly reduced median performance on assisted subject (accompanied, however, by a much larger standard deviation, as per Figure \ref{fig:performancevalidation}), all other tasks present an increase in both the mean and median performance, as high as $+21.54\%$.
+Quantitative results are obtained by comparing, for each task, the mean, standard deviation and median values of performance between the assisted and the control group. Given the data scarcity and their non-Gaussian distribution, the most meaningful conclusions will be drawn from the median values. Apart from \textit{Nephrectomy} showing a slightly reduced median performance on assisted subject ($-2.71\%$), all other tasks present an increase in both the mean and median performance, as high as $+21.54\%$ for \textit{Liver Resection} (\textit{Thymectomy} $+13.07\%$, \textit{Suturing} $+8.44\%$).
 
-The standard deviation in the performance isn't consistent when comparing the assisted and control group. 
+The standard deviation in the performance isn't consistent when comparing the two groups.
 % \begin{center}
 % \begin{tabularx}{\linewidth}{||A|B|B|B||}
 % \hline
@@ -328,13 +329,13 @@ The standard deviation in the performance isn't consistent when comparing the as
 % \hline
 % \end{tabularx}
 % \end{center}
-% \section{Discussion}
 
-Graphs in Figure \ref{fig:performancetraining} suggest that \acp{vf} grant a performance improvement when executing surgical tasks, an aspect that may be most beneficial in terms of safety and invasiveness when translated in the real surgical context. Under this light, haptic assistance effectively acts as an error-correction strategy which, when applied in real-time, re-directs the \ac{ee} towards safer spatial regions by acting on the master manipulators gripped by the surgeon.
+\section{Discussion}
+Graphs in Figure \ref{fig:results_compact} suggest that \acp{vf} grant a performance improvement when executing surgical tasks, an aspect that may be most beneficial in terms of safety and invasiveness when translated in the real surgical context. Under this light, haptic assistance effectively acts as an error-correction strategy which, when applied in real-time, re-directs the \ac{ee} towards safer spatial regions by acting on the master manipulators gripped by the surgeon.
 
 Concerning the training experience and the associated learning curve, the available results do not show any significant difference when comparing the assisted and the control group, and the hypothesized benefits of \acp{vf} regarding this aspect remain to be verified.
 
-The most interesting considerations may be drawn from Figure \ref{fig:performancevalidation} where it's evident the difference in performance in favor of the assisted subjects. Since for these tasks, which were purposely designed to resemble real surgical scenarios, no haptic assistance was provided to either of the groups, it can be concluded that the introduction of haptic assistance in the training phase actively contributed to the skill transfer from training tasks to surgical tasks. This is arguably due to the integration of the haptic guidance into the visuo-haptic motor feedback loop that acts during teleoperation: \acp{vf} therefore contribute to motor learning and, ultimately, improve the establishment of surgical skills in the longer run. As a consequence, the benefits of employing haptic assistance could arise after the training phase as well, when Virtual Fixtures are not in use.
+The most interesting considerations may be drawn from the difference in performance on the never-seen-before unassisted evaluation tasks, in favor of the assisted subjects. Since for these tasks, which were purposely designed to resemble real surgical scenarios, no haptic assistance was provided to either of the groups, it can be concluded that the introduction of haptic assistance in the training phase actively contributed to the skill transfer from training tasks to surgical tasks. This is arguably due to the integration of the haptic guidance into the visuo-haptic motor feedback loop that acts during teleoperation: \acp{vf} therefore contribute to motor learning and, ultimately, improve the establishment of surgical skills in the longer run. As a consequence, the benefits of employing haptic assistance could arise after the training phase as well, when Virtual Fixtures are not in use.
 \section{Conclusions}
 This work features the development of a haptic-enhanced VR surgical simulator integrated with a \textit{daVinci}\cright robot and an experimental study on the role of Virtual Fixtures employed as assistance strategies in the surgical training context. The results of the experimental study have concluded that employing \acp{vf} during the training phase of surgical practice leads to improved performance and augmented skill transfer toward real surgical scenarios where haptic assistance is absent.
 
