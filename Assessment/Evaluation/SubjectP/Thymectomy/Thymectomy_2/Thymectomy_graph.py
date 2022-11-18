@@ -109,17 +109,25 @@ eval_json = json.dumps(eval, indent=4)
 # with open(wd+'_eval.json', 'w') as f:
 #     f.write(eval_json)
 
-fig = plt.figure(figsize=plt.figaspect(0.5))
-axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
+fig = plt.figure(figsize=plt.figaspect(1))
+axerr = fig.add_subplot(1,1,1,projection='3d'); clean_axes(axerr)
 plotPosDist(axerr,pos,err)
 plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axerr,pos)
+plt.axis('off')
+plt.grid(b=None)
 
 plt.title("D = "+str(eval['avg_dist']))
+axerr.view_init(elev=30, azim=30)
+plt.show()
+
+
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
 plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axforce,pos)
+plt.axis('off')
+plt.grid(b=None)
 plotPosForce(axforce,pos,force['X']**2 + force['Y']**2 + force['Z']**2)
 STRIDE = 5
 axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos['Z'].to_numpy()[::STRIDE],  
@@ -129,4 +137,4 @@ plt.title("F = "+str(eval['avg_force']))
 
 c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
 
-plt.show()
+# plt.show()
