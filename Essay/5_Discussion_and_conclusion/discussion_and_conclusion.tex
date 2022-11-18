@@ -4,9 +4,49 @@
 \begin{document}
 
 \chapter{Discussion}
+The results of the experimental study conducted for this thesis work indicate how assisting robotic surgical training with high-level haptic interfaces like Virtual Fixtures can be beneficial in enhancing surgical performance and improving the learning process. The versatility and the modular nature of a \vr environment are key aspects that allow the modeling, programming and assembly \textit{ad-hoc} virtual tasks and scenarios, which allow for tailoring the training program for specialized medical fields or for improving the trainee's skillset on a specific or general level.
 
-\newpage
-\chapter{Conclusion}
+\section{Benefits of Haptic Assistance}
+Graphs in Figure \ref{fig:performancetraining} suggest that \vfs grant a performance improvement when executing surgical tasks, an aspect that may be most beneficial in terms of safety and invasiveness when translated in the real surgical context. Under this light, haptic assistance effectively acts as an error-correction strategy which, when applied in real-time, re-directs the \ee towards safer spatial regions by acting on the master manipulators gripped by the surgeon. Of the four algorithms presented, all of them seem to correctly act in improving performance: this is, however, partly due to a sensible parametrization of the visco-elastic balance obtained by tuning the values of $k$ and $\eta$, and partly to a correct error mapping. 
+
+When developing assistance algorithms that, like haptic \vfs, directly impact the teleoperation (contrary to this, visual feedback and graphic cues only act indirectly), two aspects are crucial:
+
+\begin{itemize}
+    \item A clinical expert should be involved in the design, parametrization and tuning of the assistance algorithms, in order to ensure that the error-correction strategy is safe, effective and does not interfere excessively with the trainee's learning process. 
+    \item The trainee should be free to adjust, in real-time, the parameters of the assistance algorithm, in order to adapt the training to his own needs and comfort. These parameters should be bounded to account for the surgeon's safety and for the robot's physical limits.
+\end{itemize}
+
+When implemented in this way, the automatic and real-time assistance provided by mechanical virtual constraints may act as a partial substitute for the human supervisor, who would otherwise be required to constantly monitor the trainee's performance and intervene in case of errors. This is a crucial aspect, as it allows to reduce the cost of training and to increase the number of trainees that can be supervised at the same time. The role of a trained and experienced human supervisor remains essential, and a truly optimal medical training curriculum should include both human and robotic assistance. 
+
+Concerning the training experience and the associated learning curve, the available results do not show any significant difference when comparing the assisted and the control group, and the hypothesized benefits of \vfs regarding this aspect remain to be verified. The gradual reduction of maximum haptic assistance delivered day-by-day does not seem to introduce a plateau in the performance trend: the group of assisted subjects, therefore, did not exploit \vfs for improving the task execution, but rather properly utilized them as a learning tool. Since several studies have shown that trainees may, in some cases, overuse the assistance provided and fail to learn the motor skills involved in the task execution, this result is encouraging.
+
+It is essential for the trainee to not get used to haptic assistance (or assistance of any other nature) and, for this reason, a scheduled decrease in the amount of assistance provided is recommended. Although a programmed and linear reduction seems to be effective, a performance-oriented paradigm could be the optimal approach.
+
+\section{Skill Transfer}
+
+The most interesting considerations may be drawn from Figure \ref{fig:performancevalidation} where it's evident how the difference in performance favors the assisted subjects. Performance scores calculated for the group of subjects who received haptic assistance are distributed on higher values compared to the unassisted group. 
+Since in these tasks, which were purposely designed to resemble real surgical scenarios, no haptic assistance was provided to either of the groups, it can be concluded that the introduction of haptic assistance in the training phase actively contributed to the skill transfer from training tasks to surgical tasks. This is arguably due to the integration of the haptic guidance into the visuo-haptic motor feedback loop that acts during teleoperation: \vfs therefore contribute to motor learning and, ultimately, improve the establishment of surgical skills in the longer run. As a consequence, the benefits of employing haptic assistance could arise after the training phase as well, when Virtual Fixtures are not in use.
+
+This consideration supports once more the need for an adaptive training curriculum that appropriately transitions the aspiring surgeon from the training phase to the clinical phase.
+
+\section{Limitations and Future Work}
+The main drawback of this study is the limited number of subjects involved in the experimental study. A larger sample size would have allowed for a more robust statistical analysis and a more accurate evaluation of the results. Additionally, with the absence of a medical background, the performance variability in the experimental results is difficult to interpret. Employing medical students with surgery specializations could yield more robust results, as they would be more familiar with the surgical tasks, would have a similar level of experience and could conduct a longer training program.
+
+As per the simulator and the \vr environment, although deemed as sufficiently realistic by both the clinicians and the subjects, there is a lot of room for improvement: first and foremost, with more computational power available, the rigid body physics could be enhanced to a soft-body simulation, which is more true-to-life in the context of laparoscopic surgery and soft tissues. An additional upgrade could involve the introduction of different virtual surgical tools, able to cut and cauterize tissues.
+
+A suggestion given by the clinicians involved in the study is to create surgical training tasks that involve camera placement: with camera control being one of the surgical skills to be mastered by novice surgeons, tasks that virtually emulate this aspect would allow to further improve the coverage of the training program.  
+
+\chapter{Conclusions}
+This work features the development of a haptic-enhanced VR surgical simulator integrated with a \davinci robot and an experimental study on the role of Virtual Fixtures employed as assistance strategies in the surgical training context.
+
+A Unity-based simulated environment was successfully developed and validated by expert surgeons who operate with \ac{ramis} systems on a daily basis: the surgeons themselves also provided valuable feedback and criticism in the design and development of the simulator in terms of realism, usability and ergonomics. The simulator is integrated with a \davinci robot and a haptic interface, and a series of surgical tasks were developed and validated.
+
+With the aim of assessing the benefits introduced by an enhanced robotic-assisted training curriculum, this study also features an experimental study involving an assisted group, whose training was complemented with haptic assistance algorithms, and a control group who received no haptic assistance. 
+The results of such study have concluded that employing \vfs during the training phase of surgical practice leads to improved performance and augmented skill transfer toward real surgical scenarios where haptic assistance is absent. Therefore, the benefits of haptic assistance are not limited to the training phase, but rather extend to the clinical phase as well, as this kind of assistance contributes to the establishment of surgical skills in the longer run.  
+
+With an expanding number of surgical procedures that can be performed with \ac{ramis} systems and the rising number of trained surgeons that are required to attend to such an increase of scale, the need for a more efficient and effective training program is becoming more and more evident. The results of this study suggest that haptic assistance can be a valuable tool in the training of novice surgeons, and that the benefits of employing \vfs in the training phase have positive repercussions also when the training is concluded. Advanced and high-level algorithms that deliver assistance-as-needed haptic and visual feedback are to be implemented alongside the unequivocably crucial human supervision, and the results of this study are a step in this direction. 
+
+The ongoing development of the surgical robotics industry must go alongside the estabilishment and improvement of training curriculums that are focused on both providing the necessary surgical skills and properly transferring them to the clinical phase. Large-scale multidisciplinary clinical studies are essential to achieve this goal, which demands the collaborative effort of robotics companies, medical institutions and regulatory bodies. 
 
 
 % BIBLIOGRAPHY

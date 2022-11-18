@@ -23,7 +23,7 @@ def u2r(df):
 def plotPosDist(ax,pos,err):
     for i in range(np.shape(pos)[0]-1):
         ax.plot3D(pos.iloc[i:(i+2),0],pos.iloc[i:(i+2),1],pos.iloc[i:(i+2),2],
-                  c=cm.RdYlGn(err[i]/np.max(err)),
+                  c=cm.RdYlGn_r(err[i]/np.max(err)),
                   linewidth=2
             )
         
@@ -116,6 +116,8 @@ axerr.plot(traj['X'],traj['Y'],traj['Z'],color="#0090FF",linewidth=2)
 plotPosDist(axerr,pos,err)
 plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axerr,pos)
+plt.axis('off')
+plt.grid(b=None)
 
 plt.title("D = "+str(eval['avg_dist']))
 
@@ -129,6 +131,8 @@ axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos
 
 plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axforce,pos)
+plt.axis('off')
+plt.grid(b=None)
 plt.title("F = "+str(eval['avg_force']))
 
 c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)

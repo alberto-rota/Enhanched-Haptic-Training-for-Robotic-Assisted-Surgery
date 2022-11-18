@@ -19,15 +19,15 @@
 \usepackage{siunitx}
 \usepackage{blindtext}
 \usepackage{tabularx}
-
+\usepackage{afterpage}
 \usepackage[nottoc]{tocbibind}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 %-----------------------------------------------------------------------------------
 % GEOMETRY
 \usepackage{geometry}
 \geometry{
-    left=25mm,
-    right=25mm,
+%     left=25mm,
+%     right=25mm,
     top=25mm,
     bottom=25mm
     }
@@ -112,10 +112,16 @@
 
 \renewcommand{\bibname}{References}
 
+\newcommand\blankpage{
+    \null
+    \thispagestyle{empty}
+    \addtocounter{page}{-1}
+    \newpage}
+
 \newcolumntype{A}{>{\centering\arraybackslash\hsize=1.1\hsize\linewidth=\hsize}X}
 \newcolumntype{B}{>{\centering\arraybackslash\hsize=0.96666\hsize\linewidth=\hsize}X}
 %-----------------------------------------------------------------------------------
-% Keeo ussage of Subfiles Last in the preamble 
+% Keep ussage of Subfiles Last in the preamble 
 \usepackage{subfiles}
 
 % TITLE
@@ -151,7 +157,11 @@
 % \vspace{1cm}
 %-----------------------------------------------------------------------------------
 % SECTIONS
-\tableofcontents \newpage
+\afterpage{\blankpage}
+\tableofcontents 
+\newpage 
+\newpage
+\printacronyms \newpage \newpage
 \subfile{0_Others/abstract.tex} \newpage\newpage
 \subfile{1_Introduction/introduction.tex} \newpage
 \subfile{2_State_of_the_art/state_of_the_art.tex} \newpage
@@ -159,6 +169,8 @@
 \subfile{4_Results/results.tex} \newpage
 \subfile{5_Discussion_and_conclusion/discussion_and_conclusion.tex} \newpage
 %-----------------------------------------------------------------------------------
+
+\newpage\newpage
 % LIST OF FIGURES AND TABLES
 \listoffigures 
 \listoftables

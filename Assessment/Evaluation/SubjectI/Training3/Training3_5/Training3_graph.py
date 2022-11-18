@@ -43,7 +43,7 @@ def plotObstacles(ax, path,c):
             for i, f in enumerate(obt):
                 for j in range(3):
                     m.vectors[i][j] = obv[f[j],:]   
-            ax.add_collection3d(mplot3d.art3d.Poly3DCollection(m.vectors,alpha=0.05, ec=c,fc=c,linewidth=0.1))
+            ax.add_collection3d(mplot3d.art3d.Poly3DCollection(m.vectors,alpha=0.1, ec=c,fc=c,linewidth=0.1))
    
     
 def clean_axes(ax):
@@ -117,7 +117,7 @@ fig = plt.figure(figsize=plt.figaspect(0.5))
 
 axerr = fig.add_subplot(1,2,1,projection='3d'); clean_axes(axerr)
 plotPosDist(axerr,pos,err)
-plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axerr,pos)
 
 plt.title("D = "+str(eval['avg_dist']))
@@ -130,7 +130,7 @@ axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
 
-plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#42b9f5")   
+plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\\PlotSTLs\\"+wd.split("\\")[-3]+"stl","#444444")   
 centerandequal(axforce,pos)
 
 plt.title("F = "+str(eval['avg_force']))

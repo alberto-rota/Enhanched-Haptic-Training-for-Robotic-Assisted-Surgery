@@ -20,7 +20,7 @@ Two virtual cameras are positioned in the Unity scene on the tip of the endoscop
 The training surgeon interacts with the console in the same exact way as he would when teleoperating in the \ac{or}: he views the surgical scene in the oculars, the virtual instruments respond in real-time to the movements of the manipulators and with the same kinematics, and the 3D objects behave in the same way as they would if they were real thanks to the simulated physics computed by the Unity Engine.   
 
 \subsection{The Surgical Tasks}
-The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Fig. \ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set up in order to be as challenging as possible in relation to a specific surgical skill. Specifically:
+The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings, Pillars} and \textit{Exchange}) are simplistic training tasks built with objects of simple geometry, while the remaining four (\textit{Liver Resection, Nephrectomy, Thymectomy} and \textit{Suturing}) emulate \textit{in-vivo} surgical procedures and are therefore more realistic. Figure \ref{fig:taskspanel} collects snapshots of the tasks. All of these are constructed and set up in order to be as challenging as possible in relation to a specific surgical skill. Specifically:
 
 \begin{itemize}
   \item \textit{Path} and \textit{Liver Resection} require articulate wrist motion and stability
@@ -31,8 +31,8 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{images/tasks_panel.png}
-    \caption{Snapshot of the simulated surgical tasks, with the respective denomination. Training tasks have blue headlines, while realistic evaluation tasks have orange headlines. \textit{Playground} is a propaedeutic task and isn't featured in the experimental study}
+    \includegraphics[width=\textwidth]{images/tasks_panel_8v.png}
+    \caption{Snapshot of the simulated surgical tasks, with the respective denomination. Training tasks have blue headlines, while realistic evaluation tasks have orange headlines. Tasks on the same row share the same surgical skills required for their completion. \textit{Path} and \textit{Liver Resection}: Wrist articulation; \textit{Rings} and \textit{Nephrectomy}: Depth Perception; \textit{Pillars} and \textit{Thymectomy}: Hand-Eye Coordination; \textit{Exchange} and \textit{Suturing}: Instrument exchange}
     \label{fig:taskspanel}
 \end{figure}
 
@@ -46,9 +46,8 @@ The simulator comprises eight surgical tasks, four of which (\textit{Path, Rings
 \paragraph{Suturing} Suturing with a recurve circular needle is a challenging task requiring the medical doctor to approach the tissue at an optimal angle and to properly exchange the needle from one hand to the other.  
 \paragraph{Playground} This propaedeutic task allows the trainee to familiarize himself with the simulator and the virtual surgical tools. A few simple objects are scattered Win the scene and the trainee is free to interact with them. The scope of this task is to better interface a novice user with teleoperation and the \vr environment, understanding how its movements are mapped to the motion of the instruments, how to perform a pinching action and what intensity of force and torque to expect when \vfs are applied. 
 
-
 \section{Virtual Fixtures}
-The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Fig. \ref{fig:consoletocarttransform}. 
+The tasks as described in the previous paragraph are equipped, in the virtual environment, with high-level assistance strategies that act applying mechanical forces to the \mtms, with the aim of re-directing the motion of the surgeon's arm towards intended targets or away from obstacles. The \mtms are, indeed, 8-DOFs robotic actuated arms (the last degree of freedom is not actuated and controls the opening and closing of the gripper with a magnetic Hall sensor): each of the 7 rotational joints is equipped with both an encoder for sensing purposes and with a motor for actuation purposes. The encoders determine the joint angles that will ultimately be used for estimating the pose of the gripper in the console's space, through FK; it's this pose, transformed with respect to the \hrsv \rf, that the \psms are actuated to recreate, with respect to the endoscope \rf, as in Figure \ref{fig:consoletocarttransform}. 
 
 \begin{figure}[h]
     \centering
@@ -134,7 +133,7 @@ As stated previously the force feedback delivered at the level of \mtm is comput
   \item \textbf{Insertion Guidance:} Some surgical tasks require the insertion of the instrument's tooltip into a narrow space. This algorithm, from an initial position of the \psm and a target position, aids the surgeon in approaching the target on an optimal insertion path, without deviating from it.
   \item \textbf{Surface Guidance:} After defining, in the pre-operative stage, an ideal surface of operation (the surface can be of any morphology and should be defined as a mesh of points), a Surface Guidance algorithm generates forces and torques that keep the surgical tool on such surface and with an orientation tangent to it. 
 \end{itemize} 
-Tab. \ref{tab:taskswithvfs} highlights which of these \vf algorithms are used in each of the task featured in the simulator.
+Table \ref{tab:taskswithvfs} highlights which of these \vf algorithms are used in each of the task featured in the simulator.
 \begin{table}
     \caption{The surgical tasks featured in the simulator and the virtual fixtures algorithms used for each of them. Although the modular implementation of the simulator allows to include multiple \vf algorithms in a single task (multiple-steps executions will be included in the future), for this study only one \vf algorithm is used per task.}
     \centering
@@ -159,7 +158,7 @@ Tab. \ref{tab:taskswithvfs} highlights which of these \vf algorithms are used in
     \end{tabular}
     \label{tab:taskswithvfs}
 \end{table}
-Fig. \ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
+Figure \ref{fig:vfsgraphics} graphically illustrates the \vf algorithms as described above, but a detailed analytical formulation of each algorithm follows in the next sections.
 
 \begin{figure}
     \centering
@@ -189,7 +188,7 @@ one tunes the elastic gains $k_F$ and $k_T$ and the viscous damping coefficients
     \label{fig:trajectoryguidance}
 \end{figure}
 
-Fig. \ref{fig:trajectoryguidance} illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Eq. \ref{eq:force} expanded as:
+Figure \ref{fig:trajectoryguidance} illustrates the vectors involved in the computation of the virtual fixture; specifically, contributions in Equation \ref{eq:force} expanded as:
 \begin{equation}
     \vect{F}_{elastic} = f_{map}(\|\vect{d}\|)\cdot\frac{\vect{d}}{\vect{d}}
 \end{equation} 
@@ -208,7 +207,7 @@ Here, $\vect{d}$ is the distance vector going from the surgical instrument to th
 \begin{equation}
     \vect{r} = \vect{v}\times\vect{d}
 \end{equation}
-This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Eq. \ref{eq:torque}) are expanded as: 
+This implementation is adapted from \cite{Enayati2016}. Similarly, contributions to the torque (Equation \ref{eq:torque}) are expanded as: 
 \begin{equation}
     \vect{T}_{elastic} = \arccos (\vect{z}\cdot\vect{t} ) \cdot \vect{z} \times \vect{t}
     \label{eq:telastic}
@@ -217,10 +216,10 @@ This implementation is adapted from \cite{Enayati2016}. Similarly, contributions
     \vect{T}_{viscous} = \frac{d}{dt} \left[ \arccos (\vect{z}\cdot\vect{t} ) \right] \cdot \vect{z} \times \vect{t}
     \label{eq:tviscous}
 \end{equation}
-The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Eq. \ref{eq:telastic} and Eq. \ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $\arccos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
+The role of the torque is to align the z-axis of the surgical tool's reference frame with the tangent of the trajectory $\vect{t}$ at its closest point. In Equation \ref{eq:telastic} and Equation \ref{eq:tviscous}, the angle and axis of rotation which will achieve this alignment are $\arccos(\vect{z}\cdot\vect{t})$ and $\vect{z} \times \vect{t}$, respectively.
 
 
-\paragraph{Obstacle Avoidance} The format for representing 3D objects in the simulator developed for this work is \texttt{stl} (Standard Triangle Language): in this format, a solid is defined as a list of 3D spatial coordinates of vertex points and a list of edges connecting them in groups of 3. Under a different light, an \texttt{stl} solid is a group of triangles, or ``subsurfaces'', sharing sides: the \texttt{stl} format also embeds a list of unique vector normals, one for each triangle, useful for easily accessing the orientation of each. The closest vertex point to the \psm's tooltip is identified and, with $\vect{d}$ as the normalized distance vector going from such point to the tooltip and $\vect{n}$ as the normal vector of the object mesh at that point (a graphic representation is depicted in Fig. \ref{fig:obstacleavoidance}), the force is again computed as the sum of an elastic component, modulated by $k$, and a viscous one, modulated by $\eta$:
+\paragraph{Obstacle Avoidance} The format for representing 3D objects in the simulator developed for this work is \texttt{stl} (Standard Triangle Language): in this format, a solid is defined as a list of 3D spatial coordinates of vertex points and a list of edges connecting them in groups of 3. Under a different light, an \texttt{stl} solid is a group of triangles, or ``subsurfaces'', sharing sides: the \texttt{stl} format also embeds a list of unique vector normals, one for each triangle, useful for easily accessing the orientation of each. The closest vertex point to the \psm's tooltip is identified and, with $\vect{d}$ as the normalized distance vector going from such point to the tooltip and $\vect{n}$ as the normal vector of the object mesh at that point (a graphic representation is depicted in Figure \ref{fig:obstacleavoidance}), the force is again computed as the sum of an elastic component, modulated by $k$, and a viscous one, modulated by $\eta$:
 \begin{equation}
     \vect{F} = \left[k\cdot f_{map}(\|\vect{d}\|) + \eta\cdot \frac{d}{dt} \left( f_{map}(\|\vect{d}\|)\right)\right]\cdot \frac{\vect{n}}{\|\vect{n}\|} 
     \label{eq:obstacleavoidancef}
@@ -234,7 +233,7 @@ $k$ and $\eta$ can be adjusted while performing the task and the visco-elastic b
     \label{fig:obstacleavoidance}
 \end{figure}
 
-It is to be highlighted that, for meshes with particularly sharp edges, the normal vector $\vect{n}$ at the closest point may not be optimally defined: in Fig. \ref{fig:normalsaveraging} (left), the closest point normals points upwards, which is not necessarily the motion direction that maximizes the distance with the \psm's tooltip. To solve this, instead of defining the normal vectors at the centerpoint of each subsurface, the normals taken into consideration are defined at the vertex points and are computed as the average of the normals of the subsurfaces that share the vertex point. This is illustrated in Fig. \ref{fig:normalsaveraging} (right), where it's also evident how the direction of the force generated in this case actually maximizes the distance with the \ee. With this adjustment, the spatial distribution of normal vectors is smoothed and so is the force field generated by the obstacle avoidance module.
+It is to be highlighted that, for meshes with particularly sharp edges, the normal vector $\vect{n}$ at the closest point may not be optimally defined: in Figure \ref{fig:normalsaveraging} (left), the closest point normals points upwards, which is not necessarily the motion direction that maximizes the distance with the \psm's tooltip. To solve this, instead of defining the normal vectors at the centerpoint of each subsurface, the normals taken into consideration are defined at the vertex points and are computed as the average of the normals of the subsurfaces that share the vertex point. This is illustrated in Figure \ref{fig:normalsaveraging} (right), where it's also evident how the direction of the force generated in this case actually maximizes the distance with the \ee. With this adjustment, the spatial distribution of normal vectors is smoothed and so is the force field generated by the obstacle avoidance module.
 
 Numerically, if a vertex is shared among $S$ subsurfaces, the averaged normal vector $\hat{\vect{n}}$ at that vertex is computed as:
 \begin{equation}
@@ -258,7 +257,7 @@ The force is computed with the same logic as in the Obstacle Avoidance algorithm
     \vect{F} = \left[k_F\cdot f_{map}(\|\vect{d}\|) + \eta_F\cdot \frac{d}{dt} \left( f_{map}(\|\vect{d}\|)\right)\right]\cdot \frac{\vect{-n}}{\|\vect{n}\|} 
 \end{equation}
 
-Compared to Eq. \ref{eq:obstacleavoidancef}, the sign of the normal vector $\vect{n}$ is inverted.
+Compared to Equation \ref{eq:obstacleavoidancef}, the sign of the normal vector $\vect{n}$ is inverted.
 
 To compute the torque, one considers the relative orientation of the $\vect{z}$-axis of the \psm's tooltip reference frame and the normal vector $\vect{n}$ at the closest point on the surface. In particular, the torque generated on the manipulator will aim at aligning the $\vect{z}$-axis with its projection on the tangent plane of the surface, defined by the normal vector $\vect{n}$ at the closest point. The vector projection on the tangent plane is the difference between the vector itself and its projection on the normal vector $\vect{n}$, obtained from the dot product operator:
 \begin{equation}
@@ -273,7 +272,7 @@ From this, the torque is again the sum of an elastic component dependent on the 
 
 where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation.
 
-The surface mesh is submitted to the same smoothing procedure as the obstacle mesh (Fig. \ref{fig:normalsaveraging}, Eq. \ref{eq:normalsaveraging}).
+The surface mesh is submitted to the same smoothing procedure as the obstacle mesh (Figure \ref{fig:normalsaveraging}, Equation \ref{eq:normalsaveraging}).
 
 \begin{figure}
     \centering
@@ -301,7 +300,7 @@ The position of the \ee in its longitudinal and radial components with respect t
     \vect{r} = \vect{d} - \vect{l}
 \end{equation}
 
-Fig. \ref{fig:insertionguidance} shows a representative example for the calculations of the Insertion Guidance \vf force, and the vectors involved.
+Figure \ref{fig:insertionguidance} shows a representative example for the calculations of the Insertion Guidance \vf force, and the vectors involved.
 
 For the insertion cone, fixed in space, the aperture $a$ relates the longitudinal and radial components through the angle $\alpha$ (expressed in degrees) as follows:
 \begin{equation}
@@ -352,12 +351,15 @@ Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all r
 
 The subjects underwent a week-long training phase:
 \begin{itemize}
-  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment (Fig. \ref{fig:taskspanel}), purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
+  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment (Figure \ref{fig:taskspanel}), purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
   \item From \textit{Day 1} to \textit{Day 4}, after familiarizing with in the \textit{Playground}, they were asked to execute the four training tasks of the simulator (\textit{Path, Rings, Pillars} and \textit{Exchange}), each one for a total of 3 repetitions. Tasks appeared sequentially in a random order, contributing to un-bias the results. Subjects in group A were assisted by the \vfs while training, while subjects in group C received no mechanical assistance force. At the beginning of each daily session, subjects could interact with the \textit{Playground} environment for 1 minute at maximum.  
   \item On \textit{Day 5} and \textit{Day 6} subjects were given a break period and no training was performed.
   \item On \textit{Day 7} they were asked to execute the four surgical evaluation tasks of the simulator (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}), each one for a total of 3 repetitions. Again, tasks appeared sequentially in a random order, contributing to unbiasing the results. On this day, neither group A nor group C was assisted by the \vf algorithms.
 \end{itemize}
-This training protocol is schematized in Fig. \ref{fig:trainingprotocol}.
+This training protocol is schematized in Figure \ref{fig:trainingprotocol}. 
+
+Crucially, during the training phase of the first 4 days, the intensity of the haptic assistance was progressively decreased on a daily basis: each day, the magnitude of the maximum force and torque was reduced by 25\% with respect to the first day. On day 4, the maximum force and torque delivered by the \vf algorithms were $0.25\cdot F_{max}$ and $0.25\cdot T_{max}$, respectively. This progressive reduction in the intensity of the \vfs was performed to avoid the subjects to become too dependent on the assistance, which would have made the evaluation of the effectiveness of the \vfs more difficult.
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/training_protocol.png}
@@ -370,7 +372,7 @@ The layout of the training phase was studied and developed with a focus on exami
 The 2-days break was, instead, introduced to indagate the \textit{Skill Retention} that may be introduced by augmented training: a positive skill retention occurs if the performance drop caused by a break period is reduced compared to normal. In this case, it is of interest to understand if the haptic assistance provided during the training phase causes a decrease in the performance drop across the break period.
 
 \section{Performance Metrics}   
-The simulator keeps track in real time of the pose of all the objects in the scene, as well as other relevant parameters that can be employed to quantify performance. In order to properly conduct a comparative study between the two groups, the execution of the subjects involved in the training phase was considered in relation to the execution of the expert clinicians, as in Section \ref{sec:clinicalvalidation}. Their expertise, the number of robotic surgeries in their curricula and their daily usage of a \davinci robot made it possible to consider their execution of the training and evaluation surgical tasks as ``peak performance''. Therefore, the quality of the execution of a subject is always considered in relation to the execution of expert clinicians.
+The simulator keeps track in real-time of the pose of all the objects in the scene, as well as other relevant parameters that can be employed to quantify performance. In order to properly conduct a comparative study between the two groups, the execution of the subjects involved in the training phase was considered in relation to the execution of the expert clinicians, as in Section \ref{sec:clinicalvalidation}. Their expertise, the number of robotic surgeries in their curricula and their daily usage of a \davinci robot made it possible to consider their execution of the training and evaluation surgical tasks as ``peak performance''. Therefore, the quality of the execution of a subject is always considered in relation to the execution of expert clinicians.
 
 A group of \textit{metrics} is recorded at each frame of the simulation and then logged automatically in a \texttt{.csv} file. The simulator begins and ends the metrics acquisition automatically, detecting if the user has begun interacting with the objects and tools as well as if he has reached the target. This level of automatization guarantees that the metrics are logged in the same way for all subjects, and prevents the introduction of human errors when deciding when to start and terminate the logging. The metrics are the following:
 \begin{itemize}
@@ -396,7 +398,7 @@ As stated previously, in order to sensibly account a metric as a performance ind
     \hat{X} = \frac{X_{subject}}{X_{expert}}
 \end{equation}
 
-The numerical value of performance is then established as a weighted average of the relative metrics. Depending on the surgical skills that each task requires, the weights are determined to reflect a resulting performance that properly accounts for the metrics themselves. The values of the weights in each task are reported in Tab. \ref{tab:performanceweights}
+The numerical value of performance is then established as a weighted average of the relative metrics. Depending on the surgical skills that each task requires, the weights are determined to reflect a resulting performance that properly accounts for the metrics themselves. The values of the weights in each task are reported in Table \ref{tab:performanceweights}
 
 \begin{table}
     \caption{Weights assigned to the metrics in the computation of the performance score. The weight of a generic relative metric $\hat{X}$ is denoted as $w_{\hat{X}}$.}

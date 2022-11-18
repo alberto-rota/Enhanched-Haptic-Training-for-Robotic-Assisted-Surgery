@@ -21,7 +21,7 @@ public static class Global
 {
     public static string subjectID = "P";
 
-    public static float assistance = 0f;
+    public static float assistance = 0.75f;
 
     public static bool debugmode = false;
 
