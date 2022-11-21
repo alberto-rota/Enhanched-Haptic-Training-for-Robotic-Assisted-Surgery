@@ -6,7 +6,7 @@
 \chapter{State of the Art}
 
 \section{The \davinci Surgical System}
-Since the FDA approval recieved by Intuitive Surgical Inc. (Sunnyvale, CA, USA) in 2000, the surgical robotics market has been dominated by the \davinci surgical system and its multiple evolutions (\textit{daVinci X}, \textit{daVinci Xi}, \textit{daVinci Si} and most recently the \textit{daVinci SP}). In 2021 there were more than 6,500 \textit{da Vinci} surgical systems installed in 67 countries, and more than 55000 surgeons worldwide have trained on the use of \textit{da Vinci} systems \cite{Intuitive2021}. The numerous advantages in safety, non-invasiveness, precision and dexterity were the key factors that made this technology so disruptive, as well as the role that this surgical robot was designed to undertake in the \ac{or}: it is, as a matter of fact, a tool for the surgeon to exploit to enhance his performance, and not a replacement for the surgeon himself.
+Since the FDA approval recieved by Intuitive Surgical Inc. (Sunnyvale, CA, USA) in 2000, the surgical robotics market has been dominated by the \davinci surgical system and its multiple evolutions (\textit{daVinci X}, \textit{daVinci Xi}, \textit{daVinci Si} and most recently the \textit{daVinci SP}). In 2021 there were more than 6,500 \textit{daVinci} surgical systems installed in 67 countries, and more than 55000 surgeons worldwide have been trained on the use ofit \cite{Intuitive2021}. The numerous advantages in safety, non-invasiveness, precision and dexterity were the key factors that made this technology so disruptive, as well as the role that this surgical robot was designed to undertake in the \ac{or}: it is, as a matter of fact, a tool for the surgeon to exploit to enhance his performance, and not a replacement for the surgeon himself.
 
 Three distinct componets make up a \textit{daVinci} surgical system:
 \begin{itemize}
@@ -15,10 +15,10 @@ Three distinct componets make up a \textit{daVinci} surgical system:
     \item The \textbf{Vision Cart} handles the communication between all the hardware components, and it is responsible for the image processing and the motion planning of the robot arms (Figure \ref{fig:davincisystem} center).
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/davinci_system.jpg}
-    \caption{The macro consituents of a \davinci surgical system in the operatory room: the Surgeon Console (left), the Vision Cart (middle) and the Patient Cart (right).}
+    \caption{The macro constituents of a \davinci surgical system in the operatory room: the Surgeon Console (left), the Vision Cart (middle) and the Patient Cart (right).}
     \label{fig:davincisystem}
 \end{figure}
 
@@ -89,6 +89,8 @@ The very first example of a \vf algorithm was implemented on a PUMA 560 robot an
 The first definition of Virtual Fixtures was proposed by Louis B. Rosenberg, who proposed the concept of ``abstract sensory information overlaid on top of reflected sensory feedback from a remote environment'' \cite{Rosenberg1993}. More recently, Bowyer \textit{et al.} \cite{Bowyer2014} provided an extensive review that included most of the existing \vf algorithms and proposed a taxonomy of the different approaches. Neither \cite{Rosenberg1993} nor \cite{Bowyer2014}, however, analyzed the context of surgical robotics or the role of \vf in the training of surgeons, but rather circumstanced the topic in the broader field of \textit{telemanipulation}. 
 
 One of the earliest research work indagating the role of \vfs for surgical training application concluded that the introduction of haptic guidance into a training protocol increases the reusability of paths generated with manual control \cite{Payandeh2002}. Similar positive results were obtained in the assessment of the benefits of a Guidance \textit{Trusted-Region} \vf in laparoscopic training \cite{Iranfar2018}, which was confirmed to improve the training process both in a real and in a simulated context. An Obstacle Avoidance (or Forbidden Region) Active Constraint was similarly shown to improve a training protocol conducted on a surgical simulator \cite{Hong2016}.
+
+Clinically supported training curricula for surgical robotics are a crucial step in the global standardization of training and certification of surgeons for surgical robotics procedures \cite{Fisher2015}: many of them are in the early development stage and are still in the process of being validated. The role that haptic assistance could have in such curricula is still to be explored on a large scale, but the early research results are promising \cite{Van2009}.
 
 % BIBLIOGRAPHY
 % \bibliographystyle{unsrt}

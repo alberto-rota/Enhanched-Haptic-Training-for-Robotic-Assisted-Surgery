@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{Bric2016}
+Justin~D. Bric, Derek~C. Lumbard, Matthew~J. Frelich, and Jon~C. Gould.
+\newblock Current state of virtual reality simulation in robotic surgery
+  training: a review, 6 2016.
+
+\bibitem{Lin2014}
+Yanping Lin, Xudong Wang, Fule Wu, Xiaojun Chen, Chengtao Wang, and Guofang
+  Shen.
+\newblock Development and validation of a surgical training simulator with
+  haptic feedback for learning bone-sawing skill.
+\newblock {\em Journal of Biomedical Informatics}, 48:122--129, 2014.
+
+\bibitem{Enayati2018}
+Nima Enayati, Allison~M. Okamura, Andrea Mariani, Edoardo Pellegrini,
+  Margaret~M. Coad, Giancarlo Ferrigno, and Elena~De Momi.
+\newblock Robotic assistance-as-needed for enhanced visuomotor learning in
+  surgical robotics training: An experimental study.
+\newblock pages 6631--6636. Institute of Electrical and Electronics Engineers
+  Inc., 9 2018.
+
+\bibitem{Kazanzidesf2014}
+Peter Kazanzidesf, Zihan Chen, Anton Deguet, Gregory~S. Fischer, Russell~H.
+  Taylor, and Simon~P. Dimaio.
+\newblock An open-source research kit for the da vinci® surgical system.
+\newblock pages 6434--6439. Institute of Electrical and Electronics Engineers
+  Inc., 9 2014.
+
+\bibitem{Smith2014}
+Roger Smith, Vipul Patel, and Richard Satava.
+\newblock Fundamentals of robotic surgery: A course of basic robotic surgery
+  skills based upon a 14-society consensus template of outcomes measures and
+  curriculum development.
+\newblock {\em International Journal of Medical Robotics and Computer Assisted
+  Surgery}, 10:379--384, 9 2014.
+
+\end{thebibliography}

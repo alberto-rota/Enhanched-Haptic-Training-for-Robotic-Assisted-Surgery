@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2021/W32TeX)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Executive_Summary_Alberto_Rota.aux
+The style file: unsrt.bst
+Database file #1: refs.bib
+Warning--entry type for "Bric2016" isn't style-file defined
+--line 69 of file refs.bib
+Warning--empty booktitle in Enayati2018
+Warning--empty booktitle in Kazanzidesf2014
+You've used 5 entries,
+            1791 wiz_defined-function locations,
+            486 strings with 5033 characters,
+and the built_in function-call counts, 1606 in all, are:
+= -- 135
+> -- 88
+< -- 2
++ -- 31
+- -- 26
+* -- 116
+:= -- 243
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 5
+chr.to.int$ -- 0
+cite$ -- 7
+duplicate$ -- 67
+empty$ -- 143
+format.name$ -- 26
+if$ -- 371
+int.to.chr$ -- 0
+int.to.str$ -- 5
+missing$ -- 4
+newline$ -- 27
+num.names$ -- 5
+pop$ -- 21
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 46
+stack$ -- 0
+substring$ -- 114
+swap$ -- 27
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 11
+width$ -- 6
+write$ -- 54
+(There were 3 warnings)

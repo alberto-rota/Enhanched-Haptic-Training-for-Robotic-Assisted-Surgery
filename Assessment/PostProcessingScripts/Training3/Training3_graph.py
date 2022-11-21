@@ -121,11 +121,13 @@ plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\
 centerandequal(axerr,pos)
 plt.axis('off')
 plt.grid(b=None)
+plt.tight_layout()
 
-plt.title("D = "+str(eval['avg_dist']))
-axerr.view_init(elev=30, azim=30)
+# plt.title("D = "+str(eval['avg_dist']))
+axerr.view_init(elev=53, azim=32)
+saveto = "C:\\Users\\alber\\Desktop\\executions_figs\\3.png"
+plt.savefig(saveto,dpi=500,bbox_inches=0)
 plt.show()
-
 
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
@@ -140,9 +142,9 @@ plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessmen
 centerandequal(axforce,pos)
 plt.axis('off')
 plt.grid(b=None)
+plt.tight_layout()
 
-plt.title("F = "+str(eval['avg_force']))
+# plt.title("F = "+str(eval['avg_force']))
 
-c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
-
+# c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
 # plt.show()

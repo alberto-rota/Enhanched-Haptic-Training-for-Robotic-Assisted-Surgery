@@ -96,6 +96,21 @@ ASSISTED & 0.41 & 0.04 & 0.42 \\
 
 Quantitative results are reported in the tables above: for each task, the mean, standard deviation and median values of performance are compared between the assisted and the control group. Given the data scarcity and their non-Gaussian distribution, the most meaningful conclusions will be drawn from the median values. Apart from \textit{Nephrectomy} showing a slightly reduced median performance on assisted subject (accompanied, however, by a much larger standard deviation, as per Figure \ref{fig:performancevalidation}), all other tasks present an increase the median performance, as high as $+21.54\%$. The variation in mean performance is, instead, always positive.
 
+As a qualitative interpretation on the effect of virtual fixtures, Figure \ref{fig:executiontraining} and \ref{fig:executionevaluation} show, side by side, the trajectory of the \ee during the execution by an assisted subject and a non-assisted one. The trajectory is color-coded point-wise to reflect the distance error to the target trajectory, mesh or obstacle: although the figure does not recapitulate the general case, trajectories of unassisted subjects are visibly more erratic than the ones recorded from subjects in the assisted group. This is particularly evident for the training tasks (Figure \ref{fig:executiontraining}), where the haptic feedback force is acting to correct the teleoperation. The same qualitative interpretation, though, is valid for the evaluation tasks in Figure \ref{fig:executionevaluation}: however, if the tooltip's path seems more stable and less noisy in the execution of training tasks from assisted subjects, the same pattern of stability is not consistent. In this case, nevertheless, no assistance feedback force is applied to correct the execution.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/execution_training.png}
+    \caption{Comparison in the execution of the 4 training tasks from a subject in the control group (left) and a subject in the assisted group (right). The End-Effector trajectory is color-coded according to the distance error from the target or obstacles. From top to bottom, the tasks are: \textit{Path}, \textit{Rings}, \textit{Pillars} and \textit{Exchange}.}
+    \label{fig:executiontraining}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/execution_evaluation.png}
+    \caption{Comparison in the execution of the 4 evaluation tasks from a subject in the control group (left) and a subject in the assisted group (right). The End-Effector trajectory is color-coded according to the distance error from the target or obstacles. From top to bottom, the tasks are: \textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}.}
+    \label{fig:executionevaluation}
+\end{figure}
+
 % BIBLIOGRAPHY
 % \bibliographystyle{unsrt}
 % \bibliography{refs.bib}

@@ -1,27 +1,33 @@
+# Unity Build Files
 Library
 Logs
 Packages
 UserSettings
 ProjectSettings
+Build
 Unity-Robotics-Hub-main
 Temp
-Task_Data/*/*/
-Assets/Tasks/OBJ_scenes
-# !Task_Data/*/*.stl
-# !Task_Data/*/*.m
-Build
+ActiveConstraints_Package.unitypackage
+
+# Experimental Study Files
 Assessment/Task_Data
 Assessment/PlotSTLs
 Assessment/Pre-Study
+Assessment/Evaluation
 Assessment/subjects.csv
+
+# 3D Files
+Task_Data/*/*/
+Assets/Tasks/OBJ_scenes
 Assets/3d_models
 Assets/Tasks/Setup_files/*.blend
 Assets/Tasks/Setup_files/*.blend1
 Assets/Tasks
-rosws/src/CMakeLists.txt
 PlotSTLs
+
+# Others
+/Notes
+rosws/src/CMakeLists.txt
 *.meta
 *.csproj
 *.sln
-ActiveConstraints_Package.unitypackage
-/Notes

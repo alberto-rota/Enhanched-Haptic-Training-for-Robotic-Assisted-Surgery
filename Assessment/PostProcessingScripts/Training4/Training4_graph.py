@@ -134,11 +134,13 @@ plotObstacles(axerr, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessment\
 centerandequal(axerr,pos)
 plt.axis('off')
 plt.grid(b=None)
+plt.tight_layout()
 axerr.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
-plt.title("D = "+str(eval['avg_dist']))
-axerr.view_init(elev=30, azim=30)
+# plt.title("D = "+str(eval['avg_dist']))
+axerr.view_init(elev=45, azim=25)
+saveto = "C:\\Users\\alber\\Desktop\\executions_figs\\4.png"
+plt.savefig(saveto,dpi=500,bbox_inches=0)
 plt.show()
-
 
 
 axforce = fig.add_subplot(1,2,2,projection='3d'); clean_axes(axforce) 
@@ -147,13 +149,13 @@ plotObstacles(axforce, "C:\\Users\\alber\\Desktop\\Active_Constraints\\Assessmen
 centerandequal(axerr,pos)
 plt.axis('off')
 plt.grid(b=None)
+plt.tight_layout()
 STRIDE = 5
 axforce.quiver(pos['X'].to_numpy()[::STRIDE], pos['Y'].to_numpy()[::STRIDE], pos['Z'].to_numpy()[::STRIDE],  
         force['X'].to_numpy()[::STRIDE], force['Y'].to_numpy()[::STRIDE], force['Z'].to_numpy()[::STRIDE],  
         color= "#0000ff",length=0.005,linewidth=0.5)
 axforce.plot(traj['X'].to_numpy(),traj['Y'].to_numpy(),traj['Z'].to_numpy(),color='#00aaff',linewidth=2)
-plt.title("F = "+str(eval['avg_force']))
+# plt.title("F = "+str(eval['avg_force']))
 
-c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
-
+# c1 = fig.canvas.mpl_connect('motion_notify_event', on_move)
 # plt.show()
