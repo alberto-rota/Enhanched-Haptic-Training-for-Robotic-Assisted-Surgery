@@ -15,6 +15,7 @@ Assessment/PlotSTLs
 Assessment/Pre-Study
 Assessment/Evaluation
 Assessment/subjects.csv
+Assessment/RESULTS
 
 # 3D Files
 Task_Data/*/*/
@@ -30,4 +31,4 @@ PlotSTLs
 rosws/src/CMakeLists.txt
 *.meta
 *.csproj
-*.sln
+*
