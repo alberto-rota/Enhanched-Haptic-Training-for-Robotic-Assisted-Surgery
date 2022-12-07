@@ -75,6 +75,13 @@ Most of the assistance strategies implemented here will use the distance from th
   \label{eq:sigmoidalmap}
 \end{equation}
 
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=0.75\textwidth]{images/mappingfunction.png}
+        \caption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy. The x-axis refers to a generic error shown in millimeters, but the same mapping function can be applied to an angular error.} 
+        \label{fig:mappingfunctiion}
+  \end{figure}
+
 with $\delta = +1$ for guidance \vfs and $\delta = -1$ for avoidance \vfs ($\delta$ determines if the function increases or decreases monotonically). Here:
 \begin{itemize}
   \item $t$ is the fixture \textit{threshold}, hence the value at which the sigmoid starts to significantly increase from zero
@@ -82,14 +89,6 @@ with $\delta = +1$ for guidance \vfs and $\delta = -1$ for avoidance \vfs ($\del
   \item $w$ controls the \textit{width} of the linear region, hence the steepness of the curve 
 \end{itemize}
 For example, if $t=2\si{mm}$ and $h=3\si{mm}$ the surgeon will start to feel a force for errors higher than 2\si{mm}, and at 5\si{mm} he will experience half of the maximum force that can be delivered.
-
-\begin{figure}[h!]
-  \centering
-      \includegraphics[width=0.75\textwidth]{images/mappingfunction.png}
-      \caption{Plot of the Error Mapping function. The position of$t$ and $t+h$ can be set manually to achieve a suitable behavior of the assistance strategy. The x-axis refers to a generic error shown in millimeters, but the same mapping function can be applied to an angular error.} 
-      \label{fig:mappingfunctiion}
-\end{figure}
-
 $t$, $h$ and $w$ are set manually in order to achieve an optimal "feeling" of the \vf. Their values, different from task to task, are reported in Tab.\ref{tab:thwvalues}.
 
 \begin{table}
@@ -246,12 +245,6 @@ Numerically, if a vertex is shared among $S$ subsurfaces, the averaged normal ve
     \label{eq:normalsaveraging}
 \end{equation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/surface_guidance.png}
-    \caption{Vectors involved in the computation of the Surface Guidance \vf. The \psm is shown in an example representative pose with respect to the surface mesh.}
-    \label{fig:surfaceguidance}
-\end{figure}
 
 \paragraph{Surface Guidance} Similarly to the Obstacle Avoidance algorithm, an \texttt{stl} surface may be used in some context as a reference for guidance: this implementation indeed computes a force and a torque that attracts and align the surgical \ee toward the surface itself. 
 
@@ -267,28 +260,23 @@ To compute the torque, one considers the relative orientation of the $\vect{z}$-
 \begin{equation}
     \vect{z}_{proj} = \vect{z} - (\vect{z}\cdot\vect{n})\vect{n}
 \end{equation} 
-
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/surface_guidance.png}
+    \caption{Vectors involved in the computation of the Surface Guidance \vf. The \psm is shown in an example representative pose with respect to the surface mesh.}
+    \label{fig:surfaceguidance}
+\end{figure}
 From this, the torque is again the sum of an elastic component dependent on the angle $\theta$ between $\vect{z}$ and $\vect{z}_{proj}$ (specifically $\theta = \arccos(\vect{z}\cdot\vect{z}_{proj})$) , and a viscous one proportional to the angle's derivative in time. The formula for the torque is
 \begin{equation}
     \vect{T} = \left[k_T\cdot f_{map}(\theta) + \eta_T\cdot \frac{d}{dt} \left( f_{map}(\theta)\right)\right]\cdot \frac{\vect{z} \times \vect{z}_{proj}}{\|\vect{z} \times \vect{z}_{proj}\|}
     \label{eq:}
 \end{equation}
 
-where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation.
+where $\vect{z} \times \vect{z}_{proj}$ is the axis of rotation. Graphics of the vectors involved in this algorithm are in Figure \ref{fig:surfaceguidance}
 
 The surface mesh is submitted to the same smoothing procedure as the obstacle mesh (Figure \ref{fig:normalsaveraging}, Equation \ref{eq:normalsaveraging}).
 
-
-
-
 \paragraph{Insertion Guidance} From a starting pose and a target object it's possible to define an \textit{insertion cone} that defines a safe space for the \ee to move while approaching the target object. An insertion angle $\alpha$ determines the conical aperture and, therefore, how narrow the safe space is as the tooltip gets closer to the target. The vector $\vect{\textdelta}$ links the initial \psm position to the target. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/insertion_guidance.png}
-    \caption{Vectors involved in the computation of the Insertion Guidance \vf. The \psm is shown in a ``current'' example representative pose with respect to the insertion cone, which is defined from the initial \psm position and the target position.}
-    \label{fig:insertionguidance}
-\end{figure}
 
 The position of the \ee in its longitudinal and radial components with respect to the reference insertion cone, $\vect{l}$ and $\vect{r}$ respectively, as follows:
 
@@ -309,6 +297,12 @@ For the insertion cone, fixed in space, the aperture $a$ relates the longitudina
     \|\vect{r}\| = \|\vect{l}\|\cdot a
 \end{equation}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/insertion_guidance.png}
+    \caption{Vectors involved in the computation of the Insertion Guidance \vf. The \psm is shown in a ``current'' example representative pose with respect to the insertion cone, which is defined from the initial \psm position and the target position.}
+    \label{fig:insertionguidance}
+\end{figure}
 
 The computed feedback force aims at maintaining the \ee position inside the safe insertion cone, therefore the threshold in the error mapping function $f_{map}(\cdot)$ is set to $t = \|\vect{r}\|$, the value of which varies over time and depends on the longitudinal coordinate $\|\vect{l}\|$. When the tooltip of the surgical instrument is very close to the target, the threshold becomes very small and the force gets very close to the maximum value very rapidly, which causes instabilities. To solve this issue, a ``relax distance'' $d_r$ is introduced: when the \ee is close enough to the target, the force is relaxed and scaled down to half of its value to interfere less with the surgeon's motion so close to the target. A clinical expert suggested that $d_r$ should be 20\% of the height of the cone. Considering this adjustment, the force feedback for the Insertion Guidance assistance strategy is:
 \begin{equation}
@@ -355,7 +349,7 @@ Subjects were 25\% females and 75\% males, between 23 and 27 years of age, all r
 
 The subjects underwent a week-long training phase:
 \begin{itemize}
-  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment (Figure \ref{fig:taskspanel}), purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
+  \item On \textit{Day 1}, they were given a concise explanation about the \textit{daVinci}\cright surgical system, the simulator, haptics, and the training protocol. Later, each subject experienced 5 minutes in a \textit{Playground} environment, purposely designed to understand the elementary mechanics of teleoperation, clutching and object grasping. No performance metric was recorded at this time
   \item From \textit{Day 1} to \textit{Day 4}, after familiarizing with the \textit{Playground}, they were asked to execute the four training tasks of the simulator (\textit{Path, Rings, Pillars} and \textit{Exchange}), each one for a total of 3 repetitions. Tasks appeared sequentially in a random order, contributing to un-bias the results. Subjects in group A were assisted by the \vfs while training, while subjects in group C received no mechanical assistance force. At the beginning of each daily session, subjects could interact with the \textit{Playground} environment for 1 minute at maximum.  
   \item On \textit{Day 5} and \textit{Day 6} subjects were given a break period and no training was performed.
   \item On \textit{Day 7} they were asked to execute the four surgical evaluation tasks of the simulator (\textit{Thymectomy, Nephrectomy, Liver Resection} and \textit{Suturing}), each one for a total of 3 repetitions. Again, tasks appeared sequentially in a random order, contributing to unbiasing the results. On this day, neither group A nor group C was assisted by the \vf algorithms.

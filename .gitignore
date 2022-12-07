@@ -32,3 +32,8 @@ rosws/src/CMakeLists.txt
 *.meta
 *.csproj
 *
+
+# Essay and Executive Summary
+Essay/Thesis_Image_Panels
+Essay/Executive_Summary
+Essay/Thesis_Essay_Alberto_Rota.pdf

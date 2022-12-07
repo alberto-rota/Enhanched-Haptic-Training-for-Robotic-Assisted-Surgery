@@ -39,6 +39,11 @@
             "language": "latex",
             "scheme": "file",
             "pattern": "1_Introduction/introduction.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "0_Others/acknowledgements.tex"
         }
     ]
 }

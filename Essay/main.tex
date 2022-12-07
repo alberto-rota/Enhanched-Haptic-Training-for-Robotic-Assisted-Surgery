@@ -4,7 +4,7 @@
 %                                      PREAMBLE
 %-----------------------------------------------------------------------------------
 %-----------------------------------------------------------------------------------
-\documentclass[twoside,openright,12pt]{report}
+\documentclass[a4paper,twoside,openright,12pt]{report}
 %-----------------------------------------------------------------------------------
 % PACKAGES IMPORTING
 \usepackage[utf8]{inputenc}
@@ -115,7 +115,7 @@
 \newcommand\blankpage{
     \null
     \thispagestyle{empty}
-    \addtocounter{page}{-1}
+    \addtocounter{page}{0}
     \newpage}
 
 \newcolumntype{A}{>{\centering\arraybackslash\hsize=1.1\hsize\linewidth=\hsize}X}
@@ -157,11 +157,13 @@
 % \vspace{1cm}
 %-----------------------------------------------------------------------------------
 % SECTIONS
+% \afterpage{\blankpage}
 \afterpage{\blankpage}
 \tableofcontents 
-\newpage 
-\newpage
+% \newpage 
+% \newpage \afterpage{\blankpage}
 \printacronyms \newpage \newpage
+% \subfile{Executive_Summary/Executive_Summary_in_Essay.tex}\newpage
 \subfile{0_Others/abstract.tex} \newpage\newpage
 \subfile{1_Introduction/introduction.tex} \newpage
 \subfile{2_State_of_the_art/state_of_the_art.tex} \newpage
@@ -181,6 +183,8 @@
 \bibliographystyle{unsrt}
 % \addcontentsline{toc}{chapter}{References}
 \bibliography{refs.bib}
+%-----------------------------------------------------------------------------------
+% EXECUTIVE SUMMARY
 
 %-----------------------------------------------------------------------------------
 % ACKNOWLEDGEMENTS
