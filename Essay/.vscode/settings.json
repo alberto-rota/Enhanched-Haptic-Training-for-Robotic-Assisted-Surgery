@@ -1,0 +1,44 @@
+{
+    "grammarly.selectors": [
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "Introduction/introduction.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "State_of_the_art/state_of_the_art.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "3_Materials_and_methods/materials_and_methods.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "2_State_of_the_art/state_of_the_art.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "4_Results/results.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "5_Discussion_and_conclusion/discussion_and_conclusion.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "0_Others/abstract.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "1_Introduction/introduction.tex"
+        }
+    ]
+}

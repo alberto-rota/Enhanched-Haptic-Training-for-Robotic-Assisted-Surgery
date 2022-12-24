@@ -32,7 +32,3 @@ rosws/src/CMakeLists.txt
 *.meta
 *.csproj
 *
-
-# Essay and Executive Summary
-Essay/
-*Essay/Thesis_AR_Printable.pdf
