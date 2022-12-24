@@ -34,6 +34,5 @@ rosws/src/CMakeLists.txt
 *
 
 # Essay and Executive Summary
-Essay/Thesis_Image_Panels
-Essay/Executive_Summary
-Essay/Thesis_Essay_Alberto_Rota.pdf
+Essay/
+*Essay/Thesis_AR_Printable.pdf
