@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "bc2e0e3a89172921",
+    "type": "split",
+    "children": [
+      {
+        "id": "8796118b048e8ebd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18df5cbabeb6c7b4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Thesis Reharsal.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "32906ebaa8f67cab",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01-12-2022.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "5ab881e63614539f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d8e81de8382c19fb",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.1.9"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4f4f3aab68e420c2",
+    "type": "split",
+    "children": [
+      {
+        "id": "3ca8874c2956d701",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b11710a9f7510d2b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a42c1bf1c8aa4482",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#LabMeetings",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "032b61af647880a2",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 261.5
+  },
+  "right": {
+    "id": "59cf99df2aefc4f6",
+    "type": "split",
+    "children": [
+      {
+        "id": "1ce0abffd8e809b2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3b5e1fc09812301e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Untitled 1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "acf41d263238f02e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Untitled 1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "cd4c948bb0034ebd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          },
+          {
+            "id": "0710c8a266340aa1",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Untitled 1.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "d8e81de8382c19fb",
+  "lastOpenFiles": [
+    "01-12-2022.md",
+    "Thesis Reharsal.md",
+    "Nearlab website.md",
+    "Untitled.md",
+    "2022-11-24.md",
+    "Executive Summary Corrections.md",
+    "Pedro - Thesis.md",
+    "TODO.md",
+    "Untitled 1.md",
+    "Lab Meeting 10-11-22.md"
+  ]
+}
