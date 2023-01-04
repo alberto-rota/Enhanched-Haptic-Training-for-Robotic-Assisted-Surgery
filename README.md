@@ -1,12 +1,10 @@
-
 <p align="center"> 
-<a href="https://nearlab.polimi.it/medical">
+<a>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="Notes/readme/banner_light.png">
-  <img alt="website" src="Notes/readme/banner_dark.png"> 
+  <img alt="NEARLab" src="Notes/readme/banner_dark.png"> 
 </picture>
-</a> 
-</p>
+</a> </p>
 
 
 # Virtual Fixtures in Robot-Assisted Minimally Invasive Surgery
