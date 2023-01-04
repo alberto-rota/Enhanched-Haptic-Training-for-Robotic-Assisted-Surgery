@@ -1,6 +1,14 @@
 
-![banner](Notes/readme/banner.jpg)
-***
+<p align="center"> 
+<a href="https://nearlab.polimi.it/medical">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="Notes/readme/banner_light.png">
+  <img alt="website" src="Notes/readme/banner_dark.png"> 
+</picture>
+</a> 
+</p>
+
+
 # Virtual Fixtures in Robot-Assisted Minimally Invasive Surgery
 ### *A study on their implementation, usability and effectiveness it the context of surgical robotics training*
 A surgical training simulator integrated with the *daVinci* surgical system, employing Active Constraints/Virtual Fixtures that provide a haptic force feedback during the surgical task under the **assistance-as-needed** paradigm.
